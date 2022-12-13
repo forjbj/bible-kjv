@@ -1,0 +1,22 @@
+@import"../../styles.scss";
+
+.about {
+    margin: 0 auto;
+    max-width: 90%;
+    min-height: 90vh;
+    @media (min-width: 620px)  {
+        max-width: 70%;
+    }
+}
+.scripture {
+    font-family: Bookman, Georgia, serif;
+    font-variant-caps: small-caps;
+    font-size: 0.8rem;
+    text-align: right;
+}
+.version {
+    p, ul {
+        margin-left: 3%;
+    }
+    border: 1px solid var(--ink);
+}

@@ -1,0 +1,120 @@
+@import "../../styles.scss";
+
+//::ng-deep necessary to work with wasm innerHTML
+
+::ng-deep section {
+    border: solid 1px ;
+}
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    top: 0;
+    align-items:center;
+    justify-content:center;
+    background-color: var(--zPaper);
+}
+.title {
+    font-variant-caps: small-caps;
+    font-weight: bold;
+    padding-left: 1em;
+}
+.refresh {
+    font-size: 1.3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: font-weight 0.3s linear;
+    &:hover {
+        font-weight: bolder;
+    }
+    &:active {
+        color: var(--buttonActive);
+        animation-name: spinner;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+    }
+}
+@keyframes spinner {
+    from {
+      transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+    }
+}
+
+//  increase font size for readablility (I'm old)
+::ng-deep .fontType {
+    font-family: Georgia,"Times New Roman", Times, serif;
+    line-height: 1.45em; // needs to stap 'em' units as 'rem' makes everything very wrong
+    font-size: 1.3rem;
+    @media (max-width: 1000px) {
+        font-size: 1.2rem;
+    }
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }
+}
+::ng-deep .psalm {
+    text-align: center;
+    font-size: 1rem;
+    @media (max-width: 1000px) {
+        font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+    }
+}
+::ng-deep .verses {
+    display: grid;
+    width: 100%;
+    grid-gap: 1rem; // needed to stop words scrolling right
+    grid-template-columns: 3rem auto;
+    @media (max-width: 767px) {
+        grid-template-columns: 1rem auto; // verse number column smaller for small screens
+    }
+}
+::ng-deep .firstVerse{
+    margin-left: 3rem;
+    margin-right: 1rem;
+    margin-bottom: 0.3rem;
+    &:first-of-type:first-letter {
+        float: left;
+        margin-bottom: 0; 
+        margin-right: 0.03rem;  // required for first letters that are in italics
+        vertical-align: top;
+        font-size: 2rem;
+    }
+    @media (max-width: 767px) {
+        margin-left: 1rem;
+    }
+}
+::ng-deep .verseNumber {
+    text-align: right;
+    color: var(--scriptNum);
+    margin: 0.5rem 0;
+    @media (max-width: 767px) {
+        margin: 0.3rem 0;
+    }
+}
+// stop scripture going to far right
+::ng-deep .scripture {
+    margin: 0.5rem 1rem 0.5rem 0;
+    @media (max-width: 767px) {
+        margin: 0.3rem 1rem 0.3rem 0;
+    }
+}
+//smaller font for end of book notes
+::ng-deep .notes {
+    //font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+

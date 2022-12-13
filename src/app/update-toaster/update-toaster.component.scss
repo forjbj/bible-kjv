@@ -1,0 +1,56 @@
+@import"../../styles.scss";
+
+.toast {
+    visibility: hidden;
+    width: 7rem;
+    height: 7rem;
+    margin: auto;
+    background-color: var(--ink);
+    position: fixed;
+    z-index: 7; //needed to keep on top
+    left: 0;right:0;
+    bottom: 3rem;
+    overflow: hidden;
+    white-space: nowrap;
+
+    .message {
+        font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+        padding: 0.7rem 0.2rem;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        color: var(--paper);
+        
+        button {
+            margin: 0.3rem;
+            background-color: var(--darkRed);
+            color: var(--buttonActive);
+            &:hover, &:focus, &:active {
+                background-color: var(--lightRed);
+            }
+        }
+    }
+    .img {
+        background-image: url("../../assets/icons/icon-192x192.png");
+        background-size: contain;
+        width: 7rem;
+        height: 100%;
+        float: left;
+        background-color: var(--zPaper);
+    }
+    &.show {
+        visibility: visible;
+        animation: fadein 0.7s, expand 1.2s 0.7s;
+        animation-fill-mode: both;
+    }
+}
+
+@keyframes fadein {
+    from { transform: scale(0); opacity: 0;}
+    to { transform: scale(1); opacity: 1;}
+}
+
+@keyframes expand {
+    from {width: 7rem}
+    to {width: clamp(20rem, 35vw, 24rem)}
+}

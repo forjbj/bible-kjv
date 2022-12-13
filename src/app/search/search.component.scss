@@ -1,0 +1,94 @@
+@import"../../styles.scss";
+.stationary {
+    background-color: var(--paper);
+    position: sticky;
+    position: -webkit-sticky;
+    top: 2.2rem;
+    text-align: right;    
+}
+.searchSelect {
+    display: grid;
+    grid-template-columns:repeat(5, 1fr);
+    grid-row-gap: 0.3rem;
+    .gridColumnTwo {
+        grid-column: 2;
+    };
+    .gridColumnThree {
+        grid-column: 3;
+    }
+    .gridColumnFour {
+        grid-column: 4;
+    }
+}
+
+.searchButton {
+    height: 1.6rem;
+    width: 3rem;
+    background-color: transparent;
+    vertical-align: middle;
+    transition: transform ease 0.3s;
+    &:hover, &:active {
+       transform: scale(1.2);
+    }
+}
+.searchOption, .searchInput {
+    font-family: Bookman, Georgia, serif;
+    font-size: 0.9rem;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.searchResults {
+    text-align: center;
+    min-height: 80vh; // needed to close menu on click
+    .alert {
+        max-width: 70%;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 1.5rem;
+        font-style: italic;
+        color: #771010;
+        padding: 20vh 0.3rem 0 0.3em;
+        @media (max-width: 768px) {
+            max-width: 90%;
+        }
+    }
+    //remove styling from created links
+    a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+            color: inherit;
+        }
+    }
+}
+.listResults {
+    display: grid;
+    max-width: 100%;
+    grid-gap: 1rem; // needed to stop words scrolling right
+    grid-template-columns: minmax(min-content, 10%) 1fr;
+    padding: 0;
+    text-align: left;
+    align-items: center;
+    &:nth-child(odd) {
+        background-color: var(--gridColor);
+    }
+    &:hover, &:active {
+        background-color: var(--searchHighlight);
+    }
+}
+.bookResults {
+    font-size: 0.9rem;
+    font-variant: small-caps;
+    text-align: right;
+    color: var(--scriptNum);
+}
+.scrResults {
+    font-size: 1.1rem;
+    text-align: left;
+}
+.highlight {
+    color: red;
+}

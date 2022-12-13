@@ -1,0 +1,22 @@
+<div (click) = "bibleService.displayMenu = false;">
+    <div class="stationary">
+        <hr>
+        <div class="searchSelect">
+                <label class="searchInputLabel gridColumnTwo" for="req">Search for:&ensp;&nbsp;</label>
+                <input #req class="searchInput gridColumnThree" name = "req" type="search" placeholder= {{bibleService.searchRequest}} 
+                        (keyup.enter) ="submitSearch(req.value)" required minlength="2">
+                <input class="searchButton gridColumnFour" type="image" src="./assets/search_neutral.svg"  (click) = "submitSearch(req.value)">
+                <label class="gridColumnTwo" for="testament">Search in:&ensp;&nbsp;</label>
+                <select class="searchOption gridColumnThree" name="testaments" id="testaments" [(ngModel)] ="checkedNumber" (ngModelChange) = "selectedTest()">
+                    <option *ngFor="let select of testaments" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
+                </select>
+                <label class="gridColumnTwo" for="accuracy">Accuracy:&ensp;&nbsp;</label>
+                <select class="searchOption gridColumnThree" name="accuracy" id="accuracy" [(ngModel)] ="accuracy" (ngModelChange) = "selectedAccuracy()">
+                    <option *ngFor="let select of accuracyLevel" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
+                </select>
+        </div>
+        <hr>
+        <br>
+    </div>
+    <div id="searchResults" class="searchResults" [innerHTML] = "bibleService.searchResults | safe: 'html'"></div>
+</div>

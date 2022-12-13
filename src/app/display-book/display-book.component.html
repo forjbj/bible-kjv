@@ -1,0 +1,3 @@
+<!-- <app-chapter-numbers></app-chapter-numbers> DOESN'T WORK HERE; DOES WEIRD THINGS -->
+
+<div (click) = "bibleService.showChapters = false; bibleService.displayMenu = false;" [innerHTML] = "renderedBook | safe: 'html'"></div>
