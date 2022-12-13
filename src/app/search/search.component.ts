@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   public checkedNumber: number = 2;
 
-  //public worker: any;
+  public worker: any;
 
   testaments = [    
     { id: 0, label: "Old Testament" },
@@ -42,10 +42,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.meta.addTag({ name: 'description', content: 'Search for words in the bible offline; uses WebAssembly for faster results' });
 
     // Worker needs to be created immediately or will only work with double click
-  //  if (typeof Worker !== 'undefined') {
+    if (typeof Worker !== 'undefined') {
       // Create a new
-  //    this.worker = new Worker(new URL('./search.worker', import.meta.url));
-  //  }
+      this.worker = new Worker(new URL('./search.worker', import.meta.url));
+    }
   }
   ngOnInit(): void {
   }
@@ -88,14 +88,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.bibleService.spinner = true; // run spinner animation
     this.bibleService.spinnerTitle = "Searching"
     if (typeof Worker !== 'undefined') {
-      const worker = new Worker(new URL('./search.worker', import.meta.url));
+      this.worker = new Worker(new URL('./search.worker', import.meta.url));
 
-      worker.onmessage = ({ data }: any) => {
+      this.worker.onmessage = ({ data }: any) => {
         this.bibleService.searchRequest = req;
         this.bibleService.searchResults = data;
         this.bibleService.spinner = false;
       };
-      worker.postMessage(wasm.search(this.checkedNumber, req, this.accuracy));
+      this.worker.postMessage(wasm.search(this.checkedNumber, req, this.accuracy));
     } else {
       // Web workers are not supported in this environment.
       console.log('thread not used');

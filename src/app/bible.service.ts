@@ -11,7 +11,7 @@ export class BibleService {
 
   public pageTitle:string;
 
-  public testament:number = Number(localStorage.getItem('curTestamentIndex')) ?? 0; // defaults to '0' (old testament) if '' or null - javascript is broken
+  public testament:number = Number(localStorage.getItem('curTestamentIndex')) ?? 0; // defaults to '0' (old testament) if '' or null
 
   public bookSelected:number = Number(localStorage.getItem('curBookIndex')) ?? 0; // defaults to '0' (Genesis) see above
 
@@ -31,11 +31,11 @@ export class BibleService {
   public searchNavigate = false;
 
   //variable for lefthand menu position
-  public leftHandOn: string;
+  public leftHandOn?: string; // "?" for typescript to allow undefined
 
   //variable for chapter button display
   public chapterButton: boolean;
-  public chapterNumber: string;
+  public chapterNumber?: string;
 
   //variable for spinner animation
   public spinner: boolean = false;
@@ -44,9 +44,7 @@ export class BibleService {
     constructor() {
       this.pageTitle ??= "Bible";
       this.title ??= "Bible";
-      this.leftHandOn ??= "no"; //set to no if null or memory wipe
       this.chapterButton ??= true; // turn on if null or memory wipe
-      this.chapterNumber ??= "0"; 
       this.spinnerTitle ??= "Rendering";
     }
 }

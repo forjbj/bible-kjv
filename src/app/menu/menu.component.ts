@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
               public historyService: HistoryService,
               private router: Router, ) {
 
-    this.bibleService.leftHandOn = localStorage.getItem('leftHanded') ?? "no";
+    this.bibleService.leftHandOn = localStorage.getItem('leftHanded')!;
 
     this.historyService.menuBooks();
    }

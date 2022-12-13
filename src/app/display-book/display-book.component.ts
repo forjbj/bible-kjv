@@ -16,7 +16,7 @@ export class DisplayBookComponent implements OnInit, AfterViewInit {
 
 public renderedBook: string ;
 
-public fragString: string = "0";
+public fragString?: string;
 
 public routedLink = false; //Needed to test for outside links including search link
 
@@ -101,7 +101,7 @@ public routedLink = false; //Needed to test for outside links including search l
 
     // add highlighting if come from link and scroll to it
     if (this.routedLink == true) {
-      let target = document.getElementById(this.fragString);
+      let target = document.getElementById(this.fragString!);
       target!.classList.add("activatedLink");
       setTimeout( function(){target!.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})}, 50); //needed as it doesn't work on chrome without setTimeout
     } else { //only scroll if not an outside link
