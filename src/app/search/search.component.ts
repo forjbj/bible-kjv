@@ -68,7 +68,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
             this.bibleService.showChapters = false;
             this.bibleService.displayMenu = false;
             let frag = element.id.toString();
-            this.router.navigate(['book'], {fragment: frag}); //works
+            this.router.navigate(['./book'], {fragment: frag}); //works
             //the following is necessary or doesn't work;
             document.getElementById(frag)!.classList.add("activatedLink"); //necessary or doesn't work; thinking it's a timing thing
             document.getElementById(frag)!.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});          
