@@ -43,7 +43,7 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
     this.bibleService.showChapters = false;
     //setTimeout needed for spinner to start
     setTimeout(() => {
-      this.router.navigate(['../book']); //works
+      this.router.navigate(['./book']); //works
     }, 10);
   }
 }

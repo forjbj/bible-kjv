@@ -120,12 +120,12 @@ export class HistoryService {
       Gives brief 404 error in tab title when selecting from menu - history; but corrects on loaded page
     */
     setTimeout(() => {
-      this.router.navigateByUrl('../testament', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl('./testament', { skipLocationChange: true }).then(() => {
       /*
         Below works, however gives an error code 404 from static server (github pages) on 
         reload if - this.router.navigate(['/book', this.bibleService.title]);  
       */
-        this.router.navigate(['../book']);  
+        this.router.navigate(['./book']);  
       }); 
     }, 10); 
   }
