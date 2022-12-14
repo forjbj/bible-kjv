@@ -47,13 +47,13 @@ fn psalms_book(contents:&jsonValue) -> String {
         for verse in psalm["verses"].as_array().unwrap() {
             if verse["ver"] == 1 {
                 section.push_str(&format!("<div class=\"psalm fontType\">{}</div>",verse["description"].as_str().unwrap())); //unwrap necessary to remove ""
-                section.push_str(&format!("<div id = \"0-18-{0}-1\"><a href = \"../book#0-18-{0}-1\"><p class=\"firstVerse fontType\">{1}</p></a></div>", psalm["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<div id = \"0-18-{0}-1\"><a href = \"./book#0-18-{0}-1\"><p class=\"firstVerse fontType\">{1}</p></a></div>", psalm["chapter"], verse["scr"].as_str().unwrap()));
             } else {     
                 if verse["description"] != jsonNull {  // needed for psalm 119
                     section.push_str(&format!("<p class=\"psalm fontType\">{}</p>",verse["description"].as_str().unwrap()));
                 }
-                section.push_str(&format!("<div id = \"0-18-{0}-{1}\" class = \"verses\"><a href = \"../book#0-18-{0}-{1}\" ><p class=\"verseNumber fontType\">{1}</p></a>
-                <a href = \"../book#0-18-{0}-{1}\"><p class = \"scripture fontType\">{2}</p></a></div>", psalm["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<div id = \"0-18-{0}-{1}\" class = \"verses\"><a href = \"./book#0-18-{0}-{1}\" ><p class=\"verseNumber fontType\">{1}</p></a>
+                <a href = \"./book#0-18-{0}-{1}\"><p class = \"scripture fontType\">{2}</p></a></div>", psalm["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
         if psalm != current.last().unwrap() {
@@ -85,10 +85,10 @@ fn not_psalms( test: usize, book: usize, contents:&jsonValue ) -> String {
 
         for verse in chapter["verses"].as_array().unwrap() {
             if verse["ver"] == 1 {
-                section.push_str(&format!("<div id = \"{0}-{1}-{2}-1\"><a href = \"../book#{0}-{1}-{2}-1\"><p class=\"firstVerse fontType\">{3}</p></a></div>", &test, &book, chapter["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<div id = \"{0}-{1}-{2}-1\"><a href = \"./book#{0}-{1}-{2}-1\"><p class=\"firstVerse fontType\">{3}</p></a></div>", &test, &book, chapter["chapter"], verse["scr"].as_str().unwrap()));
             } else {     
-                section.push_str(&format!("<div id = \"{0}-{1}-{2}-{3}\" class = \"verses\"><a href = \"../book#{0}-{1}-{2}-{3}\" ><p class=\"verseNumber fontType\">{3}</p></a>
-                <a href = \"../book#{0}-{1}-{2}-{3}\"><p class = \"scripture fontType\">{4}</p></a></div>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<div id = \"{0}-{1}-{2}-{3}\" class = \"verses\"><a href = \"./book#{0}-{1}-{2}-{3}\" ><p class=\"verseNumber fontType\">{3}</p></a>
+                <a href = \"./book#{0}-{1}-{2}-{3}\"><p class = \"scripture fontType\">{4}</p></a></div>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
         if chapter != current.last().unwrap() {
@@ -193,8 +193,8 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                             }
                         }
             
-                        results.push_str(&format!("<div id = \"{0}-{1}-{3}-{4}\" class = \"listResults\"><a href = \"../book#{0}-{1}-{3}-{4}\">
-                        <p class=\"bookResults\">{2} {3}:{4}</p></a><a href = \"../book#{0}-{1}-{3}-{4}\"><p class = \"scrResults\">{5}</p></a></div>", 
+                        results.push_str(&format!("<div id = \"{0}-{1}-{3}-{4}\" class = \"listResults\"><a href = \"./book#{0}-{1}-{3}-{4}\">
+                        <p class=\"bookResults\">{2} {3}:{4}</p></a><a href = \"./book#{0}-{1}-{3}-{4}\"><p class = \"scrResults\">{5}</p></a></div>", 
                         i, j ,books["bookName"].as_str().unwrap(),chapters["chapter"], verses["ver"], selected));// extract route from id - see javascript, search component; angular stops routing from innerhtml
                         search_num += 1;
                     }
