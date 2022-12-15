@@ -1,4 +1,4 @@
-<div class="toast" [class.show]="showUpdate">
+<div [ngClass]="showUpdate ? 'toastShow' : 'toastHide'">
   <div class="img"></div>
   <div class="message">
     An update is available.
