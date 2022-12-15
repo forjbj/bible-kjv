@@ -3,8 +3,8 @@
         <hr>
         <div class="searchSelect">
                 <label class="searchInputLabel gridColumnTwo" for="req">Search for:&ensp;&nbsp;</label>
-                <input #req class="searchInput gridColumnThree" name = "req" type="search" placeholder= {{bibleService.searchRequest}} 
-                        (keyup.enter) ="submitSearch(req.value)" required minlength="2">
+                <input #req class="searchInput gridColumnThree" name = "req" type="search" placeholder= "Word or Words..." 
+                        value= {{bibleService.searchRequest}} (keyup.enter) ="submitSearch(req.value)" required minlength="2">
                 <input class="searchButton gridColumnFour" type="image" src="./assets/search_neutral.svg"  (click) = "submitSearch(req.value)">
                 <label class="gridColumnTwo" for="testament">Search in:&ensp;&nbsp;</label>
                 <select class="searchOption gridColumnThree" name="testaments" id="testaments" [(ngModel)] ="checkedNumber" (ngModelChange) = "selectedTest()">
@@ -18,5 +18,8 @@
         <hr>
         <br>
     </div>
-    <div id="searchResults" class="searchResults" [innerHTML] = "bibleService.searchResults | safe: 'html' "></div>
+    <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
+    <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
+        <div id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></div>
+    </a>
 </div>

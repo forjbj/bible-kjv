@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewEncapsulation } from '@angular/core';
 import { BibleService } from '../bible.service';
 import * as wasm from '../../../pkg';
-import { Meta, Title } from '@angular/platform-browser';
+import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   public checkedNumber: number = 2;
 
-  public worker: any;
+  public worker?: any;
 
   testaments = [    
     { id: 0, label: "Old Testament" },
@@ -33,7 +33,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
               public title: Title,
               public meta: Meta,
               public elementRef:ElementRef,
-              private router: Router ) { 
+              private router: Router,
+              public sanitizer: DomSanitizer ) { 
     //nav titles and buttons
     this.bibleService.pageTitle = "Search";
     this.bibleService.chapterButton = false;
@@ -44,7 +45,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     // Worker needs to be created immediately or will only work with double click
     if (typeof Worker !== 'undefined') {
       // Create a new
-      this.worker = new Worker(new URL('./search.worker', import.meta.url));
+      this.worker = ( new Worker(new URL('./search.worker', import.meta.url)));
     }
   }
   ngOnInit(): void {
@@ -86,12 +87,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
   submitSearch(req: string) {
     this.bibleService.spinner = true; // run spinner animation
-    this.bibleService.spinnerTitle = "Searching"
+    this.bibleService.spinnerTitle = "Searching";
+    this.bibleService.searchRequest = req;
+
     if (typeof Worker !== 'undefined') {
-      this.worker = new Worker(new URL('./search.worker', import.meta.url));
+      this.worker = new Worker(new URL( './search.worker', import.meta.url));
 
       this.worker.onmessage = ({ data }: any) => {
-        this.bibleService.searchRequest = req;
         this.bibleService.searchResults = data;
         this.bibleService.spinner = false;
       };
@@ -100,11 +102,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
       // Web workers are not supported in this environment.
       console.log('thread not used');
       setTimeout(() => {
-        this.bibleService.searchRequest = req;
         this.bibleService.searchResults = wasm.search( this.checkedNumber, req, this.accuracy)
         this.bibleService.spinner = false;
-      }, 100); // give it a moment to redraw
-    }
+      }, 10); // give it a moment to redraw
+  }
     window.scrollTo(0,0); // bring new search to top of page
   }
   @HostListener('window:scroll', []) scrolled() {    

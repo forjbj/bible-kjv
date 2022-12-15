@@ -40,6 +40,13 @@
     white-space: nowrap;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        color: inherit;
+    }
+}
 .searchResults {
     text-align: center;
     min-height: 80vh; // needed to close menu on click
