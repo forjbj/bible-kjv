@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   accuracyLevel = [
     { id: 0, label: "results Contain Characters", selected: true },
-    { id: 1, label: "results are Exact Word/s (slower)" },
+    { id: 1, label: "results are Exact Match" },
   ]
   
   constructor(public bibleService: BibleService,

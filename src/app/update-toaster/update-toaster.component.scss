@@ -44,13 +44,3 @@
         background-color: var(--zPaper);
     }
 }
-
-@keyframes app-update-toaster_fadein { // name change necessary as Angular 15 requires app name in keyframes
-    from { transform: scale(0); opacity: 0;}
-    to { transform: scale(1); opacity: 1;}
-}
-
-@keyframes app-update-toaster_expand {
-    from {width: 7rem}
-    to {width: clamp(20rem, 35vw, 24rem)}
-}

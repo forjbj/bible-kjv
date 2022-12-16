@@ -124,3 +124,14 @@ h1, h2, h3, h4, h5 {
   }
 }
 //end spinner for search and long render
+// keyframes for update-toaster; need to be here as per Angular 15 update or won't work
+@keyframes app-update-toaster_fadein { // name change necessary as Angular 15 requires app name in keyframes
+    from { transform: scale(0); opacity: 0;}
+    to { transform: scale(1); opacity: 1;}
+}
+
+@keyframes app-update-toaster_expand {
+    from {width: 7rem}
+    to {width: clamp(20rem, 35vw, 24rem)}
+}
+//end keyframes for update-toaster
