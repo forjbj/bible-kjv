@@ -8,22 +8,37 @@
 }
 .searchSelect {
     display: grid;
-    grid-template-columns:repeat(5, 1fr);
+    //grid-template-columns:repeat(5, 1fr);
+    //grid-auto-columns: 1fr;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-auto-flow: column;
     grid-row-gap: 0.3rem;
+
+    .verticalLabel {
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        font-size: 0.8rem;
+        font-weight: bold;
+        font-variant: small-caps;
+        margin: 0.1rem 0.5rem 0.1rem auto;
+    }
+    .gridColumnOne {
+        grid-column: 1;
+        grid-row: 1 / 4;
+    };
     .gridColumnTwo {
         grid-column: 2;
-    };
+    }
     .gridColumnThree {
         grid-column: 3;
-    }
-    .gridColumnFour {
-        grid-column: 4;
+        grid-row: 1 / 4;
     }
 }
 
 .searchButton {
-    height: 1.6rem;
-    width: 3rem;
+    height: 2rem;
+    width: 2rem;
+    margin: auto 0.3rem;
     background-color: transparent;
     vertical-align: middle;
     transition: transform ease 0.3s;

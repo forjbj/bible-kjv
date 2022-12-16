@@ -13,7 +13,7 @@
     --buttonActive: #ddd;
     --buttonBorder: #777;
     --darkRed: #4b0101;
-    --lightRed: #8A0707;
+    --lightRed: #9A0707;
 }
 html[dataTheme = 'dark'] {
     --nav: #444;
@@ -28,7 +28,7 @@ html[dataTheme = 'dark'] {
     --buttonActive: #aaa;
     --buttonBorder: #333;
     --darkRed: #4b0101;
-    --lightRed: #8A0707;
+    --lightRed: #9A0707;
 }
 
 html {
@@ -36,6 +36,7 @@ html {
 }
 
 body {
+    width: 100vw; //needed for iOS ??
     color: var(--ink);
     background-color: var(--paper);
     margin: auto;

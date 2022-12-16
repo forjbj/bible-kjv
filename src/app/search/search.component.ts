@@ -17,16 +17,16 @@ export class SearchComponent implements OnInit, AfterViewInit {
   public worker?: any;
 
   testaments = [    
-    { id: 0, label: "Old Testament" },
-    { id: 1, label: "New Testament" },
-    { id: 2, label: "Old & New Testaments", selected: true}
+    { id: 0, label: "in Old Testament" },
+    { id: 1, label: "in New Testament" },
+    { id: 2, label: "both Old & New Testaments", selected: true}
   ]
 
   public accuracy: number = 0;
 
   accuracyLevel = [
-    { id: 0, label: "Contains Characters", selected: true },
-    { id: 1, label: "Exact Word/s (slower)" },
+    { id: 0, label: "results Contain Characters", selected: true },
+    { id: 1, label: "results are Exact Word/s (slower)" },
   ]
   
   constructor(public bibleService: BibleService,
