@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   testaments = [    
     { id: 0, label: "in Old Testament" },
     { id: 1, label: "in New Testament" },
-    { id: 2, label: "both Old & New Testaments", selected: true}
+    { id: 2, label: "in Old & New Testaments", selected: true}
   ]
 
   public accuracy: number = 0;

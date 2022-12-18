@@ -10,6 +10,7 @@ nav {
     border-bottom: var(--ink) solid 1px;
     font-family: "Bookman", Georgia, serif;
     color: var(--zInk);
+    text-shadow: 1px 1px var(--gridColor);
     height: 2.2rem;
     transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
 } 
@@ -71,6 +72,7 @@ nav {
     font-weight: bold;
     font-variant: small-caps;
     color: var(--zInk);
+    text-shadow: 1px 1px var(--gridColor);
     text-align: center;
  //   border: solid var(--buttonBorder) 1px;
     border-radius: 0.1rem;
