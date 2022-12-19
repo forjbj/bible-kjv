@@ -53,11 +53,10 @@
     background-color: var(--button);
     cursor: pointer;
     color: var(--ink);
+    text-shadow: 1px 1px var(--gridColor);
     transition: all 0.3s;
         &:hover, &:focus, &:active {
             border:1px solid var(--button);
-            color: var(--darkRed);
-            font-weight: bold;
             background-color: var(--buttonActive);
 
         }
@@ -65,6 +64,6 @@
 .chapterScroll {
     border:1px solid var(--button);
     color: var(--darkRed);
-    font-weight: bold;
+    text-shadow: 1px 1px var(--ink);
     background-color: var(--buttonActive);
 }
