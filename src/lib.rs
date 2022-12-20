@@ -149,22 +149,22 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
         for (j, books) in json_bible.iter().enumerate() {
             for chapters in books["chapters"].as_array().unwrap() {
                 for verses in chapters["verses"].as_array().unwrap() {
-                    let mut selected = String::from(verses["scr"].as_str().unwrap());
-                    let select = &selected.to_lowercase();
+                    let mut verse = String::from(verses["scr"].as_str().unwrap());
+                    let verse_lowercase = &verse.to_lowercase();
                     let mut counted = 0; 
                     for word in word_ind.iter() { //check all words are in the scripture
-                        if select.contains(word) { //find everything regardless of case
-                            if acc == 0 { //only count if accuracy is contains
+                        if verse_lowercase.contains(word) { //find everything regardless of case
+                            if acc == 0 { //only count if accuracy is 'contains'
                                 counted = counted +1;
                             } else { // only count word if exact match
                                 if word == &"i" { // have to change 'i' from search as it finds the <i> tag; change to capital 'I'
                                     let re = Regex::new(&format!("\\b{}\\b", "I")).unwrap();
-                                    if re.is_match(&selected) { //search in original case not 'select'
+                                    if re.is_match(&verse) { //search in original case not 'verse_lowercase'
                                         counted = counted +1;
                                     }
                                 } else {
-                                    let re = Regex::new(&format!("\\b{}\\b", &word.to_lowercase())).unwrap();
-                                    if re.is_match(&select) {
+                                    let re = Regex::new(&format!("\\b{}\\b", &word)).unwrap();
+                                    if re.is_match(&verse_lowercase) {
                                         counted = counted +1;
                                     }
                                 }
@@ -172,30 +172,29 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                         } 
                     }
                     if counted == word_ind.len() { // find location of words
-                        //let mut highlight_insert = Vec::new();
                         for word in word_ind.iter() {
                             if word == &"i" { // have to remove 'i' from highlight as it highlights the <i> tag; change to capital 'I'
-                            let select = selected.clone();//not sure why this is necessary; complier complains without it    
-                            let re = Regex::new(&format!("\\b{}\\b", "I")).unwrap();
-                                if re.is_match(&select) {
-                                    let mat = re.find(&select).unwrap(); //search in original case
-                                    selected.replace_range(mat.end()..mat.end(), "</span>"); //end first
-                                    selected.replace_range(mat.start()..mat.start(), "<span class=\"highlight\">");
-                                }
+                                let verse_copy = verse.clone();//not sure why this is necessary; complier complains without it    
+                                let reg = Regex::new(&format!("\\b{}\\b", "I")).unwrap();
+                                    if reg.is_match(&verse_copy) {
+                                        let mat = reg.find(&verse_copy).unwrap(); //search in original case
+                                        verse.replace_range(mat.end()..mat.end(), "</span>"); //end first
+                                        verse.replace_range(mat.start()..mat.start(), "<span class=\"highlight\">");
+                                    }
                             } else {
-                                let re = Regex::new(&format!("\\b{}\\b", &word)).unwrap();
-                                if re.is_match(&selected.to_lowercase()) {
-                                    let select = &selected.to_lowercase();
-                                    let mat = re.find(&select).unwrap();
-                                    selected.replace_range(mat.end()..mat.end(), "</span>"); //end first
-                                    selected.replace_range(mat.start()..mat.start(), "<span class=\"highlight\">");
+                                let reg = Regex::new(&format!("\\b{}\\b", &word)).unwrap();
+                                if reg.is_match(&verse_lowercase) {
+                                    let found = verse.to_lowercase(); //can't use verse_lowercase???; necessary as doesn't work without it; hightlighting is a mess without it
+                                    let mat = reg.find(&found).unwrap();
+                                    verse.replace_range(mat.end()..mat.end(), "</span>"); //end first
+                                    verse.replace_range(mat.start()..mat.start(), "<span class=\"highlight\">");
                                 }
                             }
                         }
             
                         results.push_str(&format!("<div id = \"{0}-{1}-{3}-{4}\" class = \"listResults\"><a href = \"./book#{0}-{1}-{3}-{4}\">
                         <p class=\"bookResults\">{2} {3}:{4}</p></a><a href = \"./book#{0}-{1}-{3}-{4}\"><p class = \"scrResults\">{5}</p></a></div>", 
-                        i, j ,books["bookName"].as_str().unwrap(),chapters["chapter"], verses["ver"], selected));// extract route from id - see javascript, search component; angular stops routing from innerhtml
+                        i, j ,books["bookName"].as_str().unwrap(),chapters["chapter"], verses["ver"], verse));// extract route from id - see javascript, search component; angular stops routing from innerhtml
                         search_num += 1;
                     }
                 }
