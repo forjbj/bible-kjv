@@ -138,9 +138,9 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
     let inp_str: String = word_ind_out.join(" ");
     word_ind.sort();
     word_ind.dedup(); // deduplicate after sorting removes duplicate words.
-    if word_ind.is_empty() || (word_ind[0].chars().count() < 2 && word_ind[0].len() == word_ind.capacity()) { //return if search request invalid
+    if  word_ind.is_empty() || (word_ind[0].chars().count() < 3 && word_ind.iter().count() == 1 ){ //return if search request invalid
         //return the string and finish
-        return "<div class = \"alert\">Search query must have a minimum of 2 characters</div>".to_string();
+        return "<div class = \"alert\">Search query must have a minimum of 3 characters</div>".to_string();
     } 
 
     let mut search_num = 0;
@@ -149,7 +149,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
         for (j, books) in json_bible.iter().enumerate() {
             for chapters in books["chapters"].as_array().unwrap() {
                 for verses in chapters["verses"].as_array().unwrap() {
-                    let mut verse = String::from(verses["scr"].as_str().unwrap());
+                    let verse = String::from(verses["scr"].as_str().unwrap());
                     let verse_lowercase = &verse.to_lowercase();
                     let mut counted = 0; 
                     for word in word_ind.iter() { //check all words are in the scripture
@@ -172,6 +172,13 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                         } 
                     }
                     if counted == word_ind.len() { // find location of words
+
+                        /*hightlighting code below works but is too slow, 
+                        as at 2022;
+                        God willing, will revisit the code below
+                        when/if WASM threads are a thing */
+                        /*
+
                         for word in word_ind.iter() {
                             if word == &"i" { // have to remove 'i' from highlight as it highlights the <i> tag; change to capital 'I'
                                 let verse_copy = verse.clone();//not sure why this is necessary; complier complains without it    
@@ -191,7 +198,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                                 }
                             }
                         }
-            
+                        */
                         results.push_str(&format!("<div id = \"{0}-{1}-{3}-{4}\" class = \"listResults\"><a href = \"./book#{0}-{1}-{3}-{4}\">
                         <p class=\"bookResults\">{2} {3}:{4}</p></a><a href = \"./book#{0}-{1}-{3}-{4}\"><p class = \"scrResults\">{5}</p></a></div>", 
                         i, j ,books["bookName"].as_str().unwrap(),chapters["chapter"], verses["ver"], verse));// extract route from id - see javascript, search component; angular stops routing from innerhtml
