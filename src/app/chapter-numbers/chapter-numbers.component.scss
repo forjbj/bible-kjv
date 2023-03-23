@@ -2,10 +2,11 @@
 
 .chaptersShow {
     z-index: 3;
-    background-color: var(--nav);
-    border-right: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-    border-left: 1px solid var(--ink);
+    background-color: var(--menu);
+    border: 1px solid var(--ink);
+    // border-right: 1px solid var(--ink);
+    // border-bottom: 1px solid var(--ink);
+    // border-left: 1px solid var(--ink);
     box-shadow: 0 12px 7px -7px var(--zPaper);
     color: var(--zInk);
     text-align: center;
@@ -14,7 +15,7 @@
     left: 50%;
     transform:translateX(-50%);
     display: block;
-    top: 2.2rem;
+    top: 2.3rem;
     border-radius: 0.1rem;
     hr {
         margin: 0.7rem 0.7rem;

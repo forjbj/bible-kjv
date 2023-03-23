@@ -4,43 +4,59 @@
     <div  id="navGrid" class="navGrid">
       <div id="description" class="desc">
         {{bibleService.pageTitle}} 
-    <!--    <span *ngIf = "bibleService.chapterButton == true"> {{bibleService.chapterNumber}}</span> -->
+        <span *ngIf = "bibleService.chapterButton == true"> {{bibleService.chapterNumber}}</span>
       </div>
-      <div id="titleButton"
-        (click) = "bibleService.displayMenu = false;">
-        <div *ngIf="bibleService.chapterButton == true; else version">
-          <button class = "titleButton"
-                  (click) = "bibleService.showChapters = !bibleService.showChapters;">
-            <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle">
-              Chapter {{bibleService.chapterNumber}}
+      <div *ngIf="bibleService.chapterButton == true; else version">
+        <button id="titleButton"
+                class = "titleButton"
+                (click) = "bibleService.showChapters = !bibleService.showChapters;
+                            bibleService.displayMenu = false;">
+          <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle">
+            Chapter {{bibleService.chapterNumber}}
+          </div>
+          <ng-template #notChapterTitle>
+            <div>
+              Psalm {{bibleService.chapterNumber}}
             </div>
-            <ng-template #notChapterTitle>
-              <div>
-                Psalm {{bibleService.chapterNumber}}
-              </div>
-            </ng-template>
-          </button>
-          <app-chapter-numbers *ngIf = "bibleService.showChapters"></app-chapter-numbers>
-        </div>
-        <ng-template #version >
-          <button class = "titleButton"
-            (click) = "restoreBook();">
-            Back to {{bibleService.title}}
-          </button>
-        </ng-template>
+          </ng-template>
+        </button>
+        <app-chapter-numbers *ngIf = "bibleService.showChapters"></app-chapter-numbers>
       </div>
-      <div id="menuButton"
-        class="menuButton"
-        [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'menuButton'"
-        (click) = "historyService.savePosition();
-                  bibleService.displayMenu = !bibleService.displayMenu;
-                  bibleService.showChapters = false" >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div> 
+      <ng-template #version >
+        <button class = "titleButton"
+          (click) = "restoreBook();">
+          Back to {{bibleService.title}}
+        </button>
+      </ng-template>
+      <button class="menuButton"
+              [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
+              (click) = "historyService.savePosition();
+                        bibleService.displayMenu = !bibleService.displayMenu;
+                        bibleService.showChapters = false"
+                        aria-controls="primary-navigation" aria-expanded="false">
+        <svg class="hamburger" viewBox="0 0 100 100">
+          <rect class="line top" 
+                width="80"
+                height="10"
+                x="10" y="25" rx="5">
+          </rect>
+          <rect class="line middle" 
+                width="80"
+                height="10"
+                stroke="black"
+                x="10" y="50" rx="5">
+          </rect>
+          <rect class="line bottom" 
+                width="80"
+                height="10"
+                stroke="black"
+                fill="black"
+                x="10" y="75" rx="5">
+          </rect>
+        </svg>
+      </button>
     </div>
-    <app-menu *ngIf = "bibleService.displayMenu" ></app-menu>
+    <app-menu *ngIf = "bibleService.displayMenu" class="slideMenu"></app-menu>
   </nav>
   <router-outlet>
     <div *ngIf="bibleService.spinner == true" class="spinnerBackground">

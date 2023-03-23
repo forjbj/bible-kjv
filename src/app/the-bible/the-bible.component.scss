@@ -12,14 +12,18 @@ nav {
     color: var(--zInk);
     text-shadow: 1px 1px var(--gridColor);
     height: 2.2rem;
-    transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
+    // transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
 } 
 .navGrid {
+    margin: 0;
+    padding: 0;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    align-items: center;
+    grid-template-rows: 2.2rem; // needed to centre items
+    place-items: center;
     max-width: 100%;
     transition: all 0.3s;
+    margin: 0;
     #description {
         grid-column: 1;
         grid-row: 1;
@@ -31,12 +35,12 @@ nav {
             margin: 0 0.3rem;
         }
     } 
-    #titleButton {
+    .titleButton {
         grid-column: 2;
         grid-row: 1;
         justify-self: center;
     }
-    #menuButton {
+    .menuButton {
         grid-column: 3;
         grid-row: 1;
         margin: 0 1rem;
@@ -49,12 +53,12 @@ nav {
             grid-row: 1;
             justify-self: right;
         }
-        #menuButton {
+        .menuButton {
             grid-column: 1;
             grid-row: 1;
             justify-self: left;
         }
-        #titleButton {
+        .titleButton {
             grid-column: 2;
             grid-row: 1;
             justify-self: center;
@@ -74,67 +78,118 @@ nav {
     color: var(--zInk);
     text-shadow: 1px 1px var(--gridColor);
     text-align: center;
- //   border: solid var(--buttonBorder) 1px;
     border-radius: 0.1rem;
     background-color: var(--button);
     min-width: 7rem;
     justify-self: center;
-   // min-width: clamp(7rem, 33vw, 13rem);
     padding: 0.2rem;
     cursor: pointer;
     transition: all 0.3s;
     &:hover, &:focus, &:active {
         color: var(--ink);
-        background-color: var(--buttonActive);
+        background-color: var(--menu);
         outline: 0; //needed for chrome
     }
 }
+
 .menuButton {
-    cursor: pointer;
-    height: 2.2rem;
-    width: 2.2rem; //necessary or makes a mess of the grid
-    transition: all 0.3s;
-    &:hover span, &:focus span{
-        background-color: var(--buttonActive);
+    width: 2.2rem;
+    background: transparent;
+    border: none;
+    // &:hover {   
+    //     background-color: var(--buttonActive);
+    // }
+}
+.hamburger {
+    .line {
+        fill: var(--zInk);
+        transition: 
+            rotate 0.3s,
+            y 0.3s 0.3s,
+            opacity 0s 0.3s;
+         transform-origin: center;
+         transform-box: fill-box; //needed for firefox
     }
-    span {
-        position: absolute;
-        width: 1.8rem;
-		height: 0.15rem;
-		background-color: var(--button);
-		border-radius: 0.1rem;
-        border: solid var(--buttonBorder) 2px;
-		transition: all 0.3s cubic-bezier(0.1, 0.82, 0.76, 0.965);
-        
-		&:first-of-type {
-			top: 0.3rem;
-		}
-        &:nth-of-type(2) {
-            top: 50%;
-            -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-        }
-		&:last-of-type {
-			bottom: 0.3rem;
-		} 
+}
+.menuButtonActive {
+    border: 1px solid var(--ink);
+    .top, .bottom {
+        y: 45px; // has to be px or firefox doesn't work
     }
-    &:active span {
-            &:first-of-type {
-                top: 50%;
-                -ms-transform: translateY(-50%);
-                transform: translateY(-50%);
-            }
-            &:nth-of-type(2) {
-                display: none;
-            }
-            &:last-of-type {
-                top: 50%;
-                -ms-transform: translateY(-50%);
-                transform: translateY(-50%);
-            }
+    .middle {
+        opacity: 0;
     }
+    .top {
+        rotate: -45deg;
+    }
+    .bottom {
+        rotate: 45deg;
+    }
+    .line {
+        fill: var(--zInk);
+        transition: 
+            y 0.3s,
+            rotate 0.3s 0.3s,
+            opacity 0s 0.3s;
+    }   
 }
 
-.menuButtonActive span {
-    background-color: var(--buttonActive);
+.slideMenu {
+    transform-origin: top;
+    height: auto;
 }
+
+
+// .hamburger {
+//     width: 100;
+// }
+
+// .menuButton {
+//     cursor: pointer;
+//     height: 2.2rem;
+//     width: 2.2rem; //necessary or makes a mess of the grid
+//     transition: all 0.3s;
+//     &:hover span, &:focus span{
+//         background-color: var(--buttonActive);
+//     }
+//     span {
+//         position: absolute;
+//         width: 1.8rem;
+// 		height: 0.15rem;
+// 		background-color: var(--button);
+// 		border-radius: 0.1rem;
+//         border: solid var(--buttonBorder) 2px;
+// 		transition: all 0.3s cubic-bezier(0.1, 0.82, 0.76, 0.965);
+        
+// 		&:first-of-type {
+// 			top: 0.3rem;
+// 		}
+//         &:nth-of-type(2) {
+//             top: 50%;
+//             -ms-transform: translateY(-50%);
+//             transform: translateY(-50%);
+//         }
+// 		&:last-of-type {
+// 			bottom: 0.3rem;
+// 		} 
+//     }
+//     &:active span {
+//             &:first-of-type {
+//                 top: 50%;
+//                 -ms-transform: translateY(-50%);
+//                 transform: translateY(-50%);
+//             }
+//             &:nth-of-type(2) {
+//                 display: none;
+//             }
+//             &:last-of-type {
+//                 top: 50%;
+//                 -ms-transform: translateY(-50%);
+//                 transform: translateY(-50%);
+//             }
+//     }
+// }
+
+// .menuButtonActive span {
+//     background-color: var(--buttonActive);
+// }

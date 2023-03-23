@@ -2,6 +2,7 @@
 // Global colours for easy colour scheme change
 :root {
     --nav: #ccc;
+    --menu: #ddd;
     --paper: #fff;
     --gridColor: #eee;
     --searchHighlight: #ccc;
@@ -17,6 +18,7 @@
 }
 html[dataTheme = 'dark'] {
     --nav: #444;
+    --menu: #333;
     --paper: #000;
     --gridColor: #111;
     --searchHighlight: #333;
