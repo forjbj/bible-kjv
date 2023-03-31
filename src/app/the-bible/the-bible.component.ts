@@ -4,6 +4,7 @@ import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-the-bible',
   templateUrl: './the-bible.component.html',
@@ -38,7 +39,6 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
   restoreBook () {
     this.bibleService.spinner = true;
     this.bibleService.spinnerTitle = "Restoring";
-    //this.bibleService.testament = Number(localStorage.getItem('currentTestamentIndex'));
     this.bibleService.displayMenu = false;
     this.bibleService.showChapters = false;
     //setTimeout needed for spinner to start

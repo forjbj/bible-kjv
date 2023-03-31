@@ -7,16 +7,12 @@
   min-width: 20%;
   z-index: 3;
   border: 1px solid var(--ink);
-  // border-right: 1px solid var(--ink);
-  // border-bottom: 1px solid var(--ink);
-  // border-left: 1px solid var(--ink);
   background-color: var(--menu);
   color: var(--zInk);
   text-shadow: 1px 1px var(--gridColor);
   max-height: 87vh;
   overflow-y: scroll;
- // top: 2.2rem;
-  transition: all 0.3s;
+  transition: height 0.3s;
   hr {
     // check divider in line with links
     margin: 1em;

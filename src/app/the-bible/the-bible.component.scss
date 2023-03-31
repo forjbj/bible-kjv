@@ -12,7 +12,7 @@ nav {
     color: var(--zInk);
     text-shadow: 1px 1px var(--gridColor);
     height: 2.2rem;
-    // transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
+    transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
 } 
 .navGrid {
     margin: 0;
@@ -96,9 +96,6 @@ nav {
     width: 2.2rem;
     background: transparent;
     border: none;
-    // &:hover {   
-    //     background-color: var(--buttonActive);
-    // }
 }
 .hamburger {
     .line {
@@ -133,63 +130,3 @@ nav {
             opacity 0s 0.3s;
     }   
 }
-
-.slideMenu {
-    transform-origin: top;
-    height: auto;
-}
-
-
-// .hamburger {
-//     width: 100;
-// }
-
-// .menuButton {
-//     cursor: pointer;
-//     height: 2.2rem;
-//     width: 2.2rem; //necessary or makes a mess of the grid
-//     transition: all 0.3s;
-//     &:hover span, &:focus span{
-//         background-color: var(--buttonActive);
-//     }
-//     span {
-//         position: absolute;
-//         width: 1.8rem;
-// 		height: 0.15rem;
-// 		background-color: var(--button);
-// 		border-radius: 0.1rem;
-//         border: solid var(--buttonBorder) 2px;
-// 		transition: all 0.3s cubic-bezier(0.1, 0.82, 0.76, 0.965);
-        
-// 		&:first-of-type {
-// 			top: 0.3rem;
-// 		}
-//         &:nth-of-type(2) {
-//             top: 50%;
-//             -ms-transform: translateY(-50%);
-//             transform: translateY(-50%);
-//         }
-// 		&:last-of-type {
-// 			bottom: 0.3rem;
-// 		} 
-//     }
-//     &:active span {
-//             &:first-of-type {
-//                 top: 50%;
-//                 -ms-transform: translateY(-50%);
-//                 transform: translateY(-50%);
-//             }
-//             &:nth-of-type(2) {
-//                 display: none;
-//             }
-//             &:last-of-type {
-//                 top: 50%;
-//                 -ms-transform: translateY(-50%);
-//                 transform: translateY(-50%);
-//             }
-//     }
-// }
-
-// .menuButtonActive span {
-//     background-color: var(--buttonActive);
-// }

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, HostListener, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, AfterViewInit, HostListener, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
@@ -12,13 +12,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./display-book.component.scss'],
   encapsulation: ViewEncapsulation.None // removes ::ng-deep need
 })
-export class DisplayBookComponent implements OnInit, AfterViewInit {
+export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
 public renderedBook: string ;
 
 public fragString?: string;
 
 public routedLink = false; //Needed to test for outside links including search link
+
+private observer: any;
+
 
   constructor( public bibleService: BibleService,
                public historyService: HistoryService,
@@ -34,9 +37,9 @@ public routedLink = false; //Needed to test for outside links including search l
     title.setTitle('Bible - King James Version - PWA');
 
     let fragment = this.activatedRoute.snapshot.fragment;
-    if (fragment && (this.bibleService.searchNavigate == false)){
+    if (fragment){
       let frag = fragment.split('-')
-      if (frag[3] != null){ // only if verse exists in route
+      if (frag.length > 3){ // only if verse exists in route
         localStorage.setItem( 'curTestamentIndex', (frag[0]));
         localStorage.setItem( 'curBookIndex', (frag[1]));
         localStorage.setItem('curChap', frag[2]);
@@ -59,8 +62,6 @@ public routedLink = false; //Needed to test for outside links including search l
     this.bibleService.chapterNumber = localStorage.getItem('curChap') ?? "0";
   }   
   
-  ngOnInit() {} 
-
   ngAfterViewInit() {
     //turn off spinner, setTimeout is necessary or doesn't work
     setTimeout(() => {
@@ -77,7 +78,7 @@ public routedLink = false; //Needed to test for outside links including search l
       threshold: [0],
       rootMargin: "-50%" //highlight multiple chapters if visible
     };
-    let observer = new IntersectionObserver(function (entries) {
+    this.observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
       let chapter = (entry.target.querySelector("div")!.id) ?? "0"; 
       let splits = chapter.split('-');
@@ -96,7 +97,7 @@ public routedLink = false; //Needed to test for outside links including search l
     });
     },options);
       chapters.forEach(chapter=> {
-      observer.observe(chapter);
+      this.observer.observe(chapter);
     }) 
 
     // add highlighting if come from link and scroll to it
@@ -104,25 +105,28 @@ public routedLink = false; //Needed to test for outside links including search l
       let target = document.getElementById(this.fragString!);
       target!.classList.add("activatedLink");
       setTimeout( function(){target!.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})}, 50); //needed as it doesn't work on chrome without setTimeout
-    } else { //only scroll if not an outside link
-      // get scroll position (Y offset) from local storage and scroll to it -THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK
-      window.scroll(0, Number(localStorage.getItem('curScrollY')));
+    } else { 
+      //only scroll if not an outside link
+      // get scroll position (Y offset) from local storage and scroll to it 
+      // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
+      // setTimeout absolutely necessary: chrome makes a complete mess of it if this setTimeout isn't here
+      setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},130);
     }
-
   }
 
-  @HostListener('window:scroll', []) scrolled() {    
+  @HostListener('window:scroll', []) scrolled(): void {    
     // change chapter numbers in tab title as scrolling
     this.bibleService.chapterNumber = localStorage.getItem('curChap') ?? "1";
     let tabTitle = (this.bibleService.title).concat(' ',this.bibleService.chapterNumber);
     this.title.setTitle(tabTitle);
-
-    localStorage.setItem('curScrollY', window.pageYOffset.toString());
+    // save scroll Y coordinate
+    // setTimeout absolutely necessary or chrome makes a complete mess of it (almost a week to work this out)
+    setTimeout(function(){localStorage.setItem('curScrollY', window.pageYOffset.toString())}, 1000);
   }
-  @HostListener('window:beforeunload')
-    async ngOnDestroy() {
-    // store scroll position and chapter on exit
-    this.historyService.savePosition();
-    } 
+
+  ngOnDestroy() {
+    this.observer.disconnect();
+  }
+
 }
 

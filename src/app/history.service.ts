@@ -144,6 +144,7 @@ export class HistoryService {
   }
 
   savePosition() {
+    localStorage.setItem('curScrollY', window.pageYOffset.toString());
     localStorage.setItem('ScrollYSaved', localStorage.getItem('curScrollY')!);
     localStorage.setItem('curSavedChap', localStorage.getItem('curChap')!);
   }

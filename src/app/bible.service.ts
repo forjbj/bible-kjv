@@ -28,7 +28,6 @@ export class BibleService {
 
   public searchResults: any = "<br><h2>Search results will appear here...</h2>";
   public searchRequest?: string ;
-  public searchNavigate = false;
 
   //variable for lefthand menu position
   public leftHandOn?: string; // "?" for typescript to allow undefined

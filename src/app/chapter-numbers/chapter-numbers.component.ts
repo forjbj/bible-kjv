@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Inject } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 
@@ -8,7 +8,7 @@ import { HistoryService } from '../history.service';
   templateUrl: './chapter-numbers.component.html',
   styleUrls: ['./chapter-numbers.component.scss']
 })
-export class ChapterNumbersComponent implements AfterViewInit{
+export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
 
   private observer: any;
 
