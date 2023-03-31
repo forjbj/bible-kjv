@@ -110,7 +110,7 @@ private observer: any;
       // get scroll position (Y offset) from local storage and scroll to it 
       // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
       // setTimeout absolutely necessary: chrome makes a complete mess of it if this setTimeout isn't here
-      setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},130);
+      setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},1000);
     }
   }
 
