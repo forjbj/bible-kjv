@@ -1,4 +1,4 @@
-<div (click) = "bibleService.displayMenu = false;">
+<section (click) = "bibleService.displayMenu = false;">
     <div class="stationary">
         <hr>
         <div class="searchSelect">
@@ -20,4 +20,4 @@
     <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
         <div id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></div>
     </a>
-</div>
+</section>

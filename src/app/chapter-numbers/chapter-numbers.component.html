@@ -1,4 +1,4 @@
-<div class="chaptersShow"
+<nav class="chaptersShow"
       (click) = "bibleService.showChapters = !bibleService.showChapters; ">
   <hr>
   <div *ngIf = "bibleService.title != 'Psalms'; else notChapter">
@@ -25,4 +25,4 @@
     </ng-container>
   </div>
   <hr>
-</div>
+</nav>

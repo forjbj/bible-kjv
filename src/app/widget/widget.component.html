@@ -1,5 +1,5 @@
 <!-- This outside/fullpage division is necessary for the nav to stay sticky in apple stuff; don't ask, I don't know either-->
-<div>
+<article>
     <section class="sticky">
         <div class="title">
             {{bookName}} {{chapter}}
@@ -9,4 +9,4 @@
         </div>
     </section>
     <div [innerHTML] ="result | safe: 'html'"></div>
-</div>
+</article>

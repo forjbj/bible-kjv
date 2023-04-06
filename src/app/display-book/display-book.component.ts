@@ -109,19 +109,21 @@ private observer: any;
       //only scroll if not an outside link
       // get scroll position (Y offset) from local storage and scroll to it 
       // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
-      // setTimeout absolutely necessary: chrome makes a complete mess of it if this setTimeout isn't here
-      setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},1000);
+      // setTimeout absolutely necessary or chrome (Blink engine) makes a complete mess of it; 
+      // (almost a week to work this out)
+    setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},500);
     }
   }
 
-  @HostListener('window:scroll', []) scrolled(): void {    
+  @HostListener('window:scroll', []) scrolled(): void {  
+    setTimeout(() => {  
     // change chapter numbers in tab title as scrolling
     this.bibleService.chapterNumber = localStorage.getItem('curChap') ?? "1";
     let tabTitle = (this.bibleService.title).concat(' ',this.bibleService.chapterNumber);
     this.title.setTitle(tabTitle);
     // save scroll Y coordinate
-    // setTimeout absolutely necessary or chrome makes a complete mess of it (almost a week to work this out)
-    setTimeout(function(){localStorage.setItem('curScrollY', window.pageYOffset.toString())}, 1000);
+    // setTimeout MUST be longer than setTimeout for scroll in ngAfterViewInit
+    localStorage.setItem('curScrollY', window.pageYOffset.toString())}, 700);
   }
 
   ngOnDestroy() {

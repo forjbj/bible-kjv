@@ -1,4 +1,4 @@
-<div [ngClass]="showUpdate ? 'toastShow' : 'toastHide'">
+<dialog [ngClass]="showUpdate ? 'toastShow' : 'toastHide'">
   <div class="img"></div>
   <div class="message">
     An update is available.
@@ -9,4 +9,4 @@
     <br>
     <button (click)="reload()">Reload</button>
   </div>
-</div>
+</dialog>
