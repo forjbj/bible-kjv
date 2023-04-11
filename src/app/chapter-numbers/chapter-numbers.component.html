@@ -1,18 +1,18 @@
 <nav class="chaptersShow"
       (click) = "bibleService.showChapters = !bibleService.showChapters; ">
   <hr>
-  <div *ngIf = "bibleService.title != 'Psalms'; else notChapter">
+  <header *ngIf = "bibleService.title != 'Psalms'; else notChapter">
     <p class = "chapterTitle">{{bibleService.title}}</p>
     <p class = "numberTitle">Chapter</p>
-  </div>
+  </header>
   <ng-template #notChapter>
-    <div>
+    <header>
       <p class = "chapterTitle">{{bibleService.title}}</p>
       <p class = "numberTitle">Psalm</p>
-    </div>
+    </header>
   </ng-template>
 
-  <div  class="chapterGrid">
+  <section class="chapterGrid">
     <ng-container 
     *ngFor = "let chapters of bibleService.bible[bibleService.testament].books[bibleService.bookSelected].chapters" >
 <!-- [routerLink] = "['/book', bibleService.title]" give error from static site (github pages) on reload -->
@@ -23,6 +23,6 @@
           {{chapters.chapter }}
       </div>
     </ng-container>
-  </div>
+  </section>
   <hr>
 </nav>

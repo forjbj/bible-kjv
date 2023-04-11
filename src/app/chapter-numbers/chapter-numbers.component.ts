@@ -27,17 +27,19 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
     };
     this.observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
-      let chapter = entry.target.querySelector("div")!.id!; 
-      let splits = chapter.split('-');
-      let targetChapter = splits[2];
-      if (entry.isIntersecting ) {
-        chaptersGrid[Number(targetChapter)-1].classList.add("chapterScroll");
-      } else {
-        chaptersGrid[Number(targetChapter)-1].classList.remove("chapterScroll");
+      if (entry.target.id)  { //necessary as sections used everywhere in semantic html
+        let chapter = entry.target!.id!;
+        let splits = chapter.split('-');
+        let targetChapter = splits[2];
+        if (entry.isIntersecting ) {
+          chaptersGrid[Number(targetChapter)-1].classList.add("chapterScroll");
+        } else {
+          chaptersGrid[Number(targetChapter)-1].classList.remove("chapterScroll");
+        }
+        let current = Number(localStorage.getItem('curChap'))-1;
+          //block: "nearest" is essential to stop page moving!
+        chaptersGrid[current].scrollIntoView({block: "nearest"});
       }
-      let current = Number(localStorage.getItem('curChap'))-1;
-        //block: "nearest" is essential to stop page moving!
-      chaptersGrid[current].scrollIntoView({block: "nearest"});
     });
     },options);
       chapters.forEach(chapter=> {

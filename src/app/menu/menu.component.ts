@@ -55,7 +55,7 @@ export class MenuComponent implements OnInit {
 /* Change sides */
   leftHand(){
     let leftHand = document.getElementById('leftHand') as HTMLInputElement;      
-    let grid = document.getElementById('navGrid') as HTMLInputElement;
+    let grid = document.getElementById('nav') as HTMLInputElement;
     let menu = document.getElementById('menu') as HTMLInputElement;
     if (leftHand.checked) {
       localStorage.setItem('leftHanded', 'yes');

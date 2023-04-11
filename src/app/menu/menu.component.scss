@@ -19,6 +19,9 @@
   }
   &[leftHanded = 'no'] {
     right: 0;
+  }  
+  &[leftHanded = 'yes'] {
+    left: 0;
   }
 }
 .history {

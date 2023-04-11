@@ -8,6 +8,11 @@
         max-width: 70%;
     }
 }
+.scriptHeader {
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+    border-color: var(--lightRed);
+}
 .scripture {
     font-family: Bookman, Georgia, serif;
     font-variant-caps: small-caps;

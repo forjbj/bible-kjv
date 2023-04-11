@@ -35,31 +35,31 @@ fn psalms_book(contents:&jsonValue) -> String {
 
     let current = contents["0"]["books"][18]["chapters"].as_array().unwrap();
 
-    let mut result: String = format!("<div class=\"headings\"><h4>THE</h4><h2>BOOK OF PSALMS</h2></div>");
+    let mut result: String = format!("<header class=\"headings\"><h4>THE</h4><h2>BOOK OF PSALMS</h2></header>");
     let mut section: String;
 
     for psalm in current {
-        section = format!("<section><div id =\"0-18-{}\"><div class=\"headings\" >", psalm["chapter"]);
+        section = format!("<section id =\"0-18-{}\"><header class=\"headings\" >", psalm["chapter"]);
 
-        let psal = format!("<p class=\"fontType\">PSALM {}</p></div>",psalm["chapter"]);
+        let psal = format!("<p class=\"fontType\">PSALM {}</p></header>",psalm["chapter"]);
         section.push_str(&psal);
 
         for verse in psalm["verses"].as_array().unwrap() {
             if verse["ver"] == 1 {
-                section.push_str(&format!("<div class=\"psalm fontType\">{}</div>",verse["description"].as_str().unwrap())); //unwrap necessary to remove ""
-                section.push_str(&format!("<div id = \"0-18-{0}-1\"><a href = \"./book#0-18-{0}-1\"><p class=\"firstVerse fontType\">{1}</p></a></div>", psalm["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<p class=\"psalm fontType\">{}</p>",verse["description"].as_str().unwrap())); //unwrap necessary to remove ""
+                section.push_str(&format!("<a id = \"0-18-{0}-1\" href = \"./book#0-18-{0}-1\"><p class=\"firstVerse fontType\">{1}</p></a>", psalm["chapter"], verse["scr"].as_str().unwrap()));
             } else {     
                 if verse["description"] != jsonNull {  // needed for psalm 119
                     section.push_str(&format!("<p class=\"psalm fontType\">{}</p>",verse["description"].as_str().unwrap()));
                 }
-                section.push_str(&format!("<div id = \"0-18-{0}-{1}\" class = \"verses\"><a href = \"./book#0-18-{0}-{1}\" ><p class=\"verseNumber fontType\">{1}</p></a>
-                <a href = \"./book#0-18-{0}-{1}\"><p class = \"scripture fontType\">{2}</p></a></div>", psalm["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<a id = \"0-18-{0}-{1}\" class = \"verses\" href = \"./book#0-18-{0}-{1}\" ><p class=\"verseNumber fontType\">{1}</p>
+                <p class = \"scripture fontType\">{2}</p></a>", psalm["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
         if psalm != current.last().unwrap() {
-            section.push_str("</div></section><hr>");
+            section.push_str("</section><hr>");
         } else {
-            section.push_str("</div></section>");
+            section.push_str("</section>");
         }
         result.push_str(&section);
     }
@@ -75,31 +75,31 @@ fn not_psalms( test: usize, book: usize, contents:&jsonValue ) -> String {
     let mut result: String;
     let mut section: String;
     let title = bible_book["title"].as_str().unwrap();
-    result = format!("<div class=\"headings\">{}</div>", title);
+    result = format!("<header class=\"headings\">{}</header>", title);
 
     for chapter in current {
-        section = format!("<section><div id =\"{}-{}-{}\"><div class=\"headings\" >", &test, &book, chapter["chapter"]);
+        section = format!("<section id =\"{}-{}-{}\"><header class=\"headings\" >", &test, &book, chapter["chapter"]);
 
-        let chap = format!("<p class=\"fontType\">CHAPTER {}</p></div>",chapter["chapter"]);
+        let chap = format!("<p class=\"fontType\">CHAPTER {}</p></header>",chapter["chapter"]);
         section.push_str(&chap);
 
         for verse in chapter["verses"].as_array().unwrap() {
             if verse["ver"] == 1 {
-                section.push_str(&format!("<div id = \"{0}-{1}-{2}-1\"><a href = \"./book#{0}-{1}-{2}-1\"><p class=\"firstVerse fontType\">{3}</p></a></div>", &test, &book, chapter["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<a id = \"{0}-{1}-{2}-1\" href = \"./book#{0}-{1}-{2}-1\"><p class=\"firstVerse fontType\">{3}</p></a>", &test, &book, chapter["chapter"], verse["scr"].as_str().unwrap()));
             } else {     
-                section.push_str(&format!("<div id = \"{0}-{1}-{2}-{3}\" class = \"verses\"><a href = \"./book#{0}-{1}-{2}-{3}\" ><p class=\"verseNumber fontType\">{3}</p></a>
-                <a href = \"./book#{0}-{1}-{2}-{3}\"><p class = \"scripture fontType\">{4}</p></a></div>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<a id = \"{0}-{1}-{2}-{3}\" class = \"verses\" href = \"./book#{0}-{1}-{2}-{3}\" ><p class=\"verseNumber fontType\">{3}</p>
+                <p class = \"scripture fontType\">{4}</p></a>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
         if chapter != current.last().unwrap() {
-            section.push_str("</div></section><hr>");
+            section.push_str("</section><hr>");
         } else {
-            section.push_str("</div></section>");
+            section.push_str("</section>");
         }
         result.push_str(&section);
     }
     if bible_book["note"] != jsonNull {
-        let note =  format!("<hr><br><div class = \"notes\">{}</div><br><hr>", bible_book["note"].as_str().unwrap());
+        let note =  format!("<hr><br><footer class = \"notes\">{}</footer><br><hr>", bible_book["note"].as_str().unwrap());
         result.push_str(&note);
     } else {
         result.push_str("<hr>");
@@ -140,7 +140,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
     word_ind.dedup(); // deduplicate after sorting removes duplicate words.
     if  word_ind.is_empty() || (word_ind[0].chars().count() < 3 && word_ind.iter().count() == 1 ){ //return if search request invalid
         //return the string and finish
-        return "<div class = \"alert\">Search query must have a minimum of 3 characters</div>".to_string();
+        return "<header class = \"alert\">Search query must have a minimum of 3 characters</header>".to_string();
     } 
 
     let mut search_num = 0;
@@ -199,8 +199,8 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                             }
                         }
                         */
-                        results.push_str(&format!("<div id = \"{0}-{1}-{3}-{4}\" class = \"listResults\"><a href = \"./book#{0}-{1}-{3}-{4}\">
-                        <p class=\"bookResults\">{2} {3}:{4}</p></a><a href = \"./book#{0}-{1}-{3}-{4}\"><p class = \"scrResults\">{5}</p></a></div>", 
+                        results.push_str(&format!("<a id = \"{0}-{1}-{3}-{4}\" class = \"listResults\" href = \"./book#{0}-{1}-{3}-{4}\">
+                        <p class=\"bookResults\">{2} {3}:{4}</p><p class = \"scrResults\">{5}</p></a>", 
                         i, j ,books["bookName"].as_str().unwrap(),chapters["chapter"], verses["ver"], verse));// extract route from id - see javascript, search component; angular stops routing from innerhtml
                         search_num += 1;
                     }
@@ -214,13 +214,13 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                 
     match search_num {
         0 => {
-            results_fin = format!("<div>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word with the 'Accuracy' set to 'Contains'.</div>", inp_str);
+            results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word with the 'Accuracy' set to 'Contains'.</header>", inp_str);
         },
         1 => {
-            results_fin = format!("<div>There is a Search Result For \"{}\":</div><br>", inp_str);
+            results_fin = format!("<header>There is a Search Result For \"{}\":</header><br>", inp_str);
             },
         _ => {            
-            results_fin = format!("<div>There are {} Search Results For \"{}\":</div><br>",search_num, inp_str);
+            results_fin = format!("<header>There are {} Search Results For \"{}\":</header><br>",search_num, inp_str);
             },
     }
     results_fin = results_fin + &results;
@@ -271,7 +271,7 @@ pub fn render_widget() -> String {  //need to be string for serde_json to index
                 let desc = format!("<p class=\"psalm fontType\">{}</p>", verse["description"].as_str().unwrap()); //unwrap necessary to remove ""
                 result.push_str(&desc);
             };
-            let first = format!("<div id = \"1\"><p class=\" ver firstVerse fontType\">{}</p></div>", verse["scr"].as_str().unwrap());
+            let first = format!("<p id = \"1\" class=\" ver firstVerse fontType\">{}</p>", verse["scr"].as_str().unwrap());
             result.push_str(&first);
         } else {     
             if psalms {               // needed for psalm 119
@@ -287,7 +287,7 @@ pub fn render_widget() -> String {  //need to be string for serde_json to index
     }
 
     if bible_book["note"] != jsonNull && chapter == current.last().unwrap(){
-        let note =  format!("<br><div class = \"notes\">{}</div></section>", bible_book["note"].as_str().unwrap());
+        let note =  format!("<br><footer class = \"notes\">{}</footer></section>", bible_book["note"].as_str().unwrap());
         result.push_str(&note);
     } else {
         result.push_str("</section>")

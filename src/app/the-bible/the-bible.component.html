@@ -1,12 +1,10 @@
-<!-- This outside/fullpage division is necessary for the nav to stay sticky in apple stuff; don't ask, I don't know either-->
-<div> 
-  <nav id = "nav">
-    <div  id="navGrid" class="navGrid">
-      <div id="description" class="desc">
+<main>
+  <nav id = "nav" class="navGrid">
+      <header id="description" class="desc">
         {{bibleService.pageTitle}} 
         <span *ngIf = "bibleService.chapterButton == true"> {{bibleService.chapterNumber}}</span>
-      </div>
-      <div *ngIf="bibleService.chapterButton == true; else version">
+      </header>
+      <section *ngIf="bibleService.chapterButton == true; else version">
         <button id="titleButton"
                 class = "titleButton"
                 (click) = "bibleService.showChapters = !bibleService.showChapters;
@@ -21,14 +19,14 @@
           </ng-template>
         </button>
         <app-chapter-numbers *ngIf = "bibleService.showChapters"></app-chapter-numbers>
-      </div>
+      </section>
       <ng-template #version >
         <button class = "titleButton"
           (click) = "restoreBook();">
           Back to {{bibleService.title}}
         </button>
       </ng-template>
-      <button class="menuButton"
+      <button aria-label="menu" class="menuButton"
               [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
               (click) = "historyService.savePosition();
                         bibleService.displayMenu = !bibleService.displayMenu;
@@ -54,7 +52,6 @@
           </rect>
         </svg>
       </button>
-    </div>
     <app-menu *ngIf = "bibleService.displayMenu" class="slideMenu"></app-menu>
   </nav>
   <router-outlet>
@@ -63,4 +60,4 @@
       <div class="titleSpinner">{{ bibleService.spinnerTitle }}</div>
     </div>
   </router-outlet>
-</div>
+</main>

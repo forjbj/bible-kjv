@@ -80,7 +80,7 @@ private observer: any;
     };
     this.observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
-      let chapter = (entry.target.querySelector("div")!.id) ?? "0"; 
+      let chapter = (entry.target!.id) ?? "0"; 
       let splits = chapter.split('-');
       let scrollNumber: number;
       let targetChapter = splits[2];
