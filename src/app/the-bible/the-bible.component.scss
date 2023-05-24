@@ -109,7 +109,6 @@ nav {
     }
 }
 .menuButtonActive {
-    border: 1px solid var(--ink);
     .top, .bottom {
         y: 45px; // has to be px or firefox doesn't work
     }

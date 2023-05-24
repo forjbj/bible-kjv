@@ -19,11 +19,13 @@
         font-size: 0.8rem;
         font-weight: bold;
         font-variant: small-caps;
-        margin: 0.1rem 0.5rem 0.1rem auto;
     }
     .gridColumnOne {
         grid-column: 1;
         grid-row: 1 / 4;
+        justify-self: right;
+        align-self: center;
+        padding-right: 1rem;
     };
     .gridColumnTwo {
         grid-column: 2;
@@ -31,13 +33,17 @@
     .gridColumnThree {
         grid-column: 3;
         grid-row: 1 / 4;
+        justify-self: left;
+        align-self: center;
+        padding-left: 1rem;
+
     }
 }
 
 .searchButton {
     height: 2rem;
     width: 2rem;
-    margin: auto 0.3rem;
+    // margin: auto 0.3rem;
     background-color: transparent;
     vertical-align: middle;
     transition: transform ease 0.3s;
@@ -49,6 +55,12 @@
     font-family: Bookman, Georgia, serif;
     font-size: 0.9rem;
     border-radius: 0;
+}
+.searchOption {
+    -webkit-text-fill-color: #777; //needed for apple otherwise its blue
+}
+.searchInput {
+    font-size: 1rem; //needed to stop safari zoom on input focus
 }
 
 .noWrap {
