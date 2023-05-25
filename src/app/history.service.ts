@@ -144,9 +144,13 @@ export class HistoryService {
   }
 
   savePosition() {
+    const bibleBookRoute = "book"; //only save current scroll if on the book route not on some other page
+    if (this.router.routerState.snapshot.url.slice(1,5) == bibleBookRoute){
     localStorage.setItem('curScrollY', window.pageYOffset.toString());
     localStorage.setItem('ScrollYSaved', localStorage.getItem('curScrollY')!);
     localStorage.setItem('curSavedChap', localStorage.getItem('curChap')!);
+    // console.log(this.router.routerState.snapshot.url);
+    }
   }
 
   storeBooks() {
