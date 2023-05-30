@@ -40,9 +40,6 @@ private observer: any;
     if (fragment){
       let frag = fragment.split('-')
       if (frag.length > 3){ // only if verse exists in route
-        localStorage.setItem( 'curTestamentIndex', (frag[0]));
-        localStorage.setItem( 'curBookIndex', (frag[1]));
-        localStorage.setItem('curChap', frag[2]);
         this.bibleService.testament = Number(frag[0]);
         this.bibleService.bookSelected = Number(frag[1]);
         this.bibleService.title = this.bibleService.bible[frag[0]].books[frag[1]].bookName;
