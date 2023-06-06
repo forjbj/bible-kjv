@@ -169,7 +169,6 @@ export class HistoryService {
 
       if (this.bibleService.bookSelected != Number(this.curBookArr) 
           || this.bibleService.testament != Number(this.curTestamentArr) ) { 
-            // console.log(this.bibleService.bookSelected);
         if (this.secTestamentArr != null) {
           localStorage.setItem('thirdTestamentIndex', this.secTestamentArr);
           localStorage.setItem('thirdBookIndex', this.secBookArr);
