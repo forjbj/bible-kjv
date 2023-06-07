@@ -93,6 +93,7 @@ section a {
 
 // for search result routing
 .activatedLink {
+    outline: 0;
     animation: result 7s ease 1s;
     .verseNumber {
         color: var(--lightRed);

@@ -75,7 +75,7 @@ private observer: any;
       threshold: [0],
       rootMargin: "-50%" //highlight multiple chapters if visible
     };
-    this.observer = new IntersectionObserver(function (entries) {
+    this.observer = new IntersectionObserver( (entries) => {
     entries.forEach(entry => {
       let chapter = (entry.target!.id) ?? "0"; 
       let splits = chapter.split('-');
@@ -83,53 +83,31 @@ private observer: any;
       let targetChapter = splits[2];
       if (entry.isIntersecting ) {
          localStorage.setItem('curChap', targetChapter); 
-         localStorage.setItem('curVerse', splits[3]);
-        //  console.log(splits[3]);
+         localStorage.setItem('curVerse', splits[3]); 
+         this.bibleService.chapterNumber = targetChapter;  
       }
-      else {
-        if (window.pageYOffset < scrollNumber! && targetChapter != "1")  { //chapter !- 1 ; necessary if history book - will result in chapter 0.
-          let newChap = (Number(targetChapter)-1).toString();
-          localStorage.setItem( 'curChap', newChap);
-        }     
-      }
-      scrollNumber = window.pageYOffset;
+
+      let tabTitle = (this.bibleService.title).concat(' ',targetChapter);
+      this.title.setTitle(tabTitle);
+
     });
     },options);
       chapters.forEach(chapter=> {
       this.observer.observe(chapter);
-      let tabTitle = (this.bibleService.title).concat(' ',localStorage.getItem('curChap') ?? '1');
-      this.title.setTitle(tabTitle);
     }) 
 
     // add highlighting if come from link and scroll to it
     if (this.routedLink == true) {
       let target = document.getElementById(this.fragString!);
       target!.classList.add("activatedLink");
-      setTimeout( function(){target!.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})}, 300); //needed as it doesn't work on chrome without setTimeout
+      target!.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     } else { 
       //only scroll if not an outside link
-      // get scroll position (Y offset) from local storage and scroll to it 
       // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
-      // setTimeout absolutely necessary or chrome (Blink engine) makes a complete mess of it; 
-      // (almost a week to work this out)
-      // setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},300);
-      // setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},300);
       let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
                     (localStorage.getItem("curChap") ?? '1') + '-' + (localStorage.getItem("curVerse") ?? '1');
       document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
-  }
-
-  @HostListener('window:scroll', []) scrolled(): void {  
-    setTimeout(() => {  
-    // change chapter numbers in tab title as scrolling
-    this.bibleService.chapterNumber = localStorage.getItem('curChap') ?? "1";
-    let tabTitle = (this.bibleService.title).concat(' ',this.bibleService.chapterNumber);
-    this.title.setTitle(tabTitle);
-    // save scroll Y coordinate
-    // setTimeout MUST be longer than setTimeout for scroll in ngAfterViewInit
-    // localStorage.setItem('curScrollY', window.pageYOffset.toString())
-  }, 700);
   }
 
   ngOnDestroy() {
