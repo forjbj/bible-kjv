@@ -69,7 +69,7 @@ private observer: any;
     this.historyService.storeBooks();
 
     // save chapters on scroll
-    const chapters = this.document.querySelectorAll("section");
+    const chapters = this.document.querySelectorAll("section a");
     const options = {
       root: null, // viewport
       threshold: [0],
@@ -83,6 +83,8 @@ private observer: any;
       let targetChapter = splits[2];
       if (entry.isIntersecting ) {
          localStorage.setItem('curChap', targetChapter); 
+         localStorage.setItem('curVerse', splits[3]);
+        //  console.log(splits[3]);
       }
       else {
         if (window.pageYOffset < scrollNumber! && targetChapter != "1")  { //chapter !- 1 ; necessary if history book - will result in chapter 0.
@@ -95,6 +97,8 @@ private observer: any;
     },options);
       chapters.forEach(chapter=> {
       this.observer.observe(chapter);
+      let tabTitle = (this.bibleService.title).concat(' ',localStorage.getItem('curChap') ?? '1');
+      this.title.setTitle(tabTitle);
     }) 
 
     // add highlighting if come from link and scroll to it
@@ -108,7 +112,11 @@ private observer: any;
       // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
       // setTimeout absolutely necessary or chrome (Blink engine) makes a complete mess of it; 
       // (almost a week to work this out)
-    setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},300);
+      // setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},300);
+      // setTimeout(function(){window.scroll(0, Number(localStorage.getItem('curScrollY')))},300);
+      let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
+                    (localStorage.getItem("curChap") ?? '1') + '-' + (localStorage.getItem("curVerse") ?? '1');
+      document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
   }
 
@@ -120,7 +128,8 @@ private observer: any;
     this.title.setTitle(tabTitle);
     // save scroll Y coordinate
     // setTimeout MUST be longer than setTimeout for scroll in ngAfterViewInit
-    localStorage.setItem('curScrollY', window.pageYOffset.toString())}, 700);
+    // localStorage.setItem('curScrollY', window.pageYOffset.toString())
+  }, 700);
   }
 
   ngOnDestroy() {
