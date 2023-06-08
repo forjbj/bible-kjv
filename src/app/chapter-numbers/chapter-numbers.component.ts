@@ -25,7 +25,7 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
       threshold: [0],
       rootMargin: "-50%" //highlight multiple chapters if visible
     };
-    this.observer = new IntersectionObserver(function (entries) {
+    this.observer = new IntersectionObserver( (entries) => {
     entries.forEach(entry => {
       if (entry.target.id)  { //necessary as sections used everywhere in semantic html
         let chapter = entry.target!.id!;

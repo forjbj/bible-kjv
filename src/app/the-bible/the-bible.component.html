@@ -28,8 +28,7 @@
       </ng-template>
       <button aria-label="menu" class="menuButton"
               [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
-              (click) = "historyService.savePosition();
-                        bibleService.displayMenu = !bibleService.displayMenu;
+              (click) = "bibleService.displayMenu = !bibleService.displayMenu;
                         bibleService.showChapters = false;">
         <svg class="hamburger" viewBox="0 0 100 100">
           <rect class="line top" 

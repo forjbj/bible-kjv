@@ -14,12 +14,12 @@ export class HistoryService {
   public thirdBookMenu?: string;
 
   public curChap?: string;
-  public curSavedChap?: string;
   public secSavedChap?: string;
   public thirdSavedChap?: string;
-  public curScrollYPostion?: string;
-  public secScrollY?: string;
-  public thirdScrollY?: string;
+
+  public curVerse?: string;
+  public secVerse?: string;
+  public thirdVerse?: string;
 
   public curBookArr?: string;
   public curTestamentArr?: string;
@@ -64,22 +64,22 @@ export class HistoryService {
         this.curTestamentArr = localStorage.getItem('curTestamentIndex')!; // "!" for typescript to allow undefined
         this.curBookArr = localStorage.getItem('curBookIndex')!;
         this.curChap = localStorage.getItem('curChap')!;
-        this.curScrollYPostion = localStorage.getItem('curScrollY')!;
+        this.curVerse = localStorage.getItem('curVerse')!;
         this.secTestamentArr = localStorage.getItem('secTestamentIndex')!;
         this.secBookArr = localStorage.getItem('secBookIndex')!;
         this.secSavedChap = localStorage.getItem('secSavedChap')!;
-        this.secScrollY = localStorage.getItem('secScrollYSaved')!;
+        this.secVerse = localStorage.getItem('secVerse')!;
 
         this.bibleService.testament = Number(this.secTestamentArr);
         this.bibleService.bookSelected = Number(this.secBookArr);
         this.bibleService.chapterNumber = this.secSavedChap;
         localStorage.setItem('curChap', this.secSavedChap);
-        localStorage.setItem('curScrollY', this.secScrollY);
+        localStorage.setItem('curVerse', this.secVerse);
 
         localStorage.setItem('secTestamentIndex', this.curTestamentArr);
         localStorage.setItem('secBookIndex', this.curBookArr);
         localStorage.setItem('secSavedChap', this.curChap);
-        localStorage.setItem('secScrollYSaved', this.curScrollYPostion);
+        localStorage.setItem('secVerse', this.curVerse);
 
         break;
         
@@ -87,27 +87,27 @@ export class HistoryService {
         this.curTestamentArr = localStorage.getItem('curTestamentIndex')!;
         this.curBookArr = localStorage.getItem('curBookIndex')!;
         this.curChap = localStorage.getItem('curChap')!;
-        this.curScrollYPostion = localStorage.getItem('curScrollY')!;
+        this.curVerse = localStorage.getItem('curVerse')!;
         this.secTestamentArr= localStorage.getItem('secTestamentIndex')!;
         this.secBookArr = localStorage.getItem('secBookIndex')!;
         this.secSavedChap = localStorage.getItem('secSavedChap')!;
-        this.secScrollY = localStorage.getItem('secScrollYSaved')!;
+        this.secVerse = localStorage.getItem('secVerse')!;
 
         this.bibleService.testament = Number(localStorage.getItem('thirdTestamentIndex'));
         this.bibleService.bookSelected = Number(localStorage.getItem('thirdBookIndex'));
         this.bibleService.chapterNumber = localStorage.getItem('thirdSavedChap')!;
         localStorage.setItem('curChap', localStorage.getItem('thirdSavedChap')!);
-        localStorage.setItem('curScrollY', localStorage.getItem('thirdScrollYSaved')!);
+        localStorage.setItem('curVerse', localStorage.getItem('thirdVerse')!);
 
         localStorage.setItem('secTestamentIndex', this.curTestamentArr);
         localStorage.setItem('secBookIndex', this.curBookArr);
         localStorage.setItem('secSavedChap', this.curChap);
-        localStorage.setItem('secScrollYSaved', this.curScrollYPostion);
+        localStorage.setItem('secVerse', this.curVerse);
 
         localStorage.setItem('thirdTestamentIndex', this.secTestamentArr);
         localStorage.setItem('thirdBookIndex', this.secBookArr);
         localStorage.setItem('thirdSavedChap', this.secSavedChap);
-        localStorage.setItem('thirdScrollYSaved', this.secScrollY);
+        localStorage.setItem('thirdVerse', this.secVerse);
 
         break;
     };
@@ -133,25 +133,15 @@ export class HistoryService {
   newBook() {
   // reset scroll position if new book selected                
     if ((this.bibleService.title != (this.bibleService.bible[Number(localStorage.getItem('curTestamentIndex'))]
-                                      .books[Number(localStorage.getItem('curBookIndex'))].bookName ) 
-                                    || (localStorage.getItem('curChap') == null) )
+                                      .books[Number(localStorage.getItem('curBookIndex'))].bookName ) )
                                     && (this.bibleService.menuHistoryBook == false )) {
-        localStorage.setItem('curScrollY', '0');
+        this.storeBooks();
+        localStorage.setItem('curVerse', '1');
         localStorage.setItem('curChap', '1');  
-        setTimeout(()=> this.bibleService.showChapters = true),100; //fixes problem of loading chapter-numbers.component before wasm render is finished
-       // this.bibleService.showChapters = true; //Doesn't work as loads chapter-numbers.component before wasm render is finished
+        setTimeout(()=> this.bibleService.showChapters = true),300; //fixes problem of loading chapter-numbers.component before wasm render is finished
     } 
   }
 
-  savePosition() {
-    const bibleBookRoute = "book"; //only save current scroll if on the book route not on some other page
-    if (this.router.routerState.snapshot.url.slice(1,5) == bibleBookRoute){
-    localStorage.setItem('curScrollY', window.pageYOffset.toString());
-    localStorage.setItem('ScrollYSaved', localStorage.getItem('curScrollY')!);
-    localStorage.setItem('curSavedChap', localStorage.getItem('curChap')!);
-    // console.log(this.router.routerState.snapshot.url);
-    }
-  }
 
   storeBooks() {
     // only execute if not selected from history
@@ -161,10 +151,10 @@ export class HistoryService {
       this.curTestamentArr = localStorage.getItem('curTestamentIndex')!;
       this.secBookArr = localStorage.getItem('secBookIndex')!;
       this.secTestamentArr = localStorage.getItem('secTestamentIndex')!;
-      this.curScrollYPostion = localStorage.getItem('ScrollYSaved')!;
-      this.secScrollY = localStorage.getItem('secScrollYSaved')!;
+      this.curVerse = localStorage.getItem('curVerse')!;
+      this.secVerse = localStorage.getItem('secVerse')!;
 
-      this.curSavedChap = localStorage.getItem('curSavedChap')!;
+      this.curChap = localStorage.getItem('curChap')!;
       this.secSavedChap = localStorage.getItem('secSavedChap')!;
 
       if (this.bibleService.bookSelected != Number(this.curBookArr) 
@@ -172,13 +162,13 @@ export class HistoryService {
         if (this.secTestamentArr != null) {
           localStorage.setItem('thirdTestamentIndex', this.secTestamentArr);
           localStorage.setItem('thirdBookIndex', this.secBookArr);
-          localStorage.setItem('thirdScrollYSaved', this.secScrollY);
+          localStorage.setItem('thirdVerse', this.secVerse);
           localStorage.setItem('thirdSavedChap', this.secSavedChap);
         }
         localStorage.setItem('secTestamentIndex', this.curTestamentArr);
         localStorage.setItem('secBookIndex', this.curBookArr);
-        localStorage.setItem('secScrollYSaved', this.curScrollYPostion);
-        localStorage.setItem('secSavedChap', this.curSavedChap);
+        localStorage.setItem('secVerse', this.curVerse);
+        localStorage.setItem('secSavedChap', this.curChap);
       }
       // The following need to be here or history won't originally populate
       localStorage.setItem('curTestamentIndex', (this.bibleService.testament).toString());

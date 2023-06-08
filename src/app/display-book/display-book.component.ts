@@ -56,7 +56,7 @@ private observer: any;
     }
     this.bibleService.pageTitle = this.bibleService.title;
     this.bibleService.chapterButton = true;
-    this.bibleService.chapterNumber = localStorage.getItem('curChap') ?? "0";
+    this.bibleService.chapterNumber = localStorage.getItem('curChap') ?? "1";
   }   
   
   ngAfterViewInit() {
@@ -85,6 +85,7 @@ private observer: any;
          localStorage.setItem('curChap', targetChapter); 
          localStorage.setItem('curVerse', splits[3]); 
          this.bibleService.chapterNumber = targetChapter;  
+         console.log(this.bibleService.showChapters);
       }
 
       let tabTitle = (this.bibleService.title).concat(' ',targetChapter);
@@ -105,7 +106,7 @@ private observer: any;
       //only scroll if not an outside link
       // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
       let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
-                    (localStorage.getItem("curChap") ?? '1') + '-' + (localStorage.getItem("curVerse") ?? '1');
+                    this.bibleService.chapterNumber + '-' + (localStorage.getItem("curVerse") ?? '1');
       document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
   }
