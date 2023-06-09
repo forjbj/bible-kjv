@@ -69,11 +69,13 @@ private observer: any;
     this.historyService.storeBooks();
 
     // save chapters on scroll
-    const chapters = this.document.querySelectorAll("section a");
+    // const root = this.document.getElementById("bibleBook");
+    const chapters = this.document.querySelectorAll("section > a");
     const options = {
       root: null, // viewport
       threshold: [0],
-      rootMargin: "-50%" //highlight multiple chapters if visible
+      // rootMargin: "-50%" //highlight multiple chapters if visible
+      rootMargin: "-10% 0px -90% 0px" //only top verse/s
     };
     this.observer = new IntersectionObserver( (entries) => {
     entries.forEach(entry => {
@@ -85,7 +87,7 @@ private observer: any;
          localStorage.setItem('curChap', targetChapter); 
          localStorage.setItem('curVerse', splits[3]); 
          this.bibleService.chapterNumber = targetChapter;  
-         console.log(this.bibleService.showChapters);
+         console.log(chapter);
       }
 
       let tabTitle = (this.bibleService.title).concat(' ',targetChapter);
@@ -107,7 +109,7 @@ private observer: any;
       // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
       let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
                     this.bibleService.chapterNumber + '-' + (localStorage.getItem("curVerse") ?? '1');
-      document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+      document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "start", inline: "end"});
     }
   }
 
