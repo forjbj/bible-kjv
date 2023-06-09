@@ -37,6 +37,7 @@
 }
 //remove styling from created links
 section a {
+    scroll-margin: 2.2rem; // needed for scrollIntoView to overcome the nav
     color: var(--ink);
     text-decoration: none;
     &:hover {
