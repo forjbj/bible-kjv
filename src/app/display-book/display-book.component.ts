@@ -109,7 +109,7 @@ private observer: any;
       // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
       let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
                     this.bibleService.chapterNumber + '-' + (localStorage.getItem("curVerse") ?? '1');
-      document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "start", inline: "end"});
+      document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
     }
   }
 
