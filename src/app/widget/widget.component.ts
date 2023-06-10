@@ -42,8 +42,8 @@ ngAfterViewInit(): void {
 
   ver[this.verse -1].scrollIntoView({
                         behavior: 'auto',
-                        block: 'center',
-                        inline: 'center'
+                        block: 'start',
+                        inline: 'start'
                     });
 }
 reload() {

@@ -60,6 +60,19 @@ private observer: any;
   }   
   
   ngAfterViewInit() {
+    // add highlighting if come from link and scroll to it
+    if (this.routedLink == true) {
+      let target = document.getElementById(this.fragString!);
+      target!.classList.add("activatedLink");
+      target!.scrollIntoView({behavior: "auto", block: "center", inline: "nearest"});
+    } else { 
+      //only scroll if not an outside link
+      // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
+      let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
+                    this.bibleService.chapterNumber + '-' + (localStorage.getItem("curVerse") ?? '1');
+      document.getElementById(current)?.scrollIntoView({behavior: "auto", block: "start", inline: "start"});
+    }
+    
     //turn off spinner, setTimeout is necessary or doesn't work
     setTimeout(() => {
       this.bibleService.spinner = false;
@@ -68,26 +81,23 @@ private observer: any;
     // store book for loading on return, if not chosen from history -MUST BE UNDER ngAfterViewInit 
     this.historyService.storeBooks();
 
-    // save chapters on scroll
-    // const root = this.document.getElementById("bibleBook");
+    // save chapter and verse on scroll
     const chapters = this.document.querySelectorAll("section > a");
     const options = {
       root: null, // viewport
       threshold: [0],
-      // rootMargin: "-50%" //highlight multiple chapters if visible
-      rootMargin: "-10% 0px -90% 0px" //only top verse/s
+      rootMargin: "-11% 0px -88% 0px", //only top verse/s
+      delay: 300,
     };
     this.observer = new IntersectionObserver( (entries) => {
     entries.forEach(entry => {
       let chapter = (entry.target!.id) ?? "0"; 
       let splits = chapter.split('-');
-      let scrollNumber: number;
       let targetChapter = splits[2];
       if (entry.isIntersecting ) {
          localStorage.setItem('curChap', targetChapter); 
          localStorage.setItem('curVerse', splits[3]); 
          this.bibleService.chapterNumber = targetChapter;  
-         console.log(chapter);
       }
 
       let tabTitle = (this.bibleService.title).concat(' ',targetChapter);
@@ -99,18 +109,6 @@ private observer: any;
       this.observer.observe(chapter);
     }) 
 
-    // add highlighting if come from link and scroll to it
-    if (this.routedLink == true) {
-      let target = document.getElementById(this.fragString!);
-      target!.classList.add("activatedLink");
-      target!.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-    } else { 
-      //only scroll if not an outside link
-      // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
-      let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
-                    this.bibleService.chapterNumber + '-' + (localStorage.getItem("curVerse") ?? '1');
-      document.getElementById(current)?.scrollIntoView({behavior: "smooth", block: "start", inline: "start"});
-    }
   }
 
   ngOnDestroy() {

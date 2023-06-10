@@ -34,7 +34,8 @@ html[dataTheme = 'dark'] {
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior:auto;
+    -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
 }
 
 body {
