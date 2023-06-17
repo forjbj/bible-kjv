@@ -43,7 +43,7 @@ const routes: Routes = [
     scrollOffset: [0, 100],
     //relativeLinkResolution: 'legacy', //no longer works angular 15
     //onSameUrlNavigation: 'reload', // necessary for history books to load properly //nope this is not true
-    scrollPositionRestoration: 'enabled', 
+    scrollPositionRestoration: 'disabled', 
 })
   ],
   exports: [RouterModule]
