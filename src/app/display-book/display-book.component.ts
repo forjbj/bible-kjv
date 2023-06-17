@@ -110,6 +110,9 @@ private observer: any;
     localStorage.setItem('curBookIndex', this.bibleService.bookSelected.toString());
     localStorage.setItem('curChap', this.bibleService.chapterNumber);
     localStorage.setItem('curVerse', this.bibleService.verseNumber);
+
+    this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
+
   }
 
   ngOnDestroy() {
