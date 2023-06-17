@@ -39,7 +39,7 @@ fn psalms_book(contents:&jsonValue) -> String {
     let mut section: String;
 
     for psalm in current {
-        section = format!("<section id =\"0-18-{}\"><header class=\"headings\" >", psalm["chapter"]);
+        section = format!("<section id =\"0-18-{}-0\"><header class=\"headings\" >", psalm["chapter"]);
 
         let psal = format!("<p class=\"fontType\">PSALM {}</p></header>",psalm["chapter"]);
         section.push_str(&psal);
@@ -78,7 +78,7 @@ fn not_psalms( test: usize, book: usize, contents:&jsonValue ) -> String {
     result = format!("<header class=\"headings\">{}</header>", title);
 
     for chapter in current {
-        section = format!("<section id =\"{}-{}-{}\"><header class=\"headings\" >", &test, &book, chapter["chapter"]);
+        section = format!("<section id =\"{}-{}-{}-0\"><header class=\"headings\" >", &test, &book, chapter["chapter"]);
 
         let chap = format!("<p class=\"fontType\">CHAPTER {}</p></header>",chapter["chapter"]);
         section.push_str(&chap);

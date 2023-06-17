@@ -4,7 +4,8 @@ import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
 import * as wasm from '../../../pkg';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-display-book',
@@ -27,6 +28,7 @@ private observer: any;
                public historyService: HistoryService,
                public title: Title,
                public meta: Meta, 
+               public router: Router,
                @Inject(DOCUMENT) public document: Document,
                private activatedRoute: ActivatedRoute, ) { 
               
@@ -42,6 +44,8 @@ private observer: any;
       if (frag.length > 3){ // only if verse exists in route
         this.bibleService.testament = Number(frag[0]);
         this.bibleService.bookSelected = Number(frag[1]);
+        this.bibleService.chapterNumber = frag[2];
+        this.bibleService.verseNumber = frag[3];
         this.bibleService.title = this.bibleService.bible[frag[0]].books[frag[1]].bookName;
         this.bibleService.showChapters = false;
         this.fragString = fragment.toString();
@@ -51,27 +55,15 @@ private observer: any;
 
     this.renderedBook = wasm.render(this.bibleService.testament, this.bibleService.bookSelected);
 
-    if (this.routedLink == false) {
-      this.historyService.newBook();
-    }
     this.bibleService.pageTitle = this.bibleService.title;
     this.bibleService.chapterButton = true;
-    this.bibleService.chapterNumber = localStorage.getItem('curChap') ?? "1";
+
+    if (this.bibleService.verseNumber == '0' && this.bibleService.chapterNumber == '1') {
+      this.bibleService.showChapters = true;
+    }
   }   
   
   ngAfterViewInit() {
-    // add highlighting if come from link and scroll to it
-    if (this.routedLink == true) {
-      let target = document.getElementById(this.fragString!);
-      target!.classList.add("activatedLink");
-      target!.scrollIntoView({behavior: "auto", block: "center", inline: "nearest"});
-    } else { 
-      //only scroll if not an outside link
-      // THIS MUST GO HERE OR SCROLLING TO OLD POSITION DOESN'T WORK; 
-      let current = this.bibleService.testament + '-' + this.bibleService.bookSelected + '-' + 
-                    this.bibleService.chapterNumber + '-' + (localStorage.getItem("curVerse") ?? '1');
-      document.getElementById(current)?.scrollIntoView({behavior: "auto", block: "start", inline: "start"});
-    }
     
     //turn off spinner, setTimeout is necessary or doesn't work
     setTimeout(() => {
@@ -79,15 +71,17 @@ private observer: any;
     }, 10);
     
     // store book for loading on return, if not chosen from history -MUST BE UNDER ngAfterViewInit 
-    this.historyService.storeBooks();
+    if (this.routedLink == true) {
+      this.historyService.storeBooks();
+    }
 
     // save chapter and verse on scroll
     const chapters = this.document.querySelectorAll("section > a");
     const options = {
       root: null, // viewport
       threshold: [0],
-      rootMargin: "-11% 0px -88% 0px", //only top verse/s
-      delay: 300,
+      rootMargin: "-15% 0px -83% 0px", //only top verse/s
+      // delay: 300,
     };
     this.observer = new IntersectionObserver( (entries) => {
     entries.forEach(entry => {
@@ -95,9 +89,13 @@ private observer: any;
       let splits = chapter.split('-');
       let targetChapter = splits[2];
       if (entry.isIntersecting ) {
+        //only when user scrolls; set to '1' on chapter click - see chapter-numbers component
+        // window.onscroll = (e) => {  
+         localStorage.setItem('curVerse', splits[3]);
+         this.bibleService.verseNumber = splits[3]; 
          localStorage.setItem('curChap', targetChapter); 
-         localStorage.setItem('curVerse', splits[3]); 
-         this.bibleService.chapterNumber = targetChapter;  
+         this.bibleService.chapterNumber = targetChapter; 
+        // } 
       }
 
       let tabTitle = (this.bibleService.title).concat(' ',targetChapter);
@@ -108,12 +106,14 @@ private observer: any;
       chapters.forEach(chapter=> {
       this.observer.observe(chapter);
     }) 
-
+    localStorage.setItem('curTestamentIndex', this.bibleService.testament.toString());
+    localStorage.setItem('curBookIndex', this.bibleService.bookSelected.toString());
+    localStorage.setItem('curChap', this.bibleService.chapterNumber);
+    localStorage.setItem('curVerse', this.bibleService.verseNumber);
   }
 
   ngOnDestroy() {
     this.observer.disconnect();
   }
-
 }
 

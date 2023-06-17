@@ -34,7 +34,6 @@ html[dataTheme = 'dark'] {
 }
 
 html {
-    scroll-behavior:auto;
     -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
 }
 
@@ -70,8 +69,6 @@ h1, h2, h3, h4, h5 {
     border: 7px ridge transparent; //pixels used as rem units give an uneven, weird shape
     border-top:  7px  solid #770000;
     border-radius: 50%;
-    //border-top-color:  #770000;
-    -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
     position: relative;
     margin: 0 auto;
@@ -89,12 +86,10 @@ h1, h2, h3, h4, h5 {
   }
   .circleSpinner::before {
     border-top: 7px solid #af0000;
-    -webkit-animation: 2s spin linear infinite;
     animation: 2s spin linear infinite;
   }
   .circleSpinner::after {
     border-top: 7px solid #ee0000;
-    -webkit-animation: spin 1.2s linear infinite;
     animation: spin 1.2s linear infinite;
   } 
   .titleSpinner {
@@ -105,16 +100,6 @@ h1, h2, h3, h4, h5 {
       color: red;
       transform: translateY(-3.5rem);
   }           
-  @-webkit-keyframes spin {
-      from {
-          -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-      }
-      to {
-          -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
-      }
-  }     
   @keyframes spin {
       from {
           -webkit-transform: rotate(0deg);

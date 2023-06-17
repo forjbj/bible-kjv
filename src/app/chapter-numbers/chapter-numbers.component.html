@@ -19,7 +19,8 @@
       <div 
           class = "chapters"
           [routerLink] = "['book']"
-          fragment = {{bibleService.testament}}-{{bibleService.bookSelected}}-{{chapters.chapter}}>
+          (click)="updateStorage(chapters.chapter) "
+          fragment = {{bibleService.testament}}-{{bibleService.bookSelected}}-{{chapters.chapter}}-0>
           {{chapters.chapter }}
       </div>
     </ng-container>

@@ -181,10 +181,6 @@ function handleError(f, args) {
     }
 }
 
-function getArrayU8FromWasm0(ptr, len) {
-    return getUint8Memory0().subarray(ptr / 1, ptr / 1 + len);
-}
-
 export function __wbg_readfile_fbb56beb6aa63b65() {
     const ret = read_file();
     return addHeapObject(ret);
@@ -208,7 +204,7 @@ export function __wbindgen_object_clone_ref(arg0) {
     return addHeapObject(ret);
 };
 
-export function __wbg_crypto_e1d53a1d73fb10b8(arg0) {
+export function __wbg_crypto_c48a774b022d20ac(arg0) {
     const ret = getObject(arg0).crypto;
     return addHeapObject(ret);
 };
@@ -219,17 +215,17 @@ export function __wbindgen_is_object(arg0) {
     return ret;
 };
 
-export function __wbg_process_038c26bf42b093f8(arg0) {
+export function __wbg_process_298734cf255a885d(arg0) {
     const ret = getObject(arg0).process;
     return addHeapObject(ret);
 };
 
-export function __wbg_versions_ab37218d2f0b24a8(arg0) {
+export function __wbg_versions_e2e78e134e3e5d01(arg0) {
     const ret = getObject(arg0).versions;
     return addHeapObject(ret);
 };
 
-export function __wbg_node_080f4b19d15bc1fe(arg0) {
+export function __wbg_node_1cd7a5d853dbea79(arg0) {
     const ret = getObject(arg0).node;
     return addHeapObject(ret);
 };
@@ -239,7 +235,17 @@ export function __wbindgen_is_string(arg0) {
     return ret;
 };
 
-export function __wbg_require_78a3dcfbdba9cbce() { return handleError(function () {
+export function __wbg_msCrypto_bcb970640f50a1e8(arg0) {
+    const ret = getObject(arg0).msCrypto;
+    return addHeapObject(ret);
+};
+
+export function __wbg_newwithlength_f5933855e4f48a19(arg0) {
+    const ret = new Uint8Array(arg0 >>> 0);
+    return addHeapObject(ret);
+};
+
+export function __wbg_require_8f08ceecec0f4fee() { return handleError(function () {
     const ret = module.require;
     return addHeapObject(ret);
 }, arguments) };
@@ -258,16 +264,6 @@ export function __wbg_call_168da88779e35f61() { return handleError(function (arg
     const ret = getObject(arg0).call(getObject(arg1), getObject(arg2));
     return addHeapObject(ret);
 }, arguments) };
-
-export function __wbg_msCrypto_6e7d3e1f92610cbb(arg0) {
-    const ret = getObject(arg0).msCrypto;
-    return addHeapObject(ret);
-};
-
-export function __wbg_newwithlength_f5933855e4f48a19(arg0) {
-    const ret = new Uint8Array(arg0 >>> 0);
-    return addHeapObject(ret);
-};
 
 export function __wbg_self_6d479506f72c6a71() { return handleError(function () {
     const ret = self.self;
@@ -304,23 +300,14 @@ export function __wbg_call_97ae9d8645dc388b() { return handleError(function (arg
     return addHeapObject(ret);
 }, arguments) };
 
-export function __wbg_randomFillSync_6894564c2c334c42() { return handleError(function (arg0, arg1, arg2) {
-    getObject(arg0).randomFillSync(getArrayU8FromWasm0(arg1, arg2));
-}, arguments) };
-
 export function __wbg_subarray_58ad4efbb5bcb886(arg0, arg1, arg2) {
     const ret = getObject(arg0).subarray(arg1 >>> 0, arg2 >>> 0);
     return addHeapObject(ret);
 };
 
-export function __wbg_getRandomValues_805f1c3d65988a5a() { return handleError(function (arg0, arg1) {
+export function __wbg_getRandomValues_37fa2ca9e4e07fab() { return handleError(function (arg0, arg1) {
     getObject(arg0).getRandomValues(getObject(arg1));
 }, arguments) };
-
-export function __wbg_length_9e1ae1900cb0fbd5(arg0) {
-    const ret = getObject(arg0).length;
-    return ret;
-};
 
 export function __wbindgen_memory() {
     const ret = wasm.memory;
@@ -340,6 +327,15 @@ export function __wbg_new_8c3f0052272a457a(arg0) {
 export function __wbg_set_83db9690f9353e79(arg0, arg1, arg2) {
     getObject(arg0).set(getObject(arg1), arg2 >>> 0);
 };
+
+export function __wbg_newwithbyteoffsetandlength_d9aa266703cb98be(arg0, arg1, arg2) {
+    const ret = new Uint8Array(getObject(arg0), arg1 >>> 0, arg2 >>> 0);
+    return addHeapObject(ret);
+};
+
+export function __wbg_randomFillSync_dc1e9a60c158336d() { return handleError(function (arg0, arg1) {
+    getObject(arg0).randomFillSync(takeObject(arg1));
+}, arguments) };
 
 export function __wbindgen_throw(arg0, arg1) {
     throw new Error(getStringFromWasm0(arg0, arg1));

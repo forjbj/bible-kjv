@@ -40,10 +40,10 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
     anchorScrolling: 'enabled', //needed for chapter selection and scroll
-    scrollOffset: [0, 120],
+    scrollOffset: [0, 100],
     //relativeLinkResolution: 'legacy', //no longer works angular 15
     //onSameUrlNavigation: 'reload', // necessary for history books to load properly //nope this is not true
-    //scrollPositionRestoration: 'enabled', //necessary for scroll to top on route; doesn't work in firefox
+    scrollPositionRestoration: 'enabled', 
 })
   ],
   exports: [RouterModule]

@@ -12,8 +12,14 @@ export class BibleService {
   public pageTitle:string;
 
   public testament:number = Number(localStorage.getItem('curTestamentIndex')) ?? 0; // defaults to '0' (old testament) if '' or null
-
   public bookSelected:number = Number(localStorage.getItem('curBookIndex')) ?? 0; // defaults to '0' (Genesis) see above
+  public chapterNumber: string = localStorage.getItem('curChap') ?? '1';
+  public verseNumber: string = localStorage.getItem('curVerse') ?? '1';
+
+  public fragment():string { 
+    return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber;
+  }
+
 
   public title: string = this.bible[this.testament].books[this.bookSelected].bookName;
 
@@ -34,7 +40,6 @@ export class BibleService {
 
   //variable for chapter button display
   public chapterButton: boolean;
-  public chapterNumber?: string;
 
   //variable for spinner animation
   public spinner: boolean = false;
