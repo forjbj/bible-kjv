@@ -34,7 +34,7 @@ html[dataTheme = 'dark'] {
 }
 
 html {
-    scroll-behavior: smooth;
+    // scroll-behavior: smooth; //Doesn't work with angular anchor scrolling
     -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
 }
 
