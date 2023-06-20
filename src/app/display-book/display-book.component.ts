@@ -1,11 +1,10 @@
-import { Component, AfterViewInit, HostListener, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, Location, ViewportScroller } from '@angular/common';
 import * as wasm from '../../../pkg';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-display-book',
@@ -19,8 +18,6 @@ public renderedBook: string ;
 
 public fragString?: string;
 
-public routedLink = false; //Needed to test for outside links including search link
-
 private observer: any;
 
 
@@ -29,6 +26,8 @@ private observer: any;
                public title: Title,
                public meta: Meta, 
                public router: Router,
+               private location: Location,
+               private viewport: ViewportScroller,
                @Inject(DOCUMENT) public document: Document,
                private activatedRoute: ActivatedRoute, ) { 
               
@@ -49,7 +48,6 @@ private observer: any;
         this.bibleService.title = this.bibleService.bible[frag[0]].books[frag[1]].bookName;
         this.bibleService.showChapters = false;
         this.fragString = fragment.toString();
-        this.routedLink = true;
       } 
     }
 
@@ -58,7 +56,9 @@ private observer: any;
     this.bibleService.pageTitle = this.bibleService.title;
     this.bibleService.chapterButton = true;
 
-    if (this.bibleService.verseNumber == '0' && this.bibleService.chapterNumber == '1') {
+    // Only auto open chapters if new book and history isn't populated; new uses only
+    let historyPopulated = localStorage.getItem('thirdTestamentIndex')!;
+    if (this.bibleService.verseNumber == '' && this.bibleService.chapterNumber == '1' && (historyPopulated  == null || historyPopulated == 'null')) {
       this.bibleService.showChapters = true;
     }
   }   
@@ -71,9 +71,7 @@ private observer: any;
     }, 10);
     
     // store book for loading on return, if not chosen from history -MUST BE UNDER ngAfterViewInit 
-    if (this.routedLink == true) {
       this.historyService.storeBooks();
-    }
 
     // save chapter and verse on scroll
     const chapters = this.document.querySelectorAll("section > a");
@@ -88,19 +86,17 @@ private observer: any;
       let chapter = (entry.target!.id) ?? "0"; 
       let splits = chapter.split('-');
       let targetChapter = splits[2];
+      let url = "/book#";
       if (entry.isIntersecting ) {
-        //only when user scrolls; set to '1' on chapter click - see chapter-numbers component
-        // window.onscroll = (e) => {  
          localStorage.setItem('curVerse', splits[3]);
          this.bibleService.verseNumber = splits[3]; 
          localStorage.setItem('curChap', targetChapter); 
-         this.bibleService.chapterNumber = targetChapter; 
-        // } 
+         this.bibleService.chapterNumber = targetChapter;
+         this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
+
+         let tabTitle = (this.bibleService.title).concat(' ',targetChapter);
+         this.title.setTitle(tabTitle);   
       }
-
-      let tabTitle = (this.bibleService.title).concat(' ',targetChapter);
-      this.title.setTitle(tabTitle);
-
     });
     },options);
       chapters.forEach(chapter=> {
@@ -111,7 +107,12 @@ private observer: any;
     localStorage.setItem('curChap', this.bibleService.chapterNumber);
     localStorage.setItem('curVerse', this.bibleService.verseNumber);
 
-    this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
+    if (this.bibleService.chapterNumber == '1' && this.bibleService.verseNumber == '') { //Don't change without changing testaments.components.ts as well
+      this.viewport.scrollToPosition([0,0]);
+    } else {
+      this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
+
+    }
 
   }
 

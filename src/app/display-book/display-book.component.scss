@@ -34,6 +34,10 @@ section a {
     &:hover {
         color: inherit;
     }
+    // &:focus-visible {
+    //     outline: var(--lightRed) auto 1px;
+    //     outline-offset: 0;
+    // }
 }
 .verses {
     display: grid;

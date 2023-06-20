@@ -14,10 +14,10 @@ export class BibleService {
   public testament:number = Number(localStorage.getItem('curTestamentIndex')) ?? 0; // defaults to '0' (old testament) if '' or null
   public bookSelected:number = Number(localStorage.getItem('curBookIndex')) ?? 0; // defaults to '0' (Genesis) see above
   public chapterNumber: string = localStorage.getItem('curChap') ?? '1';
-  public verseNumber: string = localStorage.getItem('curVerse') ?? '1';
+  public verseNumber: string = localStorage.getItem('curVerse') ?? '';
 
   public fragment():string { 
-    return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber;
+    return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber; // '-' at the front of the id is necessary as angular's anchor scrolling get confused otherwise
   }
 
 

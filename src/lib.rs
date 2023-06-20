@@ -39,7 +39,7 @@ fn psalms_book(contents:&jsonValue) -> String {
     let mut section: String;
 
     for psalm in current {
-        section = format!("<section id =\"0-18-{}-0\"><header class=\"headings\" >", psalm["chapter"]);
+        section = format!("<section id =\"0-18-{}-0\"><header class=\"headings\" >", psalm["chapter"]); 
 
         let psal = format!("<p class=\"fontType\">PSALM {}</p></header>",psalm["chapter"]);
         section.push_str(&psal);
