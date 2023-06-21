@@ -31,13 +31,13 @@
 section a {
     color: var(--ink);
     text-decoration: none;
+    -webkit-tap-highlight-color: var(--lightRed);
     &:hover {
         color: inherit;
     }
-    // &:focus-visible {
-    //     outline: var(--lightRed) auto 1px;
-    //     outline-offset: 0;
-    // }
+    &:focus {
+        outline: var(--lightRed) solid 1px; //needed otherwise it is blue-safari; grey-firefox; black- chrome
+    }
 }
 .verses {
     display: grid;

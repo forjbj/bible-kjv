@@ -55,9 +55,13 @@
     font-family: Bookman, Georgia, serif;
     font-size: 0.9rem;
     border-radius: 0;
+    &:focus {
+        outline: var(--lightRed) solid 1px; //needed for apple otherwise its blue
+    }
 }
 .searchOption {
     -webkit-text-fill-color: #777; //needed for apple otherwise its blue
+    appearance:none; //No arrows on select boxes as they are different colours/shapes across browsers
 }
 .searchInput {
     font-size: 1rem; //needed to stop safari zoom on input focus
