@@ -31,12 +31,12 @@
 section a {
     color: var(--ink);
     text-decoration: none;
-    -webkit-tap-highlight-color: var(--lightRed);
     &:hover {
         color: inherit;
     }
     &:focus {
         outline: var(--lightRed) solid 1px; //needed otherwise it is blue-safari; grey-firefox; black- chrome
+        outline-offset: 1px;
     }
 }
 .verses {

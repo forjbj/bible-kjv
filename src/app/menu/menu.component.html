@@ -24,7 +24,7 @@
         </label>
     </div> 
     <hr>
-    <div (click) = "wordSearch()"
+    <div (click) = "this.bibleService.wordSearch(); this.bibleService.displayMenu = false;"
         class="links" >
         Word Search&ensp;<img src="./assets/search.svg" class="searchIcon" align="right">
     </div>

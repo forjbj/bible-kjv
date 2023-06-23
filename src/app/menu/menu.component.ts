@@ -9,10 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+
+  private searchSavedScroll = localStorage.getItem('currentSearch') ?? '0';
   
   constructor(public bibleService: BibleService,
               public historyService: HistoryService,
-              private router: Router, ) {
+              ) {
 
     this.bibleService.leftHandOn = localStorage.getItem('leftHanded')!;
 
@@ -66,15 +68,5 @@ export class MenuComponent implements OnInit {
       grid.setAttribute('leftHanded', 'no'); 
       localStorage.setItem('leftHanded', 'no');
     }
-  }
-  wordSearch(){
-    this.bibleService.menuHistoryBook = false;
-    this.bibleService.displayMenu = false;
-    this.bibleService.spinner = true;
-    this.bibleService.spinnerTitle = "Restoring";
-    //setTimeout needed for spinner to start
-    setTimeout(() => {
-      this.router.navigate(['search']); //works
-    }, 10);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy, HostListener } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
@@ -113,9 +113,20 @@ private observer: any;
       this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
 
     }
+    // let screenOrientationCurrent = screen.orientation;
+    // console.log(screenOrientationCurrent)
 
   }
+  @HostListener('window:resize', []) 
+    changeOrientation() {
+      let frag = this.bibleService.fragment();//must be worked out first
+      setTimeout(()=>{
+        this.viewport.scrollToAnchor(frag);//setTimeout absolutely necessary as browser make a mess of it otherwise
+      }, 700);//needs to be this slow (maybe slower??) depending on device and book size
+      console.log(screen.orientation.type);
+      // this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
 
+    }
   ngOnDestroy() {
     this.observer.disconnect();
   }

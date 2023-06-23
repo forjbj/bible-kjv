@@ -55,6 +55,7 @@
     font-family: Bookman, Georgia, serif;
     font-size: 0.9rem;
     border-radius: 0;
+    padding: 0 0.3rem;
     &:focus {
         outline: var(--lightRed) solid 1px; //needed for apple otherwise its blue
     }
@@ -65,6 +66,7 @@
 }
 .searchInput {
     font-size: 1rem; //needed to stop safari zoom on input focus
+    caret-color: var(--lightRed); //necessary as it is bright blue in safari
 }
 
 .noWrap {

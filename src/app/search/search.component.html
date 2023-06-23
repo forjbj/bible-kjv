@@ -4,7 +4,7 @@
         <form class="searchSelect">
             <label class="verticalLabel gridColumnOne">SEARCH</label>
             <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..." 
-                    value= {{bibleService.searchRequest}} (keyup.enter) ="submitSearch(req.value)" required minlength="2">
+                    value= {{bibleService.searchRequest}} (keyup.enter) ="submitSearch(req.value)" required minlength="2" autofocus>
             <input alt="submit" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "submitSearch(req.value)">
             <select class="searchOption gridColumnTwo" name="testaments" id="testaments" [(ngModel)] ="checkedNumber" (ngModelChange) = "selectedTest()">
                 <option *ngFor="let select of testaments" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>

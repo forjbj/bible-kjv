@@ -107,6 +107,7 @@ export class HistoryService {
     localStorage.setItem('curBookIndex', (this.bibleService.bookSelected).toString());
     localStorage.setItem('curChap', this.bibleService.chapterNumber!);
     localStorage.setItem('curVerse', this.bibleService.verseNumber!);
+    this.bibleService.spinnerTitle = "Restoring";
    
     /*
       hack to force angular to reload with the above parameters - route to '/testament' then back

@@ -32,6 +32,10 @@
   text-align: left;
   margin: 1em;
   cursor: pointer;
+  transition: color 0.3s ease;
+  &:active {
+    color: var(--lightRed);
+  }
 }
 ul {
   font-family: Bookman, Georgia, serif;

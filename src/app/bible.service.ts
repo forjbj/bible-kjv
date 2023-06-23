@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import Bible from '../assets/bible/Bible.json';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -44,11 +45,33 @@ export class BibleService {
   //variable for spinner animation
   public spinner: boolean = false;
   public spinnerTitle: string;
+
+  public searchRan = false;//needed for search saved position
  
-    constructor() {
+    constructor(
+      public router: Router,
+    ) {
       this.pageTitle ??= "Bible";
       this.title ??= "Bible";
       this.chapterButton ??= true; // turn on if null or memory wipe
       this.spinnerTitle ??= "Rendering";
     }
+
+    //wordSearch needs to be in this service or throws an error re: "changed after it was checked"
+    wordSearch(){
+      if (this.router.url != '/search') { //Necessary or confuses angular router
+        this.showChapters = false;
+        this.menuHistoryBook = false;
+        this.displayMenu = false;
+        if (this.searchRan == true){
+          this.spinner = true;
+          this.spinnerTitle = "Restoring";
+        }
+        //setTimeout needed for spinner to start
+        setTimeout(() => {
+          this.router.navigate(['search']); //Do Not use fragment as it confuses angular router if user selects 'Word Search' from menu while already at that route
+        }, 10);
+      }
+    }
+  
 }
