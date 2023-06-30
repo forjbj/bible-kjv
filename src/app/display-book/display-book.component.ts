@@ -111,22 +111,19 @@ private observer: any;
       this.viewport.scrollToPosition([0,0]);
     } else {
       this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
-
     }
-    // let screenOrientationCurrent = screen.orientation;
-    // console.log(screenOrientationCurrent)
 
-  }
-  @HostListener('window:resize', []) 
-    changeOrientation() {
+    screen.orientation.onchange = () => {
       let frag = this.bibleService.fragment();//must be worked out first
+      // console.log(screen.orientation.type);
       setTimeout(()=>{
         this.viewport.scrollToAnchor(frag);//setTimeout absolutely necessary as browser make a mess of it otherwise
       }, 700);//needs to be this slow (maybe slower??) depending on device and book size
-      console.log(screen.orientation.type);
-      // this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
+  };
 
-    }
+  }
+  // @HostListener('window:resize', []) // DON'T USE THIS; mess up the screen on mobile devices with dynamic url bars
+
   ngOnDestroy() {
     this.observer.disconnect();
   }
