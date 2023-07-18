@@ -1,6 +1,7 @@
 @import "../../styles.scss";
 
 .theme {
+  margin: 0 auto;
   color: var(--ink);
   background-color: var(--paper);
 }
@@ -24,7 +25,6 @@ div:focus {
     font-family: Bookman, Georgia, serif;
     font-variant: small-caps;
     display: grid;
-    width: 100%;
     grid-gap: 0.7rem;
     grid-template-columns: repeat(3, minmax(30px, 1fr));
     text-align: center;

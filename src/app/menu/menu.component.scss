@@ -4,7 +4,6 @@
   position: absolute;
   top: 2.3rem;
   margin: 0 1rem;
-  min-width: 20%;
   z-index: 3;
   border: 1px solid var(--ink);
   background-color: var(--menu);
@@ -12,21 +11,35 @@
   text-shadow: 1px 1px var(--gridColor);
   max-height: 87vh;
   overflow-y: scroll;
-  transition: height 0.3s;
+  min-width: 13rem;
   hr {
     // check divider in line with links
     margin: 1em;
   }
-  &[leftHanded = 'no'] {
-    right: 0;
-  }  
-  &[leftHanded = 'yes'] {
-    left: 0;
+  @media (orientation: landscape){
+    bottom: 1rem;
+    top: auto;
+    &[leftHanded = 'no'] {
+      right: 3.1rem;
+    }  
+    &[leftHanded = 'yes'] {
+      left: 3.1rem;
+    }
   }
+  @media (orientation: portrait){
+    &[leftHanded = 'no'] {
+      right: 0;
+    }  
+    &[leftHanded = 'yes'] {
+      left: 0;
+    }
+  }
+
 }
 .history {
   text-align: left;
   margin: 1em;
+  white-space: nowrap;
 }
 .links {
   text-align: left;
@@ -51,6 +64,7 @@ ul {
 .mode {
   text-align: left;
   margin: 1em;
+  white-space: nowrap;
 }
 .switch {
   position: relative;

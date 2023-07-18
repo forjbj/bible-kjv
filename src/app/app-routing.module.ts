@@ -39,6 +39,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
+      // enableTracing: true,
     anchorScrolling: 'enabled', //needed for chapter selection and scroll
     scrollOffset: [0, 100],
     //relativeLinkResolution: 'legacy', //no longer works angular 15

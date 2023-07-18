@@ -2,11 +2,10 @@
   <nav id = "nav" class="navGrid">
       <header id="description" class="desc">
         {{bibleService.pageTitle}} 
-        <span *ngIf = "bibleService.chapterButton == true"> {{bibleService.chapterNumber}}</span>
+        <!-- <span *ngIf = "bibleService.chapterButton == true"> {{bibleService.chapterNumber}}</span> -->
       </header>
-      <section *ngIf="bibleService.chapterButton == true; else version">
-        <button id="titleButton"
-                class = "titleButton"
+      <section class="titleButton" *ngIf="bibleService.chapterButton == true; else version">
+        <button class = "styleButton"
                 (click) = "bibleService.showChapters = !bibleService.showChapters;
                             bibleService.displayMenu = false;">
           <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle">
@@ -21,7 +20,7 @@
         <app-chapter-numbers *ngIf = "bibleService.showChapters"></app-chapter-numbers>
       </section>
       <ng-template #version >
-        <button class = "titleButton"
+        <button class = "styleButton titleButton backButton"
           (click) = "restoreBook();">
           Back to {{bibleService.title}}
         </button>
@@ -53,10 +52,12 @@
       </button>
     <app-menu *ngIf = "bibleService.displayMenu" class="slideMenu"></app-menu>
   </nav>
-  <router-outlet>
-    <div *ngIf="bibleService.spinner == true" class="spinnerBackground">
-      <div class="circleSpinner"></div>
-      <div class="titleSpinner">{{ bibleService.spinnerTitle }}</div>
-    </div>
-  </router-outlet>
+  <div class="landscape">
+    <router-outlet>
+      <div *ngIf="bibleService.spinner == true" class="spinnerBackground">
+        <div class="circleSpinner"></div>
+        <div class="titleSpinner">{{ bibleService.spinnerTitle }}</div>
+      </div>
+    </router-outlet>
+  </div>
 </main>

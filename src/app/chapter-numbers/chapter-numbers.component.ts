@@ -16,6 +16,16 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
               public historyService: HistoryService,
               @Inject(DOCUMENT) public document: Document, ) { }
 
+  ngOnInit() {
+    // apply righthanded if set in storage
+    let gridSide = document.getElementById('chaptersShow') as HTMLInputElement;
+    if (localStorage.getItem('leftHanded') == 'no'|| (localStorage.getItem('leftHanded') == null)) {
+      gridSide.setAttribute('leftHanded', 'no');
+    } else {
+      gridSide.setAttribute('leftHanded', 'yes');
+    }
+  }      
+
   ngAfterViewInit() {
     // highlight chapters on scroll
     const chapters = this.document.querySelectorAll("section");

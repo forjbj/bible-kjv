@@ -1,24 +1,47 @@
 @import"../../styles.scss";
 
+.numberHeader {
+    position: sticky;
+    top: 0;
+    background-color: var(--menu);
+    padding-top: 0.3rem;
+}
 .chaptersShow {
+    position: absolute;
     z-index: 3;
     background-color: var(--menu);
     border: 1px solid var(--ink);
     box-shadow: 0 12px 7px -7px var(--zPaper);
     color: var(--zInk);
     text-align: center;
+    writing-mode: horizontal-tb; //needed as chrome makes a mess of it otherwise
     width: 12rem;
-    position: absolute;
-    left: 50%;
-    transform:translateX(-50%);
-    display: block;
-    top: 2.3rem;
+    overflow-y: auto;
+    // overscroll-behavior: contain; // needed to stop scrolling scripture when scrolled to end of chapters
     border-radius: 0.1rem;
     hr {
         margin: 0.7rem 0.7rem;
     }
     p {
         margin: 0;
+    }
+    @media (orientation: portrait){
+        left: 50%;
+        transform:translateX(-50%);
+        top: 2.3rem;
+        max-height: calc(100vh/2);
+    }
+    @media (orientation:landscape){
+        max-height: 90vh;
+        top: 50%;
+        transform: translateY(-50%);
+        &[leftHanded = 'yes'] {
+            left: 3.1rem;
+        }
+        &[leftHanded = 'no'] {
+            right: 3.1rem;
+        }
+
     }
 }
 .chapterTitle {
@@ -30,12 +53,9 @@
 .numberTitle {
     font-variant: small-caps;
     text-shadow: 1px 1px var(--gridColor);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
 }
 .chapterGrid {
-    max-height: calc(100vh /2);
-    overflow-y: auto;
-    overscroll-behavior: contain; // needed to stop scrolling scripture when scrolled to end of chapters
     display: grid;
     padding: 0.7rem 0;
     grid-gap: 1rem;

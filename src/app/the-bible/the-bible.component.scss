@@ -1,97 +1,125 @@
 @import"../../styles.scss";
 
-// sticky nav 
-nav {
-    position: -webkit-sticky; // needed for apple stuff
-    position: sticky;
-    top: 0;
-    z-index: 1; // necessary for the nav's child (menu) to overlay the router-outlet; search is sticky so is this.
-    background-color: var(--nav);
-    border-bottom: var(--ink) solid 1px;
-    font-family: "Bookman", Georgia, serif;
-    color: var(--zInk);
-    text-shadow: 1px 1px var(--gridColor);
-    height: 2.2rem;
-    transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
-} 
-.navGrid {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: 2.2rem; // needed to centre items
-    place-items: center;
-    max-width: 100%;
-    transition: all 0.3s;
-    margin: 0;
-    #description {
-        grid-column: 1;
-        grid-row: 1;
-        margin: 0 1rem;
-        font-variant: small-caps;
-        justify-self: left;
-        font-size: 0.9rem;
-        @media (max-width: 425px) {
-            margin: 0 0.3rem;
+main {
+    @media (orientation:landscape){
+        display: grid;
+        grid-column-gap: 1rem;
+        grid-auto-columns: auto auto;
+        grid-auto-flow: column; // necessary or creates second row when switching lefthand below
+        max-width: 100dvw;
+        .landscape{
+            justify-self: center;
+            margin: 0 auto;
+            min-width: 90vw; //terrible hack to get it to look sort of right in landscape
         }
-    } 
-    .titleButton {
-        grid-column: 2;
-        grid-row: 1;
-        justify-self: center;
+        &[leftHanded = 'yes'] {
+            &.landscape {
+                grid-column: 2;
+            }
+        }
+        &[leftHanded = 'no'] {
+            &.landscape {
+                grid-column: 1;
+            }
+        }
     }
-    .menuButton {
-        grid-column: 3;
-        grid-row: 1;
-        margin: 0 1rem;
-        justify-self: right;
-    }
+}
 
-    &[leftHanded = 'yes'] {
-        #description {
-            grid-column: 3;
-            grid-row: 1;
+@media (orientation: landscape){
+    // sticky nav 
+    nav {
+        position: -webkit-sticky; // needed for apple stuff
+        position: sticky;
+        top: 0;
+        bottom: 0;
+        place-self: start; //needed for grid
+        z-index: 1; // necessary for the nav's child (menu) to overlay the router-outlet; search is sticky so is this.
+        background-color: var(--nav);
+        font-family: "Bookman", Georgia, serif;
+        color: var(--zInk);
+        text-shadow: 1px 1px var(--gridColor);
+        height: 100dvh;
+        width: 3rem;
+        transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
+        &[leftHanded = 'yes'] {
+            grid-column: 1;
+            border-right: var(--ink) solid 1px;
+            justify-self: left;
+        }
+        &[leftHanded = 'no'] {
+            grid-column: 2;
+            border-left: var(--ink) solid 1px;
             justify-self: right;
+        }
+
+    } 
+    .navGrid {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 3rem;
+        grid-template-rows: 1fr auto 1fr; // needed to centre items
+        justify-items: center;
+        height: 100dvh;
+        transition: all 0.3s;
+        .desc {
+            grid-column: 1;
+            grid-row: 1;
+            margin: 0.3rem;
+            writing-mode: vertical-lr; //these two need to be in each row, not in 'nav' or does weird things
+            text-orientation: upright; //these two need to be in each row, not in 'nav' or does weird things
+            white-space: normal;
+            align-self: start;
+            
+        } 
+        .titleButton {
+            grid-column: 1;
+            grid-row: 2;
+            min-height: 7rem;
+            -webkit-writing-mode: vertical-lr; //needed apple stuff???
+            writing-mode: vertical-lr; //these two need to be in each row, not in 'nav' or does weird things
+            text-orientation: upright; //these two need to be in each row, not in 'nav' or does weird things
+            align-self: center;
         }
         .menuButton {
             grid-column: 1;
-            grid-row: 1;
-            justify-self: left;
+            grid-row: 3;
+            margin: 1rem 0;
+            align-self: end;
         }
-        .titleButton {
-            grid-column: 2;
-            grid-row: 1;
-            justify-self: center;
+    }
+    .desc {
+        white-space: nowrap;
+        font-variant: small-caps;
+        font-size: 0.9rem;
+    }
+
+    // back/chapter button
+    .styleButton {
+        font-family: Bookman, Georgia, serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        font-variant: small-caps;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        color: var(--zInk);
+        text-shadow: 1px 1px var(--gridColor);
+        text-align: center;
+        border-radius: 0.1rem;
+        background-color: var(--button);
+        padding: 0.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover, &:focus, &:active {
+            color: var(--ink);
+            background-color: var(--menu);
+            outline: 0; //needed for chrome
         }
     }
 }
-.desc {
-    white-space: nowrap;
+.backButton {
+    background-color: var(--paper);
 }
-
-// back/chapter button
-.titleButton {
-    font-family: Bookman, Georgia, serif;
-    font-size: 0.9rem;
-    font-weight: bold;
-    font-variant: small-caps;
-    color: var(--zInk);
-    text-shadow: 1px 1px var(--gridColor);
-    text-align: center;
-    border-radius: 0.1rem;
-    background-color: var(--button);
-    min-width: 7rem;
-    justify-self: center;
-    padding: 0.2rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    &:hover, &:focus, &:active {
-        color: var(--ink);
-        background-color: var(--menu);
-        outline: 0; //needed for chrome
-    }
-}
-
 .menuButton {
     width: 2.2rem;
     background: transparent;
@@ -128,4 +156,97 @@ nav {
             rotate 0.3s 0.3s,
             opacity 0s 0.3s;
     }   
+}
+@media (orientation: portrait){
+    // sticky nav 
+    nav {
+        position: -webkit-sticky; // needed for apple stuff
+        position: sticky;
+        top: 0;
+        z-index: 1; // necessary for the nav's child (menu) to overlay the router-outlet; search is sticky so is this.
+        background-color: var(--nav);
+        border-bottom: var(--ink) solid 1px;
+        font-family: "Bookman", Georgia, serif;
+        color: var(--zInk);
+        text-shadow: 1px 1px var(--gridColor);
+        height: 2.2rem;
+        transition: all 0.3s; // animate scroll nav for Bible See display-book.component.ts
+    } 
+    .navGrid {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-rows: 2.2rem; // needed to centre items
+        align-items: center;
+        max-width: 100%;
+        transition: all 0.3s;
+        margin: 0;
+        #description {
+            grid-column: 1;
+            grid-row: 1;
+            margin: 0 1rem;
+            font-variant: small-caps;
+            justify-self: left;
+            font-size: 0.9rem;
+            @media (max-width: 425px) {
+                margin: 0 0.3rem;
+            }
+        } 
+        .titleButton {
+            grid-column: 2;
+            grid-row: 1;
+            justify-self: center;
+        }
+        .menuButton {
+            grid-column: 3;
+            grid-row: 1;
+            margin: 0 1rem;
+            justify-self: right;
+        }
+
+        &[leftHanded = 'yes'] {
+            #description {
+                grid-column: 3;
+                grid-row: 1;
+                justify-self: right;
+            }
+            .menuButton {
+                grid-column: 1;
+                grid-row: 1;
+                justify-self: left;
+            }
+            .titleButton {
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: center;
+            }
+        }
+    }
+    .desc {
+        white-space: nowrap;
+    }
+
+    // back/chapter button
+    .styleButton {
+        font-family: Bookman, Georgia, serif;
+        font-size: 0.9rem;
+        font-weight: bold;
+        font-variant: small-caps;
+        color: var(--zInk);
+        text-shadow: 1px 1px var(--gridColor);
+        text-align: center;
+        border-radius: 0.1rem;
+        background-color: var(--button);
+        min-width: 7rem;
+        justify-self: center;
+        padding: 0.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover, &:focus, &:active {
+            color: var(--ink);
+            background-color: var(--menu);
+            outline: 0; //needed for chrome
+        }
+    }
 }

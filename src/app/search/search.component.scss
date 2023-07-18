@@ -1,10 +1,18 @@
 @import"../../styles.scss";
+
 .stationary {
     background-color: var(--paper);
     position: sticky;
     position: -webkit-sticky;
     top: 2.2rem;
-    text-align: right;    
+    text-align: right;   
+    max-width: 90%;
+    margin: 0 auto;   
+    @media (orientation: landscape){
+        top: 0;
+        border-left: var(--lightRed) dashed 1px ;
+        border-right: var(--lightRed) dashed 1px ;
+    }  
 }
 .searchSelect {
     display: grid;
@@ -43,7 +51,6 @@
 .searchButton {
     height: 2rem;
     width: 2rem;
-    // margin: auto 0.3rem;
     background-color: transparent;
     vertical-align: middle;
     transition: transform ease 0.3s;
@@ -82,7 +89,7 @@ a {
 }
 .searchResults {
     text-align: center;
-    min-height: 50vh; // needed to close menu on click
+    min-height: 100dvh; // needed to close menu on click
     .alert {
         max-width: 70%;
         margin: 0 auto;

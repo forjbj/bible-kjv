@@ -34,7 +34,7 @@ html[dataTheme = 'dark'] {
 }
 
 html {
-    // scroll-behavior: smooth; //Doesn't work with angular anchor scrolling
+    scroll-behavior: auto; //smooth - Doesn't work with angular anchor scrolling
     -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
 }
 
@@ -45,6 +45,7 @@ body {
     margin: auto;
     font-size: 1.1rem;
     transition: all 0.5s;
+    overscroll-behavior: none; //needed for bouncing on scroll end???
 }
 hr {
     border-color: var(--lightRed);
