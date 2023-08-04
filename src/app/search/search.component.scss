@@ -6,12 +6,14 @@
     position: -webkit-sticky;
     top: 2.2rem;
     text-align: right;   
-    max-width: 90%;
+    // max-width: 90%;
     margin: 0 auto;   
+    hr {
+        max-width: 90%;
+    }
     @media (orientation: landscape){
         top: 0;
-        border-left: var(--lightRed) dashed 1px ;
-        border-right: var(--lightRed) dashed 1px ;
+        padding: 0 auto;
     }  
 }
 .searchSelect {

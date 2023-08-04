@@ -1,30 +1,36 @@
-<main>
+<main class="gridWrapper">
   <nav id = "nav" class="navGrid">
       <header id="description" class="desc">
         {{bibleService.pageTitle}} 
         <!-- <span *ngIf = "bibleService.chapterButton == true"> {{bibleService.chapterNumber}}</span> -->
       </header>
-      <section class="titleButton" *ngIf="bibleService.chapterButton == true; else version">
-        <button class = "styleButton"
-                (click) = "bibleService.showChapters = !bibleService.showChapters;
-                            bibleService.displayMenu = false;">
-          <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle">
-            Chapter {{bibleService.chapterNumber}}
-          </div>
-          <ng-template #notChapterTitle>
-            <div>
-              Psalm {{bibleService.chapterNumber}}
+      <section>
+        <div *ngIf="bibleService.chapterButton == true; else version">
+          <button (click) = "bibleService.showChapters = !bibleService.showChapters;
+                              bibleService.displayMenu = false;"
+                              class="middleButton">
+            <!-- class of titleButton needs to be on div inside button or doesn't work in iOS -->
+            <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle" class="titleButton">
+              Chapter {{bibleService.chapterNumber}}
             </div>
-          </ng-template>
-        </button>
-        <app-chapter-numbers *ngIf = "bibleService.showChapters"></app-chapter-numbers>
+            <ng-template #notChapterTitle>
+              <div class="titleButton">
+                Psalm {{bibleService.chapterNumber}}
+              </div>
+            </ng-template>
+          </button>
+          <app-chapter-numbers *ngIf = "bibleService.showChapters"></app-chapter-numbers>
+        </div>
+        <ng-template #version >
+          <button (click) = "restoreBook();"
+                  class="middleButton">
+            <!-- class of titleButton and backButton needs to be on div inside button or doesn't work in iOS -->
+            <div class=" titleButton backButton">
+              back to {{bibleService.title}}
+            </div>
+          </button>
+        </ng-template>
       </section>
-      <ng-template #version >
-        <button class = "styleButton titleButton backButton"
-          (click) = "restoreBook();">
-          Back to {{bibleService.title}}
-        </button>
-      </ng-template>
       <button aria-label="menu" class="menuButton"
               [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
               (click) = "bibleService.displayMenu = !bibleService.displayMenu;
@@ -52,7 +58,7 @@
       </button>
     <app-menu *ngIf = "bibleService.displayMenu" class="slideMenu"></app-menu>
   </nav>
-  <div class="landscape">
+  <div class="landscapeGrid">
     <router-outlet>
       <div *ngIf="bibleService.spinner == true" class="spinnerBackground">
         <div class="circleSpinner"></div>
