@@ -36,17 +36,16 @@ html[dataTheme = 'dark'] {
 html {
     scroll-behavior: auto; //smooth - Doesn't work with angular anchor scrolling
     -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
-    // max-height: max-content;
-    // overscroll-behavior: none; //needed for bouncing on scroll end???
 }
-
 body {
-    width: 100vw; //needed for iOS ??
+    width: 100%; //needed for iOS ??; Can't be 100dvw or 100vw as Chrome doesn't work with these
+    height: fit-content;
     color: var(--ink);
     background-color: var(--paper);
     margin: auto;
     font-size: 1.1rem;
     transition: all 0.5s;
+    overscroll-behavior: none; //necessary??
 }
 hr {
     border-color: var(--lightRed);

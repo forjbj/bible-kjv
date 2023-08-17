@@ -20,10 +20,10 @@
     bottom: 1rem;
     top: auto;
     &[leftHanded = 'no'] {
-      right: 3.1rem;
+      right: 2.1rem;
     }  
     &[leftHanded = 'yes'] {
-      left: 3.1rem;
+      left: 2.1rem;
     }
   }
   @media (orientation: portrait){

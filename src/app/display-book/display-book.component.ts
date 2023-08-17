@@ -115,15 +115,12 @@ private observer: any;
 
     screen.orientation.onchange = () => {
       let frag = this.bibleService.fragment();//must be worked out first
-      // console.log(screen.orientation.type);
       setTimeout(()=>{
         this.viewport.scrollToAnchor(frag);//setTimeout absolutely necessary as browsers make a mess of it otherwise
       }, 900);//needs to be this slow (maybe slower??) depending on device and book size
     };
 
   }
-  // @HostListener('window:resize', []) // DON'T USE THIS; messes up the screen on mobile devices with dynamic url bars
-
   ngOnDestroy() {
     this.observer.disconnect();
   }

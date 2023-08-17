@@ -6,7 +6,6 @@
     position: -webkit-sticky;
     top: 2.2rem;
     text-align: right;   
-    // max-width: 90%;
     margin: 0 auto;   
     hr {
         max-width: 90%;
@@ -117,7 +116,7 @@ a {
     display: grid;
     max-width: 100%;
     grid-gap: 1rem; // needed to stop words scrolling right
-    grid-template-columns: minmax(min-content, 10%) 1fr;
+    grid-template-columns: minmax(min-content, 7%) 1fr;
     padding: 0;
     text-align: left;
     align-items: center;
