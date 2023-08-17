@@ -4,15 +4,15 @@
     background-color: var(--paper);
     position: sticky;
     position: -webkit-sticky;
-    top: 2.2rem;
+    top: 2.3rem;
     text-align: right;   
     margin: 0 auto;   
+    padding-top: 0.3rem;
     hr {
         max-width: 90%;
     }
     @media (orientation: landscape){
         top: 0;
-        padding: 0 auto;
     }  
 }
 .searchSelect {
@@ -90,7 +90,7 @@ a {
 }
 .searchResults {
     text-align: center;
-    min-height: 100dvh; // needed to close menu on click
+    min-height: 100dvh; // needed to close menu on click and keep landscape nav fixed/sticky
     .alert {
         max-width: 70%;
         margin: 0 auto;

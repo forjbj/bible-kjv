@@ -16,7 +16,7 @@
         <hr>
     </div>
     <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
-    <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
+    <a class="hideLink"z [href] = "bibleService.searchResults | safe: 'resourceUrl'">
         <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
     </a>
 </section>

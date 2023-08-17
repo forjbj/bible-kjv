@@ -214,7 +214,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                 
     match search_num {
         0 => {
-            results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word with the 'Accuracy' set to 'Contains'.</header>", inp_str);
+            results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word and set the bottom search option to 'results Contain Characters'.</header>", inp_str);
         },
         1 => {
             results_fin = format!("<header>There is a Search Result For \"{}\":</header><br>", inp_str);

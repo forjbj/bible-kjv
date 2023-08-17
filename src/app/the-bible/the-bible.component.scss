@@ -2,6 +2,7 @@
 
 .mainFixedHeight {
     height: 100dvh; //absolutely necessarry; took weeks to solve overscrolling problem
+    max-width: 100dvw;
 }
 .gridWrapper {
     @media (orientation:landscape){
