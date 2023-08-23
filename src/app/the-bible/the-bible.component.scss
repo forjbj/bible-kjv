@@ -2,15 +2,16 @@
 
 .mainFixedHeight {
     height: 100dvh; //absolutely necessarry; took weeks to solve overscrolling problem
-    max-width: 100dvw;
+    width: 100dvw;
 }
 .gridWrapper {
     @media (orientation:landscape){
         display: grid;
-        column-gap: 1rem;
+        column-gap: 0;
         row-gap: 0;
         grid-auto-columns: auto auto;
         grid-auto-flow: column; // necessary or creates second row when switching lefthand below
+        transition: 0.5s; //smoother change in nav on dynamic screens?? some day maybe? suppose to work but isn't yet [year 2023]
         .landscapeGrid{
             justify-self: center;
             margin: 0 auto;
@@ -104,7 +105,7 @@
         color: var(--zInk);
         text-shadow: 1px 1px var(--gridColor);
         height: 100dvh;
-        max-width: 3rem;
+        width: 3rem;
         &[leftHanded = 'yes'] {
             grid-column: 1;
             border-right: var(--ink) solid 1px;
@@ -135,6 +136,7 @@
         } 
         .middleButton {
             width: 2rem; // is necessary for iOS
+            padding: 0;            
         }
         .titleButton {  
             justify-content: center; //absolutely necessary
@@ -144,7 +146,12 @@
             margin: 0.5rem auto;
             writing-mode: vertical-lr; //not in 'navGrid' or does weird things
             font-variant: all-small-caps; // necessary for alignment
-            line-height: 1.5rem; //necessary for centreing vertical text
+            line-height: 1.8rem; //necessary for centreing vertical text;
+            vertical-align: auto;
+        }
+        .landscapeNumbers {
+            writing-mode: horizontal-tb;
+            // line-height: 2rem;
         }
         .menuButton {
             grid-column: 1;

@@ -15,8 +15,17 @@
         </form>
         <hr>
     </div>
-    <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
-    <a class="hideLink"z [href] = "bibleService.searchResults | safe: 'resourceUrl'">
-        <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
-    </a>
+    <div id="searchPage" *ngIf="bibleService.searchResults == 'noSearchYet'; else results">
+        <div class="backgroundBible"></div>
+        <div class="searchPageText">
+            <p>Choose to search in Old testament, New testament or both.</p>
+            <p>Choose level of search accuracy; Exact match or Contains Characters.</p>
+        </div>
+    </div>
+    <ng-template #results>
+        <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
+        <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
+            <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
+        </a>
+    </ng-template>
 </section>

@@ -33,7 +33,7 @@ export class BibleService {
   public displayMenu: boolean = false;
   public menuHistoryBook: boolean = false;
 
-  public searchResults: any = "<br><h2>Search results will appear here...</h2>";
+  public searchResults: any = "noSearchYet";
   public searchRequest?: string ;
 
   //variable for lefthand menu position

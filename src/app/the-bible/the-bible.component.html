@@ -4,7 +4,6 @@
     <nav id = "nav" class="navGrid">
         <header id="description" class="desc">
           {{bibleService.pageTitle}} 
-          <!-- <span *ngIf = "bibleService.chapterButton == true"> {{bibleService.chapterNumber}}</span> -->
         </header>
         <section>
           <div *ngIf="bibleService.chapterButton == true; else version">
@@ -13,11 +12,11 @@
                                 class="middleButton">
               <!-- class of titleButton needs to be on div inside button or doesn't work in iOS -->
               <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle" class="titleButton">
-                Chapter {{bibleService.chapterNumber}}
+                Chapter <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
               </div>
               <ng-template #notChapterTitle>
                 <div class="titleButton">
-                  Psalm {{bibleService.chapterNumber}}
+                  Psalm <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
                 </div>
               </ng-template>
             </button>

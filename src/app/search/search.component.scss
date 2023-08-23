@@ -81,13 +81,38 @@
     white-space: nowrap;
 }
 
-a {
+.hideLink {
     color: inherit;
     text-decoration: none;
     &:hover {
         color: inherit;
     }
 }
+#searchPage {
+    display: grid; // grid needed to place .searchPageText [css class see below] on top of .backgroundBible class
+}
+.backgroundBible {
+    grid-area: 1/1; // same grid area as .searchPageText so .searchPageText appears on top
+    height: 70dvh;
+    width: 100%;
+    top: 7rem;
+    margin: 0 auto;
+    opacity: 0.4;
+    z-index: -1; // necessary or opacity setting above bleeds into .searchPageText text.
+    background-image: url(../../assets/openBible.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.5s; //smoother change in pic size on dynamic screens - works!
+}
+.searchPageText{
+    grid-area: 1/1;
+    width: 100%;
+    text-align: center;
+    text-shadow: -1px -1px 0 var(--paper), 1px -1px 0 var(--paper), -1px 1px 0 var(--paper), 1px 1px 0 var(--paper);
+    transition: all 0.5s; //smoother change in text on dynamic screens
+}
+
 .searchResults {
     text-align: center;
     min-height: 100dvh; // needed to close menu on click and keep landscape nav fixed/sticky
@@ -97,7 +122,7 @@ a {
         text-align: center;
         font-size: 1.5rem;
         font-style: italic;
-        color: #771010;
+        color: var(--lightRed);
         padding: 20vh 0.3rem 0 0.3em;
         @media (max-width: 768px) {
             max-width: 90%;
@@ -122,6 +147,7 @@ a {
     align-items: center;
     &:nth-child(odd) {
         background-color: var(--gridColor);
+        
     }
     &:hover, &:active {
         background-color: var(--searchHighlight);

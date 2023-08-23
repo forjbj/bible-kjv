@@ -31,10 +31,10 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
     // console.log(grid)
     if (localStorage.getItem('leftHanded') == 'no'|| (localStorage.getItem('leftHanded') == null)) {
       grid.setAttribute('leftHanded', 'no');
-      routerOut.setAttribute('leftHanded', 'no');
+      routerOut?.setAttribute('leftHanded', 'no');
     } else {
       grid.setAttribute('leftHanded', 'yes');
-      routerOut.setAttribute('leftHanded', 'yes');
+      routerOut?.setAttribute('leftHanded', 'yes');
     }
   }
   

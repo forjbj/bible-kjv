@@ -56,7 +56,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
   ngAfterViewInit(): void {
-   
     //Scroll to last search place if exists
     //setTimeout necessary or angular auto scrolls to top
     setTimeout(() => {

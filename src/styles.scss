@@ -38,8 +38,8 @@ html {
     -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
 }
 body {
-    max-width: 100%; //needed for iOS ??; Can't be 100dvw or 100vw as Chrome doesn't work with these
-    height: fit-content;
+    max-width: 100dvw; //needed for iOS ??; Can't be 100dvw or 100vw as Chrome doesn't work with these
+    height: 100dvh;
     color: var(--ink);
     background-color: var(--paper);
     margin: auto;
