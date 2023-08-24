@@ -1,8 +1,8 @@
 @import"../../styles.scss";
 
 .mainFixedHeight {
-    height: 100dvh; //absolutely necessarry; took weeks to solve overscrolling problem
-    width: 100dvw;
+    height: 100%; //absolutely necessarry; took weeks to solve overscrolling problem
+    width: 100%; //can only be % as chrome make a giant mess of it if it is dvw or vw
 }
 .gridWrapper {
     @media (orientation:landscape){
@@ -32,12 +32,10 @@
 // back/chapter button
 .middleButton {
     font-family: Bookman, Georgia, serif;
-    font-size: 0.9rem;
     font-weight: bold;
     font-variant: all-small-caps;            
     color: var(--zInk);
     text-align: center;
-    vertical-align: baseline;
     text-shadow: 1px 1px var(--gridColor);
     border-radius: 0.1rem;
     background-color: var(--button);
@@ -136,7 +134,7 @@
         } 
         .middleButton {
             width: 2rem; // is necessary for iOS
-            padding: 0;            
+            padding: 0;  
         }
         .titleButton {  
             justify-content: center; //absolutely necessary
@@ -147,11 +145,9 @@
             writing-mode: vertical-lr; //not in 'navGrid' or does weird things
             font-variant: all-small-caps; // necessary for alignment
             line-height: 1.8rem; //necessary for centreing vertical text;
-            vertical-align: auto;
         }
         .landscapeNumbers {
             writing-mode: horizontal-tb;
-            // line-height: 2rem;
         }
         .menuButton {
             grid-column: 1;

@@ -1,4 +1,4 @@
-<section (click) = "bibleService.displayMenu = false;">
+<section class="searchGrid" (click) = "bibleService.displayMenu = false;">
     <div class="stationary">
         <hr>
         <form class="searchSelect">
@@ -18,8 +18,8 @@
     <div id="searchPage" *ngIf="bibleService.searchResults == 'noSearchYet'; else results">
         <div class="backgroundBible"></div>
         <div class="searchPageText">
-            <p>Choose to search in Old testament, New testament or both.</p>
-            <p>Choose level of search accuracy; Exact match or Contains Characters.</p>
+            <p>Choose to search in the Old testament, the New testament or both.</p>
+            <p>Choose the level of search accuracy; Exact match or Contains Characters.</p>
         </div>
     </div>
     <ng-template #results>
