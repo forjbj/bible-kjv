@@ -10,11 +10,14 @@
   color: var(--zInk);
   text-shadow: 1px 1px var(--gridColor);
   max-height: 87vh;
-  overflow-y: scroll;
-  min-width: 13rem;
+  overflow-y: auto;
+  width: 14rem;
+  text-align: center;
   hr {
-    // check divider in line with links
-    margin: 1em;
+    margin: 1em;  // check divider in line with links
+    &.menuSeparator {
+      border: 2px solid var(--lightRed);
+    }
   }
   @media (orientation: landscape){
     bottom: 1rem;
@@ -39,10 +42,10 @@
 .history {
   text-align: left;
   margin: 1em;
-  white-space: nowrap;
+  // white-space: nowrap;
 }
 .links {
-  text-align: left;
+  // text-align: center;
   margin: 1em;
   cursor: pointer;
   transition: color 0.3s ease;

@@ -3,6 +3,7 @@
 .mainFixedHeight {
     height: 100%; //absolutely necessarry; took weeks to solve overscrolling problem
     width: 100%; //can only be % as chrome make a giant mess of it if it is dvw or vw
+    transition: all 1s;
 }
 .gridWrapper {
     @media (orientation:landscape){
@@ -97,7 +98,7 @@
         top: 0;
         place-self: start; //needed for grid
         align-items: center;
-        z-index: 1; // necessary for the nav's child (menu) to overlay the router-outlet; search is sticky so is this.
+        z-index: 2; // necessary for the nav's child (menu) to overlay the router-outlet; search is sticky so is this.
         background-color: var(--nav);
         font-family: "Bookman", Georgia, serif;
         color: var(--zInk);

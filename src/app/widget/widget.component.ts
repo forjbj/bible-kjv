@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
 import * as bibleJson from '../../assets/bible/Bible.json';
 import * as wasm from '../../../pkg';
 import { Meta, Title } from '@angular/platform-browser';
@@ -7,7 +7,8 @@ import { BibleService } from '../bible.service';
 @Component({
   selector: 'app-widget',
   templateUrl: './widget.component.html',
-  styleUrls: ['./widget.component.scss']
+  styleUrls: ['./widget.component.scss'],
+  encapsulation: ViewEncapsulation.None // removes ::ng-deep need
 })
 export class WidgetComponent implements OnInit {
   //appTitle = 'widget';

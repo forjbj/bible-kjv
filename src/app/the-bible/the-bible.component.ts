@@ -3,12 +3,32 @@ import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { trigger, state, style, animate, transition, query, group } from '@angular/animations';
 
 
 @Component({
   selector: 'app-the-bible',
   templateUrl: './the-bible.component.html',
-  styleUrls: ['./the-bible.component.scss']
+  styleUrls: ['./the-bible.component.scss'],
+  animations: [
+    trigger('inOutAnimate', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms'),
+      ]),
+      transition(':leave', [
+        animate('300ms', style({ opacity: 0 }))
+      ]),
+
+      // transition(':enter', [
+      //   style({  transform: 'translateY(300px)' }),
+      //   animate('300ms', style({  transform: 'translateY(*)'  })),
+      // ]),
+      // transition(':leave', [
+      //   animate('300ms', style({ transform: 'translateY(300px)' }))
+      // ]),
+    ])
+  ]
 })
 
 export class TheBibleComponent implements OnInit, AfterViewInit {

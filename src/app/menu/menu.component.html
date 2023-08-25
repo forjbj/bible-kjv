@@ -1,10 +1,10 @@
 <nav id= "menu" class="menu">
-    <hr>
+    <hr class="menuSeparator">
     <div (click) = "bibleService.menuHistoryBook = false;
         bibleService.displayMenu = false"
         class="links" 
         routerLink="about">
-        About
+        About BibleKJV
     </div>
     <hr>
     <!-- Theme -->
@@ -23,10 +23,10 @@
             <span class="slider"></span>
         </label>
     </div> 
-    <hr>
+    <hr class="menuSeparator">
     <div (click) = "this.bibleService.wordSearch(); this.bibleService.displayMenu = false;"
         class="links" >
-        Word Search&ensp;<img src="./assets/search.svg" class="searchIcon" align="right">
+        Word Search&ensp;<img src="./assets/search.svg" class="searchIcon" align="center">
     </div>
     <hr>
     <div class="history">
@@ -48,5 +48,5 @@
         routerLink="testaments">
             Select a Bible Book
     </div> 
-    <hr>
+    <hr class="menuSeparator">
 </nav>

@@ -1,8 +1,7 @@
 @import "../../styles.scss";
 
-//::ng-deep necessary to work with wasm innerHTML
 
-::ng-deep section {
+section {
     border: solid 1px ;
 }
 .sticky {
@@ -48,7 +47,7 @@
 }
 
 //  increase font size for readablility (I'm old)
-::ng-deep .fontType {
+.fontType {
     font-family: Georgia,"Times New Roman", Times, serif;
     line-height: 1.45em; // needs to stap 'em' units as 'rem' makes everything very wrong
     font-size: 1.3rem;
@@ -59,7 +58,7 @@
         font-size: 1.1rem;
     }
 }
-::ng-deep .psalm {
+.psalm {
     text-align: center;
     font-size: 1rem;
     @media (max-width: 1000px) {
@@ -69,7 +68,7 @@
         font-size: 0.8rem;
     }
 }
-::ng-deep .verses {
+.verses {
     display: grid;
     width: 100%;
     grid-gap: 1rem; // needed to stop words scrolling right
@@ -78,7 +77,7 @@
         grid-template-columns: 1rem auto; // verse number column smaller for small screens
     }
 }
-::ng-deep .firstVerse{
+.firstVerse{
     margin-left: 3rem;
     margin-right: 1rem;
     margin-bottom: 0.3rem;
@@ -93,7 +92,7 @@
         margin-left: 1rem;
     }
 }
-::ng-deep .verseNumber {
+.verseNumber {
     text-align: right;
     color: var(--scriptNum);
     margin: 0.5rem 0;
@@ -102,14 +101,14 @@
     }
 }
 // stop scripture going to far right
-::ng-deep .scripture {
+.scripture {
     margin: 0.5rem 1rem 0.5rem 0;
     @media (max-width: 767px) {
         margin: 0.3rem 1rem 0.3rem 0;
     }
 }
 //smaller font for end of book notes
-::ng-deep .notes {
+.notes {
     //font-family: Arial, Helvetica, sans-serif;
     font-style: italic;
     font-size: 0.9rem;

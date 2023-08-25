@@ -2,62 +2,61 @@
   <!-- MUST have div below as grid with class of mainFixedHeight on main [with fixed height set in css] or overscroll is weird; took weeks to sort this out -->
   <div class="gridWrapper">
     <nav id = "nav" class="navGrid">
-        <header id="description" class="desc">
-          {{bibleService.pageTitle}} 
-        </header>
-        <section>
-          <div *ngIf="bibleService.chapterButton == true; else version">
-            <button (click) = "bibleService.showChapters = !bibleService.showChapters;
-                                bibleService.displayMenu = false;"
-                                class="middleButton">
-              <!-- class of titleButton needs to be on div inside button or doesn't work in iOS -->
-              <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle" class="titleButton">
-                Chapter <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
-              </div>
-              <ng-template #notChapterTitle>
-                <div class="titleButton">
-                  Psalm <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
-                </div>
-              </ng-template>
-            </button>
-            <app-chapter-numbers *ngIf = "bibleService.showChapters"></app-chapter-numbers>
+      <header id="description" class="desc">
+        {{bibleService.pageTitle}} 
+      </header>
+      <div *ngIf="bibleService.chapterButton == true; else version">
+        <button (click) = "bibleService.showChapters = !bibleService.showChapters;
+                            bibleService.displayMenu = false;"
+                            class="middleButton">
+          <!-- class of titleButton needs to be on div inside button or doesn't work in iOS -->
+          <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle" class="titleButton">
+            Chapter <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
           </div>
-          <ng-template #version >
-            <button (click) = "restoreBook();"
-                    class="middleButton">
-              <!-- class of titleButton and backButton needs to be on div inside button or doesn't work in iOS -->
-              <div class=" titleButton backButton">
-                back to {{bibleService.title}}
-              </div>
-            </button>
+          <ng-template #notChapterTitle>
+            <div class="titleButton">
+              Psalm <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
+            </div>
           </ng-template>
-        </section>
-        <button aria-label="menu" class="menuButton"
-                [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
-                (click) = "bibleService.displayMenu = !bibleService.displayMenu;
-                          bibleService.showChapters = false;">
-          <svg class="hamburger" viewBox="0 0 100 100">
-            <rect class="line top" 
-                  width="90"
-                  height="10"
-                  x="5" y="20" rx="5">
-            </rect>
-            <rect class="line middle" 
-                  width="90"
-                  height="10"
-                  stroke="black"
-                  x="5" y="50" rx="5">
-            </rect>
-            <rect class="line bottom" 
-                  width="90"
-                  height="10"
-                  stroke="black"
-                  fill="black"
-                  x="5" y="80" rx="5">
-            </rect>
-          </svg>
         </button>
-      <app-menu *ngIf = "bibleService.displayMenu" class="slideMenu"></app-menu>
+      </div>
+      <ng-template #version >
+        <button (click) = "restoreBook();"
+                class="middleButton">
+          <!-- class of titleButton and backButton needs to be on div inside button or doesn't work in iOS -->
+          <div class=" titleButton backButton">
+            back to {{bibleService.title}}
+          </div>
+        </button>
+      </ng-template>
+      <!-- below needs to be outside the above *ngIf/else or animation doesn't work -->
+      <app-chapter-numbers *ngIf = "bibleService.showChapters" @inOutAnimate></app-chapter-numbers>
+      <button aria-label="menu" class="menuButton"
+              [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
+              (click) = "bibleService.displayMenu = !bibleService.displayMenu;
+                        bibleService.showChapters = false;">
+        <svg class="hamburger" viewBox="0 0 100 100">
+          <rect class="line top" 
+                width="90"
+                height="10"
+                x="5" y="20" rx="5">
+          </rect>
+          <rect class="line middle" 
+                width="90"
+                height="10"
+                stroke="black"
+                x="5" y="50" rx="5">
+          </rect>
+          <rect class="line bottom" 
+                width="90"
+                height="10"
+                stroke="black"
+                fill="black"
+                x="5" y="80" rx="5">
+          </rect>
+        </svg>
+      </button>
+      <app-menu *ngIf = "bibleService.displayMenu" @inOutAnimate></app-menu>
     </nav>
     <div class="landscapeGrid">
       <router-outlet>
