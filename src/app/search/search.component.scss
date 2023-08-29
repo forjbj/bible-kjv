@@ -93,10 +93,18 @@
         color: inherit;
     }
 }
-#searchPage {
+.searchPage {
     display: grid; // grid needed to place .searchPageText [css class see below] on top of .backgroundBible class
     height: 100vh;
 }
+.fadeOut {
+    animation: fadeOutSearch 1s ease-out;
+    @keyframes fadeOutSearch {
+        // 0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+}
+
 .backgroundBible {
     grid-area: 1/1; // same grid area as .searchPageText so .searchPageText appears on top
     height: 50dvh;
@@ -109,11 +117,16 @@
     background-repeat: no-repeat;
     background-position: center;
     transition: all 0.5s; //smoother change in pic size on dynamic screens - works!
+    animation: fadeIn 1s ease-in-out;
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 0.4; }
+    }    
 }
+
 .searchPageText{
     grid-area: 1/1;
     width: 100%;
-    // height: 100%;
     margin: 10rem auto;
     justify-self: stretch;
     text-align: center;
@@ -124,6 +137,12 @@
 .searchResults {
     text-align: center;
     min-height: 100dvh; // needed to close menu on click and keep landscape nav fixed/sticky
+    animation: fadeIn 0.5s ease-in;
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        // 100% { opacity: 1; } //NOT THIS AS IT MESSES WITH BACKGROUND OPACITY
+    }    
+
     .alert {
         max-width: 70%;
         margin: 0 auto;

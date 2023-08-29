@@ -1,34 +1,15 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { trigger, state, style, animate, transition, query, group } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
   selector: 'app-the-bible',
   templateUrl: './the-bible.component.html',
   styleUrls: ['./the-bible.component.scss'],
-  animations: [
-    trigger('inOutAnimate', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms'),
-      ]),
-      transition(':leave', [
-        animate('300ms', style({ opacity: 0 }))
-      ]),
-
-      // transition(':enter', [
-      //   style({  transform: 'translateY(300px)' }),
-      //   animate('300ms', style({  transform: 'translateY(*)'  })),
-      // ]),
-      // transition(':leave', [
-      //   animate('300ms', style({ transform: 'translateY(300px)' }))
-      // ]),
-    ])
-  ]
 })
 
 export class TheBibleComponent implements OnInit, AfterViewInit {
@@ -37,7 +18,8 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
               public historyService: HistoryService,
               public meta: Meta,
               public title: Title,
-              private router: Router,) {
+              private router: Router,
+              @Inject(DOCUMENT) public document: Document,) {
     
     title.setTitle('Bible - King James Version - PWA');
     this.meta.addTag({ name: 'description', content: 'Bible application with History and Search functionality.'});
@@ -60,7 +42,7 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
   
   ngAfterViewInit() {
   }
-  restoreBook () {
+  restoreBook() {
     this.bibleService.spinner = true;
     this.bibleService.spinnerTitle = "Restoring";
     this.bibleService.displayMenu = false;
@@ -70,4 +52,10 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
       this.router.navigate(['./book'], {fragment: this.bibleService.fragment()}); //works
     }, 10);
   }
+  // fadeOut(){
+  //   if (this.bibleService.displayMenu == false){
+  //     let fadeAppMenu = this.document.getElementById('appMenu');
+  //     fadeAppMenu?.classList.add('fadeOut');
+  //   }
+  // }
 }

@@ -9,7 +9,8 @@ import { DOCUMENT, ViewportScroller } from '@angular/common';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  encapsulation: ViewEncapsulation.None // removes ::ng-deep need
+  encapsulation: ViewEncapsulation.None, // removes ::ng-deep need
+
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 
@@ -106,8 +107,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.bibleService.searchRequest = req;
     this.bibleService.searchRan = true;
     
-    localStorage.setItem('currentSearch', "0"); //reset search to stay at top; only works with viewport scroll below
+    localStorage.setItem('currentSearch', "0"); //reset search Y position to stay at top; only works with viewport scroll below
 
+    // Animation to fade into search results
+    let searchPage = this.document.getElementById('searchPage');
+    searchPage?.classList.add('fadeOut');
 
     if (typeof Worker !== 'undefined') {
       this.worker = new Worker(new URL( './search.worker', import.meta.url));
@@ -124,7 +128,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.bibleService.searchResults = wasm.search( this.checkedNumber, req, this.accuracy)
         this.bibleService.spinner = false;
       }, 10); // give it a moment to redraw
-    }
+    };
+
     setTimeout(() => {
       this.saveSearchPosition();
       this.viewport.scrollToPosition([0,0]);//necessary as it will scroll to previously saved otherwise

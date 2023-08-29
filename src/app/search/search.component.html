@@ -15,17 +15,19 @@
         </form>
         <hr>
     </div>
-    <div id="searchPage" *ngIf="bibleService.searchResults == 'noSearchYet'; else results">
+    <!-- no 'else' as angular animation doesn't work with ng-template -->
+    <div id="searchPage" class="searchPage" *ngIf="bibleService.searchResults == 'noSearchYet'">
         <div class="backgroundBible"></div>
         <div class="searchPageText">
             <p>Choose to search in the Old testament, the New testament or both.</p>
             <p>Choose the level of search accuracy; Exact match or Contains Characters.</p>
         </div>
     </div>
-    <ng-template #results>
+    <!-- below is terrible hack to get around angular animation not available for ng-template -->
+    <div id="searchResultPage" class="searchResultPage" *ngIf="bibleService.searchResults != 'noSearchYet'" >
         <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
         <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
             <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
         </a>
-    </ng-template>
+    </div>
 </section>

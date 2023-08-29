@@ -52,6 +52,15 @@
 .backButton {
     color: var(--ink);
 }
+
+// Fade in chapter numbers component
+.appChapterNumbers {
+    animation: fadeIn 0.3s ease-in;
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        // 100% { opacity: 1; } //NOT THIS AS IT MESSES WITH BACKGROUND OPACITY
+    }    
+}
 .menuButton {
     width: 2.2rem;
     background: transparent;
@@ -88,6 +97,22 @@
             rotate 0.3s 0.3s,
             opacity 0s 0.3s;
     }   
+}
+
+// Fade in menu component
+.appMenu {
+    animation: fadeIn 0.3s ease-in;
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        // 100% { opacity: 1; } //NOT THIS AS IT MESSES WITH BACKGROUND OPACITY
+    }    
+}
+.fadeOut {
+    animation: fadeOutSearch 1s ease-out;
+    @keyframes fadeOutSearch {
+        // 0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
 }
 
 @media (orientation: landscape){

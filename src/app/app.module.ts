@@ -18,7 +18,6 @@ import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { WidgetComponent } from './widget/widget.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
-    BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
