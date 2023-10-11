@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
@@ -53,9 +53,16 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
     }, 10);
   }
   // fadeOut(){
-  //   if (this.bibleService.displayMenu == false){
-  //     let fadeAppMenu = this.document.getElementById('appMenu');
+  //   let fadeAppMenu = this.document.getElementById('appMenu');
+    
+  //   if (this.bibleService.displayMenu == true){
   //     fadeAppMenu?.classList.add('fadeOut');
+  //     fadeAppMenu?.classList.remove('fadeIn');
+  //   // } else {
+  //   //   fadeAppMenu?.classList.remove('fadeOut')
   //   }
+  //   setTimeout(() => { this.bibleService.displayMenu = !this.bibleService.displayMenu; }, 500);
+  //   console.log(fadeAppMenu);
+
   // }
 }

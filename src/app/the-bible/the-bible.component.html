@@ -20,7 +20,7 @@
           </ng-template>
         </button>
       </div>
-      <app-chapter-numbers class="appChapterNumbers" *ngIf = "bibleService.showChapters"></app-chapter-numbers>
+      <app-chapter-numbers class="fadeIn" *ngIf = "bibleService.showChapters"></app-chapter-numbers>
       <ng-template #version >
         <button (click) = "restoreBook();"
                 class="middleButton">
@@ -33,7 +33,8 @@
       <button aria-label="menu" class="menuButton"
               [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
               (click) = "bibleService.showChapters = false;
-                        bibleService.displayMenu = !bibleService.displayMenu;">
+                        bibleService.displayMenu = !bibleService.displayMenu;
+                        ">
         <svg class="hamburger" viewBox="0 0 100 100">
           <rect class="line top" 
                 width="90"
@@ -55,7 +56,7 @@
           </rect>
         </svg>
       </button>
-      <app-menu id="appMenu" class="appMenu" *ngIf = "bibleService.displayMenu"></app-menu>
+      <app-menu id="appMenu" class="fadeIn" *ngIf = "bibleService.displayMenu"></app-menu>
     </nav>
     <div class="landscapeGrid">
       <router-outlet>
