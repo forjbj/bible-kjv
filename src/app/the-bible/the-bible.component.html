@@ -11,11 +11,11 @@
                             class="middleButton">
           <!-- class of titleButton needs to be on div inside button or doesn't work in iOS -->
           <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle" class="titleButton">
-            Chapter <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
+            Chapter <span class="horizontalNumbers">{{bibleService.chapterNumber}}</span>
           </div>
           <ng-template #notChapterTitle>
             <div class="titleButton">
-              Psalm <span class="landscapeNumbers">{{bibleService.chapterNumber}}</span>
+              Psalm <span class="horizontalNumbers">{{bibleService.chapterNumber}}</span>
             </div>
           </ng-template>
         </button>
