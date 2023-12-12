@@ -52,6 +52,9 @@
 //always display chapter numbers horizontally
 .horizontalNumbers {
     writing-mode: horizontal-tb;
+    @media (orientation: portrait){
+        margin-left: 0.2rem;
+    }
 }
 
 .backButton {
