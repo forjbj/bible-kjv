@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbible_kjv=self.webpackChunkbible_kjv||[]).push([[76],{5534:()=>{addEventListener("message",({data:e})=>{postMessage(e)})}}]);

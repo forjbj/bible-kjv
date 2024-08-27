@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1711415512049,
+  "timestamp": 1724730152199,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -11,15 +11,15 @@
         "ignoreVary": true
       },
       "urls": [
-        "./444.9f16957d3800176f.js",
-        "./63.7291c245e32aac39.js",
-        "./common.97595b7ea883bb8a.js",
+        "./444.b8cafbc8afa5ff44.js",
+        "./63.c0ba343e9b22178a.js",
+        "./common.6fe6aae0180d8b94.js",
         "./index.html",
-        "./main.32f4f42e24a419f1.js",
+        "./main.fd58e02bf645d7cd.js",
         "./manifest.webmanifest",
         "./polyfills.e9d2182f8249e4b7.js",
-        "./runtime.e76b63746c95be77.js",
-        "./styles.986a322aa3d9402e.css"
+        "./runtime.a7b46d8579846fce.js",
+        "./styles.b55e3be896b31ff0.css"
       ],
       "patterns": []
     },
@@ -51,8 +51,8 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "./444.9f16957d3800176f.js": "c96590756514898b99613545fb79aa227bdaac67",
-    "./63.7291c245e32aac39.js": "54c75916c534819e300a71e4f99676b1270214c5",
+    "./444.b8cafbc8afa5ff44.js": "f2a0f0b5dc05ac39a7365571b877ed1cfc07cffd",
+    "./63.c0ba343e9b22178a.js": "93f0e87b7410326822c732020ce4bdbcb7d02623",
     "./assets/bible/Bible.json": "2efdfc9890c2846eb518c3c5eeb64e1c0277b0fc",
     "./assets/icons/icon-128x128.png": "154210bd7c42f9a8a66a3f03db91f23bb9fd93d6",
     "./assets/icons/icon-144x144.png": "32823e2b00a262d790ac542ac1a2e1a05f940d5f",
@@ -65,15 +65,15 @@
     "./assets/openBible.png": "62907c11393cfed548c677e397517a56a53556b6",
     "./assets/search.svg": "183bc20be2b7006622c5f8b5b4678022a6b5230d",
     "./assets/search_neutral.svg": "3f54ae72cdb1ef2adc88e9a28bf417d5e455ae50",
-    "./common.97595b7ea883bb8a.js": "10d3317a5c32702ff3462146838724fa72831561",
+    "./common.6fe6aae0180d8b94.js": "ca06045bbc94250dfa7f68b4850144dcd43aaced",
     "./icon-192x192.321592a8a2f8ef9a.png": "177df93d4bc990b4551a7ca083f211364dc4b5a8",
-    "./index.html": "935d3e5f0bccad75f0351f56ae8bb918d7f785f6",
-    "./main.32f4f42e24a419f1.js": "960ea8f34d9b114b95b2d6df3b19174bd875d0fd",
+    "./index.html": "510c0082085bba0428ea7677e7b0b4f54576946f",
+    "./main.fd58e02bf645d7cd.js": "ae2f5b515b6da1238af990f7faf6cbe4132b538d",
     "./manifest.webmanifest": "52411e1189ed3cbd18f2ba2a3d703879cb9f9e9c",
     "./openBible.6e42efe05f4fbf81.png": "62907c11393cfed548c677e397517a56a53556b6",
     "./polyfills.e9d2182f8249e4b7.js": "906ef3d9c70be48eb49d9a59688893d8b4569079",
-    "./runtime.e76b63746c95be77.js": "44fe4e718af12a1b25a5d2fbb0ac3e2b6a247cd5",
-    "./styles.986a322aa3d9402e.css": "9082c1549f49455797c80c92043462e5da1d68c5"
+    "./runtime.a7b46d8579846fce.js": "ba13a0f79d13412be80ca70abd68e1e26acf47f7",
+    "./styles.b55e3be896b31ff0.css": "4dbf8bc8ccf8fe081a9519260bd2c18e032eaca8"
   },
   "navigationUrls": [
     {
