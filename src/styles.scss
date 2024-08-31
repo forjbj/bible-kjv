@@ -34,18 +34,20 @@ html[dataTheme = 'dark'] {
 }
 
 html {
-    scroll-behavior: auto; //smooth - Doesn't work with angular anchor scrolling
     -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
+    height: 100vh; // hack to fill screen along with the body min-height below
+    width: 100vw;
+    overscroll-behavior: none; //necessary??
 }
+
 body {
-    max-width: 100dvw; //needed for iOS ??; Can't be 100dvw or 100vw as Chrome doesn't work with these
-    height: 100dvh;
+    max-width: 100%; //needed for iOS ??; Can't be 100dvw or 100vw as Chrome doesn't work with these
+    min-height: 100vh;
+    height: auto;
     color: var(--ink);
     background-color: var(--paper);
     margin: auto;
     font-size: 1.1rem;
-    transition: all 0.5s;
-    overscroll-behavior: none; //necessary??
 }
 hr {
     border-color: var(--lightRed);
@@ -54,16 +56,15 @@ h1, h2, h3, h4, h5 {
     font-family: Georgia,"Times New Roman", Times, serif;
     font-weight: normal;
 }
-//spinner for search and long render
 .spinnerBackground {
     height: 6rem;
     width: 6rem;
     border-radius: 50%;
     background-image: radial-gradient(var(--paper), transparent);
     display: block;
-    position: fixed;
-    top: calc( 50% - 3rem);
-    left: calc(50% - 3rem);
+    position: absolute;
+    top: calc( 50vh - 3rem);
+    left: calc(50vw - 3rem);
     z-index: 12;
   .circleSpinner {
     height: 5rem;

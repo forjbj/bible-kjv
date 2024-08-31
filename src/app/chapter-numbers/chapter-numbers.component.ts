@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chapter-numbers',
@@ -14,7 +15,9 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
 
   constructor(public bibleService: BibleService,
               public historyService: HistoryService,
-              @Inject(DOCUMENT) public document: Document, ) { }
+              @Inject(DOCUMENT) public document: Document,
+              public router: Router, ) { 
+              }
 
   ngOnInit() {
     // apply righthanded if set in storage
@@ -59,11 +62,16 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
   ngOnDestroy() {
     this.observer.disconnect();
   }
-  updateStorage(chapter:any){
+  updateStorageAndScroll(chapter:any){
     this.bibleService.chapterNumber = chapter;
+    this.bibleService.verseNumber = '0';
     localStorage.setItem('curChap', chapter);
     localStorage.setItem('curVerse', '0');
-
-
+    let id = this.bibleService.fragment();
+    let bookChapter = this.document.getElementById(id);
+    if (bookChapter){
+      bookChapter.style.scrollMarginTop = "2.2rem";
+      bookChapter.scrollIntoView({behavior: 'smooth'});
+    }
   }
 }

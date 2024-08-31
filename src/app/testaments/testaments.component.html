@@ -1,22 +1,14 @@
 <section id="top" class="theme" (click) = "bibleService.displayMenu = false;">
-  <ng-container *ngFor = "let testamentBook of bibleService.bible; index as j">
-    <h2 class = testamentTitle>{{testamentBook.testament}} Testament</h2>
     <nav class ="bookGrid">
-      <ng-container *ngFor = "let book of bibleService.bible[j].books; index as i">
-<!-- [routerLink] = "['/book', book.bookName]" give error from static site (github pages) on reload: MUST BE ''../book' -->
+      <ng-container *ngFor = "let book of bibleService.bible[bibleService.testamentShow].books; index as i">
         <div 
           class = "bookItem"
           (click) = 
-            "bookRender(j,i,book.bookName)">
+            "bookRender(bibleService.testamentShow,i,book.bookName)">
               {{book.bookName}}
         </div>
       </ng-container>
     </nav>
-    <div *ngIf = "(j)==0">
-      <hr style="width: 50%; text-align: center;">
-      <br>
-    </div>
-  </ng-container>
 </section>  
 
 

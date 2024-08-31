@@ -10,7 +10,6 @@
     <header class="numberHeader">
       <hr>
       <p class = "chapterTitle">{{bibleService.title}}</p>
-      <!-- <p class = "numberTitle">Psalms</p> -->
       <hr>
     </header>
   </ng-template>
@@ -18,13 +17,10 @@
   <section class="chapterGrid">
     <ng-container 
     *ngFor = "let chapters of bibleService.bible[bibleService.testament].books[bibleService.bookSelected].chapters" >
-<!-- [routerLink] = "['/book', bibleService.title]" give error from static site (github pages) on reload -->
       <div 
-          class = "chapters"
-          [routerLink] = "['book']"
-          (click)="updateStorage(chapters.chapter) "
-          fragment = {{bibleService.testament}}-{{bibleService.bookSelected}}-{{chapters.chapter}}-0>
-          {{chapters.chapter }}
+        class = "chapters"
+        (click)="updateStorageAndScroll(chapters.chapter);">
+        {{chapters.chapter}}
       </div>
     </ng-container>
   </section>

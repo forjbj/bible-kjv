@@ -14,6 +14,7 @@ import { DOCUMENT } from '@angular/common';
 
 export class TheBibleComponent implements OnInit, AfterViewInit {
 
+
   constructor(public bibleService: BibleService,
               public historyService: HistoryService,
               public meta: Meta,
@@ -30,7 +31,6 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
     // apply righthanded if set in storage
     let grid = document.getElementById('nav') as HTMLInputElement;
     let routerOut = document.getElementById('routerOutlet') as HTMLInputElement;
-    // console.log(grid)
     if (localStorage.getItem('leftHanded') == 'no'|| (localStorage.getItem('leftHanded') == null)) {
       grid.setAttribute('leftHanded', 'no');
       routerOut?.setAttribute('leftHanded', 'no');
@@ -47,22 +47,10 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
     this.bibleService.spinnerTitle = "Restoring";
     this.bibleService.displayMenu = false;
     this.bibleService.showChapters = false;
+    let frag = this.bibleService.fragment(); //needed to be done first
     //setTimeout needed for spinner to start
     setTimeout(() => {
-      this.router.navigate(['./book'], {fragment: this.bibleService.fragment()}); //works
+      this.router.navigate(['./book'], {fragment: frag}); //works
     }, 10);
   }
-  // fadeOut(){
-  //   let fadeAppMenu = this.document.getElementById('appMenu');
-    
-  //   if (this.bibleService.displayMenu == true){
-  //     fadeAppMenu?.classList.add('fadeOut');
-  //     fadeAppMenu?.classList.remove('fadeIn');
-  //   // } else {
-  //   //   fadeAppMenu?.classList.remove('fadeOut')
-  //   }
-  //   setTimeout(() => { this.bibleService.displayMenu = !this.bibleService.displayMenu; }, 500);
-  //   console.log(fadeAppMenu);
-
-  // }
 }

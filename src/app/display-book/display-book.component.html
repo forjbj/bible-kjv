@@ -1,5 +1,5 @@
 <!-- <app-chapter-numbers></app-chapter-numbers> DOESN'T WORK HERE; DOES WEIRD THINGS -->
-
+<!-- below must be article or messes with chapters sections-->
 <article id="bibleBook" 
         (click) = "bibleService.showChapters = false; bibleService.displayMenu = false;" 
         [innerHTML] = "renderedBook | safe: 'html'">

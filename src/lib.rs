@@ -47,12 +47,12 @@ fn psalms_book(contents:&jsonValue) -> String {
         for verse in psalm["verses"].as_array().unwrap() {
             if verse["ver"] == 1 {
                 section.push_str(&format!("<p class=\"psalm fontType\">{}</p>",verse["description"].as_str().unwrap())); //unwrap necessary to remove ""
-                section.push_str(&format!("<a id = \"0-18-{0}-1\" href = \"./book#0-18-{0}-1\"><p class=\"firstVerse fontType\">{1}</p></a>", psalm["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<a id = \"0-18-{0}-1\" href = \"./book#0-18-{0}-1\" target=\"_blank\"><p class=\"firstVerse fontType\">{1}</p></a>", psalm["chapter"], verse["scr"].as_str().unwrap()));
             } else {     
                 if verse["description"] != jsonNull {  // needed for psalm 119
                     section.push_str(&format!("<p class=\"psalm fontType\">{}</p>",verse["description"].as_str().unwrap()));
                 }
-                section.push_str(&format!("<a id = \"0-18-{0}-{1}\" class = \"verses\" href = \"./book#0-18-{0}-{1}\" ><p class=\"verseNumber fontType\">{1}</p>
+                section.push_str(&format!("<a id = \"0-18-{0}-{1}\" class = \"verses\" href = \"./book#0-18-{0}-{1}\" target=\"_blank\"><p class=\"verseNumber fontType\">{1}</p>
                 <p class = \"scripture fontType\">{2}</p></a>", psalm["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
@@ -85,9 +85,9 @@ fn not_psalms( test: usize, book: usize, contents:&jsonValue ) -> String {
 
         for verse in chapter["verses"].as_array().unwrap() {
             if verse["ver"] == 1 {
-                section.push_str(&format!("<a id = \"{0}-{1}-{2}-1\" href = \"./book#{0}-{1}-{2}-1\"><p class=\"firstVerse fontType\">{3}</p></a>", &test, &book, chapter["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<a id = \"{0}-{1}-{2}-1\" href = \"./book#{0}-{1}-{2}-1\" target=\"_blank\"><p class=\"firstVerse fontType\">{3}</p></a>", &test, &book, chapter["chapter"], verse["scr"].as_str().unwrap()));
             } else {     
-                section.push_str(&format!("<a id = \"{0}-{1}-{2}-{3}\" class = \"verses\" href = \"./book#{0}-{1}-{2}-{3}\" ><p class=\"verseNumber fontType\">{3}</p>
+                section.push_str(&format!("<a id = \"{0}-{1}-{2}-{3}\" class = \"verses\" href = \"./book#{0}-{1}-{2}-{3}\" target=\"_blank\"><p class=\"verseNumber fontType\">{3}</p>
                 <p class = \"scripture fontType\">{4}</p></a>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
@@ -217,10 +217,10 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
             results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word and set the bottom search option to 'results Contain Characters'.</header>", inp_str);
         },
         1 => {
-            results_fin = format!("<header>There is a Search Result For \"{}\":</header><br>", inp_str);
+            results_fin = format!("<header>There is only one Search Result For \"{}\":</header><br>", inp_str);
             },
         _ => {            
-            results_fin = format!("<header>There are {} Search Results For \"{}\":</header><br>",search_num, inp_str);
+            results_fin = format!("<header class=\"resultsNum\">There are {} Search Results For \"{}\":</header><br>",search_num, inp_str);
             },
     }
     results_fin = results_fin + &results;

@@ -1,14 +1,19 @@
 @import"../../styles.scss";
+
 .searchGrid {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1;
+    grid-template-rows: 9rem auto;
+    height: calc(100vh - 3rem); // absolutely necessary for nav to be sticky
+    width: 100vw;
+    @media (orientation:landscape){
+        width: calc(100vw - 3.3rem);
+        height: 100vh;
+    }
 }
 .stationary {
+    grid-row: 1;
     background-color: var(--paper);
-    position: sticky;
-    position: -webkit-sticky;
-    top: 2.3rem;
     width: 100%;
     text-align: right;   
     margin: 0 auto;   
@@ -16,9 +21,6 @@
     hr {
         max-width: 90%;
     }
-    @media (orientation: landscape){
-        top: 0;
-    }  
 }
 .searchSelect {
     display: grid;
@@ -50,10 +52,8 @@
         justify-self: left;
         align-self: center;
         padding-left: 1rem;
-
     }
 }
-
 .searchButton {
     height: 2rem;
     width: 2rem;
@@ -93,56 +93,15 @@
         color: inherit;
     }
 }
-.searchPage {
-    display: grid; // grid needed to place .searchPageText [css class see below] on top of .backgroundBible class
-    height: 100vh;
-}
-.fadeOut {
-    animation: fadeOutSearch 1s ease-out;
-    @keyframes fadeOutSearch {
-        // 0% { opacity: 1; }
-        100% { opacity: 0; }
-    }
-}
-
-.backgroundBible {
-    grid-area: 1/1; // same grid area as .searchPageText so .searchPageText appears on top
-    height: 50dvh;
-    width: 100%;
-    margin: 7rem auto;
-    opacity: 0.4;
-    z-index: -1; // necessary or opacity setting above bleeds into .searchPageText text.
-    background-image: url(../../assets/openBible.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: all 0.5s; //smoother change in pic size on dynamic screens - works!
-    animation: fadeIn 1s ease-in-out;
-    @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 0.4; }
-    }    
-}
-
-.searchPageText{
-    grid-area: 1/1;
-    width: 100%;
-    margin: 10rem auto;
-    justify-self: stretch;
+.searchResultsPage {
     text-align: center;
-    text-shadow: -1px -1px 0 var(--paper), 1px -1px 0 var(--paper), -1px 1px 0 var(--paper), 1px 1px 0 var(--paper);
-    transition: all 0.5s; //smoother change in text on dynamic screens
+    overflow-y: scroll; // necessary for sticky nav - do not delete
 }
-
 .searchResults {
-    text-align: center;
-    min-height: 100dvh; // needed to close menu on click and keep landscape nav fixed/sticky
     animation: fadeIn 0.5s ease-in;
     @keyframes fadeIn {
         0% { opacity: 0; }
-        // 100% { opacity: 1; } //NOT THIS AS IT MESSES WITH BACKGROUND OPACITY
     }    
-
     .alert {
         max-width: 70%;
         margin: 0 auto;
@@ -167,9 +126,9 @@
 .listResults {
     display: grid;
     max-width: 100%;
-    grid-gap: 1rem; // needed to stop words scrolling right
+    column-gap: 1rem; // needed to stop words scrolling right
     grid-template-columns: minmax(min-content, 7%) 1fr;
-    padding: 0;
+    padding: 0.7rem;
     text-align: left;
     align-items: center;
     &:nth-child(odd) {
@@ -185,10 +144,12 @@
     font-variant: small-caps;
     text-align: right;
     color: var(--scriptNum);
+    margin: 0;
 }
 .scrResults {
     font-size: 1.1rem;
     text-align: left;
+    margin: 0;
 }
 .highlight {
     color: red;

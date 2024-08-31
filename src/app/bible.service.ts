@@ -12,15 +12,16 @@ export class BibleService {
 
   public pageTitle:string;
 
-  public testament:number = Number(localStorage.getItem('curTestamentIndex')) ?? 0; // defaults to '0' (old testament) if '' or null
-  public bookSelected:number = Number(localStorage.getItem('curBookIndex')) ?? 0; // defaults to '0' (Genesis) see above
-  public chapterNumber: string = localStorage.getItem('curChap') ?? '1';
-  public verseNumber: string = localStorage.getItem('curVerse') ?? '';
+  public testament:number = Number(localStorage.getItem('curTestamentIndex')) || 1; // defaults to '1' (new testament) if '' or null
+  public bookSelected:number = Number(localStorage.getItem('curBookIndex')) || 3; // defaults to '3' (Gospel of John) see above
+  public chapterNumber: string = localStorage.getItem('curChap') || '1';
+  public verseNumber: string = localStorage.getItem('curVerse') || '';
 
   public fragment():string { 
     return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber; // '-' at the front of the id is necessary as angular's anchor scrolling get confused otherwise
   }
 
+  public testamentShow:number = 1; //defaults to new testment; for dialog to testaments component, new testament has autofocus
 
   public title: string = this.bible[this.testament].books[this.bookSelected].bookName;
 
@@ -47,12 +48,11 @@ export class BibleService {
   public spinnerTitle: string;
 
   public searchRan = false;//needed for search saved position
- 
+
     constructor(
-      public router: Router,
-    ) {
+      public router: Router,) {
+        
       this.pageTitle ??= "Bible";
-      this.title ??= "Bible";
       this.chapterButton ??= true; // turn on if null or memory wipe
       this.spinnerTitle ??= "Rendering";
     }

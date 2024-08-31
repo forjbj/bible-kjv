@@ -1,16 +1,27 @@
 <article class="about"
 (click) = "bibleService.menuHistoryBook = false;
         bibleService.displayMenu = false">
+    <button class="aboutClose"
+        (click)="dialog.close()" >
+        CLOSE
+    </button>
     <br>
     <header class="scriptHeader">
         <p><i>Now thanks be unto God, which always causeth us to triumph in Christ, and maketh manifest the savour of his knowledge by us in every place.</i></p>
         <p class="scripture">2 Corinthians 2:14</p>
     </header>
-    <p>This is an opensource, offline capable (PWA), King James Version (Cambridge) Bible application.</p>
-    <p>WebAssembly is used for Bible book rendering and Search functionality</p>
-    <p>This application does not use cookies nor does it harvest any personal data. Local Storage is used to improve user experience. </p>
-    <p>For the source code of this application, please visit the <a href="https://github.com/forjbj/bible-kjv">github repository</a> </p>
-
+    <div class="leftAlign">
+        <p>This is an opensource, offline capable (PWA), King James Version (Cambridge) Bible application.</p>
+        <p>WebAssembly is used for book rendering and Search functionality</p>
+        <p>This application does not use cookies nor does it harvest any personal data. Local Storage is used to improve user experience. </p>
+        <p>The code for this application: <a href="https://github.com/forjbj/bible-kjv" target="_blank" rel="noopener noreferrer">github repository</a> </p>
+    </div>
+    <section class="version">
+        <p>Version 0.6</p>
+            <ul>
+                <li>added dialogs instead of page routing where appropriate</li>
+            </ul>
+    </section>    
     <section class="version">
         <p>Version 0.5</p>
             <ul>

@@ -37,15 +37,12 @@
       left: 0;
     }
   }
-
 }
 .history {
   text-align: left;
   margin: 1em;
-  // white-space: nowrap;
 }
 .links {
-  // text-align: center;
   margin: 1em;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -92,8 +89,6 @@ ul {
   bottom: 0;
   border-radius: 1rem;
   background-color: var(--darkRed);
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
 }
 .slider:before {
   position: absolute;
@@ -118,3 +113,199 @@ input:checked + .slider:before {
   transform: translateX(1.7em);
 }
 // end dark theme toggle switch
+
+
+// Dialogs
+dialog{
+  display: none;
+  opacity: 0;
+  max-width: 75vw;
+  max-height: 75dvh;
+  transition-property: opacity display overlay;
+  transition-duration: 0.5s;
+  transition-behavior: allow-discrete;
+  font-family: Georgia,"Times New Roman", Times, serif;
+  color: var(--ink);
+  background-color: var(--menu);
+  &.search {
+    @media (orientation: portrait){
+      margin-top: 3rem;
+    }
+  }
+  &.testament{
+    padding: 0;
+  }
+}
+dialog[open]{
+  display: block;
+  opacity: 1;
+  translate: 0 0;
+  border: 1px solid var(--ink);
+  @starting-style{
+      opacity: 0;
+      translate: 0 -20vh;
+      @media(orientation: landscape){
+        translate: 0 20vh;
+      }
+  }
+}
+dialog::backdrop{
+  transition-property: opacity display overlay;
+  transition-duration: 2s;
+  transition-behavior: allow-discrete;
+  opacity: 0;
+  background-color: var(--paper);
+}
+dialog[open]::backdrop{
+  opacity: 0.5;
+  @starting-style{
+      opacity: 0;
+  }
+}
+.stationary {
+  width: 100%;
+  text-align: right;   
+  margin: 0 auto;   
+  padding-top: 0.3rem;
+  hr {
+      max-width: 90%;
+  }
+}
+.searchSelect {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-auto-flow: column;
+  grid-row-gap: 0.3rem;
+
+  .verticalLabel {
+      font-family: Bookman, Georgia, serif;
+      color: var(--ink);
+      writing-mode: vertical-lr;
+      text-orientation: upright;
+      font-size: 0.8rem;
+      font-weight: bold;
+      font-variant: small-caps;
+  }
+  .gridColumnOne {
+      grid-column: 1;
+      grid-row: 1 / 4;
+      justify-self: right;
+      align-self: center;
+      padding-right: 1rem;
+  };
+  .gridColumnTwo {
+      grid-column: 2;
+  }
+  .gridColumnThree {
+      grid-column: 3;
+      grid-row: 1 / 4;
+      justify-self: left;
+      align-self: center;
+      padding-left: 1rem;
+  }
+}
+.searchButton {
+  height: 2rem;
+  width: 2rem;
+  background-color: transparent;
+  vertical-align: middle;
+  transition: transform ease 0.3s;
+  &:hover, &:active {
+     transform: scale(1.2);
+  }
+}
+.searchOption, .searchInput {
+  font-family: Bookman, Georgia, serif;
+  font-size: 0.9rem;
+  border-radius: 0;
+  padding: 0 0.3rem;
+  &:focus {
+      outline: var(--lightRed) solid 1px; //needed for apple otherwise its blue
+  }
+}
+.searchOption {
+  -webkit-text-fill-color: #777; //needed for apple otherwise its blue
+  appearance:none; //No arrows on select boxes as they are different colours/shapes across browsers
+}
+.searchInput {
+  font-size: 1rem; //needed to stop safari zoom on input focus
+  caret-color: var(--lightRed); //necessary as it is bright blue in safari
+}
+.noWrap {
+  white-space: nowrap;
+}
+.hideLink {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+      color: inherit;
+  }
+}
+.searchInfo {
+  display: grid; // grid needed to place .searchPageText [css class see below] on top of .backgroundBible class
+  margin: 0;
+  padding: 0;
+}
+.backgroundBible {
+  grid-area: 1/1; // same grid area as .searchPageText so .searchPageText appears on top
+  opacity: 0.7;
+  z-index: -1; // necessary or opacity setting above bleeds into .searchPageText text.
+  background-image: url(../../assets/openBible.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.5s; //smoother change in pic size on dynamic screens - works!
+}
+.searchPageText{
+  grid-area: 1/1;
+  opacity: 1;
+  justify-self: stretch;
+  text-align: center;
+  white-space: wrap;
+  color: var(--ink);
+  text-shadow: -1px -1px 0 var(--paper), 1px -1px 0 var(--paper), -1px 1px 0 var(--paper), 1px 1px 0 var(--paper);
+  transition: all 0.5s; //smoother change in text on dynamic screens
+}
+.closeInfo {
+  font-weight: bold;
+  font-variant: small-caps;            
+  color: var(--zInk);
+  text-align: center;
+  text-shadow: 1px 1px var(--gridColor);
+  border-radius: 0.1rem;
+  background-color: var(--button);
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover, &:focus, &:active {
+      color: var(--ink);
+      background-color: var(--menu);
+      outline: 0; //needed for chrome
+  }
+}
+.from {
+  margin-block-end: 0;// remove bottom margin; dialog thing
+  font-variant: small-caps;            
+  color: var(--zInk);
+  text-align: center;
+  text-shadow: 1px 1px var(--gridColor);
+}
+.testamentButton {
+  margin: 2rem 1rem;
+  font-weight: bold;
+  font-variant: small-caps;            
+  color: var(--zInk);
+  text-align: center;
+  text-shadow: 1px 1px var(--gridColor);
+  border-radius: 0.1rem;
+  background-color: var(--button);
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover, &:focus, &:active {
+      color: var(--ink);
+      background-color: var(--menu);
+      outline: 0; //needed for chrome
+  }
+}
+// End Dialogs

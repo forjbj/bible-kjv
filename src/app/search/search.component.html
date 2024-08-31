@@ -4,27 +4,19 @@
         <form class="searchSelect">
             <label class="verticalLabel gridColumnOne">SEARCH</label>
             <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..." 
-                    value= {{bibleService.searchRequest}} (keyup.enter) ="submitSearch(req.value)" required minlength="2" autofocus>
-            <input alt="submit" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "submitSearch(req.value)">
-            <select class="searchOption gridColumnTwo" name="testaments" id="testaments" [(ngModel)] ="checkedNumber" (ngModelChange) = "selectedTest()">
-                <option *ngFor="let select of testaments" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
+                    value= {{bibleService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
+            <input alt="searchIcon" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value)">
+            <select class="searchOption gridColumnTwo" name="testaments" id="testaments" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedTest()">
+                <option *ngFor="let select of searchService.testaments" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
             </select>
-            <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="accuracy" (ngModelChange) = "selectedAccuracy()">
-                <option *ngFor="let select of accuracyLevel" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
+            <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="searchService.accuracy" (ngModelChange) = "searchService.selectedAccuracy()">
+                <option *ngFor="let select of searchService.accuracyLevel" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
             </select>
         </form>
         <hr>
     </div>
-    <!-- no 'else' as angular animation doesn't work with ng-template -->
-    <div id="searchPage" class="searchPage" *ngIf="bibleService.searchResults == 'noSearchYet'">
-        <div class="backgroundBible"></div>
-        <div class="searchPageText">
-            <p>Choose to search in the Old testament, the New testament or both.</p>
-            <p>Choose the level of search accuracy; Exact match or Contains Characters.</p>
-        </div>
-    </div>
     <!-- below is terrible hack to get around angular animation not available for ng-template -->
-    <div id="searchResultPage" class="searchResultPage" *ngIf="bibleService.searchResults != 'noSearchYet'" >
+    <div id="searchResultsPage" class="searchResultsPage" >
         <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
         <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
             <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>

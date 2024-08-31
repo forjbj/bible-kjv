@@ -9,18 +9,17 @@ import { BibleService } from '../bible.service';
 })
 export class AboutComponent implements OnInit {
 
+  public dialog: any;
+
   constructor(public bibleService: BibleService,
               public title: Title,
               public meta: Meta,) {
-    //nav titles and buttons
-    this.bibleService.pageTitle = "About";
-    this.bibleService.chapterButton = false;
-    this.bibleService.spinner = false;
-    
-    this.title.setTitle('About');
+    // this.title.setTitle('About');
     this.meta.addTag({ name: 'description', content: 'About this Application; including version history and repository location' });
 
-   }
+    this.dialog = document.getElementById("aboutDialog");
+
+  }
 
   ngOnInit(): void {
   }

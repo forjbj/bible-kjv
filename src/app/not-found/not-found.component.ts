@@ -15,7 +15,7 @@ export class NotFoundComponent implements OnInit {
     title.setTitle('404 Not Found');
     this.meta.addTag({ name: 'description', content: 'The page does not exist.' });
     this.bibleService.pageTitle = "Nothing Here";
-
+    this.bibleService.chapterButton = false;
 
   }
   ngOnInit() {

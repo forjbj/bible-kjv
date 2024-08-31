@@ -1,5 +1,4 @@
 @import "../../styles.scss";
-
 //  increase font size for readablility (I'm old)
 .fontType {
     font-family: Georgia,"Times New Roman", Times, serif;
@@ -28,15 +27,17 @@
     }
 }
 //remove styling from created links
-section a {
-    color: var(--ink);
-    text-decoration: none;
-    &:hover {
-        color: inherit;
-    }
-    &:focus {
-        outline: var(--lightRed) solid 1px; //needed otherwise it is blue-safari; grey-firefox; black- chrome
-        outline-offset: 1px;
+section {
+    a {
+        color: var(--ink);
+        text-decoration: none;
+        &:hover {
+            color: inherit;
+        }
+        &:focus {
+            outline: var(--lightRed) solid 1px; //needed otherwise it is blue-safari; grey-firefox; black- chrome
+            outline-offset: 1px;
+        }
     }
 }
 .verses {

@@ -1,8 +1,31 @@
 @import"../../styles.scss";
 
 .about {
-    max-width: 90%;
-    margin: 0 auto;
+    margin: 0.5rem;
+    max-width: 30rem;
+}
+.aboutClose{
+    position: sticky;
+    top: 50%;
+    float: left;
+    margin-left: -1.5rem;
+    writing-mode: vertical-lr;
+    text-orientation: upright; // needed for safari
+    font-weight: bold;
+    font-variant: small-caps;            
+    color: var(--zInk);
+    text-align: center;
+    text-shadow: 1px 1px var(--gridColor);
+    border-radius: 0.1rem;
+    background-color: var(--button);
+    padding: 1rem 0.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover, &:focus, &:active {
+        color: var(--ink);
+        background-color: var(--menu);
+        outline: 0; //needed for chrome
+    }
 }
 .scriptHeader {
     border-top: solid 1px;
@@ -15,11 +38,17 @@
     font-size: 0.8rem;
     text-align: right;
 }
+.leftAlign {
+    text-align: left;
+}
 .version {
     max-width: 70%;
     margin: 0 auto;
     p, ul {
         margin-left: 3%;
+    }
+    li {
+        text-align: left;
     }
     border: 1px solid var(--ink);
 }
