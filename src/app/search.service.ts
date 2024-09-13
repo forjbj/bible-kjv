@@ -10,16 +10,18 @@ import { DOCUMENT, ViewportScroller } from '@angular/common';
 })
 export class SearchService {
 
-  public checkedNumber: number = 2;
+  public checkedNumber: number = 0;
 
   public worker?: any;
 
-  testaments = [    
-    { id: 0, label: "in Old Testament" },
-    { id: 1, label: "in New Testament" },
-    { id: 2, label: "in Old & New Testaments", selected: true}
+  searchArea = [    
+    { id: 0, label: "in Old & New Testaments", selected: true},
+    { id: 1, label: "in Old Testament" },
+    { id: 2, label: "in New Testament" },
+    { id: 3, label: "in specific Book" },
   ]
 
+  public specific: number = 100; //need to initialize this high so as it is ignored by rust search if not used
   public accuracy: number = 0;
 
   accuracyLevel = [
@@ -44,7 +46,7 @@ export class SearchService {
     }
   }
 
-  selectedTest() {
+  selectedArea() {
     this.checkedNumber = +this.checkedNumber;
   }
   selectedAccuracy() {

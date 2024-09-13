@@ -6,8 +6,8 @@
             <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..." 
                     value= {{bibleService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
             <input alt="searchIcon" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value)">
-            <select class="searchOption gridColumnTwo" name="testaments" id="testaments" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedTest()">
-                <option *ngFor="let select of searchService.testaments" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
+            <select class="searchOption gridColumnTwo" name="testaments" id="testaments" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedArea()">
+                <option *ngFor="let select of searchService.searchArea" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
             </select>
             <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="searchService.accuracy" (ngModelChange) = "searchService.selectedAccuracy()">
                 <option *ngFor="let select of searchService.accuracyLevel" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>

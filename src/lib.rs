@@ -113,15 +113,19 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
     let j: u8;
     match searches {
         0 => {
-            i = 0; // Old testament search only
-            j = 1; // Stop while loop '< j'
+            i = 0; // Old and New testament search
+            j = 2;
         }
         1 => {
+            i = 0; // Old testament search only
+            j = 1; // Stop while loop '< j'    
+        }
+        2 => {
             i = 1; // New testament search only
             j = 2;
         }
         _ => {
-            i = 0; // Old and New testament search
+            i = 0; // Old and New testament search fallback
             j = 2;
         }
     }
@@ -144,6 +148,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
     } 
 
     let mut search_num = 0;
+    
     while i < j {
         let json_bible = contents[format!("{}", i)]["books"].as_array().unwrap();
         for (j, books) in json_bible.iter().enumerate() {

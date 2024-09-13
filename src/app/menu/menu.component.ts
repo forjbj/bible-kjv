@@ -105,14 +105,16 @@ export class MenuComponent implements OnInit {
   }
 
   backdropClose(event: any, dialog: any){
-    let rect = event.target.getBoundingClientRect();
+    // let rect = event.target.getBoundingClientRect();
     //only close if outside dialog box.
-    if (rect.left > event.clientX ||
-        rect.right < event.clientX ||
-        rect.top > event.clientY ||
-        rect.bottom < event.clientY
-    ) {
-        dialog.close();
+    // if (rect.left > event.clientX ||
+    //     rect.right < event.clientX ||
+    //     rect.top > event.clientY ||
+    //     rect.bottom < event.clientY) {
+    //     dialog.close();
+    // }
+    if (event.target === dialog) {
+      dialog.close();
     }
   }
   // Below is necessary as ternary doesn't work for reasons that are beyond me
