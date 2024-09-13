@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1726198427095,
+  "timestamp": 1726204755262,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "./63.c0ba343e9b22178a.js",
         "./common.6fe6aae0180d8b94.js",
         "./index.html",
-        "./main.e51a9c2e10adfa51.js",
+        "./main.a701ae84b8379fb6.js",
         "./manifest.webmanifest",
         "./polyfills.e9d2182f8249e4b7.js",
         "./runtime.a7b46d8579846fce.js",
@@ -67,8 +67,8 @@
     "./assets/search_neutral.svg": "3f54ae72cdb1ef2adc88e9a28bf417d5e455ae50",
     "./common.6fe6aae0180d8b94.js": "ca06045bbc94250dfa7f68b4850144dcd43aaced",
     "./icon-192x192.321592a8a2f8ef9a.png": "177df93d4bc990b4551a7ca083f211364dc4b5a8",
-    "./index.html": "5dd2c16bb4143bf976c3466d83395e5bee3ff846",
-    "./main.e51a9c2e10adfa51.js": "64f492a08589b863a3beb1bf6e320bc75090dfce",
+    "./index.html": "61b7222ec3764fd37c404c915da2e0d5408460ef",
+    "./main.a701ae84b8379fb6.js": "5fdbb1eb53f664f25acc9c1c7820761a6fa4490b",
     "./manifest.webmanifest": "52411e1189ed3cbd18f2ba2a3d703879cb9f9e9c",
     "./openBible.6e42efe05f4fbf81.png": "62907c11393cfed548c677e397517a56a53556b6",
     "./polyfills.e9d2182f8249e4b7.js": "906ef3d9c70be48eb49d9a59688893d8b4569079",
