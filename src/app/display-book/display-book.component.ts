@@ -95,7 +95,7 @@ private observer: any;
       localStorage.setItem('curChap', this.bibleService.chapterNumber);
       localStorage.setItem('curVerse', this.bibleService.verseNumber);
     }
-    
+
     this.saveScrollposition();
 
     screen.orientation.addEventListener("change", (event) => {
@@ -115,7 +115,7 @@ private observer: any;
         const options = {
           root: null, // viewport
           threshold: [0],
-          rootMargin: "-5% 0px -90% 0px", //only top verse/s
+          rootMargin: "-5% 0px -93% 0px", //only top verse/s
           delay: 700, //only works on safari
         };
         this.observer = new IntersectionObserver( (entries) => {
