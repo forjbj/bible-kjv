@@ -115,7 +115,7 @@ private observer: any;
         const options = {
           root: null, // viewport
           threshold: [0],
-          rootMargin: "-5% 0px -93% 0px", //only top verse/s
+          rootMargin: "-4% 0px -94% 0px", //only top verse/s Don't change these affects reloading at correct verse
           delay: 700, //only works on safari
         };
         this.observer = new IntersectionObserver( (entries) => {
