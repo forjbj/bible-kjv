@@ -1,12 +1,16 @@
 <nav id= "menu" class="menu">
     <hr class="menuSeparator">
-    <article>
-        <div (click) = "aboutDialog.showModal()"
+    <article #about>
+        <div (click) = "aboutDialog.showModal();"
             class="links">
             About BibleKJV
         </div>
-        <dialog #aboutDialog
-            (click)="backdropClose($event, this.aboutDialog); bibleService.menuHistoryBook = false">  
+        <dialog id = "aboutDialog"
+            (click)="backdropClose($event, this.aboutDialog); bibleService.menuHistoryBook = false"> 
+            <button class="aboutClose"
+                (click)="aboutDialog.close()" >
+                CLOSE
+            </button> 
             <app-about></app-about>          
         </dialog>
     </article>
@@ -28,12 +32,12 @@
         </label>
     </div> 
     <hr class="menuSeparator">
-    <article>
+    <article #search>
         <div (click) = "bibleService.searchResults == 'noSearchYet'? searchDialog.showModal() : showPreviousSearch()"
             class="links" >
             Word Search&ensp;<img src="./assets/search.svg" class="searchIcon" align="center">
         </div>
-        <dialog #searchDialog
+        <dialog id = "searchDialog"
             class="search"
             (click)="backdropClose($event, this.searchDialog)">
             <div class="stationary">
@@ -80,30 +84,32 @@
         </ul>
     </div>
     <hr>
-    <div (click) = "testamentDialog.showModal()"
-        class = "links">
-            Select a Bible Book
-    </div> 
-    <dialog #testamentDialog
-        (click)="backdropClose($event, this.testamentDialog)"
-        class="testament">
-        <p class="from">From</p>
-        <form>
-            <input class="testamentButton" type="button" value="Old Testament"
-            (click)="bibleService.menuHistoryBook = false;
-            bibleService.displayMenu = false;
-            bibleService.testamentShow = 0"
-            routerLink="testaments">
-            <input class="testamentButton" type="button" value="New Testament" autofocus
-            (click)="bibleService.menuHistoryBook = false;
-            bibleService.displayMenu = false;
-            bibleService.testamentShow = 1"
-            routerLink="testaments">
-        </form>
-        <button class="closeInfo"
-        (click)="testamentDialog.close()">
-            Close without Selecting
-        </button>
-    </dialog>
+    <article #testament>
+        <div (click) = "testamentDialog.showModal()"
+            class = "links">
+                Select a Bible Book
+        </div> 
+        <dialog id = "testamentDialog"
+            (click)="backdropClose($event, this.testamentDialog)"
+            class="testament">
+            <p class="from">From</p>
+            <form>
+                <input class="testamentButton" type="button" value="Old Testament"
+                (click)="bibleService.menuHistoryBook = false;
+                bibleService.displayMenu = false;
+                bibleService.testamentShow = 0"
+                routerLink="testaments">
+                <input class="testamentButton" type="button" value="New Testament" autofocus
+                (click)="bibleService.menuHistoryBook = false;
+                bibleService.displayMenu = false;
+                bibleService.testamentShow = 1"
+                routerLink="testaments">
+            </form>
+            <button class="closeInfo"
+            (click)="testamentDialog.close()">
+                Close without Selecting
+            </button>
+        </dialog>
+    </article>
     <hr class="menuSeparator">
 </nav>

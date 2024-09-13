@@ -20,8 +20,7 @@
     }
   }
   @media (orientation: landscape){
-    bottom: 1rem;
-    top: auto;
+    top: 1rem;
     &[leftHanded = 'no'] {
       right: 2.1rem;
     }  
@@ -127,6 +126,19 @@ dialog{
   font-family: Georgia,"Times New Roman", Times, serif;
   color: var(--ink);
   background-color: var(--menu);
+  @media(orientation: portrait) {
+    opacity: 0;
+    translate: 0 -20vh;
+  }
+  @media(orientation: landscape){
+    opacity: 0;
+    &[leftHanded = 'yes'] {
+      translate: -10vw 0; 
+    }
+    &[leftHanded = 'no'] {
+      translate: 10vw  0
+    }
+  }  
   &.search {
     @media (orientation: portrait){
       margin-top: 3rem;
@@ -135,18 +147,41 @@ dialog{
   &.testament{
     padding: 0;
   }
-}
-dialog[open]{
-  display: block;
-  opacity: 1;
-  translate: 0 0;
-  border: 1px solid var(--ink);
+  &[open]{
+    display: block;
+    opacity: 1;
+    translate: 0 0;
+    border: 1px solid var(--ink);
+  }
+  // &[close]{
+  //   @media(orientation: portrait) {
+  //     opacity: 0;
+  //     translate: 0 -20vh;
+  //   }
+  //   @media(orientation: landscape){
+  //     opacity: 0;
+  //     &[leftHanded = 'yes'] {
+  //       translate: -10vw 0; 
+  //     }
+  //     &[leftHanded = 'no'] {
+  //       translate: 10vw  0
+  //     }
+  //   }  
+  // }
   @starting-style{
+    @media(orientation: portrait) {
       opacity: 0;
       translate: 0 -20vh;
-      @media(orientation: landscape){
-        translate: 0 20vh;
+    }
+    @media(orientation: landscape){
+      opacity: 0;
+      &[leftHanded = 'yes'] {
+        translate: -10vw 0; 
       }
+      &[leftHanded = 'no'] {
+        translate: 10vw  0
+      }
+    }
   }
 }
 dialog::backdrop{
@@ -160,6 +195,29 @@ dialog[open]::backdrop{
   opacity: 0.5;
   @starting-style{
       opacity: 0;
+  }
+}
+.aboutClose{
+  position: sticky;
+  top: 50%;
+  float: left;
+  margin-left: -1rem;
+  writing-mode: vertical-lr;
+  text-orientation: upright; // needed for safari
+  font-weight: bold;
+  font-variant: small-caps;            
+  color: var(--zInk);
+  text-align: center;
+  text-shadow: 1px 1px var(--gridColor);
+  border-radius: 0.1rem;
+  background-color: var(--button);
+  padding: 1rem 0.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover, &:focus, &:active {
+      color: var(--ink);
+      background-color: var(--menu);
+      outline: 0; //needed for chrome
   }
 }
 .stationary {
@@ -275,6 +333,7 @@ dialog[open]::backdrop{
   border-radius: 0.1rem;
   background-color: var(--button);
   padding: 0.2rem 1rem;
+  margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.3s;
   &:hover, &:focus, &:active {

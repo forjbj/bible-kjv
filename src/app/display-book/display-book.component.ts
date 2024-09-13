@@ -82,25 +82,27 @@ private observer: any;
     // store book for loading on return, if not chosen from history -MUST BE UNDER ngAfterViewInit 
     this.historyService.storeBooks();
 
-    this.saveScrollposition();
-
     let id = this.bibleService.fragment();//must be worked out first
     if (this.bibleService.chapterNumber == '1' && this.bibleService.verseNumber == ('' || '1')) { //Don't change without changing testaments.components.ts as well
       window.scrollTo(0, 0);
     } else {
-      let bookChapter = this.document.getElementById(id);
-      bookChapter?.scrollIntoView({behavior: 'instant'}); //instant needed to stop observer changing verse and chapter number
+      let bookPlace = this.document.getElementById(id);
+      bookPlace?.focus();
+      bookPlace?.scrollIntoView({behavior: 'instant'}); //instant needed to stop observer changing verse and chapter number
 
       localStorage.setItem('curTestamentIndex', this.bibleService.testament.toString());
       localStorage.setItem('curBookIndex', this.bibleService.bookSelected.toString());
       localStorage.setItem('curChap', this.bibleService.chapterNumber);
       localStorage.setItem('curVerse', this.bibleService.verseNumber);
     }
+    
+    this.saveScrollposition();
 
     screen.orientation.addEventListener("change", (event) => {
       let id = this.bibleService.fragment();
-      let bookChapter = this.document.getElementById(id);
-      bookChapter?.scrollIntoView({behavior:'instant'});
+      let bookPlace = this.document.getElementById(id);
+      bookPlace?.focus();
+      bookPlace?.scrollIntoView({behavior:'instant'});
     })
   }
   ngOnDestroy() {

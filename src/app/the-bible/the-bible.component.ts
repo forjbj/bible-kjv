@@ -30,7 +30,7 @@ export class TheBibleComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // apply righthanded if set in storage
     let grid = document.getElementById('nav') as HTMLInputElement;
-    let routerOut = document.getElementById('routerOutlet') as HTMLInputElement;
+    let routerOut = document.getElementById('outlet') as HTMLInputElement;
     if (localStorage.getItem('leftHanded') == 'no'|| (localStorage.getItem('leftHanded') == null)) {
       grid.setAttribute('leftHanded', 'no');
       routerOut?.setAttribute('leftHanded', 'no');

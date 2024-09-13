@@ -173,11 +173,12 @@
         text-orientation: upright; //works here; writing-mode does not
         .desc {
             grid-column: 1;
-            grid-row: 1;
-            margin: 0.3rem;
+            grid-row: 3;
+            margin: 1rem 0.3rem;
             writing-mode: vertical-lr; //not in 'navGrid' or does weird things
             white-space: normal;
-            font-variant: all-small-caps;            
+            font-variant: all-small-caps;
+            align-self: end;            
         } 
         .middleButton {
             width: 2rem; // is necessary for iOS
@@ -195,9 +196,9 @@
         }
         .menuButton {
             grid-column: 1;
-            grid-row: 3;
+            grid-row: 1;
             margin: 1rem 0;
-            align-self: end;
+            align-self: baseline;
         }
     }
     .desc {
