@@ -10,18 +10,15 @@ import { DOCUMENT, ViewportScroller } from '@angular/common';
 })
 export class SearchService {
 
-  public checkedNumber: number = 0;
+  public checkedNumber: number = 100; //ngModal on form uses this initial number for selected
 
   public worker?: any;
 
   searchArea = [    
-    { id: 0, label: "in Old & New Testaments", selected: true},
-    { id: 1, label: "in Old Testament" },
-    { id: 2, label: "in New Testament" },
-    { id: 3, label: "in specific Book" },
+    { id: 100, label: "Old & New Testaments"}, // first 65 numbers used by books; use 100, 101,102
+    { id: 101, label: "Old Testament" },
+    { id: 102, label: "New Testament" },
   ]
-
-  public specific: number = 100; //need to initialize this high so as it is ignored by rust search if not used
   public accuracy: number = 0;
 
   accuracyLevel = [
@@ -48,6 +45,7 @@ export class SearchService {
 
   selectedArea() {
     this.checkedNumber = +this.checkedNumber;
+    // console.log(this.checkedNumber)
   }
   selectedAccuracy() {
     this.accuracy = +this.accuracy;
@@ -56,7 +54,6 @@ export class SearchService {
     this.bibleService.spinner = true; // run spinner animation
     this.bibleService.spinnerTitle = "Searching";
     this.bibleService.searchRequest = req;
-    
     localStorage.setItem('currentSearch', "0"); //reset search Y position to stay at top; only works with viewport scroll below
 
     if (typeof Worker !== 'undefined') {
@@ -65,11 +62,19 @@ export class SearchService {
       this.worker.onmessage = ({ data }: any) => {
         this.bibleService.searchResults = data;
       };
-      this.worker.postMessage(wasm.search(this.checkedNumber, req, this.accuracy));
+      if (this.checkedNumber < 66){
+        this.worker.postMessage(wasm.search_book(this.checkedNumber, req, this.accuracy));
+      } else {
+        this.worker.postMessage(wasm.search(this.checkedNumber, req, this.accuracy));
+      }
     } else {
       // Web workers are not supported in this environment.
       console.log('threads not used');
-      this.bibleService.searchResults = wasm.search( this.checkedNumber, req, this.accuracy)
+      if (this.checkedNumber < 66) {
+        this.bibleService.searchResults = wasm.search_book(this.checkedNumber, req, this.accuracy);
+      } else {
+        this.bibleService.searchResults = wasm.search( this.checkedNumber, req, this.accuracy)
+      }
     };
     
     this.routeToSearch();

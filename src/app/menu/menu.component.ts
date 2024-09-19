@@ -46,8 +46,6 @@ export class MenuComponent implements OnInit {
       searchDialog.setAttribute('leftHanded', 'yes');
       testamentDialog.setAttribute('leftHanded', 'yes');
     }
-    // console.log(menu.getAttribute("leftHanded"));
-    // console.log(aboutDialog.getAttribute("leftHanded"));
 
     const toggleSwitchTheme = document.getElementById('theme') as HTMLInputElement;
     if (this.historyService.curTheme == 'dark') {
@@ -105,14 +103,6 @@ export class MenuComponent implements OnInit {
   }
 
   backdropClose(event: any, dialog: any){
-    // let rect = event.target.getBoundingClientRect();
-    //only close if outside dialog box.
-    // if (rect.left > event.clientX ||
-    //     rect.right < event.clientX ||
-    //     rect.top > event.clientY ||
-    //     rect.bottom < event.clientY) {
-    //     dialog.close();
-    // }
     if (event.target === dialog) {
       dialog.close();
     }

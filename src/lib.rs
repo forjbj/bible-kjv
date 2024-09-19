@@ -6,7 +6,7 @@ extern crate rand;
 
 use serde_json::Value as jsonValue;
 use serde_json::Value::Null as jsonNull;
-use regex::Regex;
+use regex::{Regex};
 use rand::prelude::*;
 
 #[wasm_bindgen(module = "src/app/app.component.ts")]
@@ -109,18 +109,18 @@ fn not_psalms( test: usize, book: usize, contents:&jsonValue ) -> String {
 
 #[wasm_bindgen]
 pub fn search (searches: usize, inp: String, acc: usize) -> String {
-    let mut i: u8;
-    let j: u8;
+    let mut i: usize;
+    let j: usize;
     match searches {
-        0 => {
+        100 => {
             i = 0; // Old and New testament search
             j = 2;
         }
-        1 => {
+        101 => {
             i = 0; // Old testament search only
             j = 1; // Stop while loop '< j'    
         }
-        2 => {
+        102 => {
             i = 1; // New testament search only
             j = 2;
         }
@@ -154,7 +154,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
         for (j, books) in json_bible.iter().enumerate() {
             for chapters in books["chapters"].as_array().unwrap() {
                 for verses in chapters["verses"].as_array().unwrap() {
-                    let verse = String::from(verses["scr"].as_str().unwrap());
+                    let mut verse = String::from(verses["scr"].as_str().unwrap());
                     let verse_lowercase = &verse.to_lowercase();
                     let mut counted = 0; 
                     for word in word_ind.iter() { //check all words are in the scripture
@@ -182,8 +182,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                         as at 2022;
                         God willing, will revisit the code below
                         when/if WASM threads are a thing */
-                        /*
-
+                        
                         for word in word_ind.iter() {
                             if word == &"i" { // have to remove 'i' from highlight as it highlights the <i> tag; change to capital 'I'
                                 let verse_copy = verse.clone();//not sure why this is necessary; complier complains without it    
@@ -203,7 +202,7 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
                                 }
                             }
                         }
-                        */
+                        
                         results.push_str(&format!("<a id = \"{0}-{1}-{3}-{4}\" class = \"listResults\" href = \"./book#{0}-{1}-{3}-{4}\">
                         <p class=\"bookResults\">{2} {3}:{4}</p><p class = \"scrResults\">{5}</p></a>", 
                         i, j ,books["bookName"].as_str().unwrap(),chapters["chapter"], verses["ver"], verse));// extract route from id - see javascript, search component; angular stops routing from innerhtml
@@ -214,6 +213,112 @@ pub fn search (searches: usize, inp: String, acc: usize) -> String {
         }
         i = i + 1;
     }
+    
+    let mut results_fin: String;
+                
+    match search_num {
+        0 => {
+            results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word and set the bottom search option to 'results Contain Characters'.</header>", inp_str);
+        },
+        1 => {
+            results_fin = format!("<header>There is only one Search Result For \"{}\":</header><br>", inp_str);
+            },
+        _ => {            
+            results_fin = format!("<header class=\"resultsNum\">There are {} Search Results For \"{}\":</header><br>",search_num, inp_str);
+            },
+    }
+    results_fin = results_fin + &results;
+
+    return results_fin;
+}
+
+#[wasm_bindgen]
+pub fn search_book (searches: usize, inp: String, acc: usize) -> String {
+    let i: usize;
+    let j: usize;
+    if searches < 39 {
+        i = 0;
+        j = searches;
+    } else {
+        i = 1;
+        j = searches - 39;
+    }
+
+    let file = read_file();
+    let contents: jsonValue = serde_json::from_str(&file.as_string().expect("Can't read json")).unwrap();
+
+    let mut results: String = "<br>".to_string();
+
+    let re = Regex::new(r"[[:alpha:]]+").unwrap(); // only words to search for
+    let inp_search = &inp.to_lowercase();
+    let mut word_ind: Vec<&str> = re.find_iter(&inp_search).map(|m| m.as_str()).collect();
+    let word_ind_out: Vec<&str> = re.find_iter(&inp).map(|m| m.as_str()).collect(); // input search terms minus any html for result statement
+    let inp_str: String = word_ind_out.join(" ");
+    word_ind.sort();
+    word_ind.dedup(); // deduplicate after sorting removes duplicate words.
+    if  word_ind.is_empty() || (word_ind[0].chars().count() < 3 && word_ind.iter().count() == 1 ){ //return if search request invalid
+        //return the string and finish
+        return "<header class = \"alert\">Search query must have a minimum of 3 characters</header>".to_string();
+    } 
+
+    let mut search_num = 0;
+    
+    let json_bible = contents[format!("{}", i)]["books"].as_array().unwrap();
+
+    let current_book = contents[format!("{}", &i)]["books"][&j]["chapters"].as_array().unwrap();
+        for chapters in current_book {
+            for verses in chapters["verses"].as_array().unwrap() {
+                let mut verse = String::from(verses["scr"].as_str().unwrap());
+                let verse_lowercase = &verse.to_lowercase();
+                let mut counted = 0; 
+                for word in word_ind.iter() { //check all words are in the scripture
+                    if verse_lowercase.contains(word) { //find everything regardless of case
+                        if acc == 0 { //only count if accuracy is 'contains'
+                            counted = counted +1;
+                        } else { // only count word if exact match
+                            if word == &"i" { // have to change 'i' from search as it finds the <i> tag; change to capital 'I'
+                                let re = Regex::new(&format!("\\b{}\\b", "I")).unwrap();
+                                if re.is_match(&verse) { //search in original case not 'verse_lowercase'
+                                    counted = counted +1;
+                                }
+                            } else {
+                                let re = Regex::new(&format!("\\b{}\\b", &word)).unwrap();
+                                if re.is_match(&verse_lowercase) {
+                                    counted = counted +1;
+                                }
+                            }
+                        }
+                    } 
+                }
+                if counted == word_ind.len() { // find location of words
+
+                    for word in word_ind.iter() {
+                        if word == &"i" { // have to remove 'i' from highlight as it highlights the <i> tag; change to capital 'I'
+                            let verse_copy = verse.clone();//not sure why this is necessary; complier complains without it    
+                            let reg = Regex::new(&format!("\\b{}\\b", "I")).unwrap();
+                                if reg.is_match(&verse_copy) {
+                                    let mat = reg.find(&verse_copy).unwrap(); //search in original case
+                                    verse.replace_range(mat.end()..mat.end(), "</span>"); //end first
+                                    verse.replace_range(mat.start()..mat.start(), "<span class=\"highlight\">");
+                                }
+                        } else {
+                            let reg = Regex::new(&format!("\\b{}\\b", &word)).unwrap();
+                            if reg.is_match(&verse_lowercase) {
+                                let found = verse.to_lowercase(); //can't use verse_lowercase???; necessary as doesn't work without it; hightlighting is a mess without it
+                                let mat = reg.find(&found).unwrap();
+                                verse.replace_range(mat.end()..mat.end(), "</span>"); //end first
+                                verse.replace_range(mat.start()..mat.start(), "<span class=\"highlight\">");
+                            }
+                        }
+                    }
+                    results.push_str(&format!("<a id = \"{0}-{1}-{3}-{4}\" class = \"listResults\" href = \"./book#{0}-{1}-{3}-{4}\">
+                    <p class=\"bookResults\">{2} {3}:{4}</p><p class = \"scrResults\">{5}</p></a>", 
+                    i, &j ,json_bible[j]["bookName"].as_str().unwrap(),chapters["chapter"], verses["ver"], verse));// extract route from id - see javascript, search component; angular stops routing from innerhtml
+                    search_num += 1;
+                }
+            }
+        }
+    
     
     let mut results_fin: String;
                 

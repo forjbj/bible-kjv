@@ -153,21 +153,6 @@ dialog{
     translate: 0 0;
     border: 1px solid var(--ink);
   }
-  // &[close]{
-  //   @media(orientation: portrait) {
-  //     opacity: 0;
-  //     translate: 0 -20vh;
-  //   }
-  //   @media(orientation: landscape){
-  //     opacity: 0;
-  //     &[leftHanded = 'yes'] {
-  //       translate: -10vw 0; 
-  //     }
-  //     &[leftHanded = 'no'] {
-  //       translate: 10vw  0
-  //     }
-  //   }  
-  // }
   @starting-style{
     @media(orientation: portrait) {
       opacity: 0;
@@ -234,7 +219,10 @@ dialog[open]::backdrop{
   grid-template-columns: 1fr max-content 1fr;
   grid-auto-flow: column;
   grid-row-gap: 0.3rem;
-
+  .searchInput, select, option{
+    background-color: var(--paper);
+    color: var(--ink);
+  }
   .verticalLabel {
       font-family: Bookman, Georgia, serif;
       color: var(--ink);

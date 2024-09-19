@@ -6,10 +6,17 @@
             <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..." 
                     value= {{bibleService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
             <input alt="searchIcon" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value)">
-            <select class="searchOption gridColumnTwo" name="testaments" id="testaments" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedArea()">
-                <option *ngFor="let select of searchService.searchArea" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
+            <select class="searchOption gridColumnTwo" name="area" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedArea()">
+                <optgroup label="Testament/s">
+                    <option *ngFor="let select of searchService.searchArea" [ngValue]="select.id">in {{ select.label }}</option>
+                </optgroup>
+                <optgroup label="Books">
+                    <ng-container *ngFor="let testament of bibleService.bible; let i = index;" >
+                        <option *ngFor="let book of testament.books; let j = index;" [ngValue]="((i == 1 ? bibleService.bible[0].books.length : 0) + j )" [selected] = "book.selected">in {{book.bookName}}</option>
+                    </ng-container>
+                </optgroup>
             </select>
-            <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="searchService.accuracy" (ngModelChange) = "searchService.selectedAccuracy()">
+    <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="searchService.accuracy" (ngModelChange) = "searchService.selectedAccuracy()">
                 <option *ngFor="let select of searchService.accuracyLevel" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
             </select>
         </form>

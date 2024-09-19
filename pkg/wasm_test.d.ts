@@ -14,6 +14,13 @@ export function render(test: number, book: number): string;
 */
 export function search(searches: number, inp: string, acc: number): string;
 /**
+* @param {number} searches
+* @param {string} inp
+* @param {number} acc
+* @returns {string}
+*/
+export function search_book(searches: number, inp: string, acc: number): string;
+/**
 * @returns {string}
 */
 export function render_widget(): string;
