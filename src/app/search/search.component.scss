@@ -28,6 +28,11 @@
     grid-auto-flow: column;
     grid-row-gap: 0.3rem;
 
+    .searchInput, select, option{
+        background-color: var(--nav);
+        color: var(--ink);
+      }
+
     .verticalLabel {
         font-family: Bookman, Georgia, serif;
         writing-mode: vertical-lr;

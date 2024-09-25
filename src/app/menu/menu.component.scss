@@ -220,7 +220,7 @@ dialog[open]::backdrop{
   grid-auto-flow: column;
   grid-row-gap: 0.3rem;
   .searchInput, select, option{
-    background-color: var(--paper);
+    background-color: var(--nav);
     color: var(--ink);
   }
   .verticalLabel {
