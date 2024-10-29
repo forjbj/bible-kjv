@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@angular/animations": "^17.3.5",
     "@angular/common": "^17.3.5",
     "@angular/compiler": "^17.3.5",
@@ -21,6 +22,7 @@
     "@angular/service-worker": "~17.3.5",
     "angular-cli-ghpages": "^1.0.0",
     "g": "^2.0.1",
+    "npm": "^10.9.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.5.2",
     "zone.js": "~0.14.0"
