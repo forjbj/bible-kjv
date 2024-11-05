@@ -6,7 +6,7 @@ extern crate rand;
 
 use serde_json::Value as jsonValue;
 use serde_json::Value::Null as jsonNull;
-use regex::{Regex};
+use regex::Regex;
 use rand::prelude::*;
 
 #[wasm_bindgen(module = "src/app/app.component.ts")]

@@ -1,0 +1,11 @@
+/home/john/code/forjbj_bible/bible-kjv/target/wasm32-unknown-unknown/release/deps/libgetrandom-8dc7d12107544f5b.rmeta: /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/lib.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/util.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error_impls.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/js.rs
+
+/home/john/code/forjbj_bible/bible-kjv/target/wasm32-unknown-unknown/release/deps/libgetrandom-8dc7d12107544f5b.rlib: /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/lib.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/util.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error_impls.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/js.rs
+
+/home/john/code/forjbj_bible/bible-kjv/target/wasm32-unknown-unknown/release/deps/getrandom-8dc7d12107544f5b.d: /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/lib.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/util.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error_impls.rs /home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/js.rs
+
+/home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/lib.rs:
+/home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error.rs:
+/home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/util.rs:
+/home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/error_impls.rs:
+/home/john/.cargo/registry/src/index.crates.io-6f17d22bba15001f/getrandom-0.2.15/src/js.rs:
