@@ -15,13 +15,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": {
-              "base": "dist/bible-kjv"
-            },
+            "outputPath": "dist/bible-kjv/",
             "baseHref": "/bible-kjv/",
             "index": "src/index.html",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -37,8 +36,8 @@
             ],
             "scripts": [],
             "webWorkerTsConfig": "tsconfig.worker.json",
-            "serviceWorker": "ngsw-config.json",
-            "browser": "src/main.ts"
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -57,7 +56,9 @@
               "outputHashing": "all"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -110,7 +111,7 @@
             "buildTarget": "bible-kjv:build:production",
             "repo": "https://github.com/forjbj/bible-kjv.git",
             "branch": "gh-pages",
-            "dir": "dist/bible/"
+            "dir": "dist/bible-kjv/"
           }
         }
       }
