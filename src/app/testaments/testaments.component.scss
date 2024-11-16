@@ -26,6 +26,7 @@ div:focus {
 .bookGrid {
     font-family: Bookman, Georgia, serif;
     font-variant: small-caps;
+    width: 100dvw;
     display: grid;
     grid-template-columns: repeat(3, minmax(30px, 1fr));
     text-align: center;

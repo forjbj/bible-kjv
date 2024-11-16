@@ -37,8 +37,8 @@ export class TestamentsComponent implements AfterViewInit {
       this.bibleService.chapterNumber = localStorage.getItem('curChap')!;
       this.bibleService.verseNumber = localStorage.getItem('curVerse')!;
     } else {
-      this.bibleService.chapterNumber = '1';
-      this.bibleService.verseNumber = ''; // if changing see also display-book.component.ts as it tests for this
+      this.bibleService.chapterNumber = '0';
+      this.bibleService.verseNumber = '0'; // if changing see also display-book.component.ts as it tests for this
     }
     //setTimeout needed for spinner to start
     setTimeout(() => {

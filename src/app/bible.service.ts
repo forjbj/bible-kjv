@@ -14,8 +14,8 @@ export class BibleService {
 
   public testament:number = Number(localStorage.getItem('curTestamentIndex')) || 1; // defaults to '1' (new testament) if '' or null
   public bookSelected:number = Number(localStorage.getItem('curBookIndex')) || 3; // defaults to '3' (Gospel of John) see above
-  public chapterNumber: string = localStorage.getItem('curChap') || '1';
-  public verseNumber: string = localStorage.getItem('curVerse') || '';
+  public chapterNumber: string = localStorage.getItem('curChap') || '0';
+  public verseNumber: string = localStorage.getItem('curVerse') || '0';
 
   public fragment():string { 
     return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber; // '-' at the front of the id is necessary as angular's anchor scrolling get confused otherwise
@@ -55,6 +55,7 @@ export class BibleService {
       this.pageTitle ??= "Bible";
       this.chapterButton ??= true; // turn on if null or memory wipe
       this.spinnerTitle ??= "Rendering";
+      
     }
 
     //wordSearch needs to be in this service or throws an error re: "changed after it was checked"

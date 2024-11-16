@@ -97,3 +97,26 @@ section {
     33% {background-color: var(--searchHighlight)}
     66% {background-color: var(--searchHighlight)}
   }
+
+.nextButton {
+    margin: 1rem;
+    color: var(--zInk);
+    text-align: center;
+    text-shadow: 1px 1px var(--gridColor);
+    border-radius: 0.1rem;
+    background-color: var(--button);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover, &:focus, &:active {
+        color: var(--ink);
+        background-color: var(--menu);
+        outline: 0; //needed for chrome
+    }
+}
+.smallerTitle {
+    font-size: 70%;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+    border: 1px solid var(--paper);
+}

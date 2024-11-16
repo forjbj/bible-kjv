@@ -4,3 +4,11 @@
         (click) = "bibleService.showChapters = false; bibleService.displayMenu = false;" 
         [innerHTML] = "renderedBook | safe: 'html'">
 </article>
+<div    *ngIf="nextButton != 'The End'"
+        style="text-align:center">  
+        <button class="nextButton"
+                (click)="nextBookRoute()">
+                {{ nextButton }}
+                <div class="smallerTitle" [innerHTML] = "nextBibleBook | safe: 'html'"></div>
+        </button>
+</div>

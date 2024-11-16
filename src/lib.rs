@@ -35,7 +35,7 @@ fn psalms_book(contents:&jsonValue) -> String {
 
     let current = contents["0"]["books"][18]["chapters"].as_array().unwrap();
 
-    let mut result: String = format!("<header class=\"headings\"><h4>THE</h4><h2>BOOK OF PSALMS</h2></header>");
+    let mut result: String = format!("<header id =\"0-18-0-0\"class=\"headings\"><h4>THE</h4><h2>BOOK OF PSALMS</h2></header>");
     let mut section: String;
 
     for psalm in current {
@@ -75,7 +75,7 @@ fn not_psalms( test: usize, book: usize, contents:&jsonValue ) -> String {
     let mut result: String;
     let mut section: String;
     let title = bible_book["title"].as_str().unwrap();
-    result = format!("<header class=\"headings\">{}</header>", title);
+    result = format!("<header id =\"{}-{}-0-0\" class=\"headings\">{}</header>", &test, &book, title);
 
     for chapter in current {
         section = format!("<section id =\"{}-{}-{}-0\"><header class=\"headings\" >", &test, &book, chapter["chapter"]);

@@ -49,9 +49,11 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
         } else {
           chaptersGrid[Number(targetChapter)-1].classList.remove("chapterScroll");
         }
-        let current = Number(localStorage.getItem('curChap'))-1;
-          //block: "nearest" is essential to stop page moving!
-        chaptersGrid[current].scrollIntoView({block: "nearest"});
+        if (Number(localStorage.getItem('curChap')) > 0) {
+          let current = Number(localStorage.getItem('curChap'))-1;
+            //block: "nearest" is essential to stop page moving!
+          chaptersGrid[current].scrollIntoView({block: "nearest"});
+        }
       }
     });
     },options);

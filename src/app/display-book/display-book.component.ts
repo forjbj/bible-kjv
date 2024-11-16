@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy, HostListener } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
@@ -21,8 +21,14 @@ public fragString?: string;
 public fragment?: any;
 public frag?: any;
 
-private observer: any;
+public fragId?: any;
+public bookPlace?: any;
 
+public nextFragment: string = "1-3-1-1"; // defaults to The Gospel according ot St John
+public nextButton: string = "Proceed?";
+public nextBibleBook: string = "";
+
+private observer: any;
 
   constructor( public bibleService: BibleService,
                public historyService: HistoryService,
@@ -64,47 +70,59 @@ private observer: any;
     if (this.bibleService.verseNumber == '' && this.bibleService.chapterNumber == '1' && (historyPopulated  == null || historyPopulated == 'null')) {
       this.bibleService.showChapters = true;
     }
+    
+    this.nextBook();
 
   }   
   
   ngAfterViewInit() {
-    
+
+
     //turn off spinner, setTimeout is necessary or doesn't work
     setTimeout(() => {
       this.bibleService.spinner = false;
     }, 10);
-    
-    // if (this.fragment && this.frag.length > 3){ // only if verse exists in route
-    //   let position = this.document.getElementById(this.frag);
-    //   position?.scrollIntoView({behavior: 'smooth'});
-    // };
 
     // store book for loading on return, if not chosen from history -MUST BE UNDER ngAfterViewInit 
     this.historyService.storeBooks();
 
-    let id = this.bibleService.fragment();//must be worked out first
-    if (this.bibleService.chapterNumber == '1' && this.bibleService.verseNumber == ('' || '1')) { //Don't change without changing testaments.components.ts as well
-      window.scrollTo(0, 0);
-    } else {
-      let bookPlace = this.document.getElementById(id);
-      bookPlace?.focus();
-      bookPlace?.scrollIntoView({behavior: 'instant'}); //instant needed to stop observer changing verse and chapter number
+    this.fragId = this.bibleService.fragment();//must be worked out first
 
-      localStorage.setItem('curTestamentIndex', this.bibleService.testament.toString());
-      localStorage.setItem('curBookIndex', this.bibleService.bookSelected.toString());
-      localStorage.setItem('curChap', this.bibleService.chapterNumber);
-      localStorage.setItem('curVerse', this.bibleService.verseNumber);
-    }
+    this.bookPlace = this.document.getElementById(this.fragId);
+    this.bookPlace.focus();
+    this.bookPlace.scrollIntoView({behavior: 'instant'}); //instant needed to stop observer changing verse and chapter number
+    
+    localStorage.setItem('curTestamentIndex', this.bibleService.testament.toString());
+    localStorage.setItem('curBookIndex', this.bibleService.bookSelected.toString());
+    localStorage.setItem('curChap', this.bibleService.chapterNumber);
+    localStorage.setItem('curVerse', this.bibleService.verseNumber);
 
     this.saveScrollposition();
 
-    screen.orientation.addEventListener("change", (event) => {
-      let id = this.bibleService.fragment();
-      let bookPlace = this.document.getElementById(id);
-      bookPlace?.focus();
-      bookPlace?.scrollIntoView({behavior:'instant'});
-    })
+    // screen.orientation.addEventListener("change", (event) => {
+    //   let id = this.bibleService.fragment();
+    //   let bookPlace = this.document.getElementById(id);
+    //   bookPlace?.focus();
+    //   bookPlace?.scrollIntoView({behavior:'instant'});
+
+
+    // })
+    // setTimeout(() => { //needed to stop browsers doing this too early
+ 
+    // this.scrollElem = this.document.getElementsByTagName('header')
+
+    // if (this.bibleService.chapterNumber == '1' && this.bibleService.verseNumber == ('' || '1')) { //Don't change without changing testaments.components.ts as well
+    //   this.scrollElem.scrollIntoView();
+    // }
+    // if (this.bibleService.nextBookSelected) { // scroll to top if next book selected
+    //   this.scrollElem.scrollIntoView();
+    //   console.log('its true')
+    // }
+    //   this.bibleService.nextBookSelected = false; // reset if this render was from the next book button
+    // }, 500);
+
   }
+
   ngOnDestroy() {
     this.observer.disconnect();
   }
@@ -139,7 +157,41 @@ private observer: any;
           chapters.forEach(chapter=> {
           this.observer.observe(chapter);
         }) 
-    
+  }
+
+  nextBook(){
+    if ((this.bibleService.testament == 0 && this.bibleService.bookSelected <= 37) || (this.bibleService.testament == 1 && this.bibleService.bookSelected <= 25)){
+      this.nextFragment = this.bibleService.testament + '-' + (this.bibleService.bookSelected + 1) + '-0-0';
+      this.nextButton = "Next Book: ";
+      this.nextBibleBook = this.bibleService.bible[(this.bibleService.testament)].books[(this.bibleService.bookSelected + 1)].title
+    } else if ( this.bibleService.testament == 0 && this.bibleService.bookSelected == 38) {
+      this.nextFragment = "1-0-0-0";
+      this.nextButton = "Onward to the New Testament and ";
+      this.nextBibleBook = this.bibleService.bible[1].books[0].title
+    } else if ( this.bibleService.testament == 1 && this.bibleService.bookSelected == 26){
+      this.nextFragment = "1-26-22-21";
+      this.nextButton = "The End";
+    }
+  }
+
+  nextBookRoute(){
+
+    if ((this.bibleService.testament == 0 && this.bibleService.bookSelected <= 37) || (this.bibleService.testament == 1 && this.bibleService.bookSelected <= 25)){
+      this.bibleService.bookSelected += 1;
+      // localStorage.setItem('curBookIndex', (currentBook + 1).toString());
+      // this.bibleService.title = this.bibleService.bible[currentTestament].books[(currentBook + 1)].bookName
+    } else if ( this.bibleService.testament == 0 && this.bibleService.bookSelected == 38) {
+      // localStorage.setItem('curTestamentIndex', (currentTestament + 1).toString());
+      // localStorage.setItem('curBookIndex', (currentBook + 1).toString());
+      this.bibleService.testament = 1;
+      this.bibleService.bookSelected = 0;
+      // this.bibleService.title = this.bibleService.bible[1].books[0].bookName
+    }
+    this.bibleService.chapterNumber = '0';
+    this.bibleService.verseNumber = '0';
+      // below is a terrible hack but can't seem to reload properly any other way
+    this.router.navigateByUrl('/notARoute', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['book'], {fragment: this.nextFragment });
+    });     
   }
 }
-
