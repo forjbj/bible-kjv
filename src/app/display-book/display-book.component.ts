@@ -90,7 +90,7 @@ private observer: any;
 
     this.bookPlace = this.document.getElementById(this.fragId);
     this.bookPlace.focus();
-    this.bookPlace.scrollIntoView({behavior: 'instant'}); //instant needed to stop observer changing verse and chapter number
+    this.bookPlace.scrollIntoView({block: "start", inline: "nearest", behavior: 'instant'}); //instant needed to stop observer changing verse and chapter number
     
     localStorage.setItem('curTestamentIndex', this.bibleService.testament.toString());
     localStorage.setItem('curBookIndex', this.bibleService.bookSelected.toString());
@@ -99,28 +99,12 @@ private observer: any;
 
     this.saveScrollposition();
 
-    // screen.orientation.addEventListener("change", (event) => {
-    //   let id = this.bibleService.fragment();
-    //   let bookPlace = this.document.getElementById(id);
-    //   bookPlace?.focus();
-    //   bookPlace?.scrollIntoView({behavior:'instant'});
-
-
-    // })
-    // setTimeout(() => { //needed to stop browsers doing this too early
- 
-    // this.scrollElem = this.document.getElementsByTagName('header')
-
-    // if (this.bibleService.chapterNumber == '1' && this.bibleService.verseNumber == ('' || '1')) { //Don't change without changing testaments.components.ts as well
-    //   this.scrollElem.scrollIntoView();
-    // }
-    // if (this.bibleService.nextBookSelected) { // scroll to top if next book selected
-    //   this.scrollElem.scrollIntoView();
-    //   console.log('its true')
-    // }
-    //   this.bibleService.nextBookSelected = false; // reset if this render was from the next book button
-    // }, 500);
-
+    window.addEventListener('resize', () => {
+      let id = this.bibleService.fragment();
+      let bookPlace = this.document.getElementById(id);
+      bookPlace?.focus();
+      bookPlace?.scrollIntoView({behavior:'instant'});
+    });
   }
 
   ngOnDestroy() {
@@ -178,14 +162,9 @@ private observer: any;
 
     if ((this.bibleService.testament == 0 && this.bibleService.bookSelected <= 37) || (this.bibleService.testament == 1 && this.bibleService.bookSelected <= 25)){
       this.bibleService.bookSelected += 1;
-      // localStorage.setItem('curBookIndex', (currentBook + 1).toString());
-      // this.bibleService.title = this.bibleService.bible[currentTestament].books[(currentBook + 1)].bookName
     } else if ( this.bibleService.testament == 0 && this.bibleService.bookSelected == 38) {
-      // localStorage.setItem('curTestamentIndex', (currentTestament + 1).toString());
-      // localStorage.setItem('curBookIndex', (currentBook + 1).toString());
       this.bibleService.testament = 1;
       this.bibleService.bookSelected = 0;
-      // this.bibleService.title = this.bibleService.bible[1].books[0].bookName
     }
     this.bibleService.chapterNumber = '0';
     this.bibleService.verseNumber = '0';

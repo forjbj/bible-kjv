@@ -10,13 +10,13 @@
                           class="middleButton">
         <!-- class of titleButton needs to be on div inside button or doesn't work in iOS -->
         <div *ngIf = "bibleService.title != 'Psalms'; else notChapterTitle" class="titleButton">
-          <!-- spans necessary for firefox to render correctly -->
-          <span>Chapter<span class="horizontalNumbers">{{bibleService.chapterNumber}}</span></span>
+          <!-- spans necessary for firefox to render correctly; do not display 'chapter 0' when starting new book -->
+          <span>Chapter<span *ngIf="bibleService.chapterNumber != '0'" class="horizontalNumbers">{{bibleService.chapterNumber}}</span></span>
         </div>
         <ng-template #notChapterTitle>
           <div class="titleButton">
             <!-- span necessary see above -->
-            <span>Psalm <span class="horizontalNumbers">{{bibleService.chapterNumber}}</span></span>
+            <span>Psalm <span *ngIf="bibleService.chapterNumber != '0'"  class="horizontalNumbers">{{bibleService.chapterNumber}}</span></span>
           </div>
         </ng-template>
       </button>

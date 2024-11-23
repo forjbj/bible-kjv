@@ -37,8 +37,12 @@ export class HistoryService {
     let thirdTestInd = localStorage.getItem('thirdTestamentIndex')!;
     // console.log(thirdTestInd);
 
-    this.curBookMenu = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName
-    + ' '  + this.bibleService.chapterNumber ;
+    if (this.bibleService.chapterNumber != '0') {
+      this.curBookMenu = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName
+      + ' '  + this.bibleService.chapterNumber ;
+    } else {
+      this.curBookMenu = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName;
+    }
     if ((secTestInd != 'null') && (secTestInd != null)) { // NO idea why javascript does this; could be either depending on how you hold your tongue
       this.secBookMenu = this.bibleService.bible[Number(secTestInd)].books[Number(localStorage.getItem('secBookIndex'))].bookName
       + ' ' + localStorage.getItem('secChap') ;
