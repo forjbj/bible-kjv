@@ -7,11 +7,11 @@ import * as wasm from '../../../pkg';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-display-book',
-  templateUrl: './display-book.component.html',
-  styleUrls: ['./display-book.component.scss'],
-  encapsulation: ViewEncapsulation.None, // removes ::ng-deep need
-
+    selector: 'app-display-book',
+    templateUrl: './display-book.component.html',
+    styleUrls: ['./display-book.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 

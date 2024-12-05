@@ -5,9 +5,10 @@ import { HistoryService } from '../history.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-chapter-numbers',
-  templateUrl: './chapter-numbers.component.html',
-  styleUrls: ['./chapter-numbers.component.scss']
+    selector: 'app-chapter-numbers',
+    templateUrl: './chapter-numbers.component.html',
+    styleUrls: ['./chapter-numbers.component.scss'],
+    standalone: false
 })
 export class ChapterNumbersComponent implements AfterViewInit, OnDestroy{
 

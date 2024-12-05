@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-testaments',
-  templateUrl: './testaments.component.html',
-  styleUrls: ['./testaments.component.scss']
+    selector: 'app-testaments',
+    templateUrl: './testaments.component.html',
+    styleUrls: ['./testaments.component.scss'],
+    standalone: false
 })
 export class TestamentsComponent implements AfterViewInit {
 

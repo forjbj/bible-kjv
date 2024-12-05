@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
-  encapsulation: ViewEncapsulation.None, // removes ::ng-deep need
-
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 

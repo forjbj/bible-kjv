@@ -5,10 +5,12 @@ import { Meta, Title } from '@angular/platform-browser';
 import { BibleService } from '../bible.service';
 
 @Component({
-  selector: 'app-widget',
-  templateUrl: './widget.component.html',
-  styleUrls: ['./widget.component.scss'],
-  encapsulation: ViewEncapsulation.None // removes ::ng-deep need
+    selector: 'app-widget',
+    templateUrl: './widget.component.html',
+    styleUrls: ['./widget.component.scss'],
+    encapsulation: ViewEncapsulation.None // removes ::ng-deep need
+    ,
+    standalone: false
 })
 export class WidgetComponent implements OnInit {
   //appTitle = 'widget';

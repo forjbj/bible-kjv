@@ -7,9 +7,10 @@ import { DOCUMENT } from '@angular/common';
 
 
 @Component({
-  selector: 'app-the-bible',
-  templateUrl: './the-bible.component.html',
-  styleUrls: ['./the-bible.component.scss'],
+    selector: 'app-the-bible',
+    templateUrl: './the-bible.component.html',
+    styleUrls: ['./the-bible.component.scss'],
+    standalone: false
 })
 
 export class TheBibleComponent implements OnInit, AfterViewInit {

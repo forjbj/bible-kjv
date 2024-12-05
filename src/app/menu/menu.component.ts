@@ -4,9 +4,10 @@ import { HistoryService } from '../history.service';
 import { Router } from '@angular/router';
 import { SearchService } from '../search.service';
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.scss'],
+    standalone: false
 })
 export class MenuComponent implements OnInit {
 
