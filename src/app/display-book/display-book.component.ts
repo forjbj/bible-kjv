@@ -5,11 +5,12 @@ import {
   ViewEncapsulation,
   OnDestroy,
   HostListener,
+  DOCUMENT
 } from "@angular/core";
 import { BibleService } from "../bible.service";
 import { HistoryService } from "../history.service";
 import { Meta, Title } from "@angular/platform-browser";
-import { DOCUMENT, Location } from "@angular/common";
+import { Location } from "@angular/common";
 import * as wasm from "../../../pkg";
 import { ActivatedRoute, Router } from "@angular/router";
 

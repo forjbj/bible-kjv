@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, DOCUMENT } from '@angular/core';
 import { Component, OnInit, AfterViewInit, HostListener, ElementRef, ViewEncapsulation, Inject } from '@angular/core';
 import { BibleService } from './bible.service';
 import * as wasm from './../../pkg';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { DOCUMENT, ViewportScroller } from '@angular/common';
+import { ViewportScroller } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })

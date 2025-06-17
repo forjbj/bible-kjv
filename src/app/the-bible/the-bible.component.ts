@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, Inject, OnInit, } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, DOCUMENT } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+
 
 
 @Component({

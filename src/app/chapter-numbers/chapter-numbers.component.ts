@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
+
+import { AfterViewInit, Component, Inject, OnDestroy, DOCUMENT } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Router } from '@angular/router';

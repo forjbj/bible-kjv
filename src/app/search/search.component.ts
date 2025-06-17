@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewEncapsulation, Inject, DOCUMENT } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { SearchService } from '../search.service';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+
 
 @Component({
     selector: 'app-search',
