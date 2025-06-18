@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
   OnDestroy,
   HostListener,
-  DOCUMENT
+  DOCUMENT,
 } from "@angular/core";
 import { BibleService } from "../bible.service";
 import { HistoryService } from "../history.service";
@@ -105,14 +105,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
     this.fragId = this.bibleService.fragment(); //must be worked out first
 
-    this.bookPlace = this.document.getElementById(this.fragId);
-    this.bookPlace.focus();
-    this.bookPlace.scrollIntoView({
-      block: "start",
-      inline: "nearest",
-      behavior: "instant",
-    }); //instant needed to stop observer changing verse and chapter number
-
     localStorage.setItem(
       "curTestamentIndex",
       this.bibleService.testament.toString(),
@@ -124,23 +116,36 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     localStorage.setItem("curChap", this.bibleService.chapterNumber);
     localStorage.setItem("curVerse", this.bibleService.verseNumber);
 
+    this.bookPlace = this.document.getElementById(this.fragId)!;
+    this.bookPlace.scrollIntoView({
+      block: "start",
+      inline: "nearest",
+      behavior: "instant",
+    }); //instant needed to stop observer changing verse and chapter number
+    this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
+
     this.saveScrollposition();
 
     window.addEventListener("resize", () => {
       let id = this.bibleService.fragment();
-      let bookPlace = this.document.getElementById(id);
-      bookPlace?.focus();
-      bookPlace?.scrollIntoView({ behavior: "instant" });
+      let bookPlace = this.document.getElementById(id)!;
+      bookPlace.scrollIntoView({
+        block: "start",
+        inline: "nearest",
+        behavior: "instant",
+      }); //instant needed to stop observer changing verse and chapter number
+      this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
     });
   }
 
   ngOnDestroy() {
-    this.observer.disconnect();
+    this.saveScrollposition();
+    // this.observer.disconnect();
   }
 
   saveScrollposition() {
     // save chapter and verse on scroll
-    const chapters = this.document.querySelectorAll("a");
+    const chapters = this.document.querySelectorAll("section > a, section > header > a");
     const options = {
       root: null, // viewport
       threshold: [0],
