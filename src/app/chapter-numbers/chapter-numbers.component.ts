@@ -45,7 +45,7 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy {
     const options = {
       root: null, // viewport
       threshold: [0],
-      rootMargin: "-15% 0px -83% 0px", //only chapters at top-ish
+      rootMargin: "-7% 0px -91% 0px", //only chapters at top-ish
     };
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -76,7 +76,7 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    this.observer.disconnect();
+    this.observer.disconnect()!;
   }
   updateStorageAndScroll(chapter: any) {
     this.bibleService.chapterNumber = chapter;

@@ -139,8 +139,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.saveScrollposition();
-    // this.observer.disconnect();
+    // this.observer.disconnect()!; //throws error, because it is part of saveScrollposition()???
   }
 
   saveScrollposition() {
