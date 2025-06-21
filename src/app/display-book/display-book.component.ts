@@ -53,9 +53,9 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     this.meta.addTag({
       name: "description",
       content:
-        "King James Version (Cambridge) Bible; utilising WebAssembly for speed.",
+        "King James Version (Cambridge) Bible; utilising WebAssembly.",
     });
-    title.setTitle("Bible - King James Version - PWA");
+    title.setTitle("Bible - King James Version");
 
     this.fragment = this.activatedRoute.snapshot.fragment;
     if (this.fragment) {

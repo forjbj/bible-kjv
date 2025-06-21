@@ -12,12 +12,13 @@ export class BibleService {
 
   public pageTitle:string;
 
-  public testament:number = Number(localStorage.getItem('curTestamentIndex')) || 1; // defaults to '1' (new testament) if '' or null
-  public bookSelected:number = Number(localStorage.getItem('curBookIndex')) || 3; // defaults to '3' (Gospel of John) see above
-  public chapterNumber: string = localStorage.getItem('curChap') || '0';
-  public verseNumber: string = localStorage.getItem('curVerse') || '0';
+  // Below must be ?? to insert defaults and NOT || as || will replace 0 with defaults; i.e. changes old testament to new. Javascript is seriously broken
+  public testament:number = Number(localStorage.getItem('curTestamentIndex')) ?? 1; // defaults to '1' (new testament) if '' or null
+  public bookSelected:number = Number(localStorage.getItem('curBookIndex')) ?? 3; // defaults to '3' (Gospel of John) see above
+  public chapterNumber: string = localStorage.getItem('curChap') ?? '0';
+  public verseNumber: string = localStorage.getItem('curVerse') ?? '0';
 
-  public fragment():string { 
+  public fragment():string {
     return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber; // '-' at the front of the id is necessary as angular's anchor scrolling get confused otherwise
   }
 
@@ -25,11 +26,11 @@ export class BibleService {
 
   public title: string = this.bible[this.testament].books[this.bookSelected].bookName;
 
-  public showChapters: boolean = false; /*for chapter highlighting MUST BE toggled 
-                                (scroll through chapters doesn't work otherwise); 
-                                set to 'true' in historyService.newBook() selection, but doesn't highligh to chapter 1; 
+  public showChapters: boolean = false; /*for chapter highlighting MUST BE toggled
+                                (scroll through chapters doesn't work otherwise);
+                                set to 'true' in historyService.newBook() selection, but doesn't highligh to chapter 1;
                                 not working properly TODO;
-                                */ 
+                                */
 
   public displayMenu: boolean = false;
   public menuHistoryBook: boolean = false;
@@ -51,11 +52,13 @@ export class BibleService {
 
     constructor(
       public router: Router,) {
-        
+
       this.pageTitle ??= "Bible";
       this.chapterButton ??= true; // turn on if null or memory wipe
       this.spinnerTitle ??= "Rendering";
-      
+
+      console.log(this.fragment())
+
     }
 
     //wordSearch needs to be in this service or throws an error re: "changed after it was checked"
@@ -74,5 +77,5 @@ export class BibleService {
         }, 10);
       }
     }
-  
+
 }
