@@ -57,8 +57,6 @@ export class BibleService {
       this.chapterButton ??= true; // turn on if null or memory wipe
       this.spinnerTitle ??= "Rendering";
 
-      console.log(this.fragment())
-
     }
 
     //wordSearch needs to be in this service or throws an error re: "changed after it was checked"
