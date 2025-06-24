@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   public aboutDialog: any;
   public testamentDialog: any;
 
-  
+
   constructor(public bibleService: BibleService,
               public historyService: HistoryService,
               public searchService: SearchService,
@@ -26,11 +26,12 @@ export class MenuComponent implements OnInit {
     this.bibleService.leftHandOn = localStorage.getItem('leftHanded')!;
 
     this.historyService.menuBooks();
+    const darkmode = matchMedia("(prefers-color-scheme: dark)");
 
    }
 
   ngOnInit(): void {
-    
+
     // apply righthanded if set in storage
     let menu = document.getElementById('menu') as HTMLInputElement;
     let aboutDialog = document.getElementById('aboutDialog') as HTMLInputElement;
@@ -56,7 +57,7 @@ export class MenuComponent implements OnInit {
     if (this.bibleService.leftHandOn == 'yes') {
       toggleSwitchLeftHand.checked = true;
     }
-    
+
   }
   ngAfterViewInit(){
 
@@ -69,17 +70,17 @@ export class MenuComponent implements OnInit {
   themeChange(){
       let theme = document.getElementById('theme') as HTMLInputElement;
       if (theme.checked) {
-        document.documentElement.setAttribute('dataTheme', 'dark'); 
+        document.documentElement.setAttribute('dataTheme', 'dark');
         localStorage.setItem('theme', 'dark');
     }
     else {
-        document.documentElement.setAttribute('dataTheme', 'light'); 
+        document.documentElement.setAttribute('dataTheme', 'light');
         localStorage.setItem('theme', 'light');
-    }   
+    }
   };
 /* Change sides */
   leftHand(){
-    let leftHand = document.getElementById('leftHand') as HTMLInputElement;      
+    let leftHand = document.getElementById('leftHand') as HTMLInputElement;
     let grid = document.getElementById('nav') as HTMLInputElement;
     let menu = document.getElementById('menu') as HTMLInputElement;
     let aboutDialog = document.getElementById('aboutDialog') as HTMLInputElement;
@@ -88,14 +89,14 @@ export class MenuComponent implements OnInit {
 
     if (leftHand.checked) {
       localStorage.setItem('leftHanded', 'yes');
-      grid.setAttribute('leftHanded', 'yes'); 
-      menu.setAttribute('leftHanded', 'yes'); 
+      grid.setAttribute('leftHanded', 'yes');
+      menu.setAttribute('leftHanded', 'yes');
       aboutDialog.setAttribute('leftHanded', 'yes');
       searchDialog.setAttribute('leftHanded', 'yes');
       testamentDialog.setAttribute('leftHanded', 'yes');
     } else {
-      menu.setAttribute('leftHanded', 'no'); 
-      grid.setAttribute('leftHanded', 'no'); 
+      menu.setAttribute('leftHanded', 'no');
+      grid.setAttribute('leftHanded', 'no');
       localStorage.setItem('leftHanded', 'no');
       aboutDialog.setAttribute('leftHanded', 'no');
       searchDialog.setAttribute('leftHanded', 'no');

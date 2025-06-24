@@ -20,10 +20,15 @@ export class AppComponent {
               public router: Router,
               public bibleService: BibleService) {
 
-    // apply dark theme if set in storage
-    if (localStorage.getItem('theme') == 'dark') {
+    // apply theme if set in storage or system preference
+    if (localStorage.getItem('theme') == 'dark' ) {
+      document.documentElement.setAttribute('dataTheme', 'dark');
+    } else if (localStorage.getItem('theme') == 'light') {
+      document.documentElement.setAttribute('dataTheme', 'root');
+    } else if (matchMedia("(prefers-color-scheme: dark)")){
       document.documentElement.setAttribute('dataTheme', 'dark');
     }
+
     // this is the code needed for angular 13 and onwards; check for updates to the site -WORKS!!
     const updatesAvailable = swUpdate.versionUpdates.pipe(
       filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
