@@ -148,7 +148,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     const options = {
       root: null, // viewport
       threshold: [0],
-      rootMargin: "-2% 0px -95% 0px", //only top verse/s Don't change these affects reloading at correct verse
+      rootMargin: "-2% 0px -95% 0px", //only top verse/s Don't change these affects reloading at correct verse; especially safari pwa
       delay: 700, //only works on safari
     };
     this.observer = new IntersectionObserver((entries) => {

@@ -1,6 +1,3 @@
-@import "../../styles.scss";
-
-
 section {
     border: solid 1px ;
 }
@@ -83,7 +80,7 @@ section {
     margin-bottom: 0.3rem;
     &:first-of-type:first-letter {
         float: left;
-        margin-bottom: 0; 
+        margin-bottom: 0;
         margin-right: 0.03rem;  // required for first letters that are in italics
         vertical-align: top;
         font-size: 2rem;
@@ -116,4 +113,3 @@ section {
     margin-left: 3rem;
     margin-right: 3rem;
 }
-

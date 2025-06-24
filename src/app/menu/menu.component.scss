@@ -1,5 +1,3 @@
-@import"../../styles.scss";
-
 .menu {
   position: absolute;
   top: 2.3rem;
@@ -23,7 +21,7 @@
     top: 1rem;
     &[leftHanded = 'no'] {
       right: 2.1rem;
-    }  
+    }
     &[leftHanded = 'yes'] {
       left: 2.1rem;
     }
@@ -31,7 +29,7 @@
   @media (orientation: portrait){
     &[leftHanded = 'no'] {
       right: 0;
-    }  
+    }
     &[leftHanded = 'yes'] {
       left: 0;
     }
@@ -72,7 +70,7 @@ ul {
   height: 1em;
   margin-left: 1em;
 }
-// Hide default HTML checkbox 
+// Hide default HTML checkbox
 .switch input {
   opacity: 0;
   width: 0;
@@ -99,7 +97,7 @@ ul {
   background-color: #eee;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-} 
+}
 input:checked + .slider {
   background-color: var(--lightRed);
 }
@@ -133,12 +131,12 @@ dialog{
   @media(orientation: landscape){
     opacity: 0;
     &[leftHanded = 'yes'] {
-      translate: -10vw 0; 
+      translate: -10vw 0;
     }
     &[leftHanded = 'no'] {
       translate: 10vw  0
     }
-  }  
+  }
   &.search {
     @media (orientation: portrait){
       margin-top: 3rem;
@@ -161,7 +159,7 @@ dialog{
     @media(orientation: landscape){
       opacity: 0;
       &[leftHanded = 'yes'] {
-        translate: -10vw 0; 
+        translate: -10vw 0;
       }
       &[leftHanded = 'no'] {
         translate: 10vw  0
@@ -190,7 +188,7 @@ dialog[open]::backdrop{
   writing-mode: vertical-lr;
   text-orientation: upright; // needed for safari
   font-weight: bold;
-  font-variant: small-caps;            
+  font-variant: small-caps;
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);
@@ -207,8 +205,8 @@ dialog[open]::backdrop{
 }
 .stationary {
   width: 100%;
-  text-align: right;   
-  margin: 0 auto;   
+  text-align: right;
+  margin: 0 auto;
   padding-top: 0.3rem;
   hr {
       max-width: 90%;
@@ -314,7 +312,7 @@ dialog[open]::backdrop{
 }
 .closeInfo {
   font-weight: bold;
-  font-variant: small-caps;            
+  font-variant: small-caps;
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);
@@ -332,7 +330,7 @@ dialog[open]::backdrop{
 }
 .from {
   margin-block-end: 0;// remove bottom margin; dialog thing
-  font-variant: small-caps;            
+  font-variant: small-caps;
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);
@@ -340,7 +338,7 @@ dialog[open]::backdrop{
 .testamentButton {
   margin: 2rem 1rem;
   font-weight: bold;
-  font-variant: small-caps;            
+  font-variant: small-caps;
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);

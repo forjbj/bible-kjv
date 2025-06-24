@@ -1,5 +1,3 @@
-@import"../../styles.scss";
-
 .toastHide {
     // visibility: hidden;
     display: none; // this almost did my head in; must be display: none, visibility still make it scrollable
@@ -28,7 +26,7 @@
         overflow: hidden;
         white-space: nowrap;
         color: var(--paper);
-        
+
         button {
             height: 2rem;
             width: 5rem;
