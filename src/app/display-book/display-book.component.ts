@@ -144,7 +144,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
   saveScrollposition() {
     // save chapter and verse on scroll
-    const chapters = this.document.querySelectorAll("section > a, section > header > a");
+    const chapters = this.document.querySelectorAll("section > div > a, section > header > a, section > a");
     const options = {
       root: null, // viewport
       threshold: [0],

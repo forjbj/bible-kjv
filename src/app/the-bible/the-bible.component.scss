@@ -3,7 +3,7 @@
   // every outlet has to height: 100vh (not min-height) or nav doesn't stick at end or scroll
   // overflow scroll absolutely neceesary on elements; overflow hidden must be set on html
   height: 100vh; //absolutely necessarry; took weeks to solve overscrolling problem
-  max-width: 100dvw; //can only be % as chrome make a giant mess of it if it is dvw or vw
+  max-width: 100dvw;
   display: grid;
   @media (orientation: portrait) {
     grid-template-rows: 2.3rem 1fr;

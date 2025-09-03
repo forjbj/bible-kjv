@@ -49,7 +49,7 @@ fn psalms_book(contents: &jsonValue) -> String {
         );
 
         let psal = format!(
-            "<a id = \"0-18-{0}-0\"<p class=\"fontType\">PSALM {}</p></a></header>",
+            "<a id = \"0-18-{0}-0\" href = \"./book#0-18-{0}-0\" target=\"_blank\"><p class=\"fontType\">PSALM {}</p></a></header>",
             psalm["chapter"]
         );
         section.push_str(&psal);
@@ -60,17 +60,17 @@ fn psalms_book(contents: &jsonValue) -> String {
                     "<p class=\"psalm fontType\">{}</p>",
                     verse["description"].as_str().unwrap()
                 )); //unwrap necessary to remove ""
-                section.push_str(&format!("<a id = \"0-18-{0}-1\" href = \"./book#0-18-{0}-1\" target=\"_blank\"><p class=\"firstVerse fontType\">{1}</p></a>", psalm["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<a id = \"0-18-{0}-1\" href = \"./book#0-18-{0}-1\" target=\"_blank\"></a><p class=\"firstVerse fontType\">{1}</p>",psalm["chapter"], verse["scr"].as_str().unwrap()));
             } else {
                 if verse["description"] != jsonNull {
                     // needed for psalm 119
                     section.push_str(&format!(
-                        "<p class=\"psalm fontType\">{}</p>",
+                        "<a id = \"0-18-{0}-{1}\" href = \"./book#0-18-{0}-{1}\" target=\"_blank\"></a><p class=\"psalm fontType\">{2}</p>", psalm["chapter"], verse["ver"],
                         verse["description"].as_str().unwrap()
                     ));
                 }
-                section.push_str(&format!("<a id = \"0-18-{0}-{1}\" class = \"verses\" href = \"./book#0-18-{0}-{1}\" target=\"_blank\"><p class=\"verseNumber fontType\">{1}</p>
-                <p class = \"scripture fontType\">{2}</p></a>", psalm["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<div class = \"verses\"><a id = \"0-18-{0}-{1}\" href = \"./book#0-18-{0}-{1}\" target=\"_blank\"><p class=\"verseNumber fontType\">{1}</p></a>
+                <p class = \"scripture fontType\">{2}</p></div>", psalm["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
         if psalm != current.last().unwrap() {
@@ -103,17 +103,17 @@ fn not_psalms(test: usize, book: usize, contents: &jsonValue) -> String {
         );
 
         let chap = format!(
-            "<a id = \"{}-{}-{}-0\"<p class=\"fontType\">CHAPTER {2}</p></a></header>",
+            "<a id = \"{0}-{1}-{2}-0\"href = \"./book#{0}-{1}-{2}-0\" target=\"_blank\"><p class=\"fontType\">CHAPTER {2}</p></a></header>",
             &test, &book, chapter["chapter"]
         );
         section.push_str(&chap);
 
         for verse in chapter["verses"].as_array().unwrap() {
             if verse["ver"] == 1 {
-                section.push_str(&format!("<a id = \"{0}-{1}-{2}-1\" href = \"./book#{0}-{1}-{2}-1\" target=\"_blank\"><p class=\"firstVerse fontType\">{3}</p></a>", &test, &book, chapter["chapter"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<a id = \"{0}-{1}-{2}-{3}\" href = \"./book#{0}-{1}-{2}-{3}\" target=\"_blank\"></a><p class=\"firstVerse fontType\">{4}</p>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             } else {
-                section.push_str(&format!("<a id = \"{0}-{1}-{2}-{3}\" class = \"verses\" href = \"./book#{0}-{1}-{2}-{3}\" target=\"_blank\"><p class=\"verseNumber fontType\">{3}</p>
-                <p class = \"scripture fontType\">{4}</p></a>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
+                section.push_str(&format!("<div class = \"verses\"><a id = \"{0}-{1}-{2}-{3}\" href = \"./book#{0}-{1}-{2}-{3}\" target=\"_blank\"><p class=\"verseNumber fontType\">{3}</p></a>
+                <p class = \"scripture fontType\">{4}</p></div>", &test, &book, chapter["chapter"], verse["ver"], verse["scr"].as_str().unwrap()));
             }
         }
         if chapter != current.last().unwrap() {
