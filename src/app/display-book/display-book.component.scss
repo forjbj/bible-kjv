@@ -1,25 +1,17 @@
 //  increase font size for readablility (I'm old)
 .fontType {
-    font-family: Georgia,"Times New Roman", Times, serif;
-    line-height: 1.45em; // needs to be 'em' units as 'rem' makes everything very wrong
-    font-size: 1.3rem;
+  font-family: Georgia,"Times New Roman", Times, serif;
+  line-height: 1.45em; // needs to be 'em' units as 'rem' makes everything very wrong
+  font-size: 1.3rem;
     @media (orientation: portrait) {
         font-size: 1.2rem;
     }
 }
-.headings {
-    text-align: center;
-    // make things a little more compact
-    & h5, h2, h3, h4{
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-}
 .psalm {
-    text-align: center;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    padding: 0 5rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  padding: 0 5rem;
     @media (orientation: portrait) {
         font-size: 0.9rem;
         padding: 0 4rem;
@@ -28,15 +20,23 @@
 //remove styling from created links
 section {
     a {
-        color: var(--ink);
-        text-decoration: none;
-        &:hover {
-            color: inherit;
-        }
-        &:focus {
-            outline: var(--lightRed) solid 1px; //needed otherwise it is blue-safari; grey-firefox; black- chrome
-            outline-offset: 1px;
-        }
+      color: var(--scriptNum);
+      text-decoration: none;
+      &:focus {
+        color: var(--lightRed);
+        outline: transparent solid 1px; //needed otherwise it is blue-safari; grey-firefox; black- chrome
+      }
+      &:hover {
+        color: var(--lightRed);
+      }
+    }
+}
+.headings {
+  text-align: center;
+    // make things a little more compact
+    & h5, h2, h3, h4{
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 }
 .verses {
@@ -63,7 +63,6 @@ section {
 }
 .verseNumber {
     text-align: right;
-    color: var(--scriptNum);
     margin: 0.5rem 0;
     @media (orientation: portrait) {
         margin: 0.3rem 0;
