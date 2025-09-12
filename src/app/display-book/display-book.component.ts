@@ -140,32 +140,11 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
     //below for mouse
     window.addEventListener("dblclick", (event) => {
-      this.clickedElement = event.target;
-      this.selectedText = window.getSelection()?.toString().toUpperCase()!;
-      if (this.selectedText == undefined){
-        this.selectedText = "Not in Dictionary";
-      }
-      let dictionary:any = dictionaryJson; //needed for typescript nonsense
-      this.selectedDefine = dictionary[0][this.selectedText];
-
-      let sel = window.getSelection()!;
-      if (sel.getRangeAt) {
-        //create span around word to be defined
-        let range = sel.getRangeAt(0);
-        let newNode = document.createElement("span");
-        let uniqueID = this.selectedText + this.selectedCount;
-        newNode.setAttribute('id', uniqueID);
-        newNode.setAttribute('class', 'definitionParent');
-        range.surroundContents(newNode);
-
-        // create definition span to tie to the selected word
-        let defNode = this.document.createElement("span");
-        defNode.setAttribute('class', 'definitionChild');
-        defNode.innerHTML = this.selectedDefine;
-        this.selectedID = document.getElementById(uniqueID); //span created above
-        this.selectedID.appendChild(defNode);
-        this.selectedCount += 1; //help create unique ID for next search if it is the same word
-      }
+      this.dictionaryResult(event);
+    });
+    //below for touchscreen
+    window.addEventListener("touchstart", (event) => {
+      this.dictionaryResult(event);
     });
   }
 
@@ -259,5 +238,33 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       .then(() => {
         this.router.navigate(["book"], { fragment: this.nextFragment });
       });
+  }
+  dictionaryResult (event: any) {
+    this.clickedElement = event.target;
+    this.selectedText = window.getSelection()?.toString().toUpperCase()!;
+
+    let dictionary:any = dictionaryJson; //needed for typescript nonsense
+    this.selectedDefine = dictionary[0][this.selectedText];
+    if (this.selectedDefine == undefined) {
+      this.selectedDefine = "Not in Dictionary";
+    }
+    let sel = window.getSelection()!;
+    if (sel.getRangeAt) {
+      //create span around word to be defined
+      let range = sel.getRangeAt(0);
+      let newNode = document.createElement("span");
+      let uniqueID = this.selectedText + this.selectedCount;
+      newNode.setAttribute('id', uniqueID);
+      newNode.setAttribute('class', 'definitionParent');
+      range.surroundContents(newNode);
+
+      // create definition span to tie to the selected word
+      let defNode = this.document.createElement("span");
+      defNode.setAttribute('class', 'definitionChild');
+      defNode.innerHTML = this.selectedDefine;
+      this.selectedID = document.getElementById(uniqueID); //span created above
+      this.selectedID.appendChild(defNode);
+      this.selectedCount += 1; //help create unique ID for next search if it is the same word
+    }
   }
 }
