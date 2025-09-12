@@ -50,8 +50,12 @@ export class BibleService {
 
   public searchRan = false;//needed for search saved position
 
+  // public overlayRef!: OverlayRef;
+
     constructor(
-      public router: Router,) {
+      public router: Router,
+      // public overlay: Overlay,
+      ) {
 
       this.pageTitle ??= "Bible";
       this.chapterButton ??= true; // turn on if null or memory wipe
@@ -74,5 +78,4 @@ export class BibleService {
         }, 10);
       }
     }
-
-}
+ }

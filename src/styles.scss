@@ -1,3 +1,4 @@
+
 /* You can add global styles to this file, and also import other style files */
 // Global colours for easy colour scheme change
 :root {
@@ -94,7 +95,7 @@ h1, h2, h3, h4, h5 {
   .circleSpinner::after {
     border-top: 7px solid #ee0000;
     animation: spin 1.2s linear infinite;
-  } 
+  }
   .titleSpinner {
       font-size: 0.9rem; //needed for firefox
       font-variant: small-caps;
@@ -102,7 +103,7 @@ h1, h2, h3, h4, h5 {
       text-shadow: 1px 1px var(--gridColor);
       color: red;
       transform: translateY(-3.5rem);
-  }           
+  }
   @keyframes spin {
       from {
           -webkit-transform: rotate(0deg);

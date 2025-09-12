@@ -1,18 +1,11 @@
-import {
-  Component,
-  AfterViewInit,
-  Inject,
-  ViewEncapsulation,
-  OnDestroy,
-  HostListener,
-  DOCUMENT,
-} from "@angular/core";
+import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy, HostListener, DOCUMENT,} from "@angular/core";
 import { BibleService } from "../bible.service";
 import { HistoryService } from "../history.service";
 import { Meta, Title } from "@angular/platform-browser";
 import { Location } from "@angular/common";
 import * as wasm from "../../../pkg";
 import { ActivatedRoute, Router } from "@angular/router";
+import * as dictionaryJson from '../../assets/bible/Dictionary.json';
 
 @Component({
   selector: "app-display-book",
@@ -37,6 +30,12 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
   private observer: any;
 
+  public clickedElement: any;
+  public selectedText!: string;
+  public selectedID!: any;
+  public selectedDefine!: any;
+  public selectedCount = 0; //needed for dictionay search individuality
+
   constructor(
     public bibleService: BibleService,
     public historyService: HistoryService,
@@ -46,6 +45,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     private location: Location,
     @Inject(DOCUMENT) public document: Document,
     private activatedRoute: ActivatedRoute,
+
   ) {
     this.bibleService.spinner = true;
     this.bibleService.spinnerTitle = "Rendering";
@@ -92,6 +92,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     }
 
     this.nextBook();
+
   }
 
   ngAfterViewInit() {
@@ -135,6 +136,36 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         behavior: "instant",
       }); //instant needed to stop observer changing verse and chapter number
       this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
+    });
+
+    //below for mouse
+    window.addEventListener("dblclick", (event) => {
+      this.clickedElement = event.target;
+      this.selectedText = window.getSelection()?.toString().toUpperCase()!;
+      if (this.selectedText == undefined){
+        this.selectedText = "Not in Dictionary";
+      }
+      let dictionary:any = dictionaryJson; //needed for typescript nonsense
+      this.selectedDefine = dictionary[0][this.selectedText];
+
+      let sel = window.getSelection()!;
+      if (sel.getRangeAt) {
+        //create span around word to be defined
+        let range = sel.getRangeAt(0);
+        let newNode = document.createElement("span");
+        let uniqueID = this.selectedText + this.selectedCount;
+        newNode.setAttribute('id', uniqueID);
+        newNode.setAttribute('class', 'definitionParent');
+        range.surroundContents(newNode);
+
+        // create definition span to tie to the selected word
+        let defNode = this.document.createElement("span");
+        defNode.setAttribute('class', 'definitionChild');
+        defNode.innerHTML = this.selectedDefine;
+        this.selectedID = document.getElementById(uniqueID); //span created above
+        this.selectedID.appendChild(defNode);
+        this.selectedCount += 1; //help create unique ID for next search if it is the same word
+      }
     });
   }
 
