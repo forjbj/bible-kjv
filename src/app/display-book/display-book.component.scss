@@ -121,6 +121,7 @@ section {
 .definitionParent{
   position: relative;
   text-decoration: underline;
+  text-decoration-color: var(--scriptNum);
 }
 .definitionChild {
   position:absolute;
@@ -130,8 +131,11 @@ section {
   transform: translateX(-50%);
   z-index: 1;
   white-space: nowrap; //absolutely necessary
-  /* color: var(--lightRed); */
-  color: red;
+  color: var(--scriptNum);
   font-family: Arial, Helvetica, sans-serif;
   font-style: italic;
+  @media (orientation: portrait) {
+    top: -1rem;
+    font-size: 0.9rem;
+  }
 }

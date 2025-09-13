@@ -143,8 +143,14 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.dictionaryResult(event);
     });
     //below for touchscreen
-    window.addEventListener("touchstart", (event) => {
-      this.dictionaryResult(event);
+    window.addEventListener("touchend", (event) => {
+      let selectedWord = window.getSelection()?.toString().toUpperCase()!;
+      let thisId = selectedWord + this.selectedCount;
+
+      console.log(selectedWord, document.getElementById(thisId));
+      if (selectedWord && !document.getElementById(thisId)) {
+        this.dictionaryResult(event);
+      }
     });
   }
 
@@ -242,7 +248,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
   dictionaryResult (event: any) {
     this.clickedElement = event.target;
     this.selectedText = window.getSelection()?.toString().toUpperCase()!;
-
     let dictionary:any = dictionaryJson; //needed for typescript nonsense
     this.selectedDefine = dictionary[0][this.selectedText];
     if (this.selectedDefine == undefined) {
@@ -265,6 +270,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.selectedID = document.getElementById(uniqueID); //span created above
       this.selectedID.appendChild(defNode);
       this.selectedCount += 1; //help create unique ID for next search if it is the same word
+      sel.removeAllRanges();// clear selection; absolutely needed for touch
     }
   }
 }
