@@ -253,18 +253,31 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     if (this.selectedDefine == undefined) {
       this.selectedDefine = "Not in Dictionary";
     }
+
     let sel = window.getSelection()!;
     if (sel.getRangeAt) {
+      // remove old defintion first so no overlapping
+      const defElement = document.getElementById("defId")!;
+      if (defElement){
+        defElement.remove();
+        // let selEl = document.getElementById(this.selectedText + (this.selectedCount - 1));
+        // selEl?.setAttribute('style',"text-decoration: none;")
+      };
+      // let commonParent = sel.getRangeAt(0).commonAncestorContainer.parentElement;
+      // commonParent!.setAttribute("style", "position:relative;");
+
       //create span around word to be defined
       let range = sel.getRangeAt(0);
       let newNode = document.createElement("span");
       let uniqueID = this.selectedText + this.selectedCount;
+      // commonParent?.setAttribute("id", uniqueID);
       newNode.setAttribute('id', uniqueID);
       newNode.setAttribute('class', 'definitionParent');
       range.surroundContents(newNode);
 
       // create definition span to tie to the selected word
       let defNode = this.document.createElement("span");
+      defNode.setAttribute('id', "defId");
       defNode.setAttribute('class', 'definitionChild');
       defNode.innerHTML = this.selectedDefine;
       this.selectedID = document.getElementById(uniqueID); //span created above
