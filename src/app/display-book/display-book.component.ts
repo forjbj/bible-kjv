@@ -30,11 +30,10 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
   private observer: any;
 
-  public clickedElement: any;
   public selectedText!: string;
   public selectedID!: any;
   public selectedDefine!: any;
-  public selectedCount = 0; //needed for dictionay search individuality
+  public selectedCount = 1; //needed for dictionay search individuality
 
   constructor(
     public bibleService: BibleService,
@@ -146,7 +145,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     window.addEventListener("touchend", (event) => {
       let selectedWord = window.getSelection()?.toString().toUpperCase()!;
       let thisId = selectedWord + ((this.selectedCount-1).toString());
-      console.log(thisId);
       if (selectedWord && !document.getElementById(thisId)) {
         this.dictionaryResult(event);
       }
@@ -245,29 +243,40 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       });
   }
   dictionaryResult (event: any) {
-    this.clickedElement = event.target;
     this.selectedText = window.getSelection()?.toString().toUpperCase()!;
     let dictionary:any = dictionaryJson; //needed for typescript nonsense
     this.selectedDefine = dictionary[0][this.selectedText];
     if (this.selectedDefine == undefined) {
       this.selectedDefine = "Not in Dictionary";
     }
-
+    // remove old defintion first so no overlapping
+    const defElement = document.getElementById("defId")!;
+    if (defElement){
+      defElement.remove();
+    };
     let sel = window.getSelection()!;
     if (sel.getRangeAt) {
+
+      // let commonParent = sel.getRangeAt(0).commonAncestorContainer.parentElement;
+      // commonParent!.setAttribute("style", "position:relative;");
+
       //create span around word to be defined
       let range = sel.getRangeAt(0);
-      let newNode = document.createElement("span");
+      let newNode = document.createElement("div");
       let uniqueID = this.selectedText + this.selectedCount;
-      // commonParent?.setAttribute("id", uniqueID);
       newNode.setAttribute('id', uniqueID);
       newNode.setAttribute('class', 'definitionParent');
       range.surroundContents(newNode);
 
       // create definition span to tie to the selected word
-      let defNode = this.document.createElement("span");
+      let defNode = this.document.createElement("div");
+      // defNode.setAttribute('id', "defId");
       defNode.setAttribute('class', 'definitionChild');
       defNode.innerHTML = this.selectedDefine;
+      // below is needed so definition doesn't hid behind another
+      let z = "z-index:" + (this.selectedCount).toString();
+      defNode.setAttribute('style', z);
+
       this.selectedID = document.getElementById(uniqueID); //span created above
       this.selectedID.appendChild(defNode);
       this.selectedCount += 1; //help create unique ID for next search if it is the same word
