@@ -269,12 +269,12 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       range.surroundContents(newNode);
 
       // create definition span to tie to the selected word
-      let defNode = this.document.createElement("div");
+      let defNode = this.document.createElement("content");
       // defNode.setAttribute('id', "defId");
       defNode.setAttribute('class', 'definitionChild');
       defNode.innerHTML = this.selectedDefine;
       // below is needed so definition doesn't hid behind another
-      let z = "z-index:" + (this.selectedCount).toString();
+      let z = "z-index:" + ((this.selectedCount).toString());
       defNode.setAttribute('style', z);
 
       this.selectedID = document.getElementById(uniqueID); //span created above

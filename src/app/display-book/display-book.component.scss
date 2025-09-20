@@ -126,9 +126,10 @@ section {
 }
 .definitionChild {
   position:absolute;
+  user-select: none; //necessary for ios or it makes a mess of re-selecting
   text-align: center;
   background-color: color-mix(in srgb, var(--paper) 70%, transparent);
-  bottom: 1.2rem;
+  bottom: 1.3rem;
   line-height: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
