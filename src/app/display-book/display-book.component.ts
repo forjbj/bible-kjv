@@ -145,9 +145,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     //below for touchscreen
     window.addEventListener("touchend", (event) => {
       let selectedWord = window.getSelection()?.toString().toUpperCase()!;
-      let thisId = selectedWord + this.selectedCount;
-
-      console.log(selectedWord, document.getElementById(thisId));
+      let thisId = selectedWord + ((this.selectedCount-1).toString());
+      console.log(thisId);
       if (selectedWord && !document.getElementById(thisId)) {
         this.dictionaryResult(event);
       }
@@ -256,16 +255,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
     let sel = window.getSelection()!;
     if (sel.getRangeAt) {
-      // remove old defintion first so no overlapping
-      const defElement = document.getElementById("defId")!;
-      if (defElement){
-        defElement.remove();
-        // let selEl = document.getElementById(this.selectedText + (this.selectedCount - 1));
-        // selEl?.setAttribute('style',"text-decoration: none;")
-      };
-      // let commonParent = sel.getRangeAt(0).commonAncestorContainer.parentElement;
-      // commonParent!.setAttribute("style", "position:relative;");
-
       //create span around word to be defined
       let range = sel.getRangeAt(0);
       let newNode = document.createElement("span");
@@ -277,7 +266,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
       // create definition span to tie to the selected word
       let defNode = this.document.createElement("span");
-      defNode.setAttribute('id', "defId");
       defNode.setAttribute('class', 'definitionChild');
       defNode.innerHTML = this.selectedDefine;
       this.selectedID = document.getElementById(uniqueID); //span created above
