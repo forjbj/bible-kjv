@@ -119,25 +119,25 @@ section {
     border: 1px solid var(--paper);
 }
 .definitionParent{
-  position: relative;
-  display: inline-grid; //do not change this; makes re-selecting impossible without it
-  text-decoration: underline;
+  text-decoration:underline;
+  text-decoration-style: dotted;
   text-decoration-color: var(--scriptNum);
 }
-.definitionChild {
-  position:absolute;
-  user-select: none; //necessary for ios or it makes a mess of re-selecting
-  text-align: center;
-  background-color: color-mix(in srgb, var(--paper) 70%, transparent);
-  bottom: 1.3rem;
-  line-height: 1.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(400%, 12rem);
-  color: var(--scriptNum);
-  font-family: Arial, Helvetica, sans-serif;
-  font-style: italic;
-  @media (orientation: portrait) {
-    font-size: 0.9rem;
+/*Functional Styling*/
+@media (pointer: coarse), (pointer: fine), (hover: none){ //finger on touchscreen, mouse
+  [tooltip] {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+  }
+  [tooltip]:focus::after {
+    content: attr(tooltip);
+    position: absolute;
+    bottom: 1.5rem;
+    color: var(--scriptNum);
+    background-color: color-mix(in srgb, var(--paper) 75%, transparent);
+    border: 1px solid;
+    width: fit-content;
+    padding: 3px;
   }
 }

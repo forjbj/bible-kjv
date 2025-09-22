@@ -143,11 +143,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     });
     //below for touchscreen
     window.addEventListener("touchend", (event) => {
-      let selectedWord = window.getSelection()?.toString().toUpperCase()!;
-      let thisId = selectedWord + ((this.selectedCount-1).toString());
-      if (selectedWord && !document.getElementById(thisId)) {
         this.dictionaryResult(event);
-      }
     });
   }
 
@@ -249,37 +245,20 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     if (this.selectedDefine == undefined) {
       this.selectedDefine = "Not in Dictionary";
     }
-    // remove old defintion first so no overlapping
-    const defElement = document.getElementById("defId")!;
-    if (defElement){
-      defElement.remove();
-    };
+
     let sel = window.getSelection()!;
     if (sel.getRangeAt) {
-
-      // let commonParent = sel.getRangeAt(0).commonAncestorContainer.parentElement;
-      // commonParent!.setAttribute("style", "position:relative;");
-
       //create span around word to be defined
       let range = sel.getRangeAt(0);
-      let newNode = document.createElement("div");
+      let newNode = document.createElement("span");
       let uniqueID = this.selectedText + this.selectedCount;
       newNode.setAttribute('id', uniqueID);
       newNode.setAttribute('class', 'definitionParent');
+      newNode.setAttribute('tooltip', this.selectedDefine);
       range.surroundContents(newNode);
-
-      // create definition span to tie to the selected word
-      let defNode = this.document.createElement("content");
-      // defNode.setAttribute('id', "defId");
-      defNode.setAttribute('class', 'definitionChild');
-      defNode.innerHTML = this.selectedDefine;
-      // below is needed so definition doesn't hid behind another
-      let z = "z-index:" + ((this.selectedCount).toString());
-      defNode.setAttribute('style', z);
-
-      this.selectedID = document.getElementById(uniqueID); //span created above
-      this.selectedID.appendChild(defNode);
-      this.selectedCount += 1; //help create unique ID for next search if it is the same word
+      let focusDef = document.getElementById(uniqueID)!;
+      focusDef.tabIndex = 0; // absolutely necessary; as touch tooltip doesn't work without it
+      focusDef.focus();
       sel.removeAllRanges();// clear selection; absolutely needed for touch
     }
   }
