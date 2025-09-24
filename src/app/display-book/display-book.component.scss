@@ -120,20 +120,20 @@ section {
 }
 .definitionParent{
   text-decoration:underline;
-  text-decoration-style: dotted;
+  text-decoration-style: wavy;
   text-decoration-color: var(--scriptNum);
 }
 /*Functional Styling*/
 @media (pointer: coarse), (pointer: fine), (hover: none){ //finger on touchscreen, mouse
-  [tooltip] {
+  [definition] {
     position: relative;
-    display: inline-flex;
+    display: inline-grid;
     justify-content: center;
   }
-  [tooltip]:focus::after {
-    content: attr(tooltip);
+  [definition]:focus::after {
+    content: attr(definition);
     position: absolute;
-    bottom: 1.5rem;
+    grid-row: 2;
     color: var(--scriptNum);
     background-color: color-mix(in srgb, var(--paper) 75%, transparent);
     border: 1px solid;

@@ -30,11 +30,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
   private observer: any;
 
-  public selectedText!: string;
-  public selectedID!: any;
-  public selectedDefine!: any;
-  public selectedCount = 1; //needed for dictionay search individuality
-
   constructor(
     public bibleService: BibleService,
     public historyService: HistoryService,
@@ -43,9 +38,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     public router: Router,
     private location: Location,
     @Inject(DOCUMENT) public document: Document,
-    private activatedRoute: ActivatedRoute,
-
-  ) {
+    private activatedRoute: ActivatedRoute,  ) {
     this.bibleService.spinner = true;
     this.bibleService.spinnerTitle = "Rendering";
 
@@ -91,9 +84,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     }
 
     this.nextBook();
-
   }
-
   ngAfterViewInit() {
     //turn off spinner, setTimeout is necessary or doesn't work
     setTimeout(() => {
@@ -137,20 +128,11 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
     });
 
-    //below for mouse
-    window.addEventListener("dblclick", (event) => {
-      this.dictionaryResult(event);
-    });
-    //below for touchscreen
-    window.addEventListener("touchend", (event) => {
-        this.dictionaryResult(event);
-    });
+    this.wordsDefine();    //automate word definitions
   }
-
   ngOnDestroy() {
     // this.observer.disconnect()!; //throws error, because it is part of saveScrollposition()???
   }
-
   saveScrollposition() {
     // save chapter and verse on scroll
     const chapters = this.document.querySelectorAll("section > div > a, section > header > a, section > a");
@@ -166,11 +148,19 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         let splits = chapter.split("-");
         let targetChapter = splits[2];
         let url = "/book#";
+
         if (entry.isIntersecting) {
-          localStorage.setItem("curVerse", splits[3]);
+
           this.bibleService.verseNumber = splits[3];
-          localStorage.setItem("curChap", targetChapter);
+          localStorage.setItem("curVerse", this.bibleService.verseNumber);
           this.bibleService.chapterNumber = targetChapter;
+
+          // definitions for words in the current chapter; run before setting localStorage
+          if (localStorage.getItem("curChap") != targetChapter) {
+            this.wordsDefine();
+            console.log(targetChapter);
+          };
+          localStorage.setItem("curChap", targetChapter);
           this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
 
           let tabTitle = this.bibleService.title.concat(" ", targetChapter);
@@ -182,7 +172,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.observer.observe(chapter);
     });
   }
-
   nextBook() {
     if (
       (this.bibleService.testament == 0 &&
@@ -214,7 +203,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.nextButton = "The End";
     }
   }
-
   nextBookRoute() {
     if (
       (this.bibleService.testament == 0 &&
@@ -238,28 +226,27 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         this.router.navigate(["book"], { fragment: this.nextFragment });
       });
   }
-  dictionaryResult (event: any) {
-    this.selectedText = window.getSelection()?.toString().toUpperCase()!;
-    let dictionary:any = dictionaryJson; //needed for typescript nonsense
-    this.selectedDefine = dictionary[0][this.selectedText];
-    if (this.selectedDefine == undefined) {
-      this.selectedDefine = "Not in Dictionary";
-    }
-
-    let sel = window.getSelection()!;
-    if (sel.getRangeAt) {
-      //create span around word to be defined
-      let range = sel.getRangeAt(0);
-      let newNode = document.createElement("span");
-      let uniqueID = this.selectedText + this.selectedCount;
-      newNode.setAttribute('id', uniqueID);
-      newNode.setAttribute('class', 'definitionParent');
-      newNode.setAttribute('tooltip', this.selectedDefine);
-      range.surroundContents(newNode);
-      let focusDef = document.getElementById(uniqueID)!;
-      focusDef.tabIndex = 0; // absolutely necessary; as touch tooltip doesn't work without it
-      focusDef.focus();
-      sel.removeAllRanges();// clear selection; absolutely needed for touch
+  wordsDefine (){
+    let chap = this.bibleService.chapterNumber;
+    for (var j = 0; j < 2; j++){
+      const chapterSection = document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+chap+"-"+"0-S")
+      const scripture = chapterSection!.querySelectorAll(".scripture");
+      const dictionary:any = dictionaryJson;
+      for (var i = 0; i < scripture.length; i++) {
+        const selection = (scripture[i] as HTMLElement).innerText;
+        for (const key in dictionary[0]) {
+          let re = new RegExp("\\b" + key + "\\b", 'gi')
+          if (selection.match(re)){
+            (scripture[i] as HTMLElement).textContent!.match(re)!.forEach((e) =>
+              scripture[i].innerHTML = (scripture[i] as HTMLElement).textContent!.replace(e, "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + e + "</span>"));
+          }
+        }
+      };
+      if (document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+(Number(chap) + 1).toString()+"-"+"0-S")){
+        chap = (Number(chap) +1).toString();
+      } else {
+        break;
+      }
     }
   }
 }
