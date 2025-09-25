@@ -250,3 +250,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     }
   }
 }
+export function read_dictionary() {
+  return JSON.stringify(dictionaryJson); // WASM WORKS! don't touch
+}
