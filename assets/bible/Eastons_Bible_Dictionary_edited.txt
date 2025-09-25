@@ -10,7 +10,7 @@
 "ABEDNEGO":"Meaning: servant of Nego, or servant of light.",
 "ABEL":"Man's name meaning breath, or vanity; Place name meaning a grassy place, a meadow.",
 "MAACHAH":"In the tribe of Naphtali.",
-"MEHOLAH":"Meadow of dancing, or the dancing-meadow.",
+"MEHOLAH":"Of dancing, or the dancing-meadow.",
 "ABEL-MIZRAIM":"Meadow of Egypt, or mourning of Egypt.",
 "ABEL-SHITTIM":"Meadow of the acacias.",
 "ABEZ":"Tin, or white, a town in the tribe of Issachar.",
@@ -5697,7 +5697,7 @@ wine,” i.e., the fever of wine, its intoxicating strength.
 The clouds are figuratively called the “bottles of heaven” (Job 38:37). A
 bottle blackened or shrivelled by smoke is referred to in Psalm 119:83 as
 an image to which the psalmist likens himself.
-"BO":"W The bow was in use in early times both in war and in the chase
+"BOW" The bow was in use in early times both in war and in the chase
 (Genesis 21:20; 27:3; 48:22). The tribe of Benjamin were famous for the
 use of the bow (1 Chronicles 8:40; 12:2; 2 Chronicles 14:8; 17:17); so also
 were the Elamites (Isaiah 22:6) and the Lydians (Jeremiah 46:9). The
