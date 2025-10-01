@@ -128,7 +128,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
     });
 
-    this.wordsDefine();    //automate word definitions
+      this.wordsDefine();    //automate word definitions
+
   }
   ngOnDestroy() {
     // this.observer.disconnect()!; //throws error, because it is part of saveScrollposition()???
@@ -158,7 +159,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
           // definitions for words in the current chapter; run before setting localStorage
           if (localStorage.getItem("curChap") != targetChapter) {
             this.wordsDefine();
-            console.log(targetChapter);
+            // console.log(targetChapter);
           };
           localStorage.setItem("curChap", targetChapter);
           this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
@@ -228,19 +229,26 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
   }
   wordsDefine (){
     let chap = this.bibleService.chapterNumber;
+    // below is needed for new book selection
+    if (chap == "0"){
+      chap = "1";
+    }
     for (var j = 0; j < 2; j++){
-      const chapterSection = document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+chap+"-"+"0-S")
+      const chapterSection = document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+ chap +"-"+"0-S")
       const scripture = chapterSection!.querySelectorAll(".scripture");
       const dictionary:any = dictionaryJson;
-      for (var i = 0; i < scripture.length; i++) {
-        const selection = (scripture[i] as HTMLElement).innerText;
+      for (let i = 0; i < scripture.length; i++) {
+        let verse = (scripture[i] as HTMLElement).innerHTML;
         for (const key in dictionary[0]) {
-          let re = new RegExp("\\b" + key + "\\b", 'gi')
-          if (selection.match(re)){
-            (scripture[i] as HTMLElement).textContent!.match(re)!.forEach((e) =>
-              scripture[i].innerHTML = (scripture[i] as HTMLElement).textContent!.replace(e, "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + e + "</span>"));
+          let re = new RegExp("(<span.*?<\/span>)|(\\b" + key + "\\b)", 'gi');
+          function replacer(match: any, p1: any, p2: any) {
+            // console.log(match);
+            if (p2 == undefined) return p1;
+            else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
           }
-        }
+          verse = verse.replace(re, replacer);
+          scripture[i].innerHTML = verse;
+        };
       };
       if (document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+(Number(chap) + 1).toString()+"-"+"0-S")){
         chap = (Number(chap) +1).toString();

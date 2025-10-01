@@ -136,9 +136,11 @@ section {
     position: absolute;
     grid-row: 2;
     color: var(--scriptNum);
-    background-color: color-mix(in srgb, var(--paper) 75%, transparent);
+    background-color: color-mix(in srgb, var(--paper) 80%, transparent);
     border: 1px solid;
     width: fit-content;
     padding: 3px;
+    min-width: 200%;
+    z-index: 1;
   }
 }
