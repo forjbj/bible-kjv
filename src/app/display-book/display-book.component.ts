@@ -128,8 +128,28 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
     });
 
-      this.wordsDefine();    //automate word definitions
+    this.wordsDefine();    //automate word definitions
 
+    document.addEventListener('click', e => {
+      let winSize = window.innerWidth;
+      let posClick = e.clientX;
+      console.log("viewport: " + posClick); // position relative to VIEWPORT
+      // console.log("screen: " + e.screenX); // position relative to SCREEN
+      // console.log("page: " + e.pageX);   // position relative to PAGE (take scroll in account)
+      console.log("window width: " + winSize +"\n");
+      if (posClick/winSize < 0.33){
+        console.log("clicked left side of page");
+        document.documentElement.style.setProperty("--margin_definition", "0");
+      };
+      if (posClick/winSize > 0.33 && posClick/winSize < 0.66){
+        console.log("clicked middle of page");
+        // document.documentElement.style.setProperty("--margin_definition", "-50%");
+      };
+      if (posClick/winSize > 0.66){
+        console.log("clicked right side of page");
+        document.documentElement.style.setProperty("--margin_definition", "-100%");
+      };
+    })
   }
   ngOnDestroy() {
     // this.observer.disconnect()!; //throws error, because it is part of saveScrollposition()???

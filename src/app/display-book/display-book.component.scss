@@ -135,6 +135,7 @@ section {
     content: attr(definition);
     position: absolute;
     grid-row: 2;
+    margin-left: var(--margin_definition); // variable defined by mouse click; see event listener
     color: var(--scriptNum);
     background-color: color-mix(in srgb, var(--paper) 80%, transparent);
     border: 1px solid;
