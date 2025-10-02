@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1759361080669,
+  "timestamp": 1759374176807,
   "index": "/bible-kjv/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/bible-kjv/63.c0ba343e9b22178a.js",
         "/bible-kjv/common.6fe6aae0180d8b94.js",
         "/bible-kjv/index.html",
-        "/bible-kjv/main.8313e436603fa61c.js",
+        "/bible-kjv/main.86bc772b08b041c6.js",
         "/bible-kjv/manifest.webmanifest",
         "/bible-kjv/polyfills.93a46bc31ae83002.js",
         "/bible-kjv/runtime.d0906955dba90995.js",
@@ -56,7 +56,7 @@
     "/bible-kjv/444.b8cafbc8afa5ff44.js": "f2a0f0b5dc05ac39a7365571b877ed1cfc07cffd",
     "/bible-kjv/63.c0ba343e9b22178a.js": "93f0e87b7410326822c732020ce4bdbcb7d02623",
     "/bible-kjv/assets/bible/Bible.json": "2efdfc9890c2846eb518c3c5eeb64e1c0277b0fc",
-    "/bible-kjv/assets/bible/Dictionary.json": "510eb986a76a39e1ba9d238257b0e464cf357d79",
+    "/bible-kjv/assets/bible/Dictionary.json": "6117acf7b9585320a0f3760b43fa33102e3d15a4",
     "/bible-kjv/assets/bible/Eastons_Bible_Dictionary_edited.txt": "5a67291d9d217c4b817e56fb3f469f27cddf0524",
     "/bible-kjv/assets/icons/icon-128x128.png": "154210bd7c42f9a8a66a3f03db91f23bb9fd93d6",
     "/bible-kjv/assets/icons/icon-144x144.png": "32823e2b00a262d790ac542ac1a2e1a05f940d5f",
@@ -71,8 +71,8 @@
     "/bible-kjv/assets/search_neutral.svg": "3f54ae72cdb1ef2adc88e9a28bf417d5e455ae50",
     "/bible-kjv/common.6fe6aae0180d8b94.js": "ca06045bbc94250dfa7f68b4850144dcd43aaced",
     "/bible-kjv/icon-192x192.321592a8a2f8ef9a.png": "177df93d4bc990b4551a7ca083f211364dc4b5a8",
-    "/bible-kjv/index.html": "1e10455eb93ca1d857c90a0d6d13a63a56a06a10",
-    "/bible-kjv/main.8313e436603fa61c.js": "dec59ee2aa132f12f9182fdb04ea1cf509216fe4",
+    "/bible-kjv/index.html": "e48e746272d7ef431832128cdd81876831d74b6b",
+    "/bible-kjv/main.86bc772b08b041c6.js": "7d9e90377edc0e52239aaf292a31eca9bfcf58e5",
     "/bible-kjv/manifest.webmanifest": "52411e1189ed3cbd18f2ba2a3d703879cb9f9e9c",
     "/bible-kjv/openBible.6e42efe05f4fbf81.png": "62907c11393cfed548c677e397517a56a53556b6",
     "/bible-kjv/polyfills.93a46bc31ae83002.js": "7a69aac40b485859db2a79650838fd71f9968a82",
