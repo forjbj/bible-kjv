@@ -122,14 +122,14 @@ section {
   text-decoration:underline;
   text-decoration-style: solid;
   text-decoration-color: var(--scriptNum);
-  white-space: pre-line; // needed for \n characters in definitions
+  /* white-space: pre-line; // needed for \n characters in definitions */
 }
 /*Functional Styling*/
 @media (pointer: coarse), (pointer: fine), (hover: none){ //finger on touchscreen, mouse
   [definition] {
     position: relative;
     display: inline-grid;
-    justify-content: center;
+    /* justify-content: center; */
   }
   [definition]:focus::after {
     content: attr(definition);

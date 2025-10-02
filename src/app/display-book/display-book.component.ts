@@ -138,15 +138,15 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       // console.log("page: " + e.pageX);   // position relative to PAGE (take scroll in account)
       console.log("window width: " + winSize +"\n");
       if (posClick/winSize < 0.33){
-        console.log("clicked left side of page");
+        // console.log("clicked left side of page");
         document.documentElement.style.setProperty("--margin_definition", "0");
       };
       if (posClick/winSize > 0.33 && posClick/winSize < 0.66){
-        console.log("clicked middle of page");
+        // console.log("clicked middle of page");
         // document.documentElement.style.setProperty("--margin_definition", "-50%");
       };
       if (posClick/winSize > 0.66){
-        console.log("clicked right side of page");
+        // console.log("clicked right side of page");
         document.documentElement.style.setProperty("--margin_definition", "-100%");
       };
     })
