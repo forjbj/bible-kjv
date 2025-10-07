@@ -133,21 +133,20 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     document.addEventListener('click', e => {
       let winSize = window.innerWidth;
       let posClick = e.clientX;
-      console.log("viewport: " + posClick); // position relative to VIEWPORT
-      // console.log("screen: " + e.screenX); // position relative to SCREEN
-      // console.log("page: " + e.pageX);   // position relative to PAGE (take scroll in account)
-      console.log("window width: " + winSize +"\n");
+
       if (posClick/winSize < 0.33){
         // console.log("clicked left side of page");
-        document.documentElement.style.setProperty("--margin_definition", "0");
+        document.documentElement.style.setProperty("--definitionPosition", "left");
       };
       if (posClick/winSize > 0.33 && posClick/winSize < 0.66){
         // console.log("clicked middle of page");
-        // document.documentElement.style.setProperty("--margin_definition", "-50%");
+        document.documentElement.style.setProperty("--definitionPosition", "center");
+
       };
       if (posClick/winSize > 0.66){
         // console.log("clicked right side of page");
-        document.documentElement.style.setProperty("--margin_definition", "-100%");
+        document.documentElement.style.setProperty("--definitionPosition", "right");
+
       };
     })
   }
@@ -262,9 +261,10 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         for (const key in dictionary[0]) {
           let re = new RegExp("(<span.*?<\/span>)|(\\b" + key + "\\b)", 'gi');
           function replacer(match: any, p1: any, p2: any) {
-            // console.log(match);
             if (p2 == undefined) return p1;
-            else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
+            // else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
+            // tabindex="0" essential for below to obtain focus
+            else return "<span class=\"wordToDefine\" tabindex=0>" + p2 +"<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
           }
           verse = verse.replace(re, replacer);
           scripture[i].innerHTML = verse;

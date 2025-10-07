@@ -70,7 +70,7 @@
 .searchOption, .searchInput {
     font-family: Bookman, Georgia, serif;
     font-size: 0.9rem;
-    border-radius: 0;
+    border-radius: 0.2rem;
     padding: 0 0.3rem;
     &:focus {
         outline: var(--lightRed) solid 1px; //needed for apple otherwise its blue

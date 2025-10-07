@@ -2,7 +2,7 @@
 <main class="gridWrapper">
   <nav id = "nav" class="navGrid landscapeNav portraitNav">
     <header id="description" class="desc">
-      {{bibleService.pageTitle}} 
+      {{bibleService.pageTitle}}
     </header>
     <div *ngIf="bibleService.chapterButton == true; else version">
       <button (click) = "bibleService.showChapters = !bibleService.showChapters;
@@ -34,21 +34,20 @@
     <button aria-label="menu" class="menuButton"
             [ngClass] = "bibleService.displayMenu ? 'menuButtonActive' : 'hamburger'"
             (click) = "bibleService.showChapters = false;
-                      bibleService.displayMenu = !bibleService.displayMenu;
-                      ">
+                      bibleService.displayMenu = !bibleService.displayMenu;">
       <svg class="hamburger" viewBox="0 0 100 100">
-        <rect class="line top" 
+        <rect class="line top"
               width="90"
               height="10"
               x="5" y="20" rx="5">
         </rect>
-        <rect class="line middle" 
+        <rect class="line middle"
               width="90"
               height="10"
               stroke="black"
               x="5" y="50" rx="5">
         </rect>
-        <rect class="line bottom" 
+        <rect class="line bottom"
               width="90"
               height="10"
               stroke="black"

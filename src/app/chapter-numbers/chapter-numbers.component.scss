@@ -1,6 +1,5 @@
 .chaptersShow {
     position: absolute;
-    z-index: 3;
     background-color: var(--menu);
     border: 1px solid var(--ink);
     box-shadow: 0 12px 7px -7px var(--zPaper);
@@ -10,7 +9,7 @@
     width: 14rem;
     overflow-y: auto;
     overscroll-behavior: contain; // needed to stop scrolling scripture when scrolled to end of chapters
-    border-radius: 0.1rem;
+    border-radius: 0.2rem;
     hr {
         margin: 0.7rem 0.7rem;
     }
@@ -62,7 +61,7 @@
 }
 .chapters {
     border: 1px solid var(--buttonBorder);
-    border-radius: 0.1rem;
+    border-radius: 0.2rem;
     padding: 0.33rem 0rem; // needed to make square
     height: 1.2rem; // needed to stop gird 'bouncing' on bold hover
     line-height: 1.2rem; // as above

@@ -2,8 +2,8 @@
   position: absolute;
   top: 2.3rem;
   margin: 0 1rem;
-  z-index: 3;
   border: 1px solid var(--ink);
+  border-radius: 0.2rem;
   background-color: var(--menu);
   color: var(--zInk);
   text-shadow: 1px 1px var(--gridColor);
@@ -124,6 +124,7 @@ dialog{
   font-family: Georgia,"Times New Roman", Times, serif;
   color: var(--ink);
   background-color: var(--menu);
+  border-radius: 0.2rem;
   @media(orientation: portrait) {
     opacity: 0;
     translate: 0 -20vh;
@@ -192,7 +193,7 @@ dialog[open]::backdrop{
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
   background-color: var(--button);
   padding: 1rem 0.2rem;
   cursor: pointer;
@@ -261,7 +262,7 @@ dialog[open]::backdrop{
 .searchOption, .searchInput {
   font-family: Bookman, Georgia, serif;
   font-size: 0.9rem;
-  border-radius: 0;
+  border-radius: 0.2rem;
   padding: 0 0.3rem;
   &:focus {
       outline: var(--lightRed) solid 1px; //needed for apple otherwise its blue
@@ -289,11 +290,12 @@ dialog[open]::backdrop{
   display: grid; // grid needed to place .searchPageText [css class see below] on top of .backgroundBible class
   margin: 0;
   padding: 0;
+  border-radius: 0.2rem;
 }
 .backgroundBible {
   grid-area: 1/1; // same grid area as .searchPageText so .searchPageText appears on top
   opacity: 0.7;
-  z-index: -1; // necessary or opacity setting above bleeds into .searchPageText text.
+  /* z-index: -1; // necessary or opacity setting above bleeds into .searchPageText text. */
   background-image: url(../../assets/openBible.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -316,7 +318,7 @@ dialog[open]::backdrop{
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
   background-color: var(--button);
   padding: 0.2rem 1rem;
   margin-bottom: 1rem;
@@ -342,7 +344,7 @@ dialog[open]::backdrop{
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
   background-color: var(--button);
   padding: 0.2rem 1rem;
   cursor: pointer;

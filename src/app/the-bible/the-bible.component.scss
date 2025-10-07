@@ -63,7 +63,7 @@
   color: var(--zInk);
   text-align: center;
   text-shadow: 1px 1px var(--gridColor);
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
   background-color: var(--button);
   padding: 0.2rem;
   cursor: pointer;
@@ -149,7 +149,7 @@
 
 @media (orientation: landscape) {
   nav {
-    z-index: 2; // necessary for the nav's child (menu) to overlay the router-outlet; search is sticky so is this.
+    /* z-index: 2; // necessary for the nav's child (menu) to overlay the router-outlet; search is sticky so is this. */
     background-color: var(--nav);
     font-family: "Bookman", Georgia, serif;
     color: var(--zInk);

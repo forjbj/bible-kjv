@@ -101,7 +101,7 @@ section {
     color: var(--zInk);
     text-align: center;
     text-shadow: 1px 1px var(--gridColor);
-    border-radius: 0.1rem;
+    border-radius: 0.2rem;
     background-color: var(--button);
     padding: 0.5rem 1rem;
     cursor: pointer;
@@ -118,30 +118,53 @@ section {
     padding: 0 1rem;
     border: 1px solid var(--paper);
 }
-.definitionParent{
+/* word definitions */
+.wordToDefine{
+  display: inline-flex;
   text-decoration:underline;
   text-decoration-style: solid;
   text-decoration-color: var(--scriptNum);
-  /* white-space: pre-line; // needed for \n characters in definitions */
+  justify-content: var(--definitionPosition);// variable defined by mouse click; see event listener
 }
-/*Functional Styling*/
-@media (pointer: coarse), (pointer: fine), (hover: none){ //finger on touchscreen, mouse
+.definition {
+  display: none; //necessary or definitions are hidden but on the page and cause a horizontal scroll bar
+  grid-row: 2;
+  top: 0.5rem;
+  color: var(--scriptNum);
+  background-color: color-mix(in srgb, var(--paper) 80%, transparent);
+  border: 1px solid var(--scriptNum);
+  border-radius: 0.2rem;
+  padding: 3px;
+  width: 30ch;
+  max-width: 50vw;
+  white-space: pre-wrap;
+}
+
+.wordToDefine:focus{
+  position: relative; // add only on focus; otherwise bleeds through to menus etc.
+  .definition{
+    position: absolute;// add only on focus; otherwise bleeds through to menus etc.
+    display: block;
+  }
+}
+
+//Functional Styling
+/* @media (pointer: coarse), (pointer: fine), (hover: none){ //finger on touchscreen, mouse
   [definition] {
     position: relative;
     display: inline-grid;
-    /* justify-content: center; */
   }
   [definition]:focus::after {
     content: attr(definition);
     position: absolute;
     grid-row: 2;
-    margin-left: var(--margin_definition); // variable defined by mouse click; see event listener
+    margin-left: var(--marginDefinition); // variable defined by mouse click; see event listener
     color: var(--scriptNum);
     background-color: color-mix(in srgb, var(--paper) 80%, transparent);
     border: 1px solid;
-    width: fit-content;
     padding: 3px;
-    min-width: 200%;
     z-index: 1;
+    min-width: 200%;
+    white-space: pre-wrap;
   }
-}
+} */
