@@ -111,33 +111,17 @@ input:checked + .slider:before {
 }
 // end dark theme toggle switch
 
-
 // Dialogs
 dialog{
   display: none;
-  opacity: 0;
+  /* opacity: 0; */
   max-width: 75vw;
   max-height: 75dvh;
-  transition-property: opacity display overlay;
-  transition-duration: 0.5s;
-  transition-behavior: allow-discrete;
   font-family: Georgia,"Times New Roman", Times, serif;
   color: var(--ink);
   background-color: var(--menu);
   border-radius: 0.2rem;
-  @media(orientation: portrait) {
-    opacity: 0;
-    translate: 0 -20vh;
-  }
-  @media(orientation: landscape){
-    opacity: 0;
-    &[leftHanded = 'yes'] {
-      translate: -10vw 0;
-    }
-    &[leftHanded = 'no'] {
-      translate: 10vw  0
-    }
-  }
+
   &.search {
     @media (orientation: portrait){
       margin-top: 3rem;
@@ -148,38 +132,14 @@ dialog{
   }
   &[open]{
     display: block;
-    opacity: 1;
-    translate: 0 0;
     border: 1px solid var(--ink);
-  }
-  @starting-style{
-    @media(orientation: portrait) {
-      opacity: 0;
-      translate: 0 -20vh;
-    }
-    @media(orientation: landscape){
-      opacity: 0;
-      &[leftHanded = 'yes'] {
-        translate: -10vw 0;
-      }
-      &[leftHanded = 'no'] {
-        translate: 10vw  0
-      }
-    }
   }
 }
 dialog::backdrop{
-  transition-property: opacity display overlay;
-  transition-duration: 2s;
-  transition-behavior: allow-discrete;
-  opacity: 0;
   background-color: var(--paper);
 }
 dialog[open]::backdrop{
   opacity: 0.5;
-  @starting-style{
-      opacity: 0;
-  }
 }
 .aboutClose{
   position: sticky;

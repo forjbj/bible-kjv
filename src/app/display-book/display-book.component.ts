@@ -264,11 +264,13 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
             if (p2 == undefined) return p1;
             // else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
             // tabindex="0" essential for below to obtain focus
-            else return "<span class=\"wordToDefine\" tabindex=0>" + p2 +"<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
+            else {
+              return "<span class=\"wordToDefine\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
+            }
           }
           verse = verse.replace(re, replacer);
-          scripture[i].innerHTML = verse;
         };
+        scripture[i].innerHTML = verse;
       };
       if (document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+(Number(chap) + 1).toString()+"-"+"0-S")){
         chap = (Number(chap) +1).toString();
