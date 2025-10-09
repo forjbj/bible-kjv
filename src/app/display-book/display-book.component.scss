@@ -128,7 +128,6 @@ section {
 }
 .definition {
   display: none; //necessary or definitions are hidden but on the page and cause a horizontal scroll bar
-  grid-row: 2;
   top: 0.5rem;
   color: var(--scriptNum);
   background-color: color-mix(in srgb, var(--paper) 80%, transparent);

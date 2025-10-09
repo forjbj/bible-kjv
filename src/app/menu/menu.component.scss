@@ -114,7 +114,6 @@ input:checked + .slider:before {
 // Dialogs
 dialog{
   display: none;
-  /* opacity: 0; */
   max-width: 75vw;
   max-height: 75dvh;
   font-family: Georgia,"Times New Roman", Times, serif;
@@ -134,13 +133,28 @@ dialog{
     display: block;
     border: 1px solid var(--ink);
   }
+  transition: opacity 0.7s cubic-bezier(0.5, 1.3, 0.5, 1),
+    scale 0.7s cubic-bezier(0.5, 1.3, 0.5, 1), overlay 0.2s allow-discrete,
+    display 0.2s allow-discrete;
+
+  opacity: 0;
+  scale: 0;
+  &::backdrop {
+    background-color: color-mix(in srgb, var(--paper) 50%, transparent);
+  }
+
+  &[open] {
+    opacity: 1;
+    scale: 1;
+  }
 }
-dialog::backdrop{
-  background-color: var(--paper);
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    scale: 0;
+  }
 }
-dialog[open]::backdrop{
-  opacity: 0.5;
-}
+
 .aboutClose{
   position: sticky;
   top: 50%;
