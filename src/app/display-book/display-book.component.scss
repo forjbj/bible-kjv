@@ -130,13 +130,14 @@ section {
   display: none; //necessary or definitions are hidden but on the page and cause a horizontal scroll bar
   top: 0.5rem;
   color: var(--scriptNum);
-  background-color: color-mix(in srgb, var(--paper) 80%, transparent);
+  background-color: color-mix(in srgb, var(--paper) 81%, transparent);
   border: 1px solid var(--scriptNum);
   border-radius: 0.2rem;
-  padding: 3px;
+  padding: 0.3rem 0.5rem 0.5rem 0.5rem;
   width: 30ch;
   max-width: 50vw;
   white-space: pre-wrap;
+
 }
 
 .wordToDefine:focus{
@@ -146,24 +147,3 @@ section {
     display: block;
   }
 }
-
-//Functional Styling
-/* @media (pointer: coarse), (pointer: fine), (hover: none){ //finger on touchscreen, mouse
-  [definition] {
-    position: relative;
-    display: inline-grid;
-  }
-  [definition]:focus::after {
-    content: attr(definition);
-    position: absolute;
-    grid-row: 2;
-    margin-left: var(--marginDefinition); // variable defined by mouse click; see event listener
-    color: var(--scriptNum);
-    background-color: color-mix(in srgb, var(--paper) 80%, transparent);
-    border: 1px solid;
-    padding: 3px;
-    z-index: 1;
-    min-width: 200%;
-    white-space: pre-wrap;
-  }
-} */
