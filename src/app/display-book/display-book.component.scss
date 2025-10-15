@@ -137,6 +137,10 @@ section {
   width: 30ch;
   max-width: 50vw;
   white-space: pre-wrap;
+  hr {
+
+    border-color: var(--scriptNum);
+  }
 
 }
 

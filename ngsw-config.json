@@ -26,5 +26,32 @@
         ]
       }
     }
-  ]
+  ],
+"dataGroups": [
+  {
+    "name": "api-static",
+    "urls": [
+      "/api/countries",
+      "/api/permissions",
+      "/api/settings"
+    ],
+    "cacheConfig": {
+      "strategy": "freshness",
+      "maxSize": 100,
+      "maxAge": "7d"
+    }
+  },
+  {
+    "name": "api-semi-static",
+    "urls": [
+      "/api/customization-profiles"
+    ],
+    "cacheConfig": {
+      "strategy": "freshness",
+      "maxSize": 50,
+      "maxAge": "1d",
+      "timeout": "5s"
+    }
+  }
+]
 }
