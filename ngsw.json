@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1760583696567,
+  "timestamp": 1760652917715,
   "index": "/bible-kjv/index.html",
   "assetGroups": [
     {
@@ -51,38 +51,7 @@
       "patterns": []
     }
   ],
-  "dataGroups": [
-    {
-      "name": "api-static",
-      "patterns": [
-        "\\/api\\/countries",
-        "\\/api\\/permissions",
-        "\\/api\\/settings"
-      ],
-      "strategy": "freshness",
-      "maxSize": 100,
-      "maxAge": 604800000,
-      "timeoutMs": 0,
-      "cacheQueryOptions": {
-        "ignoreVary": true
-      },
-      "version": 1
-    },
-    {
-      "name": "api-semi-static",
-      "patterns": [
-        "\\/api\\/customization-profiles"
-      ],
-      "strategy": "freshness",
-      "maxSize": 50,
-      "maxAge": 86400000,
-      "timeoutMs": 0,
-      "cacheQueryOptions": {
-        "ignoreVary": true
-      },
-      "version": 1
-    }
-  ],
+  "dataGroups": [],
   "hashTable": {
     "/bible-kjv/444.b8cafbc8afa5ff44.js": "f2a0f0b5dc05ac39a7365571b877ed1cfc07cffd",
     "/bible-kjv/63.c0ba343e9b22178a.js": "93f0e87b7410326822c732020ce4bdbcb7d02623",
