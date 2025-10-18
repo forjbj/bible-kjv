@@ -1,0 +1,14 @@
+/home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/deps/libserde-289657fa11cec9c8.rmeta: /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/lib.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/integer128.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/mod.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/de.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/ser.rs /home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/build/serde-f0f8df3d8e6b880b/out/private.rs
+
+/home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/deps/libserde-289657fa11cec9c8.rlib: /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/lib.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/integer128.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/mod.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/de.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/ser.rs /home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/build/serde-f0f8df3d8e6b880b/out/private.rs
+
+/home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/deps/serde-289657fa11cec9c8.d: /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/lib.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/integer128.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/mod.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/de.rs /home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/ser.rs /home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/build/serde-f0f8df3d8e6b880b/out/private.rs
+
+/home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/lib.rs:
+/home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/integer128.rs:
+/home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/mod.rs:
+/home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/de.rs:
+/home/john/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.226/src/private/ser.rs:
+/home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/build/serde-f0f8df3d8e6b880b/out/private.rs:
+
+# env-dep:OUT_DIR=/home/john/code/Bible/bible-kjv/target/wasm32-unknown-unknown/release/build/serde-f0f8df3d8e6b880b/out
