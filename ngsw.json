@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1760672017174,
+  "timestamp": 1760746167631,
   "index": "/bible-kjv/index.html",
   "assetGroups": [
     {
@@ -14,11 +14,12 @@
         "/bible-kjv/444.b8cafbc8afa5ff44.js",
         "/bible-kjv/63.c0ba343e9b22178a.js",
         "/bible-kjv/common.6fe6aae0180d8b94.js",
+        "/bible-kjv/favicon.ico",
         "/bible-kjv/index.html",
-        "/bible-kjv/main.6abc83da79eb0549.js",
+        "/bible-kjv/main.326f31bba1b05b9f.js",
         "/bible-kjv/manifest.webmanifest",
-        "/bible-kjv/polyfills.93a46bc31ae83002.js",
-        "/bible-kjv/runtime.d0906955dba90995.js",
+        "/bible-kjv/polyfills.e3f28fa92c093625.js",
+        "/bible-kjv/runtime.4950d25fc23a4a03.js",
         "/bible-kjv/styles.7028acf43b126dea.css"
       ],
       "patterns": []
@@ -56,7 +57,7 @@
     "/bible-kjv/444.b8cafbc8afa5ff44.js": "f2a0f0b5dc05ac39a7365571b877ed1cfc07cffd",
     "/bible-kjv/63.c0ba343e9b22178a.js": "93f0e87b7410326822c732020ce4bdbcb7d02623",
     "/bible-kjv/assets/bible/Bible.json": "2efdfc9890c2846eb518c3c5eeb64e1c0277b0fc",
-    "/bible-kjv/assets/bible/Dictionary.json": "5bde4d45762040737f3974914d45258de5426e52",
+    "/bible-kjv/assets/bible/Dictionary.json": "8c5db6a57123552e985cf4cecd5102043d7feb8b",
     "/bible-kjv/assets/bible/Eastons_Bible_Dictionary_edited.txt": "5a67291d9d217c4b817e56fb3f469f27cddf0524",
     "/bible-kjv/assets/icons/icon-128x128.png": "154210bd7c42f9a8a66a3f03db91f23bb9fd93d6",
     "/bible-kjv/assets/icons/icon-144x144.png": "32823e2b00a262d790ac542ac1a2e1a05f940d5f",
@@ -70,13 +71,14 @@
     "/bible-kjv/assets/search.svg": "183bc20be2b7006622c5f8b5b4678022a6b5230d",
     "/bible-kjv/assets/search_neutral.svg": "3f54ae72cdb1ef2adc88e9a28bf417d5e455ae50",
     "/bible-kjv/common.6fe6aae0180d8b94.js": "ca06045bbc94250dfa7f68b4850144dcd43aaced",
+    "/bible-kjv/favicon.ico": "38ce9f228ec6626c849ea446da784ebd94f709a9",
     "/bible-kjv/icon-192x192.321592a8a2f8ef9a.png": "177df93d4bc990b4551a7ca083f211364dc4b5a8",
-    "/bible-kjv/index.html": "e7c4a815ce086f36732c0d795b9db827c86d3371",
-    "/bible-kjv/main.6abc83da79eb0549.js": "2ced6700c0813ebe10d2f8a8fa0bbedd369f8328",
+    "/bible-kjv/index.html": "7f5a0188f587926a3506c8665e47d8b40c8e8045",
+    "/bible-kjv/main.326f31bba1b05b9f.js": "75db2a08d0061c26e069bd617b22617c09bf1c9c",
     "/bible-kjv/manifest.webmanifest": "52411e1189ed3cbd18f2ba2a3d703879cb9f9e9c",
     "/bible-kjv/openBible.6e42efe05f4fbf81.png": "62907c11393cfed548c677e397517a56a53556b6",
-    "/bible-kjv/polyfills.93a46bc31ae83002.js": "7a69aac40b485859db2a79650838fd71f9968a82",
-    "/bible-kjv/runtime.d0906955dba90995.js": "1a900f38d1ae3ca3de2542b6e6914db0ae871873",
+    "/bible-kjv/polyfills.e3f28fa92c093625.js": "1f125f1ddd39e784911a4dd63986c28128a89aeb",
+    "/bible-kjv/runtime.4950d25fc23a4a03.js": "320d8ea0d5c82a0b8129b2fabbaa3a41b20380af",
     "/bible-kjv/styles.7028acf43b126dea.css": "368c5709073434f1d3cffab9c153de95bda8e90a"
   },
   "navigationUrls": [
