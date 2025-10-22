@@ -1,6 +1,4 @@
-
 /* You can add global styles to this file, and also import other style files */
-// Global colours for easy colour scheme change
 :root {
     --nav: #ccc;
     --menu: #ddd;
@@ -38,14 +36,14 @@ html[dataTheme = 'dark'] {
 }
 
 html {
-    -webkit-text-size-adjust: 100%; // Apple stuff: Prevent font scaling in landscape while allowing user zoom
-    height: 100vh; // hack to fill screen along with the body min-height below
+    -webkit-text-size-adjust: 100%; /* Apple stuff: Prevent font scaling in landscape while allowing user zoom*/
+    height: 100vh; /* hack to fill screen along with the body min-height below*/
     width: 100vw;
-    overscroll-behavior: none; //necessary??
+    overscroll-behavior: none; /*necessary??*/
 }
 
 body {
-    max-width: 100%; //needed for iOS ??; Can't be 100dvw or 100vw as Chrome doesn't work with these
+  max-width: 100%; /*needed for iOS ??; Can't be 100dvw or 100vw as Chrome doesn't work with these*/
     min-height: 100vh;
     height: auto;
     color: var(--ink);
@@ -73,7 +71,7 @@ h1, h2, h3, h4, h5 {
   .circleSpinner {
     height: 5rem;
     width: 5rem;
-    border: 7px ridge transparent; //pixels used as rem units give an uneven, weird shape
+    border: 7px ridge transparent; /*pixels used as rem units give an uneven, weird shape*/
     border-top:  7px  solid #770000;
     border-radius: 50%;
     animation: spin 3s linear infinite;
@@ -84,7 +82,7 @@ h1, h2, h3, h4, h5 {
   .circleSpinner::after {
     content: "";
     position: absolute;
-    top: -7px; //pixels used as rem units give an uneven, weird shape
+    top: -7px; /*pixels used as rem units give an uneven, weird shape*/
     bottom: -7px;
     left: -7px;
     right: -7px;
@@ -100,7 +98,7 @@ h1, h2, h3, h4, h5 {
     animation: spin 1.2s linear infinite;
   }
   .titleSpinner {
-      font-size: 0.9rem; //needed for firefox
+    font-size: 0.9rem; /*needed for firefox*/
       font-variant: small-caps;
       text-align: center;
       text-shadow: 1px 1px var(--gridColor);
@@ -118,9 +116,9 @@ h1, h2, h3, h4, h5 {
       }
   }
 }
-//end spinner for search and long render
-// keyframes for update-toaster; need to be here as per Angular 15 update or won't work
-@keyframes app-update-toaster_fadein { // name change necessary as Angular 15 requires app name in keyframes
+/*end spinner for search and long render*/
+/* keyframes for update-toaster; need to be here as per Angular 15 update or won't work*/
+@keyframes app-update-toaster_fadein { /* name change necessary as Angular 15 requires app name in keyframes*/
     from { transform: scale(0); opacity: 0;}
     to { transform: scale(1); opacity: 1;}
 }
@@ -129,4 +127,4 @@ h1, h2, h3, h4, h5 {
     from {width: 7rem}
     to {width: clamp(20rem, 35vw, 24rem)}
 }
-//end keyframes for update-toaster
+/*end keyframes for update-toaster*/

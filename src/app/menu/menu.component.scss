@@ -12,7 +12,7 @@
   width: 14rem;
   text-align: center;
   hr {
-    margin: 1em;  // check divider in line with links
+    margin: 1em;  /* check divider in line with links*/
     &.menuSeparator {
       border: 2px solid var(--lightRed);
     }
@@ -56,8 +56,8 @@ ul {
   height: 1em;
   vertical-align: top;
 }
-//dark theme toggle switch
-// The switch - the box around the slider
+/*dark theme toggle switch*/
+/* The switch - the box around the slider*/
 .mode {
   text-align: left;
   margin: 1em;
@@ -70,13 +70,13 @@ ul {
   height: 1em;
   margin-left: 1em;
 }
-// Hide default HTML checkbox
+/* Hide default HTML checkbox*/
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-// The slider
+/* The slider*/
 .slider {
   position: absolute;
   cursor: pointer;
@@ -95,7 +95,7 @@ ul {
   left: 0.1em;
   border-radius: 1rem;
   background-color: #eee;
-  -webkit-transition: 0.5s;
+  transition: 0.5s;
   transition: 0.5s;
 }
 input:checked + .slider {
@@ -105,13 +105,11 @@ input:focus + .slider {
   box-shadow: 0 0 1px var(--button);
 }
 input:checked + .slider:before {
-  -webkit-transform: translateX(1.7em);
-  -ms-transform: translateX(1.7em);
   transform: translateX(1.7em);
 }
-// end dark theme toggle switch
+/* end dark theme toggle switch*/
 
-// Dialogs
+/* Dialogs*/
 dialog{
   display: none;
   max-width: 75vw;
@@ -159,7 +157,7 @@ dialog{
   float: left;
   margin-left: -1rem;
   writing-mode: vertical-lr;
-  text-orientation: upright; // needed for safari
+  text-orientation: upright; /* needed for safari*/
   font-weight: bold;
   font-variant: small-caps;
   color: var(--zInk);
@@ -173,7 +171,7 @@ dialog{
   &:hover, &:focus, &:active {
       color: var(--ink);
       background-color: var(--menu);
-      outline: 0; //needed for chrome
+      outline: 0; /*needed for chrome*/
   }
 }
 .stationary {
@@ -237,16 +235,16 @@ dialog{
   border-radius: 0.2rem;
   padding: 0 0.3rem;
   &:focus {
-      outline: var(--lightRed) solid 1px; //needed for apple otherwise its blue
+      outline: var(--lightRed) solid 1px; /*needed for apple otherwise its blue*/
   }
 }
 .searchOption {
-  -webkit-text-fill-color: #777; //needed for apple otherwise its blue
-  appearance:none; //No arrows on select boxes as they are different colours/shapes across browsers
+  /*-text-fill-color: #777; /*needed for apple otherwise its blue*/
+  appearance:none; /*No arrows on select boxes as they are different colours/shapes across browsers*/
 }
 .searchInput {
-  font-size: 1rem; //needed to stop safari zoom on input focus
-  caret-color: var(--lightRed); //necessary as it is bright blue in safari
+  font-size: 1rem; /*needed to stop safari zoom on input focus*/
+  caret-color: var(--lightRed); /*necessary as it is bright blue in safari*/
 }
 .noWrap {
   white-space: nowrap;
@@ -259,20 +257,20 @@ dialog{
   }
 }
 .searchInfo {
-  display: grid; // grid needed to place .searchPageText [css class see below] on top of .backgroundBible class
+  display: grid; /* grid needed to place .searchPageText [css class see below] on top of .backgroundBible class*/
   margin: 0;
   padding: 0;
   border-radius: 0.2rem;
 }
 .backgroundBible {
-  grid-area: 1/1; // same grid area as .searchPageText so .searchPageText appears on top
+  grid-area: 1/1; /* same grid area as .searchPageText so .searchPageText appears on top*/
   opacity: 0.7;
-  /* z-index: -1; // necessary or opacity setting above bleeds into .searchPageText text. */
+  /* z-index: -1; /* necessary or opacity setting above bleeds into .searchPageText text. */
   background-image: url(../../assets/openBible.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  transition: all 0.5s; //smoother change in pic size on dynamic screens - works!
+  transition: all 0.5s; /*smoother change in pic size on dynamic screens - works!*/
 }
 .searchPageText{
   grid-area: 1/1;
@@ -282,7 +280,7 @@ dialog{
   white-space: wrap;
   color: var(--ink);
   text-shadow: -1px -1px 0 var(--paper), 1px -1px 0 var(--paper), -1px 1px 0 var(--paper), 1px 1px 0 var(--paper);
-  transition: all 0.5s; //smoother change in text on dynamic screens
+  transition: all 0.5s; /*smoother change in text on dynamic screens*/
 }
 .closeInfo {
   font-weight: bold;
@@ -299,11 +297,11 @@ dialog{
   &:hover, &:focus, &:active {
       color: var(--ink);
       background-color: var(--menu);
-      outline: 0; //needed for chrome
+      outline: 0; /*needed for chrome*/
   }
 }
 .from {
-  margin-block-end: 0;// remove bottom margin; dialog thing
+  margin-block-end: 0;/* remove bottom margin; dialog thing*/
   font-variant: small-caps;
   color: var(--zInk);
   text-align: center;
@@ -324,7 +322,7 @@ dialog{
   &:hover, &:focus, &:active {
       color: var(--ink);
       background-color: var(--menu);
-      outline: 0; //needed for chrome
+      outline: 0; /*needed for chrome*/
   }
 }
-// End Dialogs
+/* End Dialogs*/

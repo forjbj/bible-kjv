@@ -1,7 +1,7 @@
-//  increase font size for readablility (I'm old)
+/*  increase font size for readablility (I'm old)*/
 .fontType {
   font-family: Georgia,"Times New Roman", Times, serif;
-  line-height: 1.5em; // needs to be 'em' units as 'rem' makes everything very wrong
+  line-height: 1.5em; /* needs to be 'em' units as 'rem' makes everything very wrong*/
   font-size: 1.3rem;
     @media (orientation: portrait) {
         font-size: 1.2rem;
@@ -17,14 +17,14 @@
         padding: 0 4rem;
     }
 }
-//remove styling from created links
+/*remove styling from created links*/
 section {
     a {
       color: var(--scriptNum);
       text-decoration: none;
       &:focus {
         color: var(--lightRed);
-        outline: transparent solid 1px; //needed otherwise it is blue-safari; grey-firefox; black- chrome
+        outline: transparent solid 1px; /*needed otherwise it is blue-safari; grey-firefox; black- chrome*/
       }
       &:hover {
         color: var(--lightRed);
@@ -33,7 +33,7 @@ section {
 }
 .headings {
   text-align: center;
-    // make things a little more compact
+    /* make things a little more compact*/
     & h5, h2, h3, h4{
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
@@ -42,10 +42,10 @@ section {
 .verses {
     display: grid;
     width: 100%;
-    grid-gap: 1rem; // needed to stop words scrolling right
+    grid-gap: 1rem; /* needed to stop words scrolling right*/
     grid-template-columns: 3rem auto;
     @media (orientation: portrait) {
-        grid-template-columns: 1rem auto; // verse number column smaller for small screens
+      grid-template-columns: 1rem auto; /* verse number column smaller for small screens*/
     }
 }
 .firstVerse{
@@ -53,7 +53,7 @@ section {
     margin-right: 1rem;
     margin-bottom: 0.3rem;
     &:first-of-type:first-letter {
-        margin-right: 0.03rem;  // required for first letters that are in italics
+      margin-right: 0.03rem;  /* required for first letters that are in italics*/
         vertical-align: top;
         font-size: 2rem;
     }
@@ -68,14 +68,14 @@ section {
         margin: 0.3rem 0;
     }
 }
-// stop scripture going to far right
+/* stop scripture going to far right*/
 .scripture {
     margin: 0.5rem 1rem 0.5rem 0;
     @media (orientation: portrait) {
         margin: 0.3rem 1rem 0.3rem 0;
     }
 }
-//smaller font for end of book notes
+/*smaller font for end of book notes*/
 .notes {
     font-style: italic;
     font-size: 0.9rem;
@@ -83,7 +83,7 @@ section {
     margin: 0 3rem;
 }
 
-// for search result routing
+/* for search result routing*/
 .activatedLink {
     outline: 0;
     animation: result 7s ease 1s;
@@ -109,7 +109,7 @@ section {
     &:hover, &:focus, &:active {
         color: var(--ink);
         background-color: var(--menu);
-        outline: 0; //needed for chrome
+        outline: 0; /*needed for chrome*/
     }
 }
 .smallerTitle {
@@ -124,10 +124,10 @@ section {
   text-decoration:underline;
   text-decoration-style: solid;
   text-decoration-color: var(--scriptNum);
-  justify-content: var(--definitionPosition);// variable defined by mouse click; see event listener
+  justify-content: var(--definitionPosition);/* variable defined by mouse click; see event listener*/
 }
 .definition {
-  display: none; //necessary or definitions are hidden but on the page and cause a horizontal scroll bar
+  display: none; /*necessary or definitions are hidden but on the page and cause a horizontal scroll bar*/
   top: 0.5rem;
   color: var(--scriptNum);
   background-color: color-mix(in srgb, var(--paper) 81%, transparent);
@@ -145,9 +145,9 @@ section {
 }
 
 .wordToDefine:focus{
-  position: relative; // add only on focus; otherwise bleeds through to menus etc.
+  position: relative; /* add only on focus; otherwise bleeds through to menus etc.*/
   .definition{
-    position: absolute;// add only on focus; otherwise bleeds through to menus etc.
+    position: absolute;/* add only on focus; otherwise bleeds through to menus etc.*/
     display: block;
   }
 }

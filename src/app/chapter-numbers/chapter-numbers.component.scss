@@ -5,10 +5,10 @@
     box-shadow: 0 12px 7px -7px var(--zPaper);
     color: var(--zInk);
     text-align: center;
-    writing-mode: horizontal-tb; //needed as chrome makes a mess of it otherwise
+    writing-mode: horizontal-tb; /*needed as chrome makes a mess of it otherwise*/
     width: 14rem;
     overflow-y: auto;
-    overscroll-behavior: contain; // needed to stop scrolling scripture when scrolled to end of chapters
+    overscroll-behavior: contain; /* needed to stop scrolling scripture when scrolled to end of chapters*/
     border-radius: 0.2rem;
     hr {
         margin: 0.7rem 0.7rem;
@@ -62,9 +62,9 @@
 .chapters {
     border: 1px solid var(--buttonBorder);
     border-radius: 0.2rem;
-    padding: 0.33rem 0rem; // needed to make square
-    height: 1.2rem; // needed to stop gird 'bouncing' on bold hover
-    line-height: 1.2rem; // as above
+    padding: 0.33rem 0rem; /* needed to make square*/
+    height: 1.2rem; /* needed to stop gird 'bouncing' on bold hover*/
+    line-height: 1.2rem; /* as above*/
     background-color: var(--button);
     cursor: pointer;
     color: var(--ink);

@@ -1,17 +1,17 @@
 .toastHide {
-    // visibility: hidden;
-    display: none; // this almost did my head in; must be display: none, visibility still make it scrollable
+    /* visibility: hidden;*/
+    display: none; /* this almost did my head in; must be display: none, visibility still make it scrollable*/
     height: 0;
 }
 .toastShow {
-    // visibility: visible;
-    display: block; // do not change this back to visibility; mess with scroll in other components
+    /* visibility: visible;
+    display: block; /* do not change this back to visibility; mess with scroll in other components*/
     width: 7rem;
     height: 7rem;
     margin: auto;
     background-color: var(--ink);
     position: fixed;
-    z-index: 7; //needed to keep on top
+    z-index: 7; /*needed to keep on top*/
     left: 0;right:0;
     bottom: 3rem;
     overflow: hidden;

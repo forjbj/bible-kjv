@@ -7,7 +7,7 @@
   margin-bottom: 1rem;
   min-height: 90vh;
 }
-//needed to stop blue/black border on click
+/*needed to stop blue/black border on click*/
 div:focus {
   outline: none;
 }
@@ -17,7 +17,7 @@ div:focus {
   font-variant: small-caps ;
   margin: 0;
   padding: 1em;
-  // needed for first letter to be capitalised - much easier than javascript
+  /* needed for first letter to be capitalised - much easier than javascript*/
   &:first-letter {
     text-transform: capitalize;
   }
@@ -32,7 +32,7 @@ div:focus {
     justify-items: center;
     align-items: center;
     gap: 1rem;
-    overflow-y: scroll; //necessay for sticky nav
+    overflow-y: scroll; /*necessay for sticky nav*/
     overflow-x: hidden;
 }
 .bookItem {
@@ -44,7 +44,7 @@ div:focus {
     color: var(--darkRed);
     transform: scale(1.03);
     }
-  //Text animation while loading
+  /*Text animation while loading*/
   &:active, &:focus {
     ::after {
       content: '.';

@@ -15,17 +15,18 @@
     "./snippets/*"
   ],
   "dependencies": {
-    "@angular/router": "^20.0.4",
+    "@angular/service-worker": "~20.3.6",
+    "@angular/platform-browser": "^20.3.6",
+    "@angular/compiler": "^20.3.6",
+    "@angular/router": "^20.3.6",
+    "zone.js": "^0.15.1",
+    "@angular/platform-browser-dynamic": "^20.3.6",
+    "@angular-devkit/build-angular": "^20.3.6",
+    "@angular/core": "^20.3.6",
+    "@angular/common": "^20.3.6",
     "rxjs": "~7.8.1",
-    "@angular/compiler": "^20.0.4",
-    "@angular/common": "^20.0.4",
+    "@angular/forms": "^20.3.6",
     "tslib": "^2.7.0",
-    "@angular/forms": "^20.0.4",
-    "@angular/animations": "^20.0.4",
-    "@angular/platform-browser": "^20.0.4",
-    "@angular/service-worker": "~20.0.4",
-    "zone.js": "^0.15.0",
-    "@angular/core": "^20.0.4",
-    "@angular/platform-browser-dynamic": "^20.0.4"
+    "@angular/animations": "^20.3.6"
   }
 }

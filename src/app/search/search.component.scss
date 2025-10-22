@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1;
     grid-template-rows: 9rem auto;
-    height: calc(100vh - 3rem); // absolutely necessary for nav to be sticky
+    height: calc(100vh - 3rem); /* absolutely necessary for nav to be sticky*/
     width: 100vw;
     @media (orientation:landscape){
         width: calc(100vw - 3.3rem);
@@ -73,16 +73,16 @@
     border-radius: 0.2rem;
     padding: 0 0.3rem;
     &:focus {
-        outline: var(--lightRed) solid 1px; //needed for apple otherwise its blue
+        outline: var(--lightRed) solid 1px; /*needed for apple otherwise its blue*/
     }
 }
 .searchOption {
-    -webkit-text-fill-color: #777; //needed for apple otherwise its blue
-    appearance:none; //No arrows on select boxes as they are different colours/shapes across browsers
+-webkit-text-fill-color: #777; /*needed for apple otherwise its blue*/
+    appearance:none; /*No arrows on select boxes as they are different colours/shapes across browsers*/
 }
 .searchInput {
-    font-size: 1rem; //needed to stop safari zoom on input focus
-    caret-color: var(--lightRed); //necessary as it is bright blue in safari
+    font-size: 1rem; /*needed to stop safari zoom on input focus*/
+    caret-color: var(--lightRed); /*necessary as it is bright blue in safari*/
 }
 
 .noWrap {
@@ -98,7 +98,7 @@
 }
 .searchResultsPage {
     text-align: center;
-    overflow-y: scroll; // necessary for sticky nav - do not delete
+    overflow-y: scroll; /* necessary for sticky nav - do not delete*/
 }
 .searchResults {
     animation: fadeIn 0.5s ease-in;
@@ -117,7 +117,7 @@
             max-width: 90%;
         }
     }
-    //remove styling from created links
+    /*remove styling from created links*/
     a {
         color: inherit;
         text-decoration: none;
@@ -129,7 +129,7 @@
 .listResults {
     display: grid;
     max-width: 100%;
-    column-gap: 1rem; // needed to stop words scrolling right
+    column-gap: 1rem; /* needed to stop words scrolling right*/
     grid-template-columns: minmax(min-content, 7%) 1fr;
     padding: 0.7rem;
     text-align: left;
