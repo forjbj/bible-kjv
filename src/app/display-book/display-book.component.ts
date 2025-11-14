@@ -259,16 +259,21 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       for (let i = 0; i < scripture.length; i++) {
         let verse = (scripture[i] as HTMLElement).innerHTML;
         for (const key in dictionary[0]) {
-          let re = new RegExp("(<span.*?<\/span>)|(\\b" + key + "\\b)", 'gi');
-          function replacer(match: any, p1: any, p2: any) {
-            if (p2 == undefined) return p1;
-            // else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
-            // tabindex="0" essential for below to obtain focus
-            else {
-              return "<span class=\"wordToDefine\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
-            }
-          }
-          verse = verse.replace(re, replacer);
+          // let re = new RegExp("(<span.*?<\/span>)|(\\b" + key + "\\b)", 'gi');
+          // function replacer(match: any, p1: any, p2: any) {
+          //   if (p2 == undefined) return p1;
+          //   // else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
+          //   // tabindex="0" essential for below to obtain focus
+          //   else {
+          //     return "<span class=\"wordToDefine\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
+          //   }
+          // }
+
+          // (?<!<\/?) Negative lookbehind: ensures the match is not preceded by < or </.
+          // (?!>) Negative lookahead: ensures it is not followed by > (so not <span>).
+          let re = new RegExp("(?:<span.*?<\/span>)?((?<!<\/?)\\b" + key + "\\b(?!>))", 'i');
+
+          verse = verse.replace(re, "<span class=\"wordToDefine\" tabindex=0>" + " $1 " + "<dl class='definition'><dt>" + "$1" + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>");
         };
         scripture[i].innerHTML = verse;
       };
