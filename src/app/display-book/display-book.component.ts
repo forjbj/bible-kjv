@@ -268,14 +268,15 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
               return "<span class=\"wordToDefine\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
             }
           }
-
           verse = verse.replace(re, replacer);
 
+          //  // below works, sort of, doubles up on definitions; i.e. definitions of words in defintions - needs fixing
         //   // (?<!<\/?) Negative lookbehind: ensures the match is not preceded by < or </.
         //   // (?!>) Negative lookahead: ensures it is not followed by > (so not <span>).
-        //   let re = new RegExp("(?:<span.*?<\/span>)?((?<!<\/?)\\b" + key + "\\b(?!>))", 'i');
+        //   let re = new RegExp("(?:<span\b[^>]*>[\s\S]*?<\/span>)?((?<!<\/?)\\b" + key + "\\b(?!>))", 'i');
 
-        //   verse = verse.replace(re, "<span class=\"wordToDefine\" tabindex=0>" + " $1 " + "<dl class='definition'><dt>" + "$1" + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>");
+        //  verse = verse.replace(re, "<span class=\"wordToDefine\" tabindex=0>" + " $1 " + "<dl class='definition'><dt>" + "$1" + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>");
+
         };
         scripture[i].innerHTML = verse;
       };
