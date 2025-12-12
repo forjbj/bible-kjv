@@ -1,20 +1,21 @@
 <nav id="chaptersShow" class="chaptersShow"
-      (click) = "bibleService.showChapters = !bibleService.showChapters; ">
+  (click) = "bibleService.showChapters = !bibleService.showChapters; ">
   <header class="numberHeader">
     <hr>
-    <p class = "chapterTitle">{{bibleService.title}}</p>
-    <p *ngIf = "bibleService.title != 'Psalms';" class = "numberTitle">Chapters</p>
-    <hr>
-  </header>
-  <section class="chapterGrid">
-    <ng-container 
-    *ngFor = "let chapters of bibleService.bible[bibleService.testament].books[bibleService.bookSelected].chapters" >
-      <div 
-        class = "chapters"
-        (click)="updateStorageAndScroll(chapters.chapter);">
-        {{chapters.chapter}}
-      </div>
-    </ng-container>
-  </section>
-  <hr>
-</nav>
+      <p class = "chapterTitle">{{bibleService.title}}</p>
+      @if (bibleService.title != 'Psalms';) {
+        <p class = "numberTitle">Chapters</p>
+      }
+      <hr>
+      </header>
+      <section class="chapterGrid">
+        @for (chapters of bibleService.bible[bibleService.testament].books[bibleService.bookSelected].chapters; track chapters) {
+          <div
+            class = "chapters"
+            (click)="updateStorageAndScroll(chapters.chapter);">
+            {{chapters.chapter}}
+          </div>
+        }
+      </section>
+      <hr>
+      </nav>

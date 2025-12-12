@@ -1,14 +1,14 @@
 <section id="top" class="theme" (click) = "bibleService.displayMenu = false;">
-    <nav class ="bookGrid">
-      <ng-container *ngFor = "let book of bibleService.bible[bibleService.testamentShow].books; index as i">
-        <div 
-          class = "bookItem"
-          (click) = 
-            "bookRender(bibleService.testamentShow,i,book.bookName)">
-              {{book.bookName}}
-        </div>
-      </ng-container>
-    </nav>
-</section>  
+  <nav class ="bookGrid">
+    @for (book of bibleService.bible[bibleService.testamentShow].books; track book; let i = $index) {
+      <div
+        class = "bookItem"
+        (click) =
+        "bookRender(bibleService.testamentShow,i,book.bookName)">
+        {{book.bookName}}
+      </div>
+    }
+  </nav>
+</section>
 
 

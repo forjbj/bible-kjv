@@ -1,32 +1,38 @@
 <section class="searchGrid" (click) = "bibleService.displayMenu = false;">
-    <div class="stationary">
-        <hr>
-        <form class="searchSelect">
-            <label class="verticalLabel gridColumnOne">SEARCH</label>
-            <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..." 
-                    value= {{bibleService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
-            <input alt="searchIcon" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value)">
-            <select class="searchOption gridColumnTwo" name="area" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedArea()">
-                <optgroup label="Testament/s">
-                    <option *ngFor="let select of searchService.searchArea" [ngValue]="select.id">in {{ select.label }}</option>
-                </optgroup>
-                <optgroup label="Books">
-                    <ng-container *ngFor="let testament of bibleService.bible; let i = index;" >
-                        <option *ngFor="let book of testament.books; let j = index;" [ngValue]="((i == 1 ? bibleService.bible[0].books.length : 0) + j )" [selected] = "book.selected">in {{book.bookName}}</option>
-                    </ng-container>
-                </optgroup>
-            </select>
-    <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="searchService.accuracy" (ngModelChange) = "searchService.selectedAccuracy()">
-                <option *ngFor="let select of searchService.accuracyLevel" [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
-            </select>
-        </form>
-        <hr>
-    </div>
-    <!-- below is terrible hack to get around angular animation not available for ng-template -->
-    <div id="searchResultsPage" class="searchResultsPage" >
+  <div class="stationary">
+    <hr>
+      <form class="searchSelect">
+        <label class="verticalLabel gridColumnOne">SEARCH</label>
+        <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..."
+          value= {{bibleService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
+        <input alt="searchIcon" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value)">
+        <select class="searchOption gridColumnTwo" name="area" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedArea()">
+          <optgroup label="Testament/s">
+            @for (select of searchService.searchArea; track select) {
+              <option [ngValue]="select.id">in {{ select.label }}</option>
+            }
+          </optgroup>
+          <optgroup label="Books">
+            @for (testament of bibleService.bible; track testament; let i = $index) {
+              @for (book of testament.books; track book; let j = $index) {
+                <option [ngValue]="((i == 1 ? bibleService.bible[0].books.length : 0) + j )" [selected] = "book.selected">in {{book.bookName}}</option>
+              }
+            }
+          </optgroup>
+        </select>
+        <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="searchService.accuracy" (ngModelChange) = "searchService.selectedAccuracy()">
+          @for (select of searchService.accuracyLevel; track select) {
+            <option [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
+          }
+        </select>
+      </form>
+      <hr>
+      </div>
+      <!-- below is terrible hack to get around angular animation not available for ng-template -->
+      <div id="searchResultsPage" class="searchResultsPage" >
         <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
         <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
-            <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
+          <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
         </a>
-    </div>
-</section>
+      </div>
+    </section>
