@@ -254,6 +254,10 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     }
     for (var j = 0; j < 2; j++){
       const chapterSection = document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+ chap +"-"+"0-S")
+      // skip if already definitions already populated
+      if (chapterSection!.querySelector("wordToDefine")){
+        continue
+      };
       const scripture = chapterSection!.querySelectorAll(".firstVerse, .scripture");
       const dictionary:any = dictionaryJson;
       for (let i = 0; i < scripture.length; i++) {
