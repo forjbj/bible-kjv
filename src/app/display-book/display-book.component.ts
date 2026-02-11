@@ -264,16 +264,23 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         let verse = (scripture[i] as HTMLElement).innerHTML;
         for (const key in dictionary[0]) {
           let re = new RegExp("(<span.*?<\/span>)|(\\b" + key + "\\b)", 'gi');
+          let alreadyDefined = false;
           function replacer(match: any, p1: any, p2: any) {
             if (p2 == undefined) return p1;
             // else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
             // tabindex="0" essential for below to obtain focus
             else {
-              return "<span class=\"wordToDefine\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
-            }
-          }
-          verse = verse.replace(re, replacer);
-
+              if (alreadyDefined == true) {
+                //This is necessary or replacer just keep putting the definition into each of the same words in the sentence.
+                return p2;
+              }
+              else {
+                alreadyDefined = true;
+                return "<span class=\"wordToDefine\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
+              }
+            };
+          };
+            verse = verse.replace(re, replacer);
           //  // below works, sort of, doubles up on definitions; i.e. definitions of words in defintions - needs fixing
         //   // (?<!<\/?) Negative lookbehind: ensures the match is not preceded by < or </.
         //   // (?!>) Negative lookahead: ensures it is not followed by > (so not <span>).
