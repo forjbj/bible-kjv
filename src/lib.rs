@@ -392,7 +392,7 @@ pub fn search_book(searches: usize, inp: String, acc: usize) -> String {
 
     match search_num {
         0 => {
-            results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word and set the bottom search option to 'results Contain Characters'.</header>", inp_str);
+            results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word and set the last search option to 'Contain Characters'.</header>", inp_str);
         }
         1 => {
             results_fin = format!(

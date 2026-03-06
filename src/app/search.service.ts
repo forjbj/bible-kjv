@@ -26,7 +26,7 @@ export class SearchService {
   public accuracy: number = 0;
 
   accuracyLevel = [
-    { id: 0, label: "- Match Characters", selected: true },
+    { id: 0, label: "- Contain Characters", selected: true },
     { id: 1, label: "- Exactly Match Word" },
   ]
 
