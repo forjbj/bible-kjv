@@ -31,8 +31,9 @@
   <!-- below is terrible hack to get around angular animation not available for ng-template -->
   <div id="searchResultsPage" class="searchResultsPage" >
     @if (bibleService.searchResults == "noSearchYet"){
-      <p>Choose to search in the Old testament, the New testament or both.</p>
-      <p>Choose the level of search accuracy; Exact match or Contains Characters.</p>
+      <p>Enter the word, words or part of a word to search.</p>
+      <p>Choose to search in the Old testament, the New testament, both or a specific Bible book.</p>
+      <p>Choose the level of search accuracy; Exactly Match Word(s) or Word Contains Characters.</p>
     } @else {
       <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
     }
