@@ -1,8 +1,6 @@
 .theme {
   color: var(--ink);
   background-color: var(--paper);
-  display: grid;
-  grid-template-rows:  auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
   min-height: 90vh;
@@ -12,6 +10,11 @@ div:focus {
   outline: none;
 }
 .testamentTitle {
+  text-shadow:
+      -1px -1px 0 var(--lightRed),
+       1px -1px 0 var(--darkRed),
+      -1px  1px 0 var(--lightRed),
+       1px  1px 0 var(--darkRed);
   text-align: center;
   font-weight: bold;
   font-variant: small-caps ;

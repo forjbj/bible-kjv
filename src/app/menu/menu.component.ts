@@ -11,7 +11,6 @@ import { SearchService } from '../search.service';
 })
 export class MenuComponent implements OnInit {
 
-  private searchSavedScroll = localStorage.getItem('currentSearch') ?? '0';
   public searchDialog: any;
   public aboutDialog: any;
   public testamentDialog: any;
@@ -35,18 +34,12 @@ export class MenuComponent implements OnInit {
     // apply righthanded if set in storage
     let menu = document.getElementById('menu') as HTMLInputElement;
     let aboutDialog = document.getElementById('aboutDialog') as HTMLInputElement;
-    let searchDialog = document.getElementById('searchDialog') as HTMLInputElement;
-    let testamentDialog = document.getElementById('testamentDialog') as HTMLInputElement;
     if (this.bibleService.leftHandOn == 'no'|| (localStorage.getItem('leftHanded') == null)) { // or null necessary for first visit or memory wipe
       menu.setAttribute('leftHanded', 'no');
       aboutDialog.setAttribute('leftHanded', 'no');
-      searchDialog.setAttribute('leftHanded', 'no');
-      testamentDialog.setAttribute('leftHanded', 'no');
     } else {
       menu.setAttribute('leftHanded', 'yes');
       aboutDialog.setAttribute('leftHanded', 'yes');
-      searchDialog.setAttribute('leftHanded', 'yes');
-      testamentDialog.setAttribute('leftHanded', 'yes');
     }
 
     const toggleSwitchTheme = document.getElementById('theme') as HTMLInputElement;
@@ -60,11 +53,8 @@ export class MenuComponent implements OnInit {
 
   }
   ngAfterViewInit(){
-
     this.aboutDialog = document.getElementById("aboutDialog");
-    this.searchDialog = document.getElementById("searchDialog");
-    this.testamentDialog = document.getElementById("testamentDialog");
-  }
+ }
 
 /* Change theme */
   themeChange(){
@@ -84,23 +74,17 @@ export class MenuComponent implements OnInit {
     let grid = document.getElementById('nav') as HTMLInputElement;
     let menu = document.getElementById('menu') as HTMLInputElement;
     let aboutDialog = document.getElementById('aboutDialog') as HTMLInputElement;
-    let searchDialog = document.getElementById('searchDialog') as HTMLInputElement;
-    let testamentDialog = document.getElementById('testamentDialog') as HTMLInputElement;
 
     if (leftHand.checked) {
       localStorage.setItem('leftHanded', 'yes');
       grid.setAttribute('leftHanded', 'yes');
       menu.setAttribute('leftHanded', 'yes');
       aboutDialog.setAttribute('leftHanded', 'yes');
-      searchDialog.setAttribute('leftHanded', 'yes');
-      testamentDialog.setAttribute('leftHanded', 'yes');
     } else {
       menu.setAttribute('leftHanded', 'no');
       grid.setAttribute('leftHanded', 'no');
       localStorage.setItem('leftHanded', 'no');
       aboutDialog.setAttribute('leftHanded', 'no');
-      searchDialog.setAttribute('leftHanded', 'no');
-      testamentDialog.setAttribute('leftHanded', 'no');
     }
   }
 
@@ -117,5 +101,10 @@ export class MenuComponent implements OnInit {
     setTimeout(() =>{
       this.searchService.resultsSet();
     },100)
+  }
+  showSearch(){
+    this.bibleService.displayMenu = false;
+
+    this.router.navigate(['search']);
   }
 }

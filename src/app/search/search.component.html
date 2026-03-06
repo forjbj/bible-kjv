@@ -1,15 +1,14 @@
 <section class="searchGrid" (click) = "bibleService.displayMenu = false;">
-  <div class="stationary">
+  <div id="stationary" class="stationary">
     <hr>
       <form class="searchSelect">
-        <label class="verticalLabel gridColumnOne">SEARCH</label>
-        <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..."
-          value= {{bibleService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
-        <input alt="searchIcon" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value)">
+        <label class="verticalLabel gridColumnOne">Search </label>
+        <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "Word or Words "
+          value= {{searchService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
         <select class="searchOption gridColumnTwo" name="area" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedArea()">
           <optgroup label="Testament/s">
             @for (select of searchService.searchArea; track select) {
-              <option [ngValue]="select.id">in {{ select.label }}</option>
+              <option [ngValue]="select.id">in {{ select.label}}</option>
             }
           </optgroup>
           <optgroup label="Books">
@@ -25,14 +24,17 @@
             <option [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
           }
         </select>
+        <input alt="searchIcon" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value)">
       </form>
       <hr>
-      </div>
-      <!-- below is terrible hack to get around angular animation not available for ng-template -->
-      <div id="searchResultsPage" class="searchResultsPage" >
-        <!-- The following is necessary to get around Angular's security; to be able to use Webassembly created source ('a' tag) and HTML (this took 2 days to work out) -->
-        <a class="hideLink" [href] = "bibleService.searchResults | safe: 'resourceUrl'">
-          <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
-        </a>
-      </div>
-    </section>
+  </div>
+  <!-- below is terrible hack to get around angular animation not available for ng-template -->
+  <div id="searchResultsPage" class="searchResultsPage" >
+    @if (bibleService.searchResults == "noSearchYet"){
+      <p>Choose to search in the Old testament, the New testament or both.</p>
+      <p>Choose the level of search accuracy; Exact match or Contains Characters.</p>
+    } @else {
+      <section id="searchResults" class="searchResults" [innerHtml] = "bibleService.searchResults | safe: 'html'"></section>
+    }
+  </div>
+</section>

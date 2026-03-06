@@ -22,8 +22,6 @@ export class BibleService {
     return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber; // '-' at the front of the id is necessary as angular's anchor scrolling get confused otherwise
   }
 
-  public testamentShow:number = 1; //defaults to new testment; for dialog to testaments component, new testament has autofocus
-
   public title: string = this.bible[this.testament].books[this.bookSelected].bookName;
 
   public showChapters: boolean = false; /*for chapter highlighting MUST BE toggled
@@ -36,7 +34,6 @@ export class BibleService {
   public menuHistoryBook: boolean = false;
 
   public searchResults: any = "noSearchYet";
-  public searchRequest?: string ;
 
   //variable for lefthand menu position
   public leftHandOn?: string; // "?" for typescript to allow undefined
@@ -50,11 +47,8 @@ export class BibleService {
 
   public searchRan = false;//needed for search saved position
 
-  // public overlayRef!: OverlayRef;
-
     constructor(
       public router: Router,
-      // public overlay: Overlay,
       ) {
 
       this.pageTitle ??= "Bible";

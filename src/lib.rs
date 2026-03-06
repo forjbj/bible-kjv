@@ -258,21 +258,22 @@ pub fn search(searches: usize, inp: String, acc: usize) -> String {
         i = i + 1;
     }
 
+    results.push_str(&format!("</div>"));
     let mut results_fin: String;
 
     match search_num {
         0 => {
-            results_fin = format!("<header>There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word and set the bottom search option to 'results Contain Characters'.</header>", inp_str);
+            results_fin = format!("<header class=\"resultsNum\">There are no results for \"{}\".<br><br>Please check the spelling, or try part of a word and set the bottom search option to 'results Contain Characters'.</header><div class=\"resultsMatch\">", inp_str);
         }
         1 => {
             results_fin = format!(
-                "<header>There is only one Search Result For \"{}\":</header><br>",
+                "<header class=\"resultsNum\">There is only one Search Result For \"{}\":</header><div class=\"resultsMatch\">",
                 inp_str
             );
         }
         _ => {
             results_fin = format!(
-                "<header class=\"resultsNum\">There are {} Search Results For \"{}\":</header><br>",
+                "<header id=\"resultsNum\" class=\"resultsNum\">There are {} Search Results For \"{}\":</header><div class=\"resultsMatch\">",
                 search_num, inp_str
             );
         }

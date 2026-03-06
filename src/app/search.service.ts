@@ -14,7 +14,11 @@ export class SearchService {
 
   public worker?: any;
 
-  searchArea = [    
+  public searchResults: any = "noSearchYet";
+
+  public searchRequest?: string ;
+
+  searchArea = [
     { id: 100, label: "Old & New Testaments"}, // first 65 numbers used by books; use 100, 101,102
     { id: 101, label: "Old Testament" },
     { id: 102, label: "New Testament" },
@@ -22,10 +26,10 @@ export class SearchService {
   public accuracy: number = 0;
 
   accuracyLevel = [
-    { id: 0, label: "results Contain Characters", selected: true },
-    { id: 1, label: "results are Exact Match" },
+    { id: 0, label: "- Match Characters", selected: true },
+    { id: 1, label: "- Exactly Match Word" },
   ]
-  
+
   public searchObserver: any;
 
   constructor(public bibleService: BibleService,
@@ -34,7 +38,7 @@ export class SearchService {
               public router: Router,
               private viewport: ViewportScroller,
               @Inject(DOCUMENT) public document: Document,
-              public sanitizer: DomSanitizer ) { 
+              public sanitizer: DomSanitizer ) {
 
     // Worker needs to be created immediately or will only work with double click
     if (typeof Worker !== 'undefined') {
@@ -53,7 +57,7 @@ export class SearchService {
   submitSearch(req: string) {
     this.bibleService.spinner = true; // run spinner animation
     this.bibleService.spinnerTitle = "Searching";
-    this.bibleService.searchRequest = req;
+    this.searchRequest = req;
     localStorage.setItem('currentSearch', "0"); //reset search Y position to stay at top; only works with viewport scroll below
 
     if (typeof Worker !== 'undefined') {
@@ -76,13 +80,13 @@ export class SearchService {
         this.bibleService.searchResults = wasm.search( this.checkedNumber, req, this.accuracy)
       }
     };
-    
+
     this.routeToSearch();
 
     //setTimeout is necessary to force it to wait to run
     setTimeout(() => {
       this.resultsSet();
-    }, 500)
+    }, 700)
   }
   routeToSearch(){
       this.bibleService.showChapters = false;
@@ -102,7 +106,7 @@ export class SearchService {
           const splits = element.id.toString().split('-');
           this.bibleService.testament = Number(splits[0]);
           this.bibleService.bookSelected = Number(splits[1]);
-          this.bibleService.title = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName 
+          this.bibleService.title = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName
           this.bibleService.showChapters = false;
           this.bibleService.displayMenu = false;
           let frag = element.id.toString();
@@ -124,6 +128,7 @@ export class SearchService {
       this.saveSearchPosition()
 
     }
+
     this.bibleService.spinner = false;
   }
   saveSearchPosition(){
@@ -137,16 +142,15 @@ export class SearchService {
     };
     this.searchObserver = new IntersectionObserver( (entries) => {
     entries.forEach(entry => {
-      let searchId = (entry.target!.id) ?? "0"; 
+      let searchId = (entry.target!.id) ?? "0";
       if (entry.isIntersecting ) {
         localStorage.setItem('currentSearch', searchId);
-        // console.log(searchId)
       }
     });
     },options);
       results.forEach(result=> {
       this.searchObserver.observe(result);
-    }) 
+    })
 
   }
 }

@@ -1,20 +1,33 @@
 <nav id= "menu" class="menu">
   <hr class="menuSeparator">
-  <article #about>
-    <div (click) = "aboutDialog.showModal();"
-      class="links">
-      About BibleKJV
+  <article #testament>
+    <div (click)="bibleService.displayMenu = false;"
+      routerLink="testaments"
+      class = "links">
+      Select a Bible Book
     </div>
-    <dialog id = "aboutDialog"
-      (click)="backdropClose($event, this.aboutDialog); bibleService.menuHistoryBook = false">
-      <button class="aboutClose"
-        (click)="aboutDialog.close()" >
-        CLOSE
-      </button>
-      <app-about></app-about>
-    </dialog>
   </article>
   <hr>
+    <div class="history">
+      Recent:
+      <ul class = "links" (click) = "historyService.rearrangeBooks('cur');">
+        {{this.historyService.curBookMenu}}
+      </ul>
+      <ul class = "links" (click) = "historyService.rearrangeBooks('sec');">
+        {{this.historyService.secBookMenu}}
+      </ul>
+      <ul class = "links" (click) = "historyService.rearrangeBooks('third');">
+        {{this.historyService.thirdBookMenu}}
+      </ul>
+    </div>
+  <hr>
+  <article #search>
+    <div (click) = "showSearch()"
+      class="links" >
+      Search the Bible&ensp;<img src="./assets/search.svg" class="searchIcon" align="center">
+    </div>
+  </article>
+  <hr class="menuSeparator">
     <!-- Theme -->
     <div class="mode">
       Dark Theme
@@ -31,100 +44,20 @@
         <span class="slider"></span>
       </label>
     </div>
-    <hr class="menuSeparator">
-    <article #search>
-      <div (click) = "bibleService.searchResults == 'noSearchYet'? searchDialog.showModal() : showPreviousSearch()"
-        class="links" >
-        Word Search&ensp;<img src="./assets/search.svg" class="searchIcon" align="center">
-      </div>
-      <dialog id = "searchDialog"
-        class="search"
-        (click)="backdropClose($event, this.searchDialog)">
-        <div class="stationary">
-          <hr>
-            <form class="searchSelect">
-              <label class="verticalLabel gridColumnOne">SEARCH</label>
-              <input #req class="searchInput gridColumnTwo" name = "req" type="search" placeholder= "for Word or Words..."
-                value= {{bibleService.searchRequest}} (keyup.enter) ="searchService.submitSearch(req.value)" required minlength="2" autofocus>
-              <input alt="submit" class="searchButton gridColumnThree" type="image" src="./assets/search_neutral.svg"  (click) = "searchService.submitSearch(req.value); this.bibleService.displayMenu = false; this.searchDialog.close()">
-              <select class="searchOption gridColumnTwo" name="area" [(ngModel)] ="searchService.checkedNumber" (ngModelChange) = "searchService.selectedArea()">
-                <optgroup label="Testament/s">
-                  @for (select of searchService.searchArea; track select) {
-                    <option [ngValue]="select.id">in {{ select.label }}</option>
-                  }
-                </optgroup>
-                <optgroup label="Books">
-                  @for (testament of bibleService.bible; track testament; let i = $index) {
-                    @for (book of testament.books; track book; let j = $index) {
-                      <option [ngValue]="((i == 1 ? bibleService.bible[0].books.length : 0) + j )">in {{book.bookName}}</option>
-                    }
-                  }
-                </optgroup>
-              </select>
-              <select class="searchOption gridColumnTwo" name="accuracy" id="accuracy" [(ngModel)] ="searchService.accuracy" (ngModelChange) = "searchService.selectedAccuracy()">
-                @for (select of searchService.accuracyLevel; track select) {
-                  <option [ngValue]="select.id" [selected] = "select.selected">{{ select.label }}</option>
-                }
-              </select>
-            </form>
-            <hr>
-            </div>
-            @if (bibleService.searchResults == 'noSearchYet') {
-              <div id="searchInfo" class="searchPage">
-                <div class="backgroundBible"></div>
-                <div class="searchPageText">
-                  <p>Choose to search in the Old testament, the New testament or both.</p>
-                  <p>Choose the level of search accuracy; Exact match or Contains Characters.</p>
-                  <!-- <p class="closeInfo">To close without searching; click anywhere outside this dialog box</p> -->
-                  <button class="closeInfo"
-                    (click)="searchDialog.close()">
-                    Close without Searching
-                  </button>
-                </div>
-              </div>
-            }
-          </dialog>
-        </article>
-        <hr>
-          <div class="history">
-            Recent:
-            <ul class = "links" (click) = "historyService.rearrangeBooks('cur');">
-              {{this.historyService.curBookMenu}}
-            </ul>
-            <ul class = "links" (click) = "historyService.rearrangeBooks('sec');">
-              {{this.historyService.secBookMenu}}
-            </ul>
-            <ul class = "links" (click) = "historyService.rearrangeBooks('third');">
-              {{this.historyService.thirdBookMenu}}
-            </ul>
-          </div>
-          <hr>
-            <article #testament>
-              <div (click) = "testamentDialog.showModal()"
-                class = "links">
-                Select a Bible Book
-              </div>
-              <dialog id = "testamentDialog"
-                (click)="backdropClose($event, this.testamentDialog)"
-                class="testament">
-                <p class="from">From</p>
-                <form>
-                  <input class="testamentButton" type="button" value="Old Testament"
-                (click)="bibleService.menuHistoryBook = false;
-                bibleService.displayMenu = false;
-                bibleService.testamentShow = 0"
-                    routerLink="testaments">
-                  <input class="testamentButton" type="button" value="New Testament" autofocus
-                (click)="bibleService.menuHistoryBook = false;
-                bibleService.displayMenu = false;
-                bibleService.testamentShow = 1"
-                    routerLink="testaments">
-                </form>
-                <button class="closeInfo"
-                  (click)="testamentDialog.close()">
-                  Close without Selecting
-                </button>
-              </dialog>
-            </article>
-            <hr class="menuSeparator">
-          </nav>
+  <hr class="menuSeparator">
+  <article #about>
+    <div (click) = "aboutDialog.showModal();"
+      class="links">
+      About BibleKJV
+    </div>
+    <dialog id = "aboutDialog"
+      (click)="backdropClose($event, this.aboutDialog); bibleService.menuHistoryBook = false">
+      <button class="aboutClose"
+        (click)="aboutDialog.close()" >
+        CLOSE
+      </button>
+      <app-about></app-about>
+    </dialog>
+  </article>
+  <hr class="menuSeparator">
+</nav>

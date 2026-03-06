@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
               public meta: Meta,
               private router: Router,
               @Inject(DOCUMENT) public document: Document,
-              public sanitizer: DomSanitizer ) { 
+              public sanitizer: DomSanitizer ) {
     //nav titles and buttons
     this.bibleService.pageTitle = "Search";
     this.bibleService.chapterButton = false;
@@ -33,10 +33,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
   ngAfterViewInit(): void {
-    // Below is needed to stop refresh page from opening to empty search results
-    if (this.bibleService.searchResults == 'noSearchYet'){
-      this.router.navigate(['book']);
-    }
+
   }
   ngOnDestroy() {
     if (this.bibleService.searchResults != 'noSearchYet'){

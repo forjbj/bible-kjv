@@ -1,14 +1,29 @@
 <section id="top" class="theme" (click) = "bibleService.displayMenu = false;">
+<hr style="margin: 0 4rem">
+<div class="testamentTitle">Old Testament</div>
   <nav class ="bookGrid">
-    @for (book of bibleService.bible[bibleService.testamentShow].books; track book; let i = $index) {
+    @for (book of bibleService.bible[0].books; track book; let i = $index) {
       <div
         class = "bookItem"
         (click) =
-        "bookRender(bibleService.testamentShow,i,book.bookName)">
+        "bookRender(0,i,book.bookName)">
         {{book.bookName}}
       </div>
     }
   </nav>
+  <br>
+  <hr style="margin: 0 4rem">
+  <div class="testamentTitle">New Testament</div>
+  <nav class ="bookGrid">
+      @for (book of bibleService.bible[1].books; track book; let i = $index) {
+        <div
+          class = "bookItem"
+          (click) =
+          "bookRender(1,i,book.bookName)">
+          {{book.bookName}}
+        </div>
+      }
+  </nav>
+  <br>
+  <hr style="margin: 0 4rem">
 </section>
-
-
