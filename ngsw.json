@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1777607220500,
+  "timestamp": 1778115823537,
   "index": "/bible-kjv/index.html",
   "assetGroups": [
     {
@@ -14,7 +14,7 @@
         "/bible-kjv/534.496ae61739f84e38.js",
         "/bible-kjv/favicon.ico",
         "/bible-kjv/index.html",
-        "/bible-kjv/main.0c60f8b14a1a9b7c.js",
+        "/bible-kjv/main.a496f94476506a22.js",
         "/bible-kjv/manifest.webmanifest",
         "/bible-kjv/polyfills.be62ec9bcc9e396a.js",
         "/bible-kjv/runtime.3b9d16542846a378.js",
@@ -54,7 +54,7 @@
   "hashTable": {
     "/bible-kjv/534.496ae61739f84e38.js": "366bdeda4694aa57b759962b168e327fc7dd7178",
     "/bible-kjv/assets/bible/Bible.json": "c8eaea2d9a60f872bb1cadadaaa1162b53ccc723",
-    "/bible-kjv/assets/bible/Dictionary.json": "17831b479164483d10890334b6a827d23fd37e33",
+    "/bible-kjv/assets/bible/Dictionary.json": "1c2704051121bde704c6c3f953bc84af7bff417d",
     "/bible-kjv/assets/bible/Eastons_Bible_Dictionary_edited.txt": "5a67291d9d217c4b817e56fb3f469f27cddf0524",
     "/bible-kjv/assets/icons/icon-128x128.png": "154210bd7c42f9a8a66a3f03db91f23bb9fd93d6",
     "/bible-kjv/assets/icons/icon-144x144.png": "32823e2b00a262d790ac542ac1a2e1a05f940d5f",
@@ -69,8 +69,8 @@
     "/bible-kjv/assets/search_neutral.svg": "3f54ae72cdb1ef2adc88e9a28bf417d5e455ae50",
     "/bible-kjv/favicon.ico": "38ce9f228ec6626c849ea446da784ebd94f709a9",
     "/bible-kjv/icon-192x192.321592a8a2f8ef9a.png": "177df93d4bc990b4551a7ca083f211364dc4b5a8",
-    "/bible-kjv/index.html": "90aaa29c7a1c95f49f370d16b3f6da5fb76c7553",
-    "/bible-kjv/main.0c60f8b14a1a9b7c.js": "6b8af6ff781a3ceb4260155b638cbced8e83c3d7",
+    "/bible-kjv/index.html": "904bde03be986ab07b23b559405ea15af9f23f7e",
+    "/bible-kjv/main.a496f94476506a22.js": "2182f54fa76bf0a2d2fde30407254ee2ebd89c66",
     "/bible-kjv/manifest.webmanifest": "52411e1189ed3cbd18f2ba2a3d703879cb9f9e9c",
     "/bible-kjv/openBible.6e42efe05f4fbf81.png": "62907c11393cfed548c677e397517a56a53556b6",
     "/bible-kjv/polyfills.be62ec9bcc9e396a.js": "999cd1074d3477b1d6a1195539abdd97eb1475d2",
