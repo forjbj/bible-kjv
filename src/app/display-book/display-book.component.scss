@@ -17,6 +17,10 @@
         padding: 0 4rem;
     }
 }
+article {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
 /*remove styling from created links*/
 section {
     a {
@@ -120,34 +124,32 @@ section {
 }
 /* word definitions */
 .wordToDefine{
-  display: inline-flex;
   text-decoration:underline;
   text-decoration-style: solid;
   text-decoration-color: var(--scriptNum);
-  justify-content: var(--definitionPosition);/* variable defined by mouse click; see event listener*/
 }
 .definition {
   display: none; /*necessary or definitions are hidden but on the page and cause a horizontal scroll bar*/
-  top: 0.5rem;
-  color: var(--scriptNum);
-  background-color: color-mix(in srgb, var(--paper) 81%, transparent);
-  border: 1px solid var(--scriptNum);
-  border-radius: 0.2rem;
-  padding: 0.3rem 0.5rem 0.5rem 0.5rem;
-  width: 30ch;
-  max-width: 50vw;
-  white-space: pre-wrap;
-  hr {
-
-    border-color: var(--scriptNum);
-  }
-
 }
-
 .wordToDefine:focus{
+  display: inline-grid;
+  justify-items: right;
   position: relative; /* add only on focus; otherwise bleeds through to menus etc.*/
   .definition{
     position: absolute;/* add only on focus; otherwise bleeds through to menus etc.*/
+    justify-self: var(--definitionPosition);/* variable defined by mouse click; see event listener*/;
     display: block;
+    top: 0.5rem;
+    color: var(--scriptNum);
+    background-color: color-mix(in srgb, var(--paper) 81%, transparent);
+    border: 1px solid var(--scriptNum);
+    border-radius: 0.2rem;
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+    width: 30ch;
+    max-width: 50vw;
+    white-space: pre-wrap;
+    hr {
+    border-color: var(--scriptNum);
+    }
   }
 }
