@@ -29,7 +29,7 @@ export class HistoryService {
   public thirdTestamentArr?: string | null;
 
   constructor( public bibleService: BibleService,
-              public router: Router) { } 
+              public router: Router) { }
 
   menuBooks() {
     this.curTheme =  localStorage.getItem('theme') ?? "light";
@@ -44,12 +44,20 @@ export class HistoryService {
       this.curBookMenu = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName;
     }
     if ((secTestInd != 'null') && (secTestInd != null)) { // NO idea why javascript does this; could be either depending on how you hold your tongue
-      this.secBookMenu = this.bibleService.bible[Number(secTestInd)].books[Number(localStorage.getItem('secBookIndex'))].bookName
-      + ' ' + localStorage.getItem('secChap') ;
+      if (localStorage.getItem('secChap') != '0'){
+        this.secBookMenu = this.bibleService.bible[Number(secTestInd)].books[Number(localStorage.getItem('secBookIndex'))].bookName
+        + ' ' + localStorage.getItem('secChap');
+      } else {
+        this.secBookMenu = this.bibleService.bible[Number(secTestInd)].books[Number(localStorage.getItem('secBookIndex'))].bookName;
+      }
     }
-    if (thirdTestInd != 'null' && thirdTestInd != null ) {
-      this.thirdBookMenu = this.bibleService.bible[Number(thirdTestInd)].books[Number(localStorage.getItem('thirdBookIndex'))].bookName
-      + ' ' + localStorage.getItem('thirdChap') ;
+    if ((thirdTestInd != 'null') && (thirdTestInd != null)) { // NO idea why javascript does this; could be either depending on how you hold your tongue
+      if (localStorage.getItem('thirdChap') != '0'){
+        this.thirdBookMenu = this.bibleService.bible[Number(thirdTestInd)].books[Number(localStorage.getItem('thirdBookIndex'))].bookName
+        + ' ' + localStorage.getItem('thirdChap');
+      } else {
+        this.thirdBookMenu = this.bibleService.bible[Number(thirdTestInd)].books[Number(localStorage.getItem('thirdBookIndex'))].bookName;
+      }
     }
   }
 
@@ -68,11 +76,11 @@ export class HistoryService {
     this.bibleService.displayMenu = false;
     this.bibleService.spinner = true;
     this.bibleService.spinnerTitle = "Restoring"
-    
+
     switch (book) {
       case 'cur':
         break;
-      
+
       case 'sec':
 
         this.bibleService.testament = Number(this.secTestamentArr);
@@ -86,7 +94,7 @@ export class HistoryService {
         localStorage.setItem('secVerse', this.curVerse);
 
         break;
-        
+
       case 'third':
 
         this.bibleService.testament = Number(localStorage.getItem('thirdTestamentIndex'));
@@ -112,7 +120,7 @@ export class HistoryService {
     localStorage.setItem('curChap', this.bibleService.chapterNumber!);
     localStorage.setItem('curVerse', this.bibleService.verseNumber!);
     this.bibleService.spinnerTitle = "Restoring";
-   
+
     /*
       hack to force angular to reload with the above parameters - route to '/testament' then back
       Gives brief 404 error in tab title when selecting from menu - history; but corrects on loaded page
@@ -120,12 +128,12 @@ export class HistoryService {
     setTimeout(() => {
       this.router.navigateByUrl('./testament', { skipLocationChange: true }).then(() => {
       /*
-        Below works, however gives an error code 404 from static server (github pages) on 
-        reload if - this.router.navigate(['/book', this.bibleService.title]);  
+        Below works, however gives an error code 404 from static server (github pages) on
+        reload if - this.router.navigate(['/book', this.bibleService.title]);
       */
-        this.router.navigate(['book'], {fragment: this.bibleService.fragment()});  
-      }); 
-    }, 10); 
+        this.router.navigate(['book'], {fragment: this.bibleService.fragment()});
+      });
+    }, 10);
   }
 
   storeBooks() {
@@ -141,8 +149,8 @@ export class HistoryService {
       this.curVerse = localStorage.getItem('curVerse')!;
       this.secVerse = localStorage.getItem('secVerse')!;
 
-      if (this.bibleService.bookSelected != Number(this.curBookArr) 
-          || this.bibleService.testament != Number(this.curTestamentArr) ) { 
+      if (this.bibleService.bookSelected != Number(this.curBookArr)
+          || this.bibleService.testament != Number(this.curTestamentArr) ) {
         if (this.secTestamentArr != 'null') {
           localStorage.setItem('thirdTestamentIndex', this.secTestamentArr);
           localStorage.setItem('thirdBookIndex', this.secBookArr);
@@ -160,5 +168,8 @@ export class HistoryService {
       localStorage.setItem('curChap', this.bibleService.chapterNumber);
       localStorage.setItem('curVerse', this.bibleService.verseNumber);
     }
+  }
+  bookMark(){
+    
   }
 }
