@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import * as bibleJson from '../../assets/bible/Bible.json';
 import * as wasm from '../../../pkg';
 import { Meta, Title } from '@angular/platform-browser';
@@ -10,6 +10,7 @@ import { BibleService } from '../bible.service';
     styleUrls: ['./widget.component.scss'],
     encapsulation: ViewEncapsulation.None // removes ::ng-deep need
     ,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class WidgetComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy, HostListener, DOCUMENT,} from "@angular/core";
+import { Component, AfterViewInit, Inject, ViewEncapsulation, OnDestroy, HostListener, DOCUMENT, ChangeDetectionStrategy } from "@angular/core";
 import { BibleService } from "../bible.service";
 import { HistoryService } from "../history.service";
 import { Meta, Title } from "@angular/platform-browser";
@@ -12,6 +12,7 @@ import * as dictionaryJson from '../../assets/bible/Dictionary.json';
   templateUrl: "./display-book.component.html",
   styleUrls: ["./display-book.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DisplayBookComponent implements AfterViewInit, OnDestroy {

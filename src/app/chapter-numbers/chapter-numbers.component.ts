@@ -4,6 +4,7 @@ import {
   Inject,
   OnDestroy,
   DOCUMENT,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { BibleService } from "../bible.service";
 import { HistoryService } from "../history.service";
@@ -13,6 +14,7 @@ import { Router } from "@angular/router";
   selector: "app-chapter-numbers",
   templateUrl: "./chapter-numbers.component.html",
   styleUrls: ["./chapter-numbers.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ChapterNumbersComponent implements AfterViewInit, OnDestroy {

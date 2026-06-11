@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewEncapsulation, Inject, DOCUMENT } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewEncapsulation, Inject, DOCUMENT, ChangeDetectionStrategy } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { SearchService } from '../search.service';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SearchComponent implements OnInit, AfterViewInit {

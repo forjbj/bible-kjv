@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit, DOCUMENT } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, DOCUMENT, ChangeDetectionStrategy } from '@angular/core';
 import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Meta, Title } from '@angular/platform-browser';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
     selector: 'app-the-bible',
     templateUrl: './the-bible.component.html',
     styleUrls: ['./the-bible.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 
