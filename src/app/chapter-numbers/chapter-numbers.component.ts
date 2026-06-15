@@ -82,9 +82,13 @@ export class ChapterNumbersComponent implements AfterViewInit, OnDestroy {
   }
   updateStorageAndScroll(chapter: any) {
     this.bibleService.chapterNumber = chapter;
-    this.bibleService.verseNumber = "0";
-    localStorage.setItem("curChap", chapter);
-    localStorage.setItem("curVerse", "0");
+    this.bibleService.verseNumber = 0;
+    // let updateStorage = JSON.parse(localStorage.getItem('recent1')!);
+    // if (updateStorage) {
+    //   // updateStorage[2] = chapter;
+    //   updateStorage[3] = 0;
+    // }
+    // localStorage.setItem("recent1", updateStorage);
     let id = this.bibleService.fragment();
     let bookChapter = this.document.getElementById(id);
     if (bookChapter) {

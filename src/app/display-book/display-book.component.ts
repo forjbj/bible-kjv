@@ -6,6 +6,7 @@ import { Location } from "@angular/common";
 import * as wasm from "../../../pkg";
 import { ActivatedRoute, Router } from "@angular/router";
 import * as dictionaryJson from '../../assets/bible/Dictionary.json';
+import { JsonpClientBackend } from "@angular/common/http";
 
 @Component({
   selector: "app-display-book",
@@ -57,8 +58,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         // only if verse exists in route
         this.bibleService.testament = Number(this.frag[0]);
         this.bibleService.bookSelected = Number(this.frag[1]);
-        this.bibleService.chapterNumber = this.frag[2];
-        this.bibleService.verseNumber = this.frag[3];
+        this.bibleService.chapterNumber = Number(this.frag[2]);
+        this.bibleService.verseNumber = Number(this.frag[3]);
         this.bibleService.title =
           this.bibleService.bible[this.frag[0]].books[this.frag[1]].bookName;
         this.bibleService.showChapters = false;
@@ -75,12 +76,9 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     this.bibleService.chapterButton = true;
 
     // Only auto open chapters if new book and history isn't populated; new uses only
-    let historyPopulated = localStorage.getItem("secTestamentIndex")!;
-    if (
-      this.bibleService.verseNumber == "" &&
-      this.bibleService.chapterNumber == "1" &&
-      (historyPopulated == null || historyPopulated == "null")
-    ) {
+    let historyPopulated = JSON.parse(localStorage.getItem("recent2")!);
+    // console.log(historyPopulated)
+    if (historyPopulated == null) {
       this.bibleService.showChapters = true;
     }
 
@@ -96,17 +94,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     this.historyService.storeBooks();
 
     this.fragId = this.bibleService.fragment(); //must be worked out first
-
-    localStorage.setItem(
-      "curTestamentIndex",
-      this.bibleService.testament.toString(),
-    );
-    localStorage.setItem(
-      "curBookIndex",
-      this.bibleService.bookSelected.toString(),
-    );
-    localStorage.setItem("curChap", this.bibleService.chapterNumber);
-    localStorage.setItem("curVerse", this.bibleService.verseNumber);
 
     this.bookPlace = this.document.getElementById(this.fragId)!;
     this.bookPlace.scrollIntoView({
@@ -142,12 +129,10 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       if (posClick/winSize > 0.33 && posClick/winSize < 0.66){
         // console.log("clicked middle of page");
         document.documentElement.style.setProperty("--definitionPosition", "center");
-
       };
       if (posClick/winSize > 0.66){
         // console.log("clicked right side of page");
         document.documentElement.style.setProperty("--definitionPosition", "right");
-
       };
     })
   }
@@ -165,26 +150,25 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     };
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        let chapter = entry.target!.id ?? "0";
+        let chapter = entry.target!.id ?? 0;
         let splits = chapter.split("-");
-        let targetChapter = splits[2];
+        let targetChapter = Number(splits[2]);
         let url = "/book#";
 
         if (entry.isIntersecting) {
 
-          this.bibleService.verseNumber = splits[3];
-          localStorage.setItem("curVerse", this.bibleService.verseNumber);
-          this.bibleService.chapterNumber = targetChapter;
-
-          // definitions for words in the current chapter; run before setting localStorage
-          if (localStorage.getItem("curChap") != targetChapter) {
-            this.wordsDefine();
-            // console.log(targetChapter);
-          };
-          localStorage.setItem("curChap", targetChapter);
-          this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
-
-          let tabTitle = this.bibleService.title.concat(" ", targetChapter);
+          let current = JSON.parse(localStorage.getItem('recent1')!);
+          if (current) {
+            this.bibleService.verseNumber, current[3] = Number(splits[3]);
+            // definitions for words in the current chapter; run before setting localStorage
+            if (current[2] != targetChapter) {
+              this.wordsDefine();
+            };
+            this.bibleService.chapterNumber, current[2] = targetChapter;
+            this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
+            localStorage.setItem('recent1', JSON.stringify(current));
+          }
+          let tabTitle = this.bibleService.title.concat(" ", (targetChapter).toString());
           this.title.setTitle(tabTitle);
         }
       });
@@ -238,8 +222,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.bibleService.testament = 1;
       this.bibleService.bookSelected = 0;
     }
-    this.bibleService.chapterNumber = "0";
-    this.bibleService.verseNumber = "0";
+    this.bibleService.chapterNumber = 0;
+    this.bibleService.verseNumber = 0;
     // below is a terrible hack but can't seem to reload properly any other way
     this.router
       .navigateByUrl("/notARoute", { skipLocationChange: true })
@@ -250,8 +234,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
   wordsDefine (){
     let chap = this.bibleService.chapterNumber;
     // below is needed for new book selection
-    if (chap == "0"){
-      chap = "1";
+    if (chap == 0){
+      chap = 1;
     }
     for (var j = 0; j < 2; j++){
       const chapterSection = document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+ chap +"-"+"0-S")
@@ -286,14 +270,12 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         //   // (?<!<\/?) Negative lookbehind: ensures the match is not preceded by < or </.
         //   // (?!>) Negative lookahead: ensures it is not followed by > (so not <span>).
         //   let re = new RegExp("(?:<span\b[^>]*>[\s\S]*?<\/span>)?((?<!<\/?)\\b" + key + "\\b(?!>))", 'i');
-
         //  verse = verse.replace(re, "<span class=\"wordToDefine\" tabindex=0>" + " $1 " + "<dl class='definition'><dt>" + "$1" + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>");
-
         };
         scripture[i].innerHTML = verse;
       };
       if (document.getElementById(this.bibleService.testament +"-"+this.bibleService.bookSelected+"-"+(Number(chap) + 1).toString()+"-"+"0-S")){
-        chap = (Number(chap) +1).toString();
+        chap = (chap +1);
       } else {
         break;
       }

@@ -13,14 +13,14 @@
           @if (bibleService.title != 'Psalms') {
             <div class="titleButton">
               <!-- spans necessary for firefox to render correctly; do not display 'chapter 0' when starting new book -->
-              <span>Chapter@if (bibleService.chapterNumber != '0') {
+              <span>Chapter@if (bibleService.chapterNumber != 0) {
                 <span class="horizontalNumbers">{{bibleService.chapterNumber}}</span>
               }</span>
             </div>
           } @else {
             <div class="titleButton">
               <!-- span necessary see above -->
-              <span>Psalm @if (bibleService.chapterNumber != '0') {
+              <span>Psalm @if (bibleService.chapterNumber != 0) {
                 <span  class="horizontalNumbers">{{bibleService.chapterNumber}}</span>
               }</span>
             </div>

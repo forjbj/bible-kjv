@@ -13,10 +13,11 @@ export class BibleService {
   public pageTitle:string;
 
   // Below must be ternary or Number(localStorage...) defaults to 0
-  public testament:number = localStorage.getItem('curTestamentIndex') ? (Number(localStorage.getItem('curTestamentIndex'))) : 1; // defaults to '1' (new testament) if undefined or null
-  public bookSelected:number = localStorage.getItem('curBookIndex') ? (Number(localStorage.getItem('curBookIndex'))) : 3; // defaults to '3' (Gospel of John) see above
-  public chapterNumber: any = localStorage.getItem('curChap') ? localStorage.getItem('curChap') : '0';
-  public verseNumber: any = localStorage.getItem('curVerse') ? localStorage.getItem('curVerse') : '0';
+
+  public testament:number = 1; // defaults to '1' (new testament) if undefined or null
+  public bookSelected:number = 3; // defaults to '3' (Gospel of John) see above
+  public chapterNumber: number = 0;
+  public verseNumber: number = 0;
 
   public fragment():string {
     return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber; // '-' at the front of the id is necessary as angular's anchor scrolling get confused otherwise
@@ -54,6 +55,15 @@ export class BibleService {
       this.pageTitle ??= "Bible";
       this.chapterButton ??= true; // turn on if null or memory wipe
       this.spinnerTitle ??= "Rendering";
+
+      //populate with the current book in local storage if there is one
+      if (localStorage.getItem('recent1')) {
+        let stored = JSON.parse(localStorage.getItem('recent1')!)
+        this.testament = stored[0];
+        this.bookSelected = stored[1];
+        this.chapterNumber = stored[2];
+        this.verseNumber = stored[3];
+      }
     }
 
     //wordSearch needs to be in this service or throws an error re: "changed after it was checked"

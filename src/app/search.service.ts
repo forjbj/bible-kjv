@@ -117,23 +117,25 @@ export class SearchService {
           },0)
         });
       });
-      let current = localStorage.getItem('currentSearch');
-      let searchPosition:any;
-      if (current){
-        searchPosition = this.document.getElementById(current);
-      }
-      if (searchPosition){
-        searchPosition.scrollIntoView({behavior: 'smooth'});
-      }
+
       this.saveSearchPosition()
-
     }
-
     this.bibleService.spinner = false;
+  }
+  scrollToLast(){
+    if (this.bibleService.searchResults != "noSearchYet") {
+      let current = localStorage.getItem('currentSearch')!;
+      if (current) {
+        let searchPosition = this.document.getElementById(current)!;
+        if (searchPosition) {
+          searchPosition.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
   }
   saveSearchPosition(){
     // save position on scroll
-    const results = this.document.querySelectorAll("section > a");
+    const results = this.document.querySelectorAll("section > div > a");
     const options = {
       root: null, // viewport
       threshold: [0],

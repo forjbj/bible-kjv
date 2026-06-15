@@ -35,18 +35,21 @@ export class TestamentsComponent implements AfterViewInit {
     this.bibleService.bookSelected = book;
     this.bibleService.title = title;
     this.bibleService.displayMenu = false;
-    if (this.bibleService.testament == Number(localStorage.getItem('curTestamentIndex')) && this.bibleService.bookSelected == Number(localStorage.getItem('curBookIndex'))){
-      this.bibleService.chapterNumber = localStorage.getItem('curChap')!;
-      this.bibleService.verseNumber = localStorage.getItem('curVerse')!;
+    this.bibleService.menuHistoryBook = false;
+
+    let cur = JSON.parse(localStorage.getItem('recent1')!);
+    if ((this.bibleService.testament == cur[0]) && (this.bibleService.bookSelected == cur[1])){
+      this.bibleService.chapterNumber = cur[2];
+      this.bibleService.verseNumber = cur[3];
     } else {
-      this.bibleService.chapterNumber = '0';
-      this.bibleService.verseNumber = '0'; // if changing see also display-book.component.ts as it tests for this
+      this.bibleService.chapterNumber = 0;
+      this.bibleService.verseNumber = 0; // if changing see also display-book.component.ts as it tests for this
     }
     //setTimeout needed for spinner to start
     setTimeout(() => {
       this.router.navigate(['book'], {fragment: this.bibleService.fragment()}); //works
     }, 10);
-    
+
   }
 
 }

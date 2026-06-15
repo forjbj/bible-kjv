@@ -12,64 +12,89 @@ export class HistoryService {
   public curBookMenu?: string; // "?" for typescript to allow undefined
   public secBookMenu?: string | null;
   public thirdBookMenu?: string | null;
-
-  public curChap?: string;
-  public secChap?: string;
-  public thirdChap?: string;
-
-  public curVerse?: string;
-  public secVerse?: string;
-  public thirdVerse?: string;
-
-  public curBookArr?: string;
-  public curTestamentArr?: string;
-  public secBookArr?: string;
-  public secTestamentArr?: string;
-  public thirdBookArr?: string | null;
-  public thirdTestamentArr?: string | null;
+  public fourthBookMenu?: string | null;
+  public fifthBookMenu?: string | null;
+  public sixthBookMenu?: string | null;
+  public seventhBookMenu?: string | null;
 
   constructor( public bibleService: BibleService,
               public router: Router) { }
 
   menuBooks() {
     this.curTheme =  localStorage.getItem('theme') ?? "light";
-    let secTestInd = localStorage.getItem('secTestamentIndex')!;
-    let thirdTestInd = localStorage.getItem('thirdTestamentIndex')!;
-    // console.log(thirdTestInd);
 
-    if (this.bibleService.chapterNumber != '0') {
+    let cur = JSON.parse(localStorage.getItem('recent1')!);
+    let sec = JSON.parse(localStorage.getItem('recent2')!);
+    let third = JSON.parse(localStorage.getItem('recent3')!);
+    let fourth = JSON.parse(localStorage.getItem('recent4')!);
+    let fifth = JSON.parse(localStorage.getItem('recent5')!);
+    let sixth = JSON.parse(localStorage.getItem('recent6')!);
+    let seventh = JSON.parse(localStorage.getItem('recent7')!);
+
+    if (this.bibleService.chapterNumber != 0) {
       this.curBookMenu = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName
       + ' '  + this.bibleService.chapterNumber ;
     } else {
       this.curBookMenu = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName;
     }
-    if ((secTestInd != 'null') && (secTestInd != null)) { // NO idea why javascript does this; could be either depending on how you hold your tongue
-      if (localStorage.getItem('secChap') != '0'){
-        this.secBookMenu = this.bibleService.bible[Number(secTestInd)].books[Number(localStorage.getItem('secBookIndex'))].bookName
-        + ' ' + localStorage.getItem('secChap');
+    if (sec) { // NO idea why javascript does this; could be either depending on how you hold your tongue
+      if (sec[2] != 0){
+        this.secBookMenu = this.bibleService.bible[sec[0]].books[sec[1]].bookName
+        + ' ' + sec[2];
       } else {
-        this.secBookMenu = this.bibleService.bible[Number(secTestInd)].books[Number(localStorage.getItem('secBookIndex'))].bookName;
+        this.secBookMenu = this.bibleService.bible[sec[0]].books[sec[1]].bookName;
       }
     }
-    if ((thirdTestInd != 'null') && (thirdTestInd != null)) { // NO idea why javascript does this; could be either depending on how you hold your tongue
-      if (localStorage.getItem('thirdChap') != '0'){
-        this.thirdBookMenu = this.bibleService.bible[Number(thirdTestInd)].books[Number(localStorage.getItem('thirdBookIndex'))].bookName
-        + ' ' + localStorage.getItem('thirdChap');
+    if (third) { // NO idea why javascript does this; could be either depending on how you hold your tongue
+      if (third[2] != 0){
+        this.thirdBookMenu = this.bibleService.bible[third[0]].books[third[1]].bookName
+        + ' ' + third[2];
       } else {
-        this.thirdBookMenu = this.bibleService.bible[Number(thirdTestInd)].books[Number(localStorage.getItem('thirdBookIndex'))].bookName;
+        this.thirdBookMenu = this.bibleService.bible[third[0]].books[third[1]].bookName;
+      }
+    }
+    if (fourth) { // NO idea why javascript does this; could be either depending on how you hold your tongue
+      if (fourth[2] != 0){
+        this.fourthBookMenu = this.bibleService.bible[fourth[0]].books[fourth[1]].bookName
+        + ' ' + fourth[2];
+      } else {
+        this.fourthBookMenu = this.bibleService.bible[fourth[0]].books[fourth[1]].bookName;
+      }
+    }
+    if (fifth) { // NO idea why javascript does this; could be either depending on how you hold your tongue
+      if (fifth[2] != 0){
+        this.fifthBookMenu = this.bibleService.bible[fifth[0]].books[fifth[1]].bookName
+        + ' ' + fifth[2];
+      } else {
+        this.fifthBookMenu = this.bibleService.bible[fifth[0]].books[fifth[1]].bookName;
+      }
+    }
+    if (sixth) { // NO idea why javascript does this; could be either depending on how you hold your tongue
+      if (sixth[2] != 0){
+        this.sixthBookMenu = this.bibleService.bible[sixth[0]].books[sixth[1]].bookName
+        + ' ' + sixth[2];
+      } else {
+        this.sixthBookMenu = this.bibleService.bible[sixth[0]].books[sixth[1]].bookName;
+      }
+    }
+    if (seventh) { // NO idea why javascript does this; could be either depending on how you hold your tongue
+      if (seventh[2] != 0){
+        this.seventhBookMenu = this.bibleService.bible[seventh[0]].books[seventh[1]].bookName
+        + ' ' + seventh[2];
+      } else {
+        this.seventhBookMenu = this.bibleService.bible[seventh[0]].books[seventh[1]].bookName;
       }
     }
   }
-
   rearrangeBooks(book:string) {
-    this.curTestamentArr = localStorage.getItem('curTestamentIndex')!; // "!" for typescript to allow undefined
-    this.curBookArr = localStorage.getItem('curBookIndex')!;
-    this.curChap = localStorage.getItem('curChap')!;
-    this.curVerse = localStorage.getItem('curVerse')!;
-    this.secTestamentArr = localStorage.getItem('secTestamentIndex')!;
-    this.secBookArr = localStorage.getItem('secBookIndex')!;
-    this.secChap = localStorage.getItem('secChap')!;
-    this.secVerse = localStorage.getItem('secVerse')!;
+
+    let cur_ = JSON.parse(localStorage.getItem('recent1')!);
+    let sec_ = JSON.parse(localStorage.getItem('recent2')!);
+    let third_ = JSON.parse(localStorage.getItem('recent3')!);
+    let fourth_ = JSON.parse(localStorage.getItem('recent4')!);
+    let fifth_ = JSON.parse(localStorage.getItem('recent5')!);
+    let sixth_ = JSON.parse(localStorage.getItem('recent6')!);
+    let seventh_ = JSON.parse(localStorage.getItem('recent7')!);
 
     this.bibleService.menuHistoryBook = true;
     this.bibleService.showChapters = false;
@@ -80,45 +105,80 @@ export class HistoryService {
     switch (book) {
       case 'cur':
         break;
-
       case 'sec':
-
-        this.bibleService.testament = Number(this.secTestamentArr);
-        this.bibleService.bookSelected = Number(this.secBookArr);
-        this.bibleService.chapterNumber = this.secChap;
-        this.bibleService.verseNumber = this.secVerse;
-
-        localStorage.setItem('secTestamentIndex', this.curTestamentArr);
-        localStorage.setItem('secBookIndex', this.curBookArr);
-        localStorage.setItem('secChap', this.curChap);
-        localStorage.setItem('secVerse', this.curVerse);
+        this.bibleService.testament = sec_[0];
+        this.bibleService.bookSelected = sec_[1];
+        this.bibleService.chapterNumber = sec_[2];
+        this.bibleService.verseNumber = sec_[3];
+        localStorage.setItem('recent1', JSON.stringify(sec_));
+        localStorage.setItem('recent2', JSON.stringify(cur_));
 
         break;
-
       case 'third':
+        this.bibleService.testament = third_[0];
+        this.bibleService.bookSelected = third_[1];
+        this.bibleService.chapterNumber = third_[2]!;
+        this.bibleService.verseNumber = third_[3]!;
+        localStorage.setItem('recent1', JSON.stringify(third_));
+        localStorage.setItem('recent2', JSON.stringify(cur_));
+        localStorage.setItem('recent3', JSON.stringify(sec_));
 
-        this.bibleService.testament = Number(localStorage.getItem('thirdTestamentIndex'));
-        this.bibleService.bookSelected = Number(localStorage.getItem('thirdBookIndex'));
-        this.bibleService.chapterNumber = localStorage.getItem('thirdChap')!;
-        this.bibleService.verseNumber = localStorage.getItem('thirdVerse')!;
+        break;
+      case 'fourth':
+        this.bibleService.testament = fourth_[0];
+        this.bibleService.bookSelected = fourth_[1];
+        this.bibleService.chapterNumber = fourth_[2]!;
+        this.bibleService.verseNumber = fourth_[3]!;
+        localStorage.setItem('recent1', JSON.stringify(fourth_));
+        localStorage.setItem('recent2', JSON.stringify(cur_));
+        localStorage.setItem('recent3', JSON.stringify(sec_));
+        localStorage.setItem('recent4', JSON.stringify(third_));
 
-        localStorage.setItem('secTestamentIndex', this.curTestamentArr);
-        localStorage.setItem('secBookIndex', this.curBookArr);
-        localStorage.setItem('secChap', this.curChap);
-        localStorage.setItem('secVerse', this.curVerse);
+        break;
+      case 'fifth':
+        this.bibleService.testament = fifth_[0];
+        this.bibleService.bookSelected = fifth_[1];
+        this.bibleService.chapterNumber = fifth_[2]!;
+        this.bibleService.verseNumber = fifth_[3]!;
+        localStorage.setItem('recent1', JSON.stringify(fifth_));
+        localStorage.setItem('recent2', JSON.stringify(cur_));
+        localStorage.setItem('recent3', JSON.stringify(sec_));
+        localStorage.setItem('recent4', JSON.stringify(third_));
+        localStorage.setItem('recent5', JSON.stringify(fourth_));
 
-        localStorage.setItem('thirdTestamentIndex', this.secTestamentArr);
-        localStorage.setItem('thirdBookIndex', this.secBookArr);
-        localStorage.setItem('thirdChap', this.secChap);
-        localStorage.setItem('thirdVerse', this.secVerse);
+        break;
+      case 'sixth':
+        this.bibleService.testament = sixth_[0];
+        this.bibleService.bookSelected = sixth_[1];
+        this.bibleService.chapterNumber = sixth_[2]!;
+        this.bibleService.verseNumber = sixth_[3]!;
+        localStorage.setItem('recent1', JSON.stringify(sixth_));
+        localStorage.setItem('recent2', JSON.stringify(cur_));
+        localStorage.setItem('recent3', JSON.stringify(sec_));
+        localStorage.setItem('recent4', JSON.stringify(third_));
+        localStorage.setItem('recent5', JSON.stringify(fourth_));
+        localStorage.setItem('recent6', JSON.stringify(fifth_));
+
+        break;
+      case 'seventh':
+        this.bibleService.testament = seventh_[0];
+        this.bibleService.bookSelected = seventh_[1];
+        this.bibleService.chapterNumber = seventh_[2]!;
+        this.bibleService.verseNumber = seventh_[3]!;
+        localStorage.setItem('recent1', JSON.stringify(seventh_));
+        localStorage.setItem('recent2', JSON.stringify(cur_));
+        localStorage.setItem('recent3', JSON.stringify(sec_));
+        localStorage.setItem('recent4', JSON.stringify(third_));
+        localStorage.setItem('recent5', JSON.stringify(fourth_));
+        localStorage.setItem('recent6', JSON.stringify(fifth_));
+        localStorage.setItem('recent7', JSON.stringify(sixth_));
 
         break;
     };
     this.bibleService.title = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName;
-    localStorage.setItem('curTestamentIndex', (this.bibleService.testament).toString());
-    localStorage.setItem('curBookIndex', (this.bibleService.bookSelected).toString());
-    localStorage.setItem('curChap', this.bibleService.chapterNumber!);
-    localStorage.setItem('curVerse', this.bibleService.verseNumber!);
+
+    // localStorage.setItem('recent1', JSON.stringify(cur_));
+
     this.bibleService.spinnerTitle = "Restoring";
 
     /*
@@ -138,38 +198,47 @@ export class HistoryService {
 
   storeBooks() {
     // only execute if not selected from history
-    if (this.bibleService.menuHistoryBook == false) {
+     if (this.bibleService.menuHistoryBook == false) {
+      let recentOne = JSON.parse(localStorage.getItem('recent1')!);
+      let recentTwo = JSON.parse(localStorage.getItem('recent2')!);
+      let recentThree = JSON.parse(localStorage.getItem('recent3')!);
+      let recentFour = JSON.parse(localStorage.getItem('recent4')!);
+      let recentFive = JSON.parse(localStorage.getItem('recent5')!);
+      let recentSix = JSON.parse(localStorage.getItem('recent6')!);
+      let recentSeven = JSON.parse(localStorage.getItem('recent7')!);
 
-      this.curTestamentArr = localStorage.getItem('curTestamentIndex')!;
-      this.secTestamentArr = localStorage.getItem('secTestamentIndex')!;
-      this.curBookArr = localStorage.getItem('curBookIndex')!;
-      this.secBookArr = localStorage.getItem('secBookIndex')!;
-      this.curChap = localStorage.getItem('curChap')!;
-      this.secChap = localStorage.getItem('secChap')!;
-      this.curVerse = localStorage.getItem('curVerse')!;
-      this.secVerse = localStorage.getItem('secVerse')!;
-
-      if (this.bibleService.bookSelected != Number(this.curBookArr)
-          || this.bibleService.testament != Number(this.curTestamentArr) ) {
-        if (this.secTestamentArr != 'null') {
-          localStorage.setItem('thirdTestamentIndex', this.secTestamentArr);
-          localStorage.setItem('thirdBookIndex', this.secBookArr);
-          localStorage.setItem('thirdChap', this.secChap);
-          localStorage.setItem('thirdVerse', this.secVerse);
-        }
-        localStorage.setItem('secTestamentIndex', this.curTestamentArr);
-        localStorage.setItem('secBookIndex', this.curBookArr);
-        localStorage.setItem('secChap', this.curChap);
-        localStorage.setItem('secVerse', this.curVerse);
-      }
+       if (recentOne) {
+         if ((this.bibleService.bookSelected != recentOne[1])
+           || (this.bibleService.testament != recentOne[0])) {
+           let one = JSON.stringify(recentOne);
+           localStorage.setItem('recent2', one);
+           if (recentTwo) {
+             let two = JSON.stringify(recentTwo);
+             localStorage.setItem('recent3', two);
+             if (recentThree) {
+               let three = JSON.stringify(recentThree);
+               localStorage.setItem('recent4', three);
+               if (recentFour) {
+                 let four = JSON.stringify(recentFour);
+                 localStorage.setItem('recent5', four);
+                 if (recentFive) {
+                   let five = JSON.stringify(recentFive);
+                   localStorage.setItem('recent6', five);
+                   if (recentSix) {
+                     let six = JSON.stringify(recentSix);
+                     localStorage.setItem('recent7', six);
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
       // The following need to be here or history won't originally populate
-      localStorage.setItem('curTestamentIndex', (this.bibleService.testament).toString());
-      localStorage.setItem('curBookIndex', (this.bibleService.bookSelected).toString());
-      localStorage.setItem('curChap', this.bibleService.chapterNumber);
-      localStorage.setItem('curVerse', this.bibleService.verseNumber);
+      recentOne = [this.bibleService.testament, this.bibleService.bookSelected, this.bibleService.chapterNumber, this.bibleService.verseNumber];
+      let x = JSON.stringify(recentOne);
+      localStorage.setItem('recent1', x);
+
     }
-  }
-  bookMark(){
-    
   }
 }

@@ -34,7 +34,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
   ngAfterViewInit(): void {
-
+    if( this.bibleService.searchResults != 'noSearchYet'){
+      this.searchService.scrollToLast();
+      this.searchService.resultsSet();
+    }
   }
   ngOnDestroy() {
     if (this.bibleService.searchResults != 'noSearchYet'){
