@@ -1,0 +1,23 @@
+<div class="leadHeader" ></div>
+<div
+    [innerHTML] ="result | safe: 'html'"
+    class="script">
+</div>
+<div
+    class=" stickyMenu">
+    <div class="bookAndChap">
+        {{bookName}} {{chapter}}
+    </div>
+    <button
+        aria-label="reload a random scripture"
+        (click) = " load();"
+        class="newScript">
+        New Scripture
+    </button>
+    <button
+        aria-label="close the scripture dialog box"
+        (click)="menu.randomDialog.close()"
+        class="closeScript">
+        Close Scripture
+    </button>
+</div>

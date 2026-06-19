@@ -1,0 +1,85 @@
+  .leadHeader {
+      position: sticky;
+      top: 0;
+      height: 0.5rem;
+      width: 100%;
+      background: var(--menu);
+  }
+  .script {
+      text-align: left;
+      margin: 1rem 0.3rem;
+  }
+  .stickyMenu {
+      position: sticky;
+      bottom: -0.1rem; //necessary for ios or words can be seen scrolling under menu
+      margin: 0 auto;
+      padding: 0.7rem 0.1rem;
+      margin-bottom: -0.1rem;
+      display: grid;
+      grid-auto-columns: minmax(0, 1fr);
+      grid-auto-flow: column;
+      color: var(--ink);
+      font-variant-caps: small-caps;
+      background-color: var(--nav);
+      //below is necessary to remove blue glow in iOS
+      *:focus:not(.focus-visible) {
+          outline: none;
+        }
+
+      .bookAndChap {
+          margin-left: 1rem;
+          justify-self: left;
+          padding: 0.5rem;
+          margin-bottom: 0.2rem;
+      }
+      .newScript {
+          justify-self: center;
+          width: fit-content;
+          font-family: Georgia,"Times New Roman", Times, serif; //needs to be here or doesn't work
+          font-variant-caps: small-caps;//needs to be here or doesn't work
+          margin-bottom: 0.2rem;
+          border: 2px solid var(--button);
+          color: var(--ink); //needed for ios or button font is blue
+          padding: 0.3rem 0.7rem;
+          background-color: transparent;
+          transition-duration: 1s;
+          &:hover{
+              background-color: var(--button);
+          }
+          &:active{
+              color: red;
+              transform: translateY(-0.3rem);
+
+          }
+          @media (pointer: fine){
+              &:hover{
+                  transform: translateY(-0.3rem);
+              }
+          }
+      }
+      .closeScript {
+          width: fit-content;
+          margin-right: 1rem;
+          margin-bottom: 0.2rem;
+          justify-self: right;
+          font-family: Georgia,"Times New Roman", Times, serif;//needs to be here or doesn't work
+          font-variant-caps: small-caps;//needs to be here or doesn't work
+          border: 2px solid #a11;
+          padding: 0.3rem 0.7rem;
+          color: var(--ink);
+          background-color: transparent;
+          transition-duration: 1s;
+          &:hover {
+              background-color: #aa0101;
+          }
+          &:active{
+              color: red;
+              transform: translateY(-0.3rem);
+          }
+          @media (pointer: fine){
+              &:hover{
+                  transform: translateY(-0.3rem);
+              }
+          }
+      }
+    }
