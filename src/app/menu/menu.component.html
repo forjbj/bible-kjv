@@ -17,22 +17,22 @@
         <li class = "links" (click) = "historyService.rearrangeBooks('cur');">
           {{this.historyService.curBookMenu}}
         </li>
-        <li class = "links" (click) = "historyService.rearrangeBooks('sec');">
+        <li *ngIf="historyService.secBookMenu" class = "links" (click) = "historyService.rearrangeBooks('sec');">
           {{this.historyService.secBookMenu}}
         </li>
-        <li class = "links" (click) = "historyService.rearrangeBooks('third');">
+        <li *ngIf="historyService.thirdBookMenu" class = "links" (click) = "historyService.rearrangeBooks('third');">
           {{this.historyService.thirdBookMenu}}
         </li>
-        <li class = "links" (click) = "historyService.rearrangeBooks('fourth');">
+        <li *ngIf="historyService.fourthBookMenu" class = "links" (click) = "historyService.rearrangeBooks('fourth');">
           {{this.historyService.fourthBookMenu}}
         </li>
-        <li class = "links" (click) = "historyService.rearrangeBooks('fifth');">
+        <li *ngIf="historyService.fifthBookMenu" class = "links" (click) = "historyService.rearrangeBooks('fifth');">
           {{this.historyService.fifthBookMenu}}
         </li>
-        <li class = "links" (click) = "historyService.rearrangeBooks('sixth');">
+        <li *ngIf="historyService.sixthBookMenu" class = "links" (click) = "historyService.rearrangeBooks('sixth');">
           {{this.historyService.sixthBookMenu}}
         </li>
-        <li class = "links" (click) = "historyService.rearrangeBooks('seventh');">
+        <li *ngIf="historyService.seventhBookMenu" class = "links" (click) = "historyService.rearrangeBooks('seventh');">
           {{this.historyService.seventhBookMenu}}
         </li>
       </ul>
