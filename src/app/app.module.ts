@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { WidgetComponent } from './widget/widget.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RandomComponent } from './random/random.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AboutComponent,
     WidgetComponent,
     NotFoundComponent,
+    RandomComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,30 +8,36 @@
     </div>
   </article>
   <hr>
-    <div class="history">
-      Recent:
-      <ul class = "links" (click) = "historyService.rearrangeBooks('cur');">
-        {{this.historyService.curBookMenu}}
-      </ul>
-      <ul class = "links" (click) = "historyService.rearrangeBooks('sec');">
-        {{this.historyService.secBookMenu}}
-      </ul>
-      <ul class = "links" (click) = "historyService.rearrangeBooks('third');">
-        {{this.historyService.thirdBookMenu}}
-      </ul>
-      <ul class = "links" (click) = "historyService.rearrangeBooks('fourth');">
-        {{this.historyService.fourthBookMenu}}
-      </ul>
-      <ul class = "links" (click) = "historyService.rearrangeBooks('fifth');">
-        {{this.historyService.fifthBookMenu}}
-      </ul>
-      <ul class = "links" (click) = "historyService.rearrangeBooks('sixth');">
-        {{this.historyService.sixthBookMenu}}
-      </ul>
-      <ul class = "links" (click) = "historyService.rearrangeBooks('seventh');">
-        {{this.historyService.seventhBookMenu}}
+  <article #history>
+    <div class="recent" (click)="toggleList(recentShowHide)">
+      Recently Opened
+    </div>
+    <div id="recentLinks" class="recentLinks" style="display: none;">
+      <ul>
+        <li class = "links" (click) = "historyService.rearrangeBooks('cur');">
+          {{this.historyService.curBookMenu}}
+        </li>
+        <li class = "links" (click) = "historyService.rearrangeBooks('sec');">
+          {{this.historyService.secBookMenu}}
+        </li>
+        <li class = "links" (click) = "historyService.rearrangeBooks('third');">
+          {{this.historyService.thirdBookMenu}}
+        </li>
+        <li class = "links" (click) = "historyService.rearrangeBooks('fourth');">
+          {{this.historyService.fourthBookMenu}}
+        </li>
+        <li class = "links" (click) = "historyService.rearrangeBooks('fifth');">
+          {{this.historyService.fifthBookMenu}}
+        </li>
+        <li class = "links" (click) = "historyService.rearrangeBooks('sixth');">
+          {{this.historyService.sixthBookMenu}}
+        </li>
+        <li class = "links" (click) = "historyService.rearrangeBooks('seventh');">
+          {{this.historyService.seventhBookMenu}}
+        </li>
       </ul>
     </div>
+  </article>
   <hr>
   <article #search>
     <div (click) = "showSearch()"
@@ -39,8 +45,23 @@
       Search the Bible&ensp;<img src="./assets/search.svg" class="searchIcon" align="center">
     </div>
   </article>
+  <hr>
+  <article #random>
+    <div (click) = "randomDialog.showModal();"
+      class="links">
+        Random Scripture
+    </div>
+    <dialog id = "randomDialog"
+      (click)="backdropClose($event, this.randomDialog); bibleService.menuHistoryBook = false">
+      <app-random></app-random>
+    </dialog>
+  </article>
   <hr class="menuSeparator">
     <!-- Theme -->
+  <div (click)="toggleList(settingsShowHide)">
+    Settings
+  </div>
+  <div id="settings" style="display: none;">
     <div class="mode">
       Dark Theme
       <label class="switch">
@@ -56,6 +77,7 @@
         <span class="slider"></span>
       </label>
     </div>
+  </div>
   <hr class="menuSeparator">
   <article #about>
     <div (click) = "aboutDialog.showModal();"
@@ -64,10 +86,6 @@
     </div>
     <dialog id = "aboutDialog"
       (click)="backdropClose($event, this.aboutDialog); bibleService.menuHistoryBook = false">
-      <button class="aboutClose"
-        (click)="aboutDialog.close()" >
-        CLOSE
-      </button>
       <app-about></app-about>
     </dialog>
   </article>

@@ -14,10 +14,10 @@ export class BibleService {
 
   // Below must be ternary or Number(localStorage...) defaults to 0
 
-  public testament:number = 1; // defaults to '1' (new testament) if undefined or null
-  public bookSelected:number = 3; // defaults to '3' (Gospel of John) see above
-  public chapterNumber: number = 0;
-  public verseNumber: number = 0;
+  public testament:number = localStorage.getItem('recent1') ? (JSON.parse(localStorage.getItem('recent1')!)[0]) : 1; // defaults to '1' (new testament) if undefined or null
+  public bookSelected:number = localStorage.getItem('recent1') ? (JSON.parse(localStorage.getItem('recent1')!)[1]) : 3; // defaults to '3' (Gospel of John) see above
+  public chapterNumber: number = localStorage.getItem('recent1') ? (JSON.parse(localStorage.getItem('recent1')!)[2]) : 0;
+  public verseNumber: number = localStorage.getItem('recent1') ? (JSON.parse(localStorage.getItem('recent1')!)[3]) : 0;
 
   public fragment():string {
     return this.testament + '-' + this.bookSelected + '-' + this.chapterNumber + '-' + this.verseNumber; // '-' at the front of the id is necessary as angular's anchor scrolling get confused otherwise

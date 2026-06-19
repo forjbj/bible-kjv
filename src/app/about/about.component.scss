@@ -1,6 +1,7 @@
 .about {
     margin: 0.5rem 1rem;
-    max-width: 30rem;
+    max-width: 33rem;
+    padding: 0.7rem;
 }
 .scriptHeader {
     border-top: solid 1px;
@@ -15,6 +16,24 @@
 }
 .leftAlign {
     text-align: left;
+    a:link {
+      color: var(--lightRed);
+      background-color: transparent;
+      text-decoration: none;
+      outline: 0;
+    }
+    a:visited {
+      color: var(--darkRed);
+      background-color: transparent;
+      text-decoration: none;
+      outline: 0;
+    }
+
+    a:hover {
+      background-color: transparent;
+      text-decoration: underline;
+      outline: 0;
+    }
 }
 .version {
     max-width: 70%;
@@ -26,4 +45,29 @@
         text-align: left;
     }
     border: 1px solid var(--ink);
+}
+.closeAbout {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--darkRed);
+  font-size: 1.2rem;
+  width: fit-content;
+  font-family: Georgia,"Times New Roman", Times, serif;//needs to be here or doesn't work
+  font-variant-caps: small-caps;//needs to be here or doesn't work
+  border: 2px solid #a11;
+  padding: 0.3rem 0.7rem;
+  color: white;
+  transition-duration: 1s;
+  &:hover {
+      background-color: #aa0101;
+  }
+  &:active{
+      color: red;
+      transform: translateY(-0.3rem);
+  }
+  @media (pointer: fine){
+      &:hover{
+          transform: translateY(-0.3rem);
+      }
+  }
 }

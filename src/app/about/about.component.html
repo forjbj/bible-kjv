@@ -8,7 +8,7 @@
         <p>This is an opensource, offline capable (PWA), King James Version (Cambridge) Bible application.</p>
         <p>WebAssembly is used for book rendering and Search functionality</p>
         <p>This application does not use cookies nor does it harvest any personal data. Local Storage is used to improve user experience. </p>
-        <p>The code for this application: <a href="https://github.com/forjbj/bible-kjv" target="_blank" rel="noopener noreferrer">github repository</a> </p>
+        <p>Link for the application code: <a href="https://github.com/forjbj/bible-kjv" target="_blank" rel="noopener noreferrer">github repository</a> </p>
     </div>
     <section class="version">
         <p>Version 0.7</p>
@@ -63,3 +63,9 @@
             </ul>
     </section>
 </article>
+<button
+    aria-label="close the 'About' dialog box"
+    (click)="menu.aboutDialog.close()"
+    class="closeAbout">
+    Close
+</button>

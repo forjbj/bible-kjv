@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { BibleService } from '../bible.service';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
     selector: 'app-about',
@@ -11,18 +12,12 @@ import { BibleService } from '../bible.service';
 })
 export class AboutComponent implements OnInit {
 
-  public dialog: any;
-
   constructor(public bibleService: BibleService,
               public title: Title,
-              public meta: Meta,) {
-    // this.title.setTitle('About');
+              public meta: Meta,
+              public menu: MenuComponent,) {
     this.meta.addTag({ name: 'description', content: 'About this Application; including version history and repository location' });
-
-    this.dialog = document.getElementById("aboutDialog");
-
   }
-
   ngOnInit(): void {
   }
 

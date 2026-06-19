@@ -39,6 +39,9 @@
   text-align: left;
   margin: 1em;
 }
+.recent {
+  text-align: center;
+}
 .links {
   margin: 1em;
   cursor: pointer;
@@ -50,6 +53,9 @@
 ul {
   font-family: Bookman, Georgia, serif;
   font-variant: small-caps;
+  li{
+    text-align: left;
+  }
 }
 .searchIcon {
   width: inherit;
@@ -117,61 +123,30 @@ dialog{
   font-family: Georgia,"Times New Roman", Times, serif;
   color: var(--ink);
   background-color: var(--menu);
-  border-radius: 0.2rem;
+  border-width: 0;
+  padding: 0;
   transition: opacity 0.7s cubic-bezier(0.5, 1.3, 0.5, 1),
     scale 0.7s cubic-bezier(0.5, 1.3, 0.5, 1), overlay 0.2s allow-discrete,
     display 0.2s allow-discrete;
   opacity: 0;
   scale: 0;
-
-  &.search {
-    @media (orientation: portrait){
-      margin-top: 3rem;
-    }
-  }
-  &.testament{
-    padding: 0;
+  @media (orientation: portrait){
+    max-width: 90vw;
   }
   &[open]{
     display: block;
-    border: 1px solid var(--ink);
+    border: 1px solid var(--darkRed);
     opacity: 1;
     scale: 1;
   }
-
   &::backdrop {
     background-color: color-mix(in srgb, var(--paper) 50%, transparent);
   }
-
 }
 @starting-style {
   dialog[open] {
     opacity: 0;
     scale: 0;
-  }
-}
-
-.aboutClose{
-  position: sticky;
-  top: 50%;
-  float: left;
-  margin-left: -1rem;
-  writing-mode: vertical-lr;
-  text-orientation: upright; /* needed for safari*/
-  font-weight: bold;
-  font-variant: small-caps;
-  color: var(--zInk);
-  text-align: center;
-  text-shadow: 1px 1px var(--gridColor);
-  border-radius: 0.2rem;
-  background-color: var(--button);
-  padding: 1rem 0.2rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  &:hover, &:focus, &:active {
-      color: var(--ink);
-      background-color: var(--menu);
-      outline: 0; /*needed for chrome*/
   }
 }
 .stationary {

@@ -177,8 +177,6 @@ export class HistoryService {
     };
     this.bibleService.title = this.bibleService.bible[this.bibleService.testament].books[this.bibleService.bookSelected].bookName;
 
-    // localStorage.setItem('recent1', JSON.stringify(cur_));
-
     this.bibleService.spinnerTitle = "Restoring";
 
     /*

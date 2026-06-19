@@ -15,6 +15,10 @@ export class MenuComponent implements OnInit {
   public searchDialog: any;
   public aboutDialog: any;
   public testamentDialog: any;
+  public randomDialog: any;
+
+  public recentShowHide: any;
+  public settingsShowHide: any;
 
 
   constructor(public bibleService: BibleService,
@@ -37,10 +41,8 @@ export class MenuComponent implements OnInit {
     let aboutDialog = document.getElementById('aboutDialog') as HTMLInputElement;
     if (this.bibleService.leftHandOn == 'no'|| (localStorage.getItem('leftHanded') == null)) { // or null necessary for first visit or memory wipe
       menu.setAttribute('leftHanded', 'no');
-      aboutDialog.setAttribute('leftHanded', 'no');
     } else {
       menu.setAttribute('leftHanded', 'yes');
-      aboutDialog.setAttribute('leftHanded', 'yes');
     }
 
     const toggleSwitchTheme = document.getElementById('theme') as HTMLInputElement;
@@ -54,7 +56,12 @@ export class MenuComponent implements OnInit {
 
   }
   ngAfterViewInit(){
-    this.aboutDialog = document.getElementById("aboutDialog");
+    this.aboutDialog = document.getElementById("aboutDialog"); // needed for 'showModal' to work
+    this.randomDialog = document.getElementById("randomDialog");// needed for 'showModal' to work
+
+    this.settingsShowHide = document.getElementById('settings');
+    this.recentShowHide = document.getElementById('recentLinks');
+
  }
 
 /* Change theme */
@@ -74,21 +81,17 @@ export class MenuComponent implements OnInit {
     let leftHand = document.getElementById('leftHand') as HTMLInputElement;
     let grid = document.getElementById('nav') as HTMLInputElement;
     let menu = document.getElementById('menu') as HTMLInputElement;
-    let aboutDialog = document.getElementById('aboutDialog') as HTMLInputElement;
 
     if (leftHand.checked) {
       localStorage.setItem('leftHanded', 'yes');
       grid.setAttribute('leftHanded', 'yes');
       menu.setAttribute('leftHanded', 'yes');
-      aboutDialog.setAttribute('leftHanded', 'yes');
     } else {
       menu.setAttribute('leftHanded', 'no');
       grid.setAttribute('leftHanded', 'no');
       localStorage.setItem('leftHanded', 'no');
-      aboutDialog.setAttribute('leftHanded', 'no');
     }
   }
-
   backdropClose(event: any, dialog: any){
     if (event.target === dialog) {
       dialog.close();
@@ -105,7 +108,13 @@ export class MenuComponent implements OnInit {
   }
   showSearch(){
     this.bibleService.displayMenu = false;
-
     this.router.navigate(['search']);
+  }
+  toggleList(list: any){
+    if (list.style.display === "none") {
+        list.style.display = "block"; // Show the list
+    } else {
+        list.style.display = "none"; // Hide the list
+    }
   }
 }
