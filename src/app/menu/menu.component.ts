@@ -110,11 +110,14 @@ export class MenuComponent implements OnInit {
     this.bibleService.displayMenu = false;
     this.router.navigate(['search']);
   }
-  toggleList(list: any){
+  toggleList(list: any, element: any){
+    let id = document.getElementById(element)!;
     if (list.style.display === "none") {
         list.style.display = "block"; // Show the list
+      id.style.color = "var(--lightRed)";
     } else {
         list.style.display = "none"; // Hide the list
+        id.style.color = "var(--ink";
     }
   }
 }

@@ -12,9 +12,10 @@
   width: 14rem;
   text-align: center;
   hr {
+    border: 1px solid var(--darkRed);
     margin: 1em;  /* check divider in line with links*/
     &.menuSeparator {
-      border: 2px solid var(--lightRed);
+      border: 2px solid var(--darkRed);
     }
   }
   @media (orientation: landscape){
@@ -41,7 +42,9 @@
 }
 .recent {
   text-align: center;
+
 }
+
 .links {
   margin: 1em;
   cursor: pointer;
@@ -50,11 +53,24 @@
     color: var(--lightRed);
   }
 }
+/* ol {
+  padding: 1rem;
+  li{
+    text-align: right;
+  }
+}
+ol li::before{
+  color: var(--darkRed);
+} */
 ul {
+  list-style: square;
   font-family: Bookman, Georgia, serif;
   font-variant: small-caps;
   li{
     text-align: left;
+  }
+  li::marker{
+    color: var(--darkRed);
   }
 }
 .searchIcon {

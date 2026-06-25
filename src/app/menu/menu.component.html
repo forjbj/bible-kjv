@@ -9,7 +9,7 @@
   </article>
   <hr>
   <article #history>
-    <div class="recent" (click)="toggleList(recentShowHide)">
+    <div id="recentHead" class="recent" (click)="toggleList(recentShowHide, 'recentHead')">
       Recently Opened
     </div>
     <div id="recentLinks" class="recentLinks" style="display: none;">
@@ -58,7 +58,7 @@
   </article>
   <hr class="menuSeparator">
     <!-- Theme -->
-  <div (click)="toggleList(settingsShowHide)">
+  <div id="settingsHead" (click)="toggleList(settingsShowHide, 'settingsHead')">
     Settings
   </div>
   <div id="settings" style="display: none;">

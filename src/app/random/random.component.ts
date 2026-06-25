@@ -29,17 +29,17 @@ export class RandomComponent {
              public elementRef:ElementRef,
              public menu: MenuComponent,
   ) {
-
+    this.load();
   }
 
   ngAfterViewInit(){
-    this.load(); //has to be here not in the constructor; doesn't load bible info and scroll in constructor
+
   }
   load() {
     this.threadWASM();
     setTimeout(() => { //setTimeOut 0.4secs; necessary as bibleInfo not populated on start ??? not sure why; reload produces last book info without this
       this.bibleInfo();
-    }, 400);
+    }, 300);
   }
   threadWASM() {
     if (typeof Worker !== 'undefined') {
@@ -61,20 +61,21 @@ export class RandomComponent {
       const name: any = this.elementRef?.nativeElement.querySelector(".head");
       const splits = name.id.toString().split('-');
       const ver = document?.getElementsByClassName("ver")
+      this.verse = Math.floor(Math.random() * ver.length) + 1;
       this.testament = Number(splits[0]);
       this.bookSelected = Number(splits[1]);
       this.chapter = Number(splits[2]) + 1; // add 1 to get right chapter number
       this.bookName = this.bible[this.testament].books[this.bookSelected].bookName;
-      this.verse = Math.floor(Math.random() * ver.length) + 1;
-
-      setTimeout(() => {
-        this.scrollToVer();
-      },300)
     }
+    setTimeout(() => {
+      this.scrollToVer();
+    },100);
   }
   scrollToVer(){
-    const ver = document?.getElementsByClassName("ver")
-    ver[this.verse -1].scrollIntoView({
+    // const ver = document?.getElementsByClassName("ver")
+    const ver = document.getElementById(this.verse.toString())!;
+    // ver[this.verse -1].scrollIntoView({
+    ver.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
       inline: 'center'
