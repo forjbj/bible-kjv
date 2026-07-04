@@ -7,6 +7,7 @@ import * as wasm from "../../../pkg";
 import { ActivatedRoute, Router } from "@angular/router";
 import * as dictionaryJson from '../../assets/bible/Dictionary.json';
 import { JsonpClientBackend } from "@angular/common/http";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: "app-display-book",
@@ -40,7 +41,9 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     public router: Router,
     private location: Location,
     @Inject(DOCUMENT) public document: Document,
-    private activatedRoute: ActivatedRoute,  ) {
+                      private activatedRoute: ActivatedRoute,
+                      private sanitizer: DomSanitizer
+                      ) {
     this.bibleService.spinner = true;
     this.bibleService.spinnerTitle = "Rendering";
 
@@ -76,7 +79,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     this.bibleService.chapterButton = true;
 
     // Only auto open chapters if new book and history isn't populated; new uses only
-    let historyPopulated = JSON.parse(localStorage.getItem("recent2")!);
+    // let historyPopulated = JSON.parse(localStorage.getItem("recent2")!);
+    let historyPopulated = JSON.parse(localStorage.getItem("recent")!);
     // console.log(historyPopulated)
     if (historyPopulated == null) {
       this.bibleService.showChapters = true;
@@ -91,7 +95,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     }, 10);
 
     // store book for loading on return, if not chosen from history -MUST BE UNDER ngAfterViewInit
-    this.historyService.storeBooks();
+    // this.historyService.storeBooks();
+    this.historyService.storeRecent();
 
     this.fragId = this.bibleService.fragment(); //must be worked out first
 
@@ -122,19 +127,62 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       let winSize = window.innerWidth;
       let posClick = e.clientX;
 
-      if (posClick/winSize < 0.33){
+      if (posClick / winSize < 0.33) {
         // console.log("clicked left side of page");
         document.documentElement.style.setProperty("--definitionPosition", "left");
       };
-      if (posClick/winSize > 0.33 && posClick/winSize < 0.66){
+      if (posClick / winSize > 0.33 && posClick / winSize < 0.66) {
         // console.log("clicked middle of page");
         document.documentElement.style.setProperty("--definitionPosition", "center");
       };
-      if (posClick/winSize > 0.66){
+      if (posClick / winSize > 0.66) {
         // console.log("clicked right side of page");
         document.documentElement.style.setProperty("--definitionPosition", "right");
       };
-    })
+    });
+
+    //add right click menu to bookmark verse
+    const noContext = document.getElementsByClassName("verseNumber")!;
+    for (let verse of noContext) {
+      verse.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        // let parent = verse.parentNode
+        // let activeElement = document.getElementById(verse.parentElement!.id);
+        // console.log(verse.parentElement!.id)
+        // activeElement?.focus();//necessary for bookmarking
+        let ver = verse.parentElement!.id;
+        let verArray = ver.split('-');
+        let a = Number(verArray[0]);
+        let b = Number(verArray[1]);
+        let c =  Number(verArray[2]);
+        let d =  Number(verArray[3]);
+        this.historyService.verseClicked = JSON.stringify([a,b,c,d]);//must be stringified or fails with whitespace
+        // console.log(this.historyService.verseClicked)
+        const event = e as PointerEvent;
+        // let menu = document.createElement("div");
+        let menu = document.getElementById("bookmarkMenu")!;
+        // menu.id = "ctxmenu";
+        //         menu.style.display = "block";
+        menu.style.display = "block";
+
+        let menuStyleTop = event.pageY - 20+ "px";
+        let menuStyleLeft = event.pageX + 20 + "px";
+        menu.style.top = menuStyleTop
+        menu.style.left = menuStyleLeft;
+        // console.log(menu.style.top)
+        // menu.onmouseleave = () => (menu).outerHTML = '';
+        //         menu.click = () => (menu).style.display = "none";
+        addEventListener("click", (event) => { })
+
+        onclick = (event) => { menu.style.display = "none" };
+        // menu.click= () => (menu).style.display = "none";
+        menu.onmouseleave = () => (menu).style.display = "none";
+        // menu.innerHTML = "<p (click) = \"historyService.store('bookmarks');\">Bookmark verse</p> | safe: 'html'";
+        // menu.innerHTML = "<p>Bookmark Verse</p>";
+        // let menuTrust = this.sanitizer.bypassSecurityTrustHtml(menu);
+        // document.body.appendChild(menu);
+      });
+    }
   }
   ngOnDestroy() {
     // this.observer.disconnect()!; //throws error, because it is part of saveScrollposition()???
@@ -157,16 +205,18 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
 
         if (entry.isIntersecting) {
 
-          let current = JSON.parse(localStorage.getItem('recent1')!);
+          // let current = JSON.parse(localStorage.getItem('recent1')!);
+          let current = (JSON.parse(localStorage.getItem('recent')!));
           if (current) {
-            this.bibleService.verseNumber, current[3] = Number(splits[3]);
+            this.bibleService.verseNumber, current[0][3] = Number(splits[3]);
             // definitions for words in the current chapter; run before setting localStorage
-            if (current[2] != targetChapter) {
+            if (current[0][2] != targetChapter) {
               this.wordsDefine();
             };
-            this.bibleService.chapterNumber, current[2] = targetChapter;
+            this.bibleService.chapterNumber, current[0][2] = targetChapter;
             this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
-            localStorage.setItem('recent1', JSON.stringify(current));
+            // localStorage.setItem('recent1', JSON.stringify(current));
+            localStorage.setItem('recent', JSON.stringify(current));
           }
           let tabTitle = this.bibleService.title.concat(" ", (targetChapter).toString());
           this.title.setTitle(tabTitle);
@@ -281,6 +331,14 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       }
     }
   }
+  // addBookmark(id: any) {
+  //     // Parse any JSON previously stored in allEntries
+  //     let existingBookmarks = JSON.parse(localStorage.getItem("bookmarks")!);
+  //     if(existingBookmarks == null) existingBookmarks = [];
+  //     var entryBookmark = document.getElementById(id);
+  //     existingBookmarks.push(entryBookmark);
+  //     localStorage.setItem("bookmarks", JSON.stringify(existingBookmarks));
+  // };
 }
 export function read_dictionary() {
   return JSON.stringify(dictionaryJson); // WASM WORKS! don't touch

@@ -152,3 +152,10 @@ section {
     }
   }
 }
+#bookmarkMenu{
+  background-color: var(--menu);
+  position: absolute;
+  display: none;
+  padding: 0 1rem;
+  border: 1px solid var(--ink);
+}

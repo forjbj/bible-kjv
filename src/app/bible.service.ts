@@ -57,12 +57,12 @@ export class BibleService {
       this.spinnerTitle ??= "Rendering";
 
       //populate with the current book in local storage if there is one
-      if (localStorage.getItem('recent1')) {
-        let stored = JSON.parse(localStorage.getItem('recent1')!)
-        this.testament = stored[0];
-        this.bookSelected = stored[1];
-        this.chapterNumber = stored[2];
-        this.verseNumber = stored[3];
+      if (localStorage.getItem('recent')) {
+        let stored = JSON.parse(localStorage.getItem('recent')!)
+        this.testament = stored[0][0];
+        this.bookSelected = stored[0][1];
+        this.chapterNumber = stored[0][2];
+        this.verseNumber = stored[0][3];
       }
     }
 

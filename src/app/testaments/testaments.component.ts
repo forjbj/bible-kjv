@@ -37,10 +37,10 @@ export class TestamentsComponent implements AfterViewInit {
     this.bibleService.displayMenu = false;
     this.bibleService.menuHistoryBook = false;
 
-    let cur = JSON.parse(localStorage.getItem('recent1')!);
-    if ((this.bibleService.testament == cur[0]) && (this.bibleService.bookSelected == cur[1])){
-      this.bibleService.chapterNumber = cur[2];
-      this.bibleService.verseNumber = cur[3];
+    let cur = JSON.parse(localStorage.getItem('recent')!);
+    if ((this.bibleService.testament == cur[0][0]) && (this.bibleService.bookSelected == cur[0][1])){
+      this.bibleService.chapterNumber = cur[0][2];
+      this.bibleService.verseNumber = cur[0][3];
     } else {
       this.bibleService.chapterNumber = 0;
       this.bibleService.verseNumber = 0; // if changing see also display-book.component.ts as it tests for this

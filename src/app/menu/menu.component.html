@@ -8,11 +8,29 @@
     </div>
   </article>
   <hr>
+  <article #search>
+    <div (click) = "showSearch()"
+      class="links" >
+      Search the Bible&ensp;<img src="./assets/search.svg" class="searchIcon" align="center">
+    </div>
+  </article>
+  <hr>
   <article #history>
-    <div id="recentHead" class="recent" (click)="toggleList(recentShowHide, 'recentHead')">
+    <div id="recentHead" class="recent" (click)="toggleList(recentShowHide, 'recentHead', settingsShowHide, 'settingsHead', bookmarkShowHide, 'bookmarkHead');">
       Recently Opened
     </div>
-    <div id="recentLinks" class="recentLinks" style="display: none;">
+    <div id="recentLinks" style="display: none;">
+      <ul>
+        @for (recent of historyService.storedRecent; track recent; let idx = $index) {
+          <li (click) = "historyService.rearrange(idx)"
+            class = "recentItem"
+            >
+            {{bibleService.bible[recent[0]].books[recent[1]].bookName}} @if(recent[2] != 0){{{ + ' ' + recent[2]}}}
+          </li>
+        }
+      </ul>
+    </div>
+    <!--<div id="recentLinks" class="recentLinks">
       <ul>
         <li class = "links" (click) = "historyService.rearrangeBooks('cur');">
           {{this.historyService.curBookMenu}}
@@ -36,29 +54,44 @@
           {{this.historyService.seventhBookMenu}}
         </li>
       </ul>
-    </div>
+    </div>-->
   </article>
   <hr>
-  <article #search>
-    <div (click) = "showSearch()"
-      class="links" >
-      Search the Bible&ensp;<img src="./assets/search.svg" class="searchIcon" align="center">
+  <article #bookmark>
+    <div id="bookmarkHead" (click)="toggleList( bookmarkShowHide, 'bookmarkHead', recentShowHide, 'recentHead', settingsShowHide, 'settingsHead');"
+      class="bookmark" >
+      Bookmarks
     </div>
+    @if(historyService.storedBookmarks){
+    <div id="bookmarkLinks" style="display: none;">
+      <ul>
+        @for (bookmark of historyService.storedBookmarks; track bookmark; let idx = $index) {
+          <li
+            class = "bookmarkItem"
+            (click) = "historyService.openBookmark(idx)"
+            >
+              {{bibleService.bible[bookmark[0]].books[bookmark[1]].bookName}} {{ + ' ' + bookmark[2] + ' : ' + bookmark[3]}}
+          </li>
+        }
+      </ul>
+    </div>
+    }
   </article>
   <hr>
   <article #random>
-    <div (click) = "randomDialog.showModal();"
+    <div (click) = "randomDialog.showModal(); clickedRandom = true;"
       class="links">
         Random Scripture
     </div>
-    <dialog id = "randomDialog"
+    <dialog
+      id = "randomDialog"
       (click)="backdropClose($event, this.randomDialog); bibleService.menuHistoryBook = false">
-      <app-random></app-random>
+      <app-random *ngIf="clickedRandom" ></app-random>
     </dialog>
   </article>
   <hr class="menuSeparator">
     <!-- Theme -->
-  <div id="settingsHead" (click)="toggleList(settingsShowHide, 'settingsHead')">
+  <div id="settingsHead" (click)="toggleList(settingsShowHide, 'settingsHead', recentShowHide, 'recentHead', bookmarkShowHide, 'bookmarkHead')">
     Settings
   </div>
   <div id="settings" style="display: none;">

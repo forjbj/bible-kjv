@@ -42,9 +42,10 @@
 }
 .recent {
   text-align: center;
-
 }
-
+#recentHead, #settingsHead, #settings, #recentLinks {
+  transition: all 0.3s ease-in-out;
+}
 .links {
   margin: 1em;
   cursor: pointer;

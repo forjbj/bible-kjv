@@ -3,6 +3,7 @@ import { BibleService } from '../bible.service';
 import { HistoryService } from '../history.service';
 import { Router } from '@angular/router';
 import { SearchService } from '../search.service';
+
 @Component({
     selector: 'app-menu',
     templateUrl: './menu.component.html',
@@ -19,7 +20,12 @@ export class MenuComponent implements OnInit {
 
   public recentShowHide: any;
   public settingsShowHide: any;
+  public bookmarkShowHide: any;
 
+  public clickedRandom = false; //necessary for Random Scripture dialog not to load on menu open
+  // public clickedRecent = false; //necessary for Recent not to load on menu open
+
+  // public storedBookmarks = localStorage.getItem('bookmarks')!;
 
   constructor(public bibleService: BibleService,
               public historyService: HistoryService,
@@ -29,9 +35,11 @@ export class MenuComponent implements OnInit {
 
     this.bibleService.leftHandOn = localStorage.getItem('leftHanded')!;
 
-    this.historyService.menuBooks();
+    // this.historyService.menuBooks();
     const darkmode = matchMedia("(prefers-color-scheme: dark)");
 
+    this.historyService.storedRecent = JSON.parse(localStorage.getItem('recent')!) //necessary or Recently Opened doesn't initally populate
+    this.historyService.storedBookmarks = JSON.parse(localStorage.getItem('bookmarks')!);
    }
 
   ngOnInit(): void {
@@ -54,6 +62,7 @@ export class MenuComponent implements OnInit {
       toggleSwitchLeftHand.checked = true;
     }
 
+    // localStorage.setItem('recent', "[[0,1,1,1], [1,2,3,5]]")
   }
   ngAfterViewInit(){
     this.aboutDialog = document.getElementById("aboutDialog"); // needed for 'showModal' to work
@@ -61,7 +70,9 @@ export class MenuComponent implements OnInit {
 
     this.settingsShowHide = document.getElementById('settings');
     this.recentShowHide = document.getElementById('recentLinks');
+    this.bookmarkShowHide = document.getElementById('bookmarkLinks');
 
+    // console.log(this.historyService.storedRecent)
  }
 
 /* Change theme */
@@ -110,14 +121,23 @@ export class MenuComponent implements OnInit {
     this.bibleService.displayMenu = false;
     this.router.navigate(['search']);
   }
-  toggleList(list: any, element: any){
-    let id = document.getElementById(element)!;
-    if (list.style.display === "none") {
-        list.style.display = "block"; // Show the list
-      id.style.color = "var(--lightRed)";
+  toggleList(listCurrent: any, elementCurrent: any, listSecond: any, elementSecond: any, listThird: any, elementThird: any, ){
+    let idCurrent = document.getElementById(elementCurrent)!;
+    let idSecond = document.getElementById(elementSecond)!;
+    let idThird = document.getElementById(elementThird)!;
+    if (listCurrent.style.display === "none") {
+      listCurrent.style.display = "block"; // Show the list
+      // listCurrent.style.opacity = "1";
+      idCurrent.style.color = "var(--lightRed)";
+      listSecond.style.display = "none";
+      idSecond.style.color = "var(--ink)";
+      listThird.style.display = "none";
+      idThird.style.color = "var(--ink)";
+
     } else {
-        list.style.display = "none"; // Hide the list
-        id.style.color = "var(--ink";
+        listCurrent.style.display = "none"; // Hide the list
+        idCurrent.style.color = "var(--ink)";
     }
   }
+
 }
