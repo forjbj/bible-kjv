@@ -23,38 +23,13 @@
       <ul>
         @for (recent of historyService.storedRecent; track recent; let idx = $index) {
           <li (click) = "historyService.rearrange(idx)"
-            class = "recentItem"
+            class = "links"
             >
             {{bibleService.bible[recent[0]].books[recent[1]].bookName}} @if(recent[2] != 0){{{ + ' ' + recent[2]}}}
           </li>
         }
       </ul>
     </div>
-    <!--<div id="recentLinks" class="recentLinks">
-      <ul>
-        <li class = "links" (click) = "historyService.rearrangeBooks('cur');">
-          {{this.historyService.curBookMenu}}
-        </li>
-        <li *ngIf="historyService.secBookMenu" class = "links" (click) = "historyService.rearrangeBooks('sec');">
-          {{this.historyService.secBookMenu}}
-        </li>
-        <li *ngIf="historyService.thirdBookMenu" class = "links" (click) = "historyService.rearrangeBooks('third');">
-          {{this.historyService.thirdBookMenu}}
-        </li>
-        <li *ngIf="historyService.fourthBookMenu" class = "links" (click) = "historyService.rearrangeBooks('fourth');">
-          {{this.historyService.fourthBookMenu}}
-        </li>
-        <li *ngIf="historyService.fifthBookMenu" class = "links" (click) = "historyService.rearrangeBooks('fifth');">
-          {{this.historyService.fifthBookMenu}}
-        </li>
-        <li *ngIf="historyService.sixthBookMenu" class = "links" (click) = "historyService.rearrangeBooks('sixth');">
-          {{this.historyService.sixthBookMenu}}
-        </li>
-        <li *ngIf="historyService.seventhBookMenu" class = "links" (click) = "historyService.rearrangeBooks('seventh');">
-          {{this.historyService.seventhBookMenu}}
-        </li>
-      </ul>
-    </div>-->
   </article>
   <hr>
   <article #bookmark>
@@ -67,8 +42,8 @@
       <ul>
         @for (bookmark of historyService.storedBookmarks; track bookmark; let idx = $index) {
           <li
-            class = "bookmarkItem"
-            (click) = "historyService.openBookmark(idx)"
+            class = "links"
+            (click) = "historyService.openBookmark(idx);"
             >
               {{bibleService.bible[bookmark[0]].books[bookmark[1]].bookName}} {{ + ' ' + bookmark[2] + ' : ' + bookmark[3]}}
           </li>

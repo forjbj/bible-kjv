@@ -47,22 +47,13 @@
   transition: all 0.3s ease-in-out;
 }
 .links {
-  margin: 1em;
+  margin: 0.5em 1rem;
   cursor: pointer;
   transition: color 0.3s ease;
   &:active {
     color: var(--lightRed);
   }
 }
-/* ol {
-  padding: 1rem;
-  li{
-    text-align: right;
-  }
-}
-ol li::before{
-  color: var(--darkRed);
-} */
 ul {
   list-style: square;
   font-family: Bookman, Georgia, serif;

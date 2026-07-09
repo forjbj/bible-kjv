@@ -18,11 +18,13 @@
     }
 }
 article {
+  scroll-margin-top: 1rem;
   overflow-x: hidden; /* Needed as when descriptions of words are rendered, it can overflow to the right before the click event can change it to be right justified*/
 }
 /*remove styling from created links*/
 section {
     a {
+      scroll-margin-top: 1rem;
       color: var(--scriptNum);
       text-decoration: none;
       &:focus {

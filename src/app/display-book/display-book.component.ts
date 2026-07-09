@@ -79,13 +79,10 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     this.bibleService.chapterButton = true;
 
     // Only auto open chapters if new book and history isn't populated; new uses only
-    // let historyPopulated = JSON.parse(localStorage.getItem("recent2")!);
     let historyPopulated = JSON.parse(localStorage.getItem("recent")!);
-    // console.log(historyPopulated)
     if (historyPopulated == null) {
       this.bibleService.showChapters = true;
     }
-
     this.nextBook();
   }
   ngAfterViewInit() {
@@ -95,7 +92,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     }, 10);
 
     // store book for loading on return, if not chosen from history -MUST BE UNDER ngAfterViewInit
-    // this.historyService.storeBooks();
     this.historyService.storeRecent();
 
     this.fragId = this.bibleService.fragment(); //must be worked out first
@@ -145,13 +141,8 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     const noContext = document.getElementsByClassName("verseNumber")!;
     for (let verse of noContext) {
       ['contextmenu','touchstart'].forEach( evt =>
-        // verse.addEventListener("contextmenu", (e) => {
         verse.addEventListener(evt, (e) => {
           e.preventDefault();
-          // let parent = verse.parentNode
-          // let activeElement = document.getElementById(verse.parentElement!.id);
-          // console.log(verse.parentElement!.id)
-          // activeElement?.focus();//necessary for bookmarking
           let ver = verse.parentElement!.id;
           let verArray = ver.split('-');
           let a = Number(verArray[0]);
@@ -159,30 +150,17 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
           let c =  Number(verArray[2]);
           let d =  Number(verArray[3]);
           this.historyService.verseClicked = JSON.stringify([a,b,c,d]);//must be stringified or fails with whitespace
-          // console.log(this.historyService.verseClicked)
           const event = e as PointerEvent;
-          // let menu = document.createElement("div");
           let menu = document.getElementById("bookmarkMenu")!;
-          // menu.id = "ctxmenu";
-          //         menu.style.display = "block";
           menu.style.display = "block";
-
           let menuStyleTop = event.pageY - 20+ "px";
           let menuStyleLeft = event.pageX + 20 + "px";
           menu.style.top = menuStyleTop
           menu.style.left = menuStyleLeft;
-          // console.log(menu.style.top)
-          // menu.onmouseleave = () => (menu).outerHTML = '';
-          //         menu.click = () => (menu).style.display = "none";
           addEventListener("click", (event) => { })
 
           onclick = (event) => { menu.style.display = "none" };
-          // menu.click= () => (menu).style.display = "none";
           menu.onmouseleave = () => (menu).style.display = "none";
-          // menu.innerHTML = "<p (click) = \"historyService.store('bookmarks');\">Bookmark verse</p> | safe: 'html'";
-          // menu.innerHTML = "<p>Bookmark Verse</p>";
-          // let menuTrust = this.sanitizer.bypassSecurityTrustHtml(menu);
-          // document.body.appendChild(menu);
         })
       );
     }
@@ -192,23 +170,20 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
   }
   saveScrollposition() {
     // save chapter and verse on scroll
-    const chapters = this.document.querySelectorAll("section > div > a, section > header > a, section > a");
+    const chapters = this.document.querySelectorAll("header, section > div > a, section > header > a, section > a");
     const options = {
       root: null, // viewport
       threshold: [0],
-      rootMargin: "-2% 0px -95% 0px", //only top verse/s Don't change these affects reloading at correct verse; especially safari pwa
+      rootMargin: "0px 0px -92% 0px", //only top verse/s Don't change these affects reloading at correct verse; especially safari pwa
       delay: 700, //only works on safari
     };
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        let chapter = entry.target!.id ?? 0;
+        let chapter = entry.target!.id;
         let splits = chapter.split("-");
         let targetChapter = Number(splits[2]);
         let url = "/book#";
-
         if (entry.isIntersecting) {
-
-          // let current = JSON.parse(localStorage.getItem('recent1')!);
           let current = (JSON.parse(localStorage.getItem('recent')!));
           if (current) {
             this.bibleService.verseNumber, current[0][3] = Number(splits[3]);
@@ -218,7 +193,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
             };
             this.bibleService.chapterNumber, current[0][2] = targetChapter;
             this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
-            // localStorage.setItem('recent1', JSON.stringify(current));
             localStorage.setItem('recent', JSON.stringify(current));
           }
           let tabTitle = this.bibleService.title.concat(" ", (targetChapter).toString());
@@ -305,8 +279,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
           let alreadyDefined = false;
           function replacer(match: any, p1: any, p2: any) {
             if (p2 == undefined) return p1;
-            // else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
-            // tabindex="0" essential for below to obtain focus
             else {
               if (alreadyDefined == true) {
                 //This is necessary or replacer just keep putting the definition into each of the same words in the sentence.
@@ -334,14 +306,6 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       }
     }
   }
-  // addBookmark(id: any) {
-  //     // Parse any JSON previously stored in allEntries
-  //     let existingBookmarks = JSON.parse(localStorage.getItem("bookmarks")!);
-  //     if(existingBookmarks == null) existingBookmarks = [];
-  //     var entryBookmark = document.getElementById(id);
-  //     existingBookmarks.push(entryBookmark);
-  //     localStorage.setItem("bookmarks", JSON.stringify(existingBookmarks));
-  // };
 }
 export function read_dictionary() {
   return JSON.stringify(dictionaryJson); // WASM WORKS! don't touch

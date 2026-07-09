@@ -74,10 +74,7 @@ export class RandomComponent {
     }, 100);
   }
   scrollToVer() {
-    // const ver = document?.getElementsByClassName("ver")
     const ver = document.getElementById(this.verse.toString())!;
-    // ver[this.verse -1].scrollIntoView({
-    // console.log(this.verse);
     ver.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -104,11 +101,6 @@ export class RandomComponent {
     }
     for (var j = 0; j < 2; j++) {
       const chapterSection = document.getElementById(this.testament + "-" + this.bookSelected + "-" + (this.chapter!-1));
-      // console.log(this.testament + "-" + this.bookSelected + "-" + this.chapter)
-      // skip if already definitions already populated
-      // if (chapterSection!.querySelector("wordToDefine")) {
-      //   continue
-      // };
       const scripture = chapterSection!.querySelectorAll(".firstVerse, .scripture");
       const dictionary: any = dictionaryJson;
       for (let i = 0; i < scripture.length; i++) {
@@ -118,8 +110,6 @@ export class RandomComponent {
           let alreadyDefined = false;
           function replacer(match: any, p1: any, p2: any) {
             if (p2 == undefined) return p1;
-            // else return "<span class='definitionParent' definition='" + dictionary[0][key] + "' tabindex=0>" + p2 + "</span>";
-            // tabindex="0" essential for below to obtain focus
             else {
               if (alreadyDefined == true) {
                 //This is necessary or replacer just keep putting the definition into each of the same words in the sentence.
@@ -132,19 +122,9 @@ export class RandomComponent {
             };
           };
           verse = verse.replace(re, replacer);
-          //  // below works, sort of, doubles up on definitions; i.e. definitions of words in defintions - needs fixing
-          //   // (?<!<\/?) Negative lookbehind: ensures the match is not preceded by < or </.
-          //   // (?!>) Negative lookahead: ensures it is not followed by > (so not <span>).
-          //   let re = new RegExp("(?:<span\b[^>]*>[\s\S]*?<\/span>)?((?<!<\/?)\\b" + key + "\\b(?!>))", 'i');
-          //  verse = verse.replace(re, "<span class=\"wordToDefine\" tabindex=0>" + " $1 " + "<dl class='definition'><dt>" + "$1" + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>");
         };
         scripture[i].innerHTML = verse;
       };
-      // if (document.getElementById(this.testament + "-" + this.bookSelected + "-" + (Number(chap) + 1).toString() + "-" + "0-S")) {
-      //   chap = (chap! + 1);
-      // } else {
-      //   break;
-      // }
     }
   }
 }

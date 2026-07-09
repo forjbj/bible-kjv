@@ -23,9 +23,6 @@ export class MenuComponent implements OnInit {
   public bookmarkShowHide: any;
 
   public clickedRandom = false; //necessary for Random Scripture dialog not to load on menu open
-  // public clickedRecent = false; //necessary for Recent not to load on menu open
-
-  // public storedBookmarks = localStorage.getItem('bookmarks')!;
 
   constructor(public bibleService: BibleService,
               public historyService: HistoryService,
@@ -35,7 +32,6 @@ export class MenuComponent implements OnInit {
 
     this.bibleService.leftHandOn = localStorage.getItem('leftHanded')!;
 
-    // this.historyService.menuBooks();
     const darkmode = matchMedia("(prefers-color-scheme: dark)");
 
     this.historyService.storedRecent = JSON.parse(localStorage.getItem('recent')!) //necessary or Recently Opened doesn't initally populate
@@ -61,8 +57,6 @@ export class MenuComponent implements OnInit {
     if (this.bibleService.leftHandOn == 'yes') {
       toggleSwitchLeftHand.checked = true;
     }
-
-    // localStorage.setItem('recent', "[[0,1,1,1], [1,2,3,5]]")
   }
   ngAfterViewInit(){
     this.aboutDialog = document.getElementById("aboutDialog"); // needed for 'showModal' to work
