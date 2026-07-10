@@ -33,6 +33,7 @@ export class BibleService {
 
   public displayMenu: boolean = false;
   public menuHistoryBook: boolean = false;
+  public isBookmark: boolean = false;
 
   public searchResults: any = "noSearchYet";
 

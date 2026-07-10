@@ -169,40 +169,44 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
     // this.observer.disconnect()!; //throws error, because it is part of saveScrollposition()???
   }
   saveScrollposition() {
-    // save chapter and verse on scroll
-    const chapters = this.document.querySelectorAll("header, section > div > a, section > header > a, section > a");
-    const options = {
-      root: null, // viewport
-      threshold: [0],
-      rootMargin: "0px 0px -92% 0px", //only top verse/s Don't change these affects reloading at correct verse; especially safari pwa
-      delay: 700, //only works on safari
-    };
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        let chapter = entry.target!.id;
-        let splits = chapter.split("-");
-        let targetChapter = Number(splits[2]);
-        let url = "/book#";
-        if (entry.isIntersecting) {
-          let current = (JSON.parse(localStorage.getItem('recent')!));
-          if (current) {
-            this.bibleService.verseNumber, current[0][3] = Number(splits[3]);
-            // definitions for words in the current chapter; run before setting localStorage
-            if (current[0][2] != targetChapter) {
-              this.wordsDefine();
-            };
-            this.bibleService.chapterNumber, current[0][2] = targetChapter;
-            this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
-            localStorage.setItem('recent', JSON.stringify(current));
+    // save chapter and verse on scroll if not a bookmarked book
+    if (this.bibleService.isBookmark == false) {
+      const chapters = this.document.querySelectorAll("header, section > div > a, section > header > a, section > a");
+      const options = {
+        root: null, // viewport
+        threshold: [0],
+        rootMargin: "0px 0px -92% 0px", //only top verse/s Don't change these affects reloading at correct verse; especially safari pwa
+        delay: 700, //only works on safari
+      };
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          let chapter = entry.target!.id;
+          let splits = chapter.split("-");
+          let targetChapter = Number(splits[2]);
+          let url = "/book#";
+          if (entry.isIntersecting) {
+            let current = (JSON.parse(localStorage.getItem('recent')!));
+            if (current) {
+              this.bibleService.verseNumber, current[0][3] = Number(splits[3]);
+              // definitions for words in the current chapter; run before setting localStorage
+              if (current[0][2] != targetChapter) {
+                this.wordsDefine();
+              };
+              this.bibleService.chapterNumber, current[0][2] = targetChapter;
+              this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
+              localStorage.setItem('recent', JSON.stringify(current));
+            }
+            let tabTitle = this.bibleService.title.concat(" ", (targetChapter).toString());
+            this.title.setTitle(tabTitle);
           }
-          let tabTitle = this.bibleService.title.concat(" ", (targetChapter).toString());
-          this.title.setTitle(tabTitle);
-        }
+        });
+      }, options);
+      chapters.forEach((chapter) => {
+        this.observer.observe(chapter);
       });
-    }, options);
-    chapters.forEach((chapter) => {
-      this.observer.observe(chapter);
-    });
+    } else {
+      this.bibleService.isBookmark = false
+    }
   }
   nextBook() {
     if (

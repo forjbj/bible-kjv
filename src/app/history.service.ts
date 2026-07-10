@@ -52,7 +52,8 @@ export class HistoryService {
     }, 10);
   }
   openBookmark(index: any){
-    this.bibleService.menuHistoryBook = false;
+    this.bibleService.menuHistoryBook = true;
+    this.bibleService.isBookmark = true;
     this.bibleService.showChapters = false;
     this.bibleService.displayMenu = false;
     this.bibleService.spinner = true;
