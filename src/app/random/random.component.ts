@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Injectable } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ViewEncapsulation } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { BibleService } from '../bible.service';
 import * as bibleJson from '../../assets/bible/Bible.json';
@@ -11,7 +11,8 @@ import * as dictionaryJson from '../../assets/bible/Dictionary.json';
   templateUrl: './random.component.html',
   styleUrl: './random.component.scss',
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  standalone: false,
+  encapsulation: ViewEncapsulation.None
 
 })
 
@@ -35,6 +36,24 @@ export class RandomComponent {
 
   ngAfterViewInit() {
     this.load();
+
+    document.addEventListener('click', e => {
+      let winSize = window.innerWidth;
+      let posClick = e.clientX;
+
+      if (posClick / winSize < 0.33) {
+        // console.log("clicked left side of page");
+        document.documentElement.style.setProperty("--definitionPosition", "left");
+      };
+      if (posClick / winSize > 0.33 && posClick / winSize < 0.66) {
+        // console.log("clicked middle of page");
+        document.documentElement.style.setProperty("--definitionPosition", "center");
+      };
+      if (posClick / winSize > 0.66) {
+        // console.log("clicked right side of page");
+        document.documentElement.style.setProperty("--definitionPosition", "right");
+      };
+    });
   }
   load() {
     this.threadWASM();
@@ -117,7 +136,7 @@ export class RandomComponent {
               }
               else {
                 alreadyDefined = true;
-                return "<span class=\"wordToDefine\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
+                return "<span class=\"wordToDefineRandom\" tabindex=0>" + p2 + "<dl class='definition'><dt>" + p2 + ":</dt><dd>" + dictionary[0][key] + "</dd></dl></span>";
               }
             };
           };

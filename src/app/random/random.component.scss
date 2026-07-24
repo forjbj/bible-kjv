@@ -1,85 +1,163 @@
-  .leadHeader {
-      position: sticky;
-      top: 0;
-      height: 0.5rem;
-      width: 100%;
-      background: var(--menu);
+.leadHeader {
+  position: sticky;
+  top: 0;
+  height: 0.5rem;
+  width: 100%;
+  background: var(--menu);
+}
+.script {
+  text-align: left;
+  margin: 1rem 0.3rem;
+  /*scripture styling*/
+  .fontType {
+    font-family: Georgia,"Times New Roman", Times, serif;
+    line-height: 1.5em; /* needs to be 'em' units as 'rem' makes everything very wrong*/
+    font-size: 1.3rem;
+      @media (orientation: portrait) {
+          font-size: 1.2rem;
+      }
   }
-  .script {
-      text-align: left;
-      margin: 1rem 0.3rem;
-  }
-  .stickyMenu {
-      position: sticky;
-      bottom: -0.1rem; //necessary for ios or words can be seen scrolling under menu
-      margin: 0 auto;
-      padding: 0.7rem 0.1rem;
-      margin-bottom: -0.1rem;
-      display: grid;
-      grid-auto-columns: minmax(0, 1fr);
-      grid-auto-flow: column;
-      color: var(--ink);
-      font-variant-caps: small-caps;
-      background-color: var(--nav);
-      //below is necessary to remove blue glow in iOS
-      *:focus:not(.focus-visible) {
-          outline: none;
-        }
+ .verses {
+     display: grid;
+     width: 100%;
+     grid-gap: 1rem; /* needed to stop words scrolling right*/
+     grid-template-columns: 3rem auto;
+     @media (orientation: portrait) {
+       grid-template-columns: 1rem auto; /* verse number column smaller for small screens*/
+     }
+ }
+ .firstVerse{
+     margin-left: 3rem;
+     margin-right: 1rem;
+     margin-bottom: 0.3rem;
+     &:first-of-type:first-letter {
+       margin-right: 0.03rem;  /* required for first letters that are in italics*/
+         vertical-align: top;
+         font-size: 2rem;
+     }
+     @media (orientation: portrait) {
+         margin-left: 1rem;
+     }
+ }
 
-      .bookAndChap {
-          margin-left: 1rem;
-          justify-self: left;
-          padding: 0.5rem;
-          margin-bottom: 0.2rem;
-      }
-      .newScript {
-          justify-self: center;
-          width: fit-content;
-          font-family: Georgia,"Times New Roman", Times, serif; //needs to be here or doesn't work
-          font-variant-caps: small-caps;//needs to be here or doesn't work
-          margin-bottom: 0.2rem;
-          border: 2px solid var(--button);
-          color: var(--ink); //needed for ios or button font is blue
-          padding: 0.3rem 0.7rem;
-          background-color: transparent;
-          transition-duration: 1s;
-          &:hover{
-              background-color: var(--button);
-          }
-          &:active{
-              color: red;
-              transform: translateY(-0.3rem);
-
-          }
-          @media (pointer: fine){
-              &:hover{
-                  transform: translateY(-0.3rem);
-              }
-          }
-      }
-      .closeScript {
-          width: fit-content;
-          margin-right: 1rem;
-          margin-bottom: 0.2rem;
-          justify-self: right;
-          font-family: Georgia,"Times New Roman", Times, serif;//needs to be here or doesn't work
-          font-variant-caps: small-caps;//needs to be here or doesn't work
-          border: 2px solid #a11;
-          padding: 0.3rem 0.7rem;
-          color: var(--ink);
-          background-color: transparent;
-          transition-duration: 1s;
-          &:hover {
-              background-color: #aa0101;
-          }
-          &:active{
-              color: red;
-              transform: translateY(-0.3rem);
-          }
-          @media (pointer: fine){
-              &:hover{
-                  transform: translateY(-0.3rem);
-              }
-          }
-      }
+ .verseNumber {
+     text-align: right;
+     margin: 0.5rem 0;
+     @media (orientation: portrait) {
+         margin: 0.3rem 0;
+     }
+ }
+ /* stop scripture going to far right*/
+ .scripture {
+     margin: 0.5rem 1rem 0.5rem 0;
+     @media (orientation: portrait) {
+         margin: 0.3rem 1rem 0.3rem 0;
+     }
+ }
+ /* word definitions */
+ .wordToDefineRandom{
+   text-decoration:underline;
+   text-decoration-style: solid;
+   text-decoration-color: var(--scriptNum);
+ }
+ .definition {
+   display: none; /*necessary or definitions are hidden but on the page and cause a horizontal scroll bar*/
+ }
+ .wordToDefineRandom:focus{
+   display: inline-grid;
+   justify-items: right;
+   position: relative; /* add only on focus; otherwise bleeds through to menus etc.*/
+   .definition{
+     position: absolute;/* add only on focus; otherwise bleeds through to menus etc.*/
+     justify-self: var(--definitionPosition);/* variable defined by mouse click; see event listener*/;
+     display: block;
+     top: 0.5rem;
+     color: var(--scriptNum);
+     background-color: color-mix(in srgb, var(--paper) 81%, transparent);
+     border: 1px solid var(--scriptNum);
+     border-radius: 0.2rem;
+     padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+     width: 30ch;
+     max-width: 50vw;
+     white-space: pre-wrap;
+     hr {
+     border-color: var(--scriptNum);
+     }
+   }
+ }
+}
+.stickyMenu {
+  position: sticky;
+  bottom: -0.1rem; //necessary for ios or words can be seen scrolling under menu
+  margin: 0 auto;
+  padding: 0.7rem 0.1rem;
+  margin-bottom: -0.1rem;
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  color: var(--ink);
+  font-variant-caps: small-caps;
+  background-color: var(--nav);
+  //below is necessary to remove blue glow in iOS
+  *:focus:not(.focus-visible) {
+      outline: none;
     }
+
+  .bookAndChap {
+      margin-left: 1rem;
+      justify-self: left;
+      padding: 0.5rem;
+      margin-bottom: 0.2rem;
+  }
+  .newScript {
+      justify-self: center;
+      width: fit-content;
+      font-family: Georgia,"Times New Roman", Times, serif; //needs to be here or doesn't work
+      font-variant-caps: small-caps;//needs to be here or doesn't work
+      margin-bottom: 0.2rem;
+      border: 2px solid var(--button);
+      color: var(--ink); //needed for ios or button font is blue
+      padding: 0.3rem 0.7rem;
+      background-color: transparent;
+      transition-duration: 1s;
+      &:hover{
+          background-color: var(--button);
+      }
+      &:active{
+          color: red;
+          transform: translateY(-0.3rem);
+
+      }
+      @media (pointer: fine){
+          &:hover{
+              transform: translateY(-0.3rem);
+          }
+      }
+  }
+  .closeScript {
+      width: fit-content;
+      margin-right: 1rem;
+      margin-bottom: 0.2rem;
+      justify-self: right;
+      font-family: Georgia,"Times New Roman", Times, serif;//needs to be here or doesn't work
+      font-variant-caps: small-caps;//needs to be here or doesn't work
+      border: 2px solid #a11;
+      padding: 0.3rem 0.7rem;
+      color: var(--ink);
+      background-color: transparent;
+      transition-duration: 1s;
+      &:hover {
+          background-color: #aa0101;
+      }
+      &:active{
+          color: red;
+          transform: translateY(-0.3rem);
+      }
+      @media (pointer: fine){
+          &:hover{
+              transform: translateY(-0.3rem);
+          }
+      }
+  }
+
+}
