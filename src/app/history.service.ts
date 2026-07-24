@@ -87,7 +87,7 @@ export class HistoryService {
       let recentOne = [this.bibleService.testament, this.bibleService.bookSelected, this.bibleService.chapterNumber, this.bibleService.verseNumber];
       let x = JSON.stringify([recentOne]);//this and above; only for no Recent in storage; double brackets for first one
       if (recentStore) {
-        if (this.bibleService.menuHistoryBook == false && (this.bibleService.bookSelected != recentStore[0][1])
+        if ((this.bibleService.bookSelected != recentStore[0][1])
           || (this.bibleService.testament != recentStore[0][0])) {
           this.storedRecent.unshift(recentOne);
           let lengthArray = this.storedRecent.length;

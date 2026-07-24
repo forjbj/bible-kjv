@@ -196,8 +196,12 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
               this.location.go(url.concat(chapter)); //update url on scroll to ensure place if reloaded
               localStorage.setItem('recent', JSON.stringify(current));
             }
-            let tabTitle = this.bibleService.title.concat(" ", (targetChapter).toString());
-            this.title.setTitle(tabTitle);
+            if (targetChapter == 0) {
+              this.title.setTitle(this.bibleService.title);
+            }else{
+              let tabTitle = this.bibleService.title.concat(" ", (targetChapter).toString());
+              this.title.setTitle(tabTitle);
+            }
           }
         });
       }, options);
