@@ -16,6 +16,7 @@
     text-align: center;
     margin: 0 auto;
     padding-top: 0.3rem;
+    font-size: 1.2rem;
     hr {
         max-width: 90%;
     }
@@ -30,7 +31,7 @@
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     grid-template-rows: 4;
-    grid-row-gap: 0.3rem;
+    grid-row-gap: 0.5rem;
     .verticalLabel {
         font-family: Bookman, Georgia, serif;
         writing-mode: vertical-lr;
@@ -71,7 +72,7 @@
 }
 .searchOption, .searchInput {
     font-family: Bookman, Georgia, serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border-radius: 0.2rem;
     padding: 0 0.3rem;
     &:focus {
@@ -83,7 +84,7 @@
     appearance:none; /*No arrows on select boxes as they are different colours/shapes across browsers*/
 }
 .searchInput {
-    font-size: 1rem; /*needed to stop safari zoom on input focus*/
+    font-size: 1.2rem; /*needed to stop safari zoom on input focus*/
     caret-color: var(--lightRed); /*necessary as it is bright blue in safari*/
 }
 

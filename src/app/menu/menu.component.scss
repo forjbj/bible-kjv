@@ -58,6 +58,9 @@ ul {
   list-style: square;
   font-family: Bookman, Georgia, serif;
   font-variant: small-caps;
+  :not(:last-child) {
+      margin-bottom: 1rem;
+   }
   li{
     text-align: left;
   }
