@@ -83,12 +83,12 @@ export class HistoryService {
   }
   storeRecent(){
     if (this.bibleService.menuHistoryBook == false) {
-      let recentStore = JSON.parse(localStorage.getItem('recent')!);
+      this.storedRecent = JSON.parse(localStorage.getItem('recent')!);
       let recentOne = [this.bibleService.testament, this.bibleService.bookSelected, this.bibleService.chapterNumber, this.bibleService.verseNumber];
       let x = JSON.stringify([recentOne]);//this and above; only for no Recent in storage; double brackets for first one
-      if (recentStore) {
-        if ((this.bibleService.bookSelected != recentStore[0][1])
-          || (this.bibleService.testament != recentStore[0][0])) {
+      if (this.storedRecent) {
+        if ((this.bibleService.bookSelected != this.storedRecent[0][1])
+          || (this.bibleService.testament != this.storedRecent[0][0])) {
           this.storedRecent.unshift(recentOne);
           let lengthArray = this.storedRecent.length;
           if (lengthArray < 8) {
