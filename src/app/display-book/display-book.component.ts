@@ -102,8 +102,12 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       inline: "nearest",
       behavior: "instant",
     }); //instant needed to stop observer changing verse and chapter number
-    this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
-
+    if (this.bibleService.chapterNumber == 0) {
+      this.document.getElementById(this.bibleService.testament +'-'+ this.bibleService.bookSelected
+        + '-1-0')?.focus();
+    } else {
+      this.bookPlace.focus(); //focus must be after scrollIntoView or throws error
+    };
     this.saveScrollposition();
 
     window.addEventListener("resize", () => {
