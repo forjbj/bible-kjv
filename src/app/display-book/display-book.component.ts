@@ -227,7 +227,7 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
         "-" +
         (this.bibleService.bookSelected + 1) +
         "-0-0";
-      this.nextButton = "Next Book: ";
+      this.nextButton = "Click here to continue to: ";
       this.nextBibleBook =
         this.bibleService.bible[this.bibleService.testament].books[
           this.bibleService.bookSelected + 1
@@ -237,14 +237,14 @@ export class DisplayBookComponent implements AfterViewInit, OnDestroy {
       this.bibleService.bookSelected == 38
     ) {
       this.nextFragment = "1-0-0-0";
-      this.nextButton = "Onward to the New Testament and ";
+      this.nextButton = "Click here to continue to the New Testament: ";
       this.nextBibleBook = this.bibleService.bible[1].books[0].title;
     } else if (
       this.bibleService.testament == 1 &&
       this.bibleService.bookSelected == 26
     ) {
       this.nextFragment = "1-26-22-21";
-      this.nextButton = "The End";
+      this.nextButton = "The End"; //used in html to stop button showing at the end of revelation
     }
   }
   nextBookRoute() {
